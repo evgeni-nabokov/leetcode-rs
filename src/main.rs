@@ -1,0 +1,4 @@
+mod easy;
+
+fn main() {
+}

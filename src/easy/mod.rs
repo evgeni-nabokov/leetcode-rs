@@ -5,6 +5,7 @@ mod tests;
 
 struct Solution {}
 
+// https://leetcode.com/problems/two-sum/
 impl Solution {
     pub fn two_sum(nums: Vec<i32>, target: i32) -> Vec<i32> {
         let mut cache: HashMap<i32, usize> = HashMap::new();

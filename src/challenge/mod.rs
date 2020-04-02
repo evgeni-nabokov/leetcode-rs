@@ -1,3 +1,5 @@
+use std::collections::HashSet;
+
 #[cfg(test)]
 mod tests;
 
@@ -31,5 +33,31 @@ impl Solution {
             a ^= *n;
         }
         a
+    }
+
+    // https://leetcode.com/problems/happy-number/
+    pub fn is_happy(n: i32) -> bool {
+        if n == 0 { return false; }
+        if n == 1 { return true; }
+        let mut nn = n.clone();
+        let mut sum_set: HashSet<i32> = HashSet::with_capacity(20);
+        sum_set.insert(nn);
+        let mut sum = 0;
+        loop {
+            while nn > 0 {
+                let d = nn % 10;
+                sum += d * d;
+                nn = nn / 10;
+            }
+            if sum == 1 {
+                return true;
+            } else if sum_set.contains(&sum) {
+                return false;
+            }
+            sum_set.insert(sum);
+            nn = sum;
+            sum = 0;
+        }
+        false
     }
 }

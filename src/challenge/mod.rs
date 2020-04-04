@@ -58,6 +58,30 @@ impl Solution {
             nn = sum;
             sum = 0;
         }
-        false
+    }
+
+    // https://leetcode.com/problems/maximum-subarray/
+    pub fn max_sub_array(nums: Vec<i32>) -> i32 {
+        if nums.len() == 1 { return nums[0]; }
+        let mut sum: i32 = nums[0];
+        let mut max_sum: i32 = sum;
+        for &n in nums.iter().skip(1) {
+            match n {
+                n if n >= 0 && sum < 0 => sum = n,
+                n if n >= 0 && sum >= 0 => sum += n,
+                n if n < 0 && sum < 0 && sum < n => sum = n,
+                n if n < 0 && sum > 0 => {
+                    if sum > max_sum {
+                        max_sum = sum;
+                    }
+                    sum += n;
+                }
+                _ => ()
+            }
+        }
+        if sum > max_sum {
+            max_sum = sum;
+        }
+        max_sum
     }
 }

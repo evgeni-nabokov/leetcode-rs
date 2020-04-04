@@ -84,4 +84,38 @@ impl Solution {
         }
         max_sum
     }
+
+    pub fn move_zeroes(nums: &mut Vec<i32>) {
+        if nums.len() < 2 { return; }
+        let mut i: usize = 0;
+        let mut cnt: usize = 0;
+        let len = nums.len();
+        loop {
+            if i == len {
+                break;
+            } else if nums[i] == 0 {
+                cnt += 1;
+            } else if cnt > 0 {
+                nums[i - cnt] = nums[i];
+                nums[i] = 0;
+            }
+            i += 1;
+        }
+    }
+
+    pub fn move_zeroes_v2(nums: &mut Vec<i32>) {
+        if nums.len() < 2 { return; }
+        let mut main_index: usize = 0;
+        let mut non_zero_index: usize = 0;
+        let len = nums.len();
+        loop {
+            if main_index == len {
+                break;
+            } else if nums[main_index] != 0 {
+                nums.swap(non_zero_index, main_index);
+                non_zero_index += 1;
+            }
+            main_index += 1;
+        }
+    }
 }

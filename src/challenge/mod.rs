@@ -130,4 +130,56 @@ impl Solution {
             main_index += 1;
         }
     }
+
+    // https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/
+    pub fn max_profit(prices: Vec<i32>) -> i32 {
+        if prices.len() < 2 { return 0; }
+        let mut in_tran = false;
+        let mut i: usize = 0;
+        let last_i = prices.len() - 1;
+        let mut buy_price = 0;
+        let mut profit = 0;
+        loop {
+            if i == last_i {
+                if in_tran {
+                    // Final selling.
+                    profit += prices[i] - buy_price;
+                }
+                break;
+            }
+            if in_tran {
+                if prices[i] < prices[i + 1] {
+                    // Do nothing.
+                } else {
+                    // Selling.
+                    profit += prices[i] - buy_price;
+                    in_tran = false;
+                }
+            } else {
+                if prices[i] < prices[i + 1] {
+                    // Buying.
+                    buy_price = prices[i];
+                    in_tran = true;
+                } else {
+                    // Do nothing.
+                }
+            }
+            i += 1;
+        }
+        profit
+    }
+
+    pub fn max_profit_v2(prices: Vec<i32>) -> i32 {
+        if prices.len() < 2 { return 0; }
+        let mut i: usize = 1;
+        let len = prices.len();
+        let mut profit = 0;
+        while i < len {
+            if prices[i] > prices[i - 1] {
+                profit += prices[i] - prices[i - 1];
+            }
+            i += 1;
+        }
+        profit
+    }
 }

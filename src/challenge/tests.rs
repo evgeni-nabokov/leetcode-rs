@@ -126,3 +126,23 @@ fn move_zeroes_v2_test() {
     let expected7 = vec![-1, -3, -12, 0, 0];
     assert_eq!(actual7, expected7);
 }
+
+#[test]
+fn max_profit_test() {
+    assert_eq!(Solution::max_profit(vec![]), 0);
+    assert_eq!(Solution::max_profit(vec![1]), 0);
+    assert_eq!(Solution::max_profit(vec![1, 1, 1, 1, 1]), 0);
+    assert_eq!(Solution::max_profit(vec![7, 1, 5, 3, 6, 4]), 7);
+    assert_eq!(Solution::max_profit(vec![1, 2, 3, 4, 5]), 4);
+    assert_eq!(Solution::max_profit(vec![7, 6, 4, 3, 1]), 0);
+}
+
+#[test]
+fn max_profit_v2_test() {
+    assert_eq!(Solution::max_profit_v2(vec![]), 0);
+    assert_eq!(Solution::max_profit_v2(vec![1]), 0);
+    assert_eq!(Solution::max_profit_v2(vec![1, 1, 1, 1, 1]), 0);
+    assert_eq!(Solution::max_profit_v2(vec![7, 1, 5, 3, 6, 4]), 7);
+    assert_eq!(Solution::max_profit_v2(vec![1, 2, 3, 4, 5]), 4);
+    assert_eq!(Solution::max_profit_v2(vec![7, 6, 4, 3, 1]), 0);
+}

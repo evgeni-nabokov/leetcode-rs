@@ -1,4 +1,5 @@
 use std::collections::HashSet;
+use std::cmp::max;
 
 #[cfg(test)]
 mod tests;
@@ -81,6 +82,17 @@ impl Solution {
         }
         if sum > max_sum {
             max_sum = sum;
+        }
+        max_sum
+    }
+
+    pub fn max_sub_array_v2(nums: Vec<i32>) -> i32 {
+        if nums.len() == 1 { return nums[0]; }
+        let mut sum: i32 = nums[0];
+        let mut max_sum: i32 = sum;
+        for &n in nums.iter().skip(1) {
+            sum = max(n, sum + n);
+            max_sum = max(sum, max_sum);
         }
         max_sum
     }

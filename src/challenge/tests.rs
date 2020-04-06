@@ -146,3 +146,29 @@ fn max_profit_v2_test() {
     assert_eq!(Solution::max_profit_v2(vec![1, 2, 3, 4, 5]), 4);
     assert_eq!(Solution::max_profit_v2(vec![7, 6, 4, 3, 1]), 0);
 }
+
+#[test]
+fn group_anagrams_test() {
+    assert_eq!(Solution::group_anagrams(vec![]), Vec::<Vec<String>>::new());
+    assert_eq!(Solution::group_anagrams(
+        vec!["eat".to_string(), "tea".to_string(), "tan".to_string(),
+                  "ate".to_string(), "nat".to_string(), "bat".to_string()]),
+           vec![
+               vec!["ate".to_string(), "eat".to_string(), "tea".to_string()],
+               vec!["nat".to_string(), "tan".to_string()],
+               vec!["bat".to_string()],
+           ]);
+}
+
+#[test]
+fn group_anagrams_v2_test() {
+    assert_eq!(Solution::group_anagrams_v2(vec![]), Vec::<Vec<String>>::new());
+    assert_eq!(Solution::group_anagrams_v2(
+        vec!["eat".to_string(), "tea".to_string(), "tan".to_string(),
+             "ate".to_string(), "nat".to_string(), "bat".to_string()]),
+               vec![
+                   vec!["ate".to_string(), "eat".to_string(), "tea".to_string()],
+                   vec!["nat".to_string(), "tan".to_string()],
+                   vec!["bat".to_string()],
+               ]);
+}

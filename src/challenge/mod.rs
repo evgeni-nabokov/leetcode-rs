@@ -1,4 +1,4 @@
-use std::collections::HashSet;
+use std::collections::{HashSet, HashMap};
 use std::cmp::max;
 
 #[cfg(test)]
@@ -45,6 +45,7 @@ impl Solution {
         sum_set.insert(nn);
         let mut sum = 0;
         loop {
+            // Splitting into separate digits, square them and sum.
             while nn > 0 {
                 let d = nn % 10;
                 sum += d * d;
@@ -97,6 +98,7 @@ impl Solution {
         max_sum
     }
 
+    // https://leetcode.com/problems/move-zeroes/
     pub fn move_zeroes(nums: &mut Vec<i32>) {
         if nums.len() < 2 { return; }
         let mut i: usize = 0;
@@ -181,5 +183,42 @@ impl Solution {
             i += 1;
         }
         profit
+    }
+
+    // https://leetcode.com/problems/group-anagrams/
+    pub fn group_anagrams(strs: Vec<String>) -> Vec<Vec<String>> {
+        let mut cntr: HashMap<String, Vec<String>> = HashMap::new();
+        for s in strs.iter() {
+            let mut chars: Vec<char> = s.chars().collect();
+            chars.sort_unstable();
+            let key: String = chars.into_iter().collect();
+            cntr.entry(key).or_insert(Vec::<String>::new()).push(s.clone());
+        }
+        let mut res: Vec<Vec<String>> = Vec::new();
+        for (key, anagrams) in cntr.into_iter() {
+            res.push(anagrams);
+        }
+        for anagrams in res.iter_mut() {
+            anagrams.sort_unstable();
+        }
+        res.sort_unstable_by(|x, y| y.len().cmp(&x.len()));
+        res
+    }
+
+    pub fn group_anagrams_v2(strs: Vec<String>) -> Vec<Vec<String>> {
+        let mut cntr: HashMap<[i32; 26], Vec<String>> = HashMap::new();
+        for s in strs.into_iter() {
+            let mut key = [0; 26];
+            for c in s.chars() {
+                key[c as usize - 'a' as usize] += 1;
+            }
+            cntr.entry(key).or_insert(Vec::<String>::new()).push(s.clone());
+        }
+        let mut res: Vec<Vec<String>> = cntr.into_iter().map(|(_, s)| s).collect();
+        for anagrams in res.iter_mut() {
+            anagrams.sort_unstable();
+        }
+        res.sort_unstable_by(|x, y| y.len().cmp(&x.len()));
+        res
     }
 }

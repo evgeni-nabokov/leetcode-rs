@@ -221,4 +221,23 @@ impl Solution {
         res.sort_unstable_by(|x, y| y.len().cmp(&x.len()));
         res
     }
+
+    pub fn count_elements(mut arr: Vec<i32>) -> i32 {
+        arr.sort_unstable();
+        let mut prev_x = arr[0];
+        let mut cnt = 0;
+        let mut rep_cnt = 1;
+        for &x in arr.iter().skip(1) {
+            if x == prev_x {
+                rep_cnt += 1;
+            } else {
+                if prev_x + 1 == x {
+                    cnt += rep_cnt;
+                }
+                rep_cnt = 1;
+            }
+            prev_x = x;
+        }
+        cnt
+    }
 }

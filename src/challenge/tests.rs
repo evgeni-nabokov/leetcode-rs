@@ -172,3 +172,10 @@ fn group_anagrams_v2_test() {
                    vec!["bat".to_string()],
                ]);
 }
+
+#[test]
+fn count_elements_test() {
+    assert_eq!(Solution::count_elements(vec![1, 2, 3]), 2);
+    assert_eq!(Solution::count_elements(vec![1, 1, 3, 3, 5, 5, 7, 7]), 0);
+    assert_eq!(Solution::count_elements(vec![1, 3, 2, 3, 5, 0]), 3);
+}

@@ -4,6 +4,23 @@ use std::cmp::max;
 #[cfg(test)]
 mod tests;
 
+// Definition for singly-linked list.
+#[derive(PartialEq, Eq, Clone, Debug)]
+pub struct ListNode {
+    pub val: i32,
+    pub next: Option<Box<ListNode>>
+}
+
+impl ListNode {
+    #[inline]
+    fn new(val: i32) -> Self {
+        ListNode {
+            next: None,
+            val
+        }
+    }
+}
+
 struct Solution;
 
 impl Solution {
@@ -195,7 +212,7 @@ impl Solution {
             cntr.entry(key).or_insert(Vec::<String>::new()).push(s.clone());
         }
         let mut res: Vec<Vec<String>> = Vec::new();
-        for (key, anagrams) in cntr.into_iter() {
+        for (_, anagrams) in cntr.into_iter() {
             res.push(anagrams);
         }
         for anagrams in res.iter_mut() {
@@ -239,5 +256,21 @@ impl Solution {
             prev_x = x;
         }
         cnt
+    }
+
+    pub fn middle_node(head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
+        if head.is_none() { return None; }
+        let mut cur = &head;
+        let mut res = &head;
+        let mut step = 1;
+        let factor = 2;
+        while let Some(node) = cur {
+            cur = &node.next;
+            if step % factor == 0 {
+                res = &res.as_ref().unwrap().next;
+            }
+            step += 1;
+        }
+        res.clone()
     }
 }

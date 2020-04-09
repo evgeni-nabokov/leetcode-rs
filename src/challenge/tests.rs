@@ -179,3 +179,41 @@ fn count_elements_test() {
     assert_eq!(Solution::count_elements(vec![1, 1, 3, 3, 5, 5, 7, 7]), 0);
     assert_eq!(Solution::count_elements(vec![1, 3, 2, 3, 5, 0]), 3);
 }
+
+fn build_list_from_slice(slice: &[i32]) -> Option<Box<ListNode>> {
+    if slice.len() == 0 { return None; }
+    let mut head = Some(Box::new(ListNode::new(slice[0])));
+    let mut prev = head.as_mut().unwrap();
+    for v in slice.into_iter().skip(1) {
+        prev.next = Some(Box::new(ListNode::new(*v)));
+        prev = prev.next.as_mut().unwrap();
+    }
+    head
+}
+
+fn build_vector_from_list(head: &Option<Box<ListNode>>) -> Vec<i32> {
+    let mut res = Vec::new();
+    if head.is_none() { return res; }
+    let mut cur = head;
+    while let Some(node) = cur {
+        res.push(node.val);
+        cur = &node.next;
+    }
+    res
+}
+
+#[test]
+fn list_helpers_test() {
+    assert_eq!(build_vector_from_list(&build_list_from_slice(&[])), vec![]);
+    assert_eq!(build_vector_from_list(&build_list_from_slice(&[1])), vec![1]);
+    assert_eq!(build_vector_from_list(&build_list_from_slice(&[1, 2, 3, 4, 5])), vec![1, 2, 3, 4, 5]);
+}
+
+#[test]
+fn middle_node_test() {
+    assert_eq!(build_vector_from_list(&Solution::middle_node(build_list_from_slice(&[]))), vec![]);
+    assert_eq!(build_vector_from_list(&Solution::middle_node(build_list_from_slice(&[1]))), vec![1]);
+    assert_eq!(build_vector_from_list(&Solution::middle_node(build_list_from_slice(&[1, 2]))), vec![2]);
+    assert_eq!(build_vector_from_list(&Solution::middle_node(build_list_from_slice(&[1, 2, 3]))), vec![2, 3]);
+    assert_eq!(build_vector_from_list(&Solution::middle_node(build_list_from_slice(&[1, 2, 3, 4]))), vec![3, 4]);
+}

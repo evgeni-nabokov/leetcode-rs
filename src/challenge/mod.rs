@@ -1,5 +1,7 @@
 use std::collections::{HashSet, HashMap};
 use std::cmp::max;
+use std::iter::Rev;
+use std::str::Chars;
 
 #[cfg(test)]
 mod tests;
@@ -272,5 +274,31 @@ impl Solution {
             step += 1;
         }
         res.clone()
+    }
+
+    pub fn backspace_compare(s: String, t: String) -> bool {
+        if s.len() == 0 && t.len() == 0 { return true; }
+        let mut s_iter = s.chars().rev();
+        let mut t_iter = t.chars().rev();
+        loop {
+            let s_char = apply_backspaces(&mut s_iter);
+            let t_char = apply_backspaces(&mut t_iter);
+            if s_char.is_none() && t_char.is_none() { return true; }
+            if s_char != t_char { return false; }
+        }
+    }
+}
+
+#[inline(always)]
+pub fn apply_backspaces(iter: &mut Rev<Chars>) -> Option<char> {
+    let mut ch = iter.next();
+    let mut cnt = 0;
+    loop {
+        match ch {
+            None => return None,
+            Some('#') => { cnt += 1; ch = iter.next(); },
+            Some(_) if cnt == 0 => return ch,
+            _ => { cnt -= 1; ch = iter.next(); },
+        }
     }
 }

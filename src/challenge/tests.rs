@@ -217,3 +217,32 @@ fn middle_node_test() {
     assert_eq!(build_vector_from_list(&Solution::middle_node(build_list_from_slice(&[1, 2, 3]))), vec![2, 3]);
     assert_eq!(build_vector_from_list(&Solution::middle_node(build_list_from_slice(&[1, 2, 3, 4]))), vec![3, 4]);
 }
+
+fn apply_backspaces_for_str(s: &str) -> String {
+    let mut iter = s.chars().rev();
+    let char = apply_backspaces(&mut iter);
+    if char.is_none() { return String::new(); }
+    let mut res = char.unwrap().to_string();
+    res.push_str(&iter.collect::<String>());
+    res
+}
+
+#[test]
+fn apply_backspaces_test() {
+    assert_eq!(apply_backspaces_for_str(""), "".to_string());
+    assert_eq!(apply_backspaces_for_str("#"), "".to_string());
+    assert_eq!(apply_backspaces_for_str("#####"), "".to_string());
+    assert_eq!(apply_backspaces_for_str("a#"), "".to_string());
+    assert_eq!(apply_backspaces_for_str("ab#"), "a".to_string());
+    assert_eq!(apply_backspaces_for_str("ab##"), "".to_string());
+    assert_eq!(apply_backspaces_for_str("a#b#"), "".to_string());
+    assert_eq!(apply_backspaces_for_str("ab###c####"), "".to_string());
+}
+
+#[test]
+fn backspace_compare() {
+    assert_eq!(Solution::backspace_compare("ab#c".to_string(), "ad#c".to_string()), true);
+    assert_eq!(Solution::backspace_compare("ab##".to_string(), "c#d#".to_string()), true);
+    assert_eq!(Solution::backspace_compare("a##c".to_string(), "#a#c".to_string()), true);
+    assert_eq!(Solution::backspace_compare("a#c".to_string(), "b".to_string()), false);
+}

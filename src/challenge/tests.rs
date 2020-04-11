@@ -1,4 +1,5 @@
 use super::*;
+use super::min_stack::MinStack;
 
 #[test]
 fn single_number_test() {

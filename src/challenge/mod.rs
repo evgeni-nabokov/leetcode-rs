@@ -1,63 +1,18 @@
-use std::collections::{HashSet, HashMap};
-use std::cmp::{min, max};
-use std::iter::Rev;
-use std::str::Chars;
-
 #[cfg(test)]
 mod tests;
+mod list_node;
+mod tree_node;
+mod min_stack;
 
-// Definition for singly-linked list.
-#[derive(PartialEq, Eq, Clone, Debug)]
-pub struct ListNode {
-    pub val: i32,
-    pub next: Option<Box<ListNode>>
-}
+use std::cmp::max;
+use std::iter::Rev;
+use std::str::Chars;
+use std::rc::Rc;
+use std::cell::RefCell;
+use std::collections::{HashSet, HashMap};
 
-impl ListNode {
-    #[inline]
-    fn new(val: i32) -> Self {
-        ListNode {
-            next: None,
-            val
-        }
-    }
-}
-
-struct MinStack {
-    container: Vec<(i32, i32)>,
-}
-
-impl MinStack {
-
-    /** initialize your data structure here. */
-    fn new() -> Self {
-        MinStack { container: Vec::with_capacity(64) }
-    }
-
-    fn push(&mut self, x: i32) {
-        self.container.push((x, min(x, self.container.last().unwrap_or(&(x, x)).1)));
-    }
-
-    fn pop(&mut self) {
-        self.container.pop();
-    }
-
-    fn top(&mut self) -> Option<i32> {
-        if self.container.is_empty() {
-            None
-        } else {
-            Some(self.container.last().unwrap().0)
-        }
-    }
-
-    fn get_min(&self) -> Option<i32> {
-        if self.container.is_empty() {
-            None
-        } else {
-            Some(self.container.last().unwrap().1)
-        }
-    }
-}
+use crate::challenge::list_node::ListNode;
+use crate::challenge::tree_node::TreeNode;
 
 struct Solution;
 
@@ -322,6 +277,10 @@ impl Solution {
             if s_char.is_none() && t_char.is_none() { return true; }
             if s_char != t_char { return false; }
         }
+    }
+
+    pub fn diameter_of_binary_tree(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
+        0
     }
 }
 

@@ -240,9 +240,21 @@ fn apply_backspaces_test() {
 }
 
 #[test]
-fn backspace_compare() {
+fn backspace_compare_test() {
     assert_eq!(Solution::backspace_compare("ab#c".to_string(), "ad#c".to_string()), true);
     assert_eq!(Solution::backspace_compare("ab##".to_string(), "c#d#".to_string()), true);
     assert_eq!(Solution::backspace_compare("a##c".to_string(), "#a#c".to_string()), true);
     assert_eq!(Solution::backspace_compare("a#c".to_string(), "b".to_string()), false);
+}
+
+#[test]
+fn min_stack_test() {
+    let mut obj = MinStack::new();
+    obj.push(-2);
+    obj.push(0);
+    obj.push(-3);
+    assert_eq!(obj.get_min(), Some(-3));
+    obj.pop();
+    assert_eq!(obj.top(), Some(0));
+    assert_eq!(obj.get_min(), Some(-2));
 }

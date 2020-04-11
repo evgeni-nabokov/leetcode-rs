@@ -1,5 +1,5 @@
 use std::collections::{HashSet, HashMap};
-use std::cmp::max;
+use std::cmp::{min, max};
 use std::iter::Rev;
 use std::str::Chars;
 
@@ -19,6 +19,42 @@ impl ListNode {
         ListNode {
             next: None,
             val
+        }
+    }
+}
+
+struct MinStack {
+    container: Vec<(i32, i32)>,
+}
+
+impl MinStack {
+
+    /** initialize your data structure here. */
+    fn new() -> Self {
+        MinStack { container: Vec::with_capacity(64) }
+    }
+
+    fn push(&mut self, x: i32) {
+        self.container.push((x, min(x, self.container.last().unwrap_or(&(x, x)).1)));
+    }
+
+    fn pop(&mut self) {
+        self.container.pop();
+    }
+
+    fn top(&mut self) -> Option<i32> {
+        if self.container.is_empty() {
+            None
+        } else {
+            Some(self.container.last().unwrap().0)
+        }
+    }
+
+    fn get_min(&self) -> Option<i32> {
+        if self.container.is_empty() {
+            None
+        } else {
+            Some(self.container.last().unwrap().1)
         }
     }
 }

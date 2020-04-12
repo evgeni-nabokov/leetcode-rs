@@ -259,3 +259,10 @@ fn min_stack_test() {
     assert_eq!(obj.top(), Some(0));
     assert_eq!(obj.get_min(), Some(-2));
 }
+
+#[test]
+fn last_stone_weight_test() {
+    assert_eq!(Solution::last_stone_weight(vec![]), 0);
+    assert_eq!(Solution::last_stone_weight(vec![1, 1]), 0);
+    assert_eq!(Solution::last_stone_weight(vec![2, 7, 4, 1, 8, 1]), 1);
+}

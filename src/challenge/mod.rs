@@ -7,9 +7,7 @@ mod min_stack;
 use std::cmp::max;
 use std::iter::Rev;
 use std::str::Chars;
-use std::rc::Rc;
-use std::cell::RefCell;
-use std::collections::{HashSet, HashMap};
+use std::collections::{HashSet, HashMap, BinaryHeap};
 
 use crate::challenge::list_node::ListNode;
 use crate::challenge::tree_node::TreeNode;
@@ -279,8 +277,21 @@ impl Solution {
         }
     }
 
-    pub fn diameter_of_binary_tree(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
-        0
+     pub fn last_stone_weight(stones: Vec<i32>) -> i32 {
+        if stones.is_empty() { return 0; }
+        if stones.len() == 1 { return stones[0]; }
+        let mut heap= BinaryHeap::with_capacity(30);
+        for s in stones.iter() {
+            heap.push(*s);
+        }
+        while heap.len() > 1 {
+            let x = heap.pop().unwrap();
+            let y = heap.pop().unwrap();
+            if x > y {
+                heap.push(x - y);
+            }
+        }
+        heap.pop().unwrap_or(0)
     }
 }
 

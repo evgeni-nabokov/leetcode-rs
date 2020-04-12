@@ -12,10 +12,10 @@ pub struct TreeNode {
 impl TreeNode {
     #[inline]
     pub fn new(val: i32) -> Self {
-    TreeNode {
-        val,
-        left: None,
-        right: None
-    }
+        TreeNode {
+            val,
+            left: None,
+            right: None
+        }
     }
 }

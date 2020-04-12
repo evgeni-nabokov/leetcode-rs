@@ -6,6 +6,7 @@ use std::collections::{HashMap, VecDeque};
 struct Solution;
 
 impl Solution {
+    // https://leetcode.com/problems/string-matching-in-an-array/
     pub fn string_matching(mut words: Vec<String>) -> Vec<String> {
         if words.len() < 2 { return Vec::new(); }
         let mut res = Vec::<String>::with_capacity(100);
@@ -25,6 +26,7 @@ impl Solution {
         res
     }
 
+    // https://leetcode.com/problems/html-entity-parser/
     pub fn entity_parser(text: String) -> String {
         let mut res = Vec::<char>::with_capacity(text.len());
         let entity_map: HashMap<&str, char> =
@@ -59,6 +61,7 @@ impl Solution {
         res.iter().collect()
     }
 
+    // https://leetcode.com/problems/queries-on-a-permutation-with-key/
     pub fn process_queries(queries: Vec<i32>, m: i32) -> Vec<i32> {
         if queries.len() == 0 || m == 0 { return Vec::new(); }
         let mut res: Vec<i32> = Vec::with_capacity(queries.len());
@@ -79,7 +82,18 @@ impl Solution {
         res
     }
 
+    // https://leetcode.com/problems/number-of-ways-to-paint-n-3-grid/
     pub fn num_of_ways(n: i32) -> i32 {
-        0
+        if n == 0 { return 1; }
+        if n == 1 { return 12; }
+        let modulo = 1000000007u64;
+        let mut x = 6u64; // three color variants for n = 1.
+        let mut y = 6u64; // two color variants for n = 1.
+       for i in 2..=n {
+            let old_x = x;
+            x = (2 * x + 2 * y) % modulo;
+            y = (2 * old_x + 3 * y) % modulo;
+        }
+        ((x + y) % modulo) as i32
     }
 }

@@ -266,3 +266,14 @@ fn last_stone_weight_test() {
     assert_eq!(Solution::last_stone_weight(vec![1, 1]), 0);
     assert_eq!(Solution::last_stone_weight(vec![2, 7, 4, 1, 8, 1]), 1);
 }
+
+#[test]
+fn find_max_length_test() {
+    assert_eq!(Solution::find_max_length(vec![]), 0);
+    assert_eq!(Solution::find_max_length(vec![1]), 0);
+    assert_eq!(Solution::find_max_length(vec![1, 0]), 2);
+    assert_eq!(Solution::find_max_length(vec![1, 1]), 0);
+    assert_eq!(Solution::find_max_length(vec![0,1,0]), 2);
+    assert_eq!(Solution::find_max_length(vec![0, 1, 1, 0, 1, 1, 1, 0]), 4);
+    assert_eq!(Solution::find_max_length(vec![0,0,1,0,0,0,1,1]), 6);
+}

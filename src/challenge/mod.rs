@@ -4,7 +4,7 @@ mod list_node;
 mod tree_node;
 mod min_stack;
 
-use std::cmp::max;
+use std::cmp::{max, min};
 use std::iter::Rev;
 use std::str::Chars;
 use std::collections::{HashSet, HashMap, BinaryHeap};
@@ -249,6 +249,7 @@ impl Solution {
         cnt
     }
 
+    // https://leetcode.com/problems/middle-of-the-linked-list/
     pub fn middle_node(head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
         if head.is_none() { return None; }
         let mut cur = &head;
@@ -265,6 +266,7 @@ impl Solution {
         res.clone()
     }
 
+    // https://leetcode.com/problems/backspace-string-compare/
     pub fn backspace_compare(s: String, t: String) -> bool {
         if s.len() == 0 && t.len() == 0 { return true; }
         let mut s_iter = s.chars().rev();
@@ -277,6 +279,7 @@ impl Solution {
         }
     }
 
+     // https://leetcode.com/problems/last-stone-weight/
      pub fn last_stone_weight(stones: Vec<i32>) -> i32 {
         if stones.is_empty() { return 0; }
         if stones.len() == 1 { return stones[0]; }
@@ -292,6 +295,25 @@ impl Solution {
             }
         }
         heap.pop().unwrap_or(0)
+    }
+
+    // https://leetcode.com/problems/contiguous-array/
+    pub fn find_max_length(nums: Vec<i32>) -> i32 {
+        if nums.len() < 2 { return 0; }
+        let mut max_len = 0;
+        let mut sum = 0;
+        let mut sums = HashMap::<i32, i32>::new();
+        sums.insert(0, -1);
+        for (i, &n) in nums.iter().enumerate() {
+            if n == 0 { sum -= 1; }
+            else { sum += 1 }
+            if sums.contains_key(&sum) {
+                max_len = max(max_len, i as i32 - sums.get(&sum).unwrap().clone())
+            } else {
+                sums.insert(sum, i as i32);
+            }
+        }
+        max_len
     }
 }
 

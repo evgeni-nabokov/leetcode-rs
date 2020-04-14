@@ -315,6 +315,23 @@ impl Solution {
         }
         max_len
     }
+
+    pub fn string_shift(s: String, shift: Vec<Vec<i32>>) -> String {
+        let l = s.len();
+        if l < 2 { return s; }
+        let sum = shift.iter().fold(0, |sum, val| sum + if val[0] == 0 { -val[1] } else { val[1] }) % l as i32;
+        if sum == 0 { return s; }
+        let mut res = String::with_capacity(l);
+        let sh = i32::abs(sum) as usize;
+        if sum > 0 {
+            res.push_str(&s[l - sh..l]);
+            res.push_str(&s[0..l - sh]);
+        } else {
+            res.push_str(&s[sh..l]);
+            res.push_str(&s[0..sh]);
+        }
+        res
+    }
 }
 
 #[inline(always)]

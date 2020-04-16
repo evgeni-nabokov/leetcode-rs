@@ -363,6 +363,31 @@ impl Solution {
         }
         res
     }
+
+    pub fn check_valid_string(s: String) -> bool {
+        if s.is_empty() { return true; }
+        let mut par_stack = Vec::<usize>::with_capacity(s.len());
+        let mut ast_stack = Vec::<usize>::with_capacity(s.len());
+        for (i, c) in s.chars().enumerate() {
+            match c {
+                '(' => { par_stack.push(i); },
+                '*' => { ast_stack.push(i); },
+                ')' if !par_stack.is_empty() => { par_stack.pop(); },
+                ')' if par_stack.is_empty() && !ast_stack.is_empty() && i > ast_stack.pop().unwrap() => (),
+                _ => return false,
+            }
+        }
+
+        if par_stack.is_empty() { return true; }
+
+        if par_stack.len() <= ast_stack.len() {
+            while !par_stack.is_empty() {
+                if par_stack.pop() > ast_stack.pop() { return false; }
+            }
+            return true;
+        }
+        false
+    }
 }
 
 #[inline(always)]

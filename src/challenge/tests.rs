@@ -299,3 +299,26 @@ fn product_except_self_v2_test() {
     assert_eq!(Solution::product_except_self_v2(vec![1, 2, 3, 4]), vec![24 , 12, 8, 6]);
     assert_eq!(Solution::product_except_self_v2(vec![2, 3, 4, 5]), vec![60 , 40, 30, 24]);
 }
+
+#[test]
+fn check_valid_string_test() {
+    assert_eq!(Solution::check_valid_string("".to_string()), true);
+    assert_eq!(Solution::check_valid_string("*".to_string()), true);
+    assert_eq!(Solution::check_valid_string("()".to_string()), true);
+    assert_eq!(Solution::check_valid_string("(*)".to_string()), true);
+    assert_eq!(Solution::check_valid_string("**()**".to_string()), true);
+    assert_eq!(Solution::check_valid_string("**(**".to_string()), true);
+    assert_eq!(Solution::check_valid_string("**)**".to_string()), true);
+    assert_eq!(Solution::check_valid_string("(((******))".to_string()), true);
+    assert_eq!(Solution::check_valid_string("(*))".to_string()), true);
+    assert_eq!(Solution::check_valid_string("(*)())".to_string()), true);
+    assert_eq!(Solution::check_valid_string("(*)()()".to_string()), true);
+    assert_eq!(Solution::check_valid_string("**))".to_string()), true);
+    assert_eq!(Solution::check_valid_string("((**".to_string()), true);
+    assert_eq!(Solution::check_valid_string("(*".to_string()), true);
+    assert_eq!(Solution::check_valid_string("*(".to_string()), false);
+    assert_eq!(Solution::check_valid_string("((*".to_string()), false);
+    assert_eq!(Solution::check_valid_string(")(".to_string()), false);
+    assert_eq!(Solution::check_valid_string("())".to_string()), false);
+    assert_eq!(Solution::check_valid_string("(())((())()()(*)(*()(())())())()()((()())((()))(*".to_string()), false);
+}

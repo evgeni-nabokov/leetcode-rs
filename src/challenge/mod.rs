@@ -332,6 +332,37 @@ impl Solution {
         }
         res
     }
+
+    pub fn product_except_self(nums: Vec<i32>) -> Vec<i32> {
+        let l = nums.len();
+        if l == 0 { return vec![]; }
+        if l == 1 { return vec![1]; }
+        let mut left_products = vec![1i32; l];
+        for i in 0..(l - 1) {
+            left_products[i + 1] = left_products[i] * nums[i];
+        }
+        let mut right_products = vec![1i32; l];
+        for i in (1..l).rev() {
+            right_products[i - 1] = right_products[i] * nums[i];
+        }
+        left_products.iter().zip(right_products.iter()).map(|(lp, rp)| *lp * *rp).collect()
+    }
+
+    pub fn product_except_self_v2(nums: Vec<i32>) -> Vec<i32> {
+        let l = nums.len();
+        if l == 0 { return vec![]; }
+        if l == 1 { return vec![1]; }
+        let mut res = vec![1i32; l];
+        for i in 0..(l - 1) {
+            res[i + 1] = res[i] * nums[i];
+        }
+        let mut right_product = 1;
+        for i in (0..l).rev() {
+            res[i] = right_product * res[i];
+            right_product *= nums[i];
+        }
+        res
+    }
 }
 
 #[inline(always)]

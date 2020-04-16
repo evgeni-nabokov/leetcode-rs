@@ -283,3 +283,19 @@ fn string_shift_test() {
     assert_eq!(Solution::string_shift("abc".to_string(), vec![vec![0, 1], vec![1, 2]]), "cab".to_string());
     assert_eq!(Solution::string_shift("abcdefg".to_string(), vec![vec![1, 1], vec![1, 1], vec![0, 2], vec![1, 3]]), "efgabcd".to_string());
 }
+
+#[test]
+fn product_except_self_test() {
+    assert_eq!(Solution::product_except_self(vec![]), vec![]);
+    assert_eq!(Solution::product_except_self(vec![42]), vec![1]);
+    assert_eq!(Solution::product_except_self(vec![1, 2, 3, 4]), vec![24 , 12, 8, 6]);
+    assert_eq!(Solution::product_except_self(vec![2, 3, 4, 5]), vec![60 , 40, 30, 24]);
+}
+
+#[test]
+fn product_except_self_v2_test() {
+    assert_eq!(Solution::product_except_self_v2(vec![]), vec![]);
+    assert_eq!(Solution::product_except_self_v2(vec![42]), vec![1]);
+    assert_eq!(Solution::product_except_self_v2(vec![1, 2, 3, 4]), vec![24 , 12, 8, 6]);
+    assert_eq!(Solution::product_except_self_v2(vec![2, 3, 4, 5]), vec![60 , 40, 30, 24]);
+}

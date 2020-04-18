@@ -12,6 +12,20 @@ use std::collections::{HashSet, HashMap, BinaryHeap};
 use crate::challenge::list_node::ListNode;
 use crate::challenge::tree_node::TreeNode;
 
+#[inline(always)]
+pub fn apply_backspaces(iter: &mut Rev<Chars>) -> Option<char> {
+    let mut ch = iter.next();
+    let mut cnt = 0;
+    loop {
+        match ch {
+            None => return None,
+            Some('#') => { cnt += 1; ch = iter.next(); },
+            Some(_) if cnt == 0 => return ch,
+            _ => { cnt -= 1; ch = iter.next(); },
+        }
+    }
+}
+
 struct Solution;
 
 impl Solution {
@@ -388,18 +402,70 @@ impl Solution {
         }
         false
     }
-}
 
-#[inline(always)]
-pub fn apply_backspaces(iter: &mut Rev<Chars>) -> Option<char> {
-    let mut ch = iter.next();
-    let mut cnt = 0;
-    loop {
-        match ch {
-            None => return None,
-            Some('#') => { cnt += 1; ch = iter.next(); },
-            Some(_) if cnt == 0 => return ch,
-            _ => { cnt -= 1; ch = iter.next(); },
+    pub fn num_islands(grid: Vec<Vec<char>>) -> i32 {
+        if grid.is_empty() { return 0; }
+        let mut res = 0;
+        let (h, w) = (grid.len() as i32, grid[0].len() as i32);
+        let mut visited_cells = HashSet::<i32>::with_capacity((w * h) as usize);
+
+        fn visit_cell((x, y): (i32, i32), &(w, h): &(i32, i32), grid: &Vec<Vec<char>>, mut visited_cells: HashSet<i32>) -> HashSet<i32> {
+            let mut cell_num = y * w + x;
+            visited_cells.insert(cell_num);
+            let neighbor_cells = [(x + 1, y), (x, y + 1), (x - 1, y), (x, y - 1)];
+            for &(ax, ay) in neighbor_cells.iter() {
+                if ax >= 0 && ax < w && ay >= 0 && ay < h {
+                    cell_num = ay * w + ax;
+                    if grid[ay as usize][ax as usize] == '1' && !visited_cells.contains(&cell_num) {
+                        visited_cells = visit_cell((ax, ay), &(w, h), grid, visited_cells);
+                    }
+                }
+            }
+            visited_cells
         }
+
+        let mut x = 0; let mut y = 0;
+        while y < h {
+            while x < w {
+                if grid[y as usize][x as usize] == '1' {
+                    let cell_num = y * w + x;
+                    if !visited_cells.contains(&cell_num) {
+                        res += 1;
+                        visited_cells = visit_cell((x, y), &(w, h), &grid, visited_cells);
+                    }
+                }
+                x += 1;
+            }
+            y += 1;
+            x = 0;
+        }
+        res
+    }
+
+    pub fn num_islands_v2(mut grid: Vec<Vec<char>>) -> i32 {
+        if grid.is_empty() { return 0; }
+        let mut res = 0;
+        let (h, w) = (grid.len() as i32, grid[0].len() as i32);
+
+        fn visit_cell((x, y): (i32, i32), &(w, h): &(i32, i32), grid: &mut Vec<Vec<char>>) {
+            grid[y as usize][x as usize] = '#';
+            let neighbor_cells = [(x + 1, y), (x, y + 1), (x - 1, y), (x, y - 1)];
+            for &(ax, ay) in neighbor_cells.iter() {
+                if ax >= 0 && ax < w && ay >= 0 && ay < h
+                    && grid[ay as usize][ax as usize] == '1' {
+                        visit_cell((ax, ay), &(w, h), grid);
+                }
+            }
+        }
+
+        for y in 0..grid.len() {
+            for x in 0..grid[y].len() {
+                if grid[y as usize][x as usize] == '1' {
+                    res += 1;
+                    visit_cell((x as i32 , y as i32), &(w, h), &mut grid);
+                }
+            }
+        }
+        res
     }
 }

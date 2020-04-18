@@ -1,5 +1,5 @@
 use super::*;
-use super::min_stack::MinStack;
+use super::min_stack::{MinStack, MinStack2, MinStack3};
 
 #[test]
 fn single_number_test() {
@@ -321,4 +321,41 @@ fn check_valid_string_test() {
     assert_eq!(Solution::check_valid_string(")(".to_string()), false);
     assert_eq!(Solution::check_valid_string("())".to_string()), false);
     assert_eq!(Solution::check_valid_string("(())((())()()(*)(*()(())())())()()((()())((()))(*".to_string()), false);
+}
+
+fn get_grid_1() -> Vec<Vec<char>> {
+    vec![
+        vec!['1', '1', '1', '1', '0'],
+        vec!['1', '1', '0', '1', '0'],
+        vec!['1', '1', '0', '0', '0'],
+        vec!['0', '0', '0', '0', '0'],
+    ]
+}
+
+
+fn get_grid_2() -> Vec<Vec<char>> {
+    vec![
+        vec!['1', '1', '0', '0', '0'],
+        vec!['1', '1', '0', '0', '0'],
+        vec!['0', '0', '1', '0', '0'],
+        vec!['0', '0', '0', '1', '1'],
+    ]
+}
+
+#[test]
+fn num_islands_test() {
+    assert_eq!(Solution::num_islands(vec![]), 0);
+    assert_eq!(Solution::num_islands(vec![vec![]]), 0);
+
+    assert_eq!(Solution::num_islands(get_grid_1()), 1);
+    assert_eq!(Solution::num_islands(get_grid_2()), 3);
+}
+
+#[test]
+fn num_islands_v2_test() {
+    assert_eq!(Solution::num_islands_v2(vec![]), 0);
+    assert_eq!(Solution::num_islands_v2(vec![vec![]]), 0);
+
+    assert_eq!(Solution::num_islands_v2(get_grid_1()), 1);
+    assert_eq!(Solution::num_islands_v2(get_grid_2()), 3);
 }

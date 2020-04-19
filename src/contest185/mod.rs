@@ -1,7 +1,7 @@
 #[cfg(test)]
 mod tests;
 
-use std::collections::{HashMap, VecDeque};
+use std::collections::{HashMap, HashSet};
 use std::mem::swap;
 
 struct Solution;
@@ -72,6 +72,29 @@ impl Solution {
         }
         res.sort_unstable_by(|a, b| a[0].parse::<i32>().unwrap().cmp(&b[0].parse::<i32>().unwrap()));
         res[0][0] = "Table".to_string();
+        res
+    }
+
+    pub fn display_table_v2(orders: Vec<Vec<String>>) -> Vec<Vec<String>> {
+        let mut fname_set: HashSet<String> = HashSet::new();
+        let mut table: HashMap<String, HashMap<String, i32>> = HashMap::new();
+        for ord in orders.iter() {
+            let (tbl_num, fname) = (ord[1].clone(), ord[2].clone());
+            fname_set.insert(fname.clone());
+            *table.entry(tbl_num).or_insert(HashMap::new()).entry(fname).or_insert(0) += 1;
+        }
+        let mut fnames: Vec<String> = fname_set.into_iter().collect();
+        fnames.sort();
+        let mut res: Vec<Vec<String>> = Vec::new();
+        res.push(vec!["Table".to_string()]);
+        res[0].extend_from_slice(&fnames);
+        let mut tbl_nums: Vec<String> = table.keys().map(|k| k.clone()).collect();
+        tbl_nums.sort_unstable_by(|a, b| a.parse::<i32>().unwrap().cmp(&b.parse::<i32>().unwrap()));
+        for tbl_num in tbl_nums.iter() {
+            let mut row = vec![tbl_num.clone()];
+            row.extend(fnames.iter().map(|fname| table[tbl_num].get(fname).unwrap_or(&0).to_string()));
+            res.push(row);
+        }
         res
     }
 }

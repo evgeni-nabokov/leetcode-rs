@@ -323,7 +323,7 @@ fn check_valid_string_test() {
     assert_eq!(Solution::check_valid_string("(())((())()()(*)(*()(())())())()()((()())((()))(*".to_string()), false);
 }
 
-fn get_grid_1() -> Vec<Vec<char>> {
+fn get_char_grid_1() -> Vec<Vec<char>> {
     vec![
         vec!['1', '1', '1', '1', '0'],
         vec!['1', '1', '0', '1', '0'],
@@ -333,7 +333,7 @@ fn get_grid_1() -> Vec<Vec<char>> {
 }
 
 
-fn get_grid_2() -> Vec<Vec<char>> {
+fn get_char_grid_2() -> Vec<Vec<char>> {
     vec![
         vec!['1', '1', '0', '0', '0'],
         vec!['1', '1', '0', '0', '0'],
@@ -347,8 +347,8 @@ fn num_islands_test() {
     assert_eq!(Solution::num_islands(vec![]), 0);
     assert_eq!(Solution::num_islands(vec![vec![]]), 0);
 
-    assert_eq!(Solution::num_islands(get_grid_1()), 1);
-    assert_eq!(Solution::num_islands(get_grid_2()), 3);
+    assert_eq!(Solution::num_islands(get_char_grid_1()), 1);
+    assert_eq!(Solution::num_islands(get_char_grid_2()), 3);
 }
 
 #[test]
@@ -356,6 +356,32 @@ fn num_islands_v2_test() {
     assert_eq!(Solution::num_islands_v2(vec![]), 0);
     assert_eq!(Solution::num_islands_v2(vec![vec![]]), 0);
 
-    assert_eq!(Solution::num_islands_v2(get_grid_1()), 1);
-    assert_eq!(Solution::num_islands_v2(get_grid_2()), 3);
+    assert_eq!(Solution::num_islands_v2(get_char_grid_1()), 1);
+    assert_eq!(Solution::num_islands_v2(get_char_grid_2()), 3);
+}
+
+
+fn get_number_grid_1() -> Vec<Vec<i32>> {
+    vec![
+        vec![1, 3, 1],
+        vec![1, 5, 1],
+        vec![4, 2, 1],
+    ]
+}
+
+fn get_number_grid_2() -> Vec<Vec<i32>> {
+    vec![
+        vec![0, 0, 0],
+        vec![0, 0, 0],
+        vec![0, 0, 0],
+    ]
+}
+
+#[test]
+fn min_path_sum_test() {
+    assert_eq!(Solution::min_path_sum(vec![]), 0);
+    assert_eq!(Solution::min_path_sum(vec![vec![]]), 0);
+
+    assert_eq!(Solution::min_path_sum(get_number_grid_1()), 7);
+    // assert_eq!(Solution::min_path_sum(get_number_grid_2()), 0);
 }

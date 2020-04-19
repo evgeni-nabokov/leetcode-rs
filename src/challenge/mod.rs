@@ -468,4 +468,23 @@ impl Solution {
         }
         res
     }
+
+    pub fn min_path_sum(grid: Vec<Vec<i32>>) -> i32 {
+        if grid.is_empty() { return 0; }
+        let (h, w) = (grid.len(), grid[0].len());
+        if w == 0 { return 0; }
+        let mut sums = vec![vec![0; w]; h];
+        for y in 0..grid.len() {
+            for x in 0..grid[y].len() {
+                sums[y][x] = grid[y][x] +
+                    match (x, y) {
+                        (0, 0) => 0,
+                        (x, 0) => sums[y][x - 1],
+                        (0, y) => sums[y - 1][x],
+                        (x, y) => min(sums[y][x - 1], sums[y - 1][x])
+                    };
+            }
+        }
+        sums[h - 1usize][w - 1usize]
+    }
 }

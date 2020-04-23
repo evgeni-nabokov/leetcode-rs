@@ -383,5 +383,50 @@ fn min_path_sum_test() {
     assert_eq!(Solution::min_path_sum(vec![vec![]]), 0);
 
     assert_eq!(Solution::min_path_sum(get_number_grid_1()), 7);
-    // assert_eq!(Solution::min_path_sum(get_number_grid_2()), 0);
+    assert_eq!(Solution::min_path_sum(get_number_grid_2()), 0);
+}
+
+#[test]
+fn search_test() {
+    assert_eq!(Solution::search(vec![], 1), -1);
+    assert_eq!(Solution::search(vec![1], 1), 0);
+    assert_eq!(Solution::search(vec![2], 1), -1);
+    assert_eq!(Solution::search(vec![1, 2], 1), 0);
+    assert_eq!(Solution::search(vec![1, 2], 2), 1);
+    assert_eq!(Solution::search(vec![1, 2], 3), -1);
+    assert_eq!(Solution::search(vec![2, 1], 1), 1);
+    assert_eq!(Solution::search(vec![2, 1], 2), 0);
+    assert_eq!(Solution::search(vec![2, 1], 3), -1);
+    assert_eq!(Solution::search(vec![1, 2, 3], 3), 2);
+    assert_eq!(Solution::search(vec![3, 1, 2], 3), 0);
+    assert_eq!(Solution::search(vec![4, 5, 6, 7, 0, 1, 2], 0), 4);
+    assert_eq!(Solution::search(vec![4, 5, 6, 7, 0, 1, 2], 3), -1);
+}
+
+#[test]
+fn subarray_sum_test() {
+    assert_eq!(Solution::subarray_sum(vec![1, 1, 1], 2), 2);
+    assert_eq!(Solution::subarray_sum(vec![2, 5, 4, 1, 0], 2), 1);
+    assert_eq!(Solution::subarray_sum(vec![2, 5, 4, 1, 0], 1), 2);
+}
+
+#[test]
+fn subarray_sum_v2_test() {
+    assert_eq!(Solution::subarray_sum_v2(vec![1, 1, 1], 2), 2);
+    assert_eq!(Solution::subarray_sum_v2(vec![2, 5, 4, 1, 0], 2), 1);
+    assert_eq!(Solution::subarray_sum_v2(vec![2, 5, 4, 1, 0], 1), 2);
+}
+
+#[test]
+fn subarray_sum_v3_test() {
+    assert_eq!(Solution::subarray_sum_v3(vec![1, 1, 1], 2), 2);
+    assert_eq!(Solution::subarray_sum_v3(vec![2, 5, 4, 1, 0], 2), 1);
+    assert_eq!(Solution::subarray_sum_v3(vec![2, 5, 4, 1, 0], 1), 2);
+}
+
+#[test]
+fn subarray_sum_v4_test() {
+    assert_eq!(Solution::subarray_sum_v4(vec![1, 1, 1], 2), 2);
+    assert_eq!(Solution::subarray_sum_v4(vec![2, 5, 4, 1, 0], 2), 1);
+    assert_eq!(Solution::subarray_sum_v4(vec![2, 5, 4, 1, 0], 1), 2);
 }

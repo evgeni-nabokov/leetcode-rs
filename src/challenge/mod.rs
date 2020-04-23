@@ -487,4 +487,102 @@ impl Solution {
         }
         sums[h - 1usize][w - 1usize]
     }
+
+    pub fn search(nums: Vec<i32>, target: i32) -> i32 {
+        if nums.is_empty() { return -1; }
+        let mut left = 0;
+        let mut right = nums.len() - 1;
+        while left <= right {
+            let mid = (left + right) / 2;
+            if target == nums[mid] { return mid as i32; }
+            if nums[left] <= nums[mid] {
+                // Regular part is to the left of the middle.
+                if target < nums[mid] && target >= nums[left] {
+                    // Goes to the regular part.
+                    right = mid - 1;
+                } else {
+                    // Goes to the irregular part.
+                    left = mid + 1
+                }
+            } else {
+                // Regular part is to the right of the middle.
+                if target > nums[mid] && target <= nums[right] {
+                    // Goes to the regular part.
+                    left = mid + 1;
+                } else {
+                    // Goes to the irregular part.
+                    right = mid - 1
+                }
+            }
+        }
+        -1
+    }
+
+    pub fn subarray_sum(nums: Vec<i32>, k: i32) -> i32 {
+        if nums.is_empty() { return 0; }
+        let mut cnt = 0;
+        let mut sums: Vec<i32> = Vec::with_capacity(nums.len() + 1);
+        sums.push(0);
+        for n in nums.iter() {
+            sums.push(sums.last().unwrap() + n);
+        }
+        for curr_len in 1..=nums.len() {
+            for i in 0..=(nums.len() - curr_len) {
+                let sum = sums[i + curr_len] - sums[i];
+                if sum == k {
+                    cnt += 1;
+                }
+            }
+        }
+        cnt
+    }
+
+    pub fn subarray_sum_v2(nums: Vec<i32>, k: i32) -> i32 {
+        if nums.is_empty() { return 0; }
+        let mut cnt = 0;
+        let mut sums: Vec<i32> = Vec::with_capacity(nums.len());
+        sums.push(0);
+        for n in nums.iter() {
+            sums.push(sums.last().unwrap() + n);
+        }
+        for start in 0..nums.len() {
+            for end in (start + 1)..=nums.len() {
+                let sum = sums[end] - sums[start];
+                if sum == k {
+                    cnt += 1;
+                }
+            }
+        }
+        cnt
+    }
+
+    pub fn subarray_sum_v3(nums: Vec<i32>, k: i32) -> i32 {
+        if nums.is_empty() { return 0; }
+        let mut cnt = 0;
+        for start in 0..nums.len() {
+            let mut sum = 0;
+            for end in start..nums.len() {
+                sum += nums[end];
+                if sum == k {
+                    cnt += 1;
+                }
+            }
+        }
+        cnt
+    }
+
+    pub fn subarray_sum_v4(nums: Vec<i32>, k: i32) -> i32 {
+        if nums.is_empty() { return 0; }
+        let mut cnt = 0;
+        let mut map: HashMap<i32, i32> = HashMap::new();
+        map.insert(0, 1);
+        let mut sum = 0;
+        for &n in nums.iter() {
+            sum += n;
+            let key = sum - k;
+            cnt += map.get(&key).unwrap_or(&0);
+            *map.entry(sum).or_insert(0) += 1;
+        }
+        cnt
+    }
 }

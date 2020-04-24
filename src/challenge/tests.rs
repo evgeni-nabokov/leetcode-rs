@@ -430,3 +430,11 @@ fn subarray_sum_v4_test() {
     assert_eq!(Solution::subarray_sum_v4(vec![2, 5, 4, 1, 0], 2), 1);
     assert_eq!(Solution::subarray_sum_v4(vec![2, 5, 4, 1, 0], 1), 2);
 }
+
+#[test]
+fn range_bitwise_and_test() {
+    assert_eq!(Solution::range_bitwise_and(5, 7), 4);
+    assert_eq!(Solution::range_bitwise_and(0, 1), 0);
+    assert_eq!(Solution::range_bitwise_and(16, 19), 16);
+    assert_eq!(Solution::range_bitwise_and(16, 31), 16);
+}

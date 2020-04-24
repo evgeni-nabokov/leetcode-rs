@@ -585,4 +585,14 @@ impl Solution {
         }
         cnt
     }
+
+    pub fn range_bitwise_and(mut m: i32, mut n: i32) -> i32 {
+        let mut cnt = 0;
+        while m != n {
+            m = m >> 1;
+            n = n >> 1;
+            cnt += 1;
+        }
+        m << cnt
+    }
 }

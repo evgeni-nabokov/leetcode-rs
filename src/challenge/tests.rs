@@ -454,3 +454,14 @@ fn can_jump_v2_test() {
     assert_eq!(Solution::can_jump_v2(vec![2,3,1,1,4]), true);
     assert_eq!(Solution::can_jump_v2(vec![3,2,1,0,4]), false);
 }
+
+#[test]
+fn longest_common_subsequence() {
+    assert_eq!(Solution::longest_common_subsequence("".to_string(), "a".to_string()), 0);
+    assert_eq!(Solution::longest_common_subsequence("a".to_string(), "a".to_string()), 1);
+    assert_eq!(Solution::longest_common_subsequence("a".to_string(), "b".to_string()), 0);
+    assert_eq!(Solution::longest_common_subsequence("abcde".to_string(), "ace".to_string()), 3);
+    assert_eq!(Solution::longest_common_subsequence("abc".to_string(), "abc".to_string()), 3);
+    assert_eq!(Solution::longest_common_subsequence("abc".to_string(), "def".to_string()), 0);
+    assert_eq!(Solution::longest_common_subsequence("aggtab".to_string(), "gxtxayb".to_string()), 4);
+}

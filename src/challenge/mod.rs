@@ -626,4 +626,29 @@ impl Solution {
         }
         true
     }
+
+    pub fn longest_common_subsequence(text_1: String, text_2: String) -> i32 {
+        if text_1.is_empty() || text_2.is_empty() { return 0; }
+        let cols = text_1.len() + 1;
+        let rows = text_2.len() + 1;
+        let mut table: Vec<Vec<i32>> = vec![vec![0i32; cols]; rows];
+        for c in 0..cols {
+            table[0][c] = 0;
+        }
+        for r in 1..rows {
+            table[r][0] = 0;
+        }
+        let chars_1: Vec<char> = text_1.chars().collect();
+        let chars_2: Vec<char> = text_2.chars().collect();
+        for r in 1..rows {
+            for c in 1..cols {
+                if chars_1[c - 1] == chars_2[r - 1] {
+                    table[r][c] = 1 + table[r - 1][c - 1];
+                } else {
+                    table[r][c] = max(table[r - 1][c], table[r][c - 1]);
+                }
+            }
+        }
+        table[rows - 1][cols - 1]
+    }
 }

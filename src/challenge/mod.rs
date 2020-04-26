@@ -293,11 +293,11 @@ impl Solution {
         }
     }
 
-     // https://leetcode.com/problems/last-stone-weight/
-     pub fn last_stone_weight(stones: Vec<i32>) -> i32 {
+    // https://leetcode.com/problems/last-stone-weight/
+    pub fn last_stone_weight(stones: Vec<i32>) -> i32 {
         if stones.is_empty() { return 0; }
         if stones.len() == 1 { return stones[0]; }
-        let mut heap= BinaryHeap::with_capacity(30);
+        let mut heap = BinaryHeap::with_capacity(30);
         for s in stones.iter() {
             heap.push(*s);
         }
@@ -319,8 +319,7 @@ impl Solution {
         let mut sums = HashMap::<i32, i32>::new();
         sums.insert(0, -1);
         for (i, &n) in nums.iter().enumerate() {
-            if n == 0 { sum -= 1; }
-            else { sum += 1 }
+            if n == 0 { sum -= 1; } else { sum += 1 }
             if sums.contains_key(&sum) {
                 max_len = max(max_len, i as i32 - sums.get(&sum).unwrap().clone())
             } else {
@@ -424,7 +423,8 @@ impl Solution {
             visited_cells
         }
 
-        let mut x = 0; let mut y = 0;
+        let mut x = 0;
+        let mut y = 0;
         while y < h {
             while x < w {
                 if grid[y as usize][x as usize] == '1' {
@@ -453,7 +453,7 @@ impl Solution {
             for &(ax, ay) in neighbor_cells.iter() {
                 if ax >= 0 && ax < w && ay >= 0 && ay < h
                     && grid[ay as usize][ax as usize] == '1' {
-                        visit_cell((ax, ay), &(w, h), grid);
+                    visit_cell((ax, ay), &(w, h), grid);
                 }
             }
         }
@@ -462,7 +462,7 @@ impl Solution {
             for x in 0..grid[y].len() {
                 if grid[y as usize][x as usize] == '1' {
                     res += 1;
-                    visit_cell((x as i32 , y as i32), &(w, h), &mut grid);
+                    visit_cell((x as i32, y as i32), &(w, h), &mut grid);
                 }
             }
         }
@@ -594,5 +594,36 @@ impl Solution {
             cnt += 1;
         }
         m << cnt
+    }
+
+    pub fn can_jump(nums: Vec<i32>) -> bool {
+        if nums.len() < 2 { return true; }
+        Solution::can_jump_recursive(&nums[..])
+    }
+
+    fn can_jump_recursive(nums: &[i32]) -> bool {
+        for i in (0..(nums.len() - 1)).rev() {
+            if i + nums[i] as usize >= nums.len() - 1 {
+                if i == 0 {
+                    return true
+                } else if Solution::can_jump_recursive(&nums[0..=i]) == true {
+                    return true;
+                }
+            }
+        }
+        false
+    }
+
+    pub fn can_jump_v2(nums: Vec<i32>) -> bool {
+        if nums.len() < 2 { return true; }
+        let mut reach_dist = 0;
+        for n in nums[..nums.len() - 1].iter() {
+            if *n == 0 && reach_dist == 0 {
+                return false;
+            } else {
+                reach_dist = max(reach_dist, *n) - 1;
+            }
+        }
+        true
     }
 }

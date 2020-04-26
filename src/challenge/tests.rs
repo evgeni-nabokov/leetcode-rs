@@ -438,3 +438,19 @@ fn range_bitwise_and_test() {
     assert_eq!(Solution::range_bitwise_and(16, 19), 16);
     assert_eq!(Solution::range_bitwise_and(16, 31), 16);
 }
+
+#[test]
+fn can_jump_test() {
+    assert_eq!(Solution::can_jump(vec![]), true);
+    assert_eq!(Solution::can_jump(vec![2,0,0]), true);
+    assert_eq!(Solution::can_jump(vec![2,3,1,1,4]), true);
+    assert_eq!(Solution::can_jump(vec![3,2,1,0,4]), false);
+}
+
+#[test]
+fn can_jump_v2_test() {
+    assert_eq!(Solution::can_jump_v2(vec![]), true);
+    assert_eq!(Solution::can_jump_v2(vec![2,0,0]), true);
+    assert_eq!(Solution::can_jump_v2(vec![2,3,1,1,4]), true);
+    assert_eq!(Solution::can_jump_v2(vec![3,2,1,0,4]), false);
+}

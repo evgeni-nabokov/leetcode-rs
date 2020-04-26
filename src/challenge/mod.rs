@@ -580,7 +580,7 @@ impl Solution {
         for &n in nums.iter() {
             sum += n;
             let key = sum - k;
-            cnt += map.get(&key).unwrap_or(&0);
+            cnt += *map.get(&key).unwrap_or(&0);
             *map.entry(sum).or_insert(0) += 1;
         }
         cnt

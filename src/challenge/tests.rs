@@ -465,3 +465,37 @@ fn longest_common_subsequence() {
     assert_eq!(Solution::longest_common_subsequence("abc".to_string(), "def".to_string()), 0);
     assert_eq!(Solution::longest_common_subsequence("aggtab".to_string(), "gxtxayb".to_string()), 4);
 }
+
+#[test]
+fn maximal_square_test() {
+    assert_eq!(Solution::maximal_square(vec![vec![]]), 0);
+    assert_eq!(Solution::maximal_square(vec![
+        vec!['0']
+    ]), 0);
+    assert_eq!(Solution::maximal_square(vec![
+        vec!['1']
+    ]), 1);
+    assert_eq!(Solution::maximal_square(vec![
+        vec!['1', '0', '1', '0', '0'],
+        vec!['1', '0', '1', '1', '1'],
+        vec!['1', '1', '1', '1', '1'],
+        vec!['1', '0', '0', '1', '0'],
+    ]), 4);
+}
+
+#[test]
+fn maximal_square_v2_test() {
+    assert_eq!(Solution::maximal_square_v2(vec![vec![]]), 0);
+    assert_eq!(Solution::maximal_square_v2(vec![
+        vec!['0']
+    ]), 0);
+    assert_eq!(Solution::maximal_square_v2(vec![
+        vec!['1']
+    ]), 1);
+    assert_eq!(Solution::maximal_square_v2(vec![
+        vec!['1', '0', '1', '0', '0'],
+        vec!['1', '0', '1', '1', '1'],
+        vec!['1', '1', '1', '1', '1'],
+        vec!['1', '0', '0', '1', '0'],
+    ]), 4);
+}

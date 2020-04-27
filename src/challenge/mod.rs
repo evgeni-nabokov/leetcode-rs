@@ -632,12 +632,6 @@ impl Solution {
         let cols = text_1.len() + 1;
         let rows = text_2.len() + 1;
         let mut table: Vec<Vec<i32>> = vec![vec![0i32; cols]; rows];
-        for c in 0..cols {
-            table[0][c] = 0;
-        }
-        for r in 1..rows {
-            table[r][0] = 0;
-        }
         let chars_1: Vec<char> = text_1.chars().collect();
         let chars_2: Vec<char> = text_2.chars().collect();
         for r in 1..rows {
@@ -650,5 +644,46 @@ impl Solution {
             }
         }
         table[rows - 1][cols - 1]
+    }
+
+    pub fn maximal_square(matrix: Vec<Vec<char>>) -> i32 {
+        if matrix.is_empty() { return 0; }
+        let rows = matrix.len() + 1;
+        let cols = matrix[0].len() + 1;
+        let mut table: Vec<Vec<i32>> = vec![vec![0i32; cols]; rows];
+        let mut max_sz = 0;
+        for r in 1..rows {
+            for c in 1..cols {
+                if matrix[r - 1][c - 1] == '0' {
+                    table[r][c] = 0;
+                } else {
+                    table[r][c] = 1 + min(min(table[r - 1][c], table[r][c - 1]), table[r - 1][c - 1]);
+                    max_sz = max(max_sz, table[r][c]);
+                }
+            }
+        }
+        max_sz * max_sz
+    }
+
+    pub fn maximal_square_v2(matrix: Vec<Vec<char>>) -> i32 {
+        if matrix.is_empty() { return 0; }
+        let rows = matrix.len() + 1;
+        let cols = matrix[0].len() + 1;
+        let mut prev_row: Vec<i32> = vec![0i32; cols];
+        let mut max_sz = 0;
+        let mut prev = 0;
+        for r in 1..rows {
+            for c in 1..cols {
+                if matrix[r - 1][c - 1] == '0' {
+                    prev_row[c] = 0;
+                } else {
+                    let tmp = prev_row[c];
+                    prev_row[c] = 1 + min(min(prev_row[c], prev_row[c - 1]), prev);
+                    max_sz = max(max_sz, prev_row[c]);
+                    prev = tmp;
+                }
+            }
+        }
+        max_sz * max_sz
     }
 }

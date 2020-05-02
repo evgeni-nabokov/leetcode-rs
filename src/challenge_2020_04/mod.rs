@@ -9,8 +9,8 @@ use std::iter::Rev;
 use std::str::Chars;
 use std::collections::{HashSet, HashMap, BinaryHeap};
 
-use crate::challenge::list_node::ListNode;
-use crate::challenge::tree_node::TreeNode;
+use crate::challenge_2020_04::list_node::ListNode;
+use crate::challenge_2020_04::tree_node::TreeNode;
 
 #[inline(always)]
 pub fn apply_backspaces(iter: &mut Rev<Chars>) -> Option<char> {
@@ -670,8 +670,8 @@ impl Solution {
         let rows = matrix.len() + 1;
         let cols = matrix[0].len() + 1;
         let mut prev_row: Vec<i32> = vec![0i32; cols];
-        let mut max_sz = 0;
         let mut prev = 0;
+        let mut max_sz = 0;
         for r in 1..rows {
             for c in 1..cols {
                 if matrix[r - 1][c - 1] == '0' {

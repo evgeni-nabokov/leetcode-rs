@@ -1,7 +1,8 @@
 #[cfg(test)]
 mod tests;
 
-use std::collections::HashSet;
+use std::collections::{HashSet, HashMap};
+use std::collections::hash_map::Entry;
 
 pub struct Solution;
 
@@ -19,5 +20,42 @@ impl Solution {
             }
         }
         cnt
+    }
+
+    pub fn can_construct(ransom_note: String, magazine: String) -> bool {
+        if ransom_note.len() > 0 && magazine.len() == 0 { return false; }
+        let mut avail_chars = HashMap::<char, usize>::with_capacity(magazine.len());
+        for c in magazine.chars() {
+            *avail_chars.entry(c).or_insert(0) += 1;
+        }
+        for c in ransom_note.chars() {
+            if let Entry::Occupied(mut o) = avail_chars.entry(c) {
+                if *o.get() > 0 {
+                    *o.get_mut() -= 1;
+                } else {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        }
+        true
+    }
+
+    pub fn can_construct_v2(ransom_note: String, magazine: String) -> bool {
+        if ransom_note.len() > 0 && magazine.len() == 0 { return false; }
+        let mut chars = vec![0; 26];
+        for c in magazine.chars() {
+            chars[c as usize - 97] += 1;
+        }
+        for c in ransom_note.chars() {
+            let i = c as usize - 97;
+            if chars[i] == 0 {
+                return false;
+            } else {
+                chars[i] -= 1;
+            }
+        }
+        true
     }
 }

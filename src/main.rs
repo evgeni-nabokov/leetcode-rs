@@ -3,6 +3,7 @@ mod challenge_2020_05;
 mod contest_184;
 mod contest_185;
 mod contest_186;
+mod contest_187;
 
 mod easy;
 mod medium;

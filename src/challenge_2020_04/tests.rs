@@ -279,6 +279,17 @@ fn find_max_length_test() {
 }
 
 #[test]
+fn find_max_length_v2_test() {
+    assert_eq!(Solution::find_max_length_v2(vec![]), 0);
+    assert_eq!(Solution::find_max_length_v2(vec![1]), 0);
+    assert_eq!(Solution::find_max_length_v2(vec![1, 0]), 2);
+    assert_eq!(Solution::find_max_length_v2(vec![1, 1]), 0);
+    assert_eq!(Solution::find_max_length_v2(vec![0,1,0]), 2);
+    assert_eq!(Solution::find_max_length_v2(vec![0, 1, 1, 0, 1, 1, 1, 0]), 4);
+    assert_eq!(Solution::find_max_length_v2(vec![0,0,1,0,0,0,1,1]), 6);
+}
+
+#[test]
 fn string_shift_test() {
     assert_eq!(Solution::string_shift("abc".to_string(), vec![vec![0, 1], vec![1, 2]]), "cab".to_string());
     assert_eq!(Solution::string_shift("abcdefg".to_string(), vec![vec![1, 1], vec![1, 1], vec![0, 2], vec![1, 3]]), "efgabcd".to_string());

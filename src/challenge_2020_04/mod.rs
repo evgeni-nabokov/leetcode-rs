@@ -329,6 +329,26 @@ impl Solution {
         max_len
     }
 
+    pub fn find_max_length_v2(nums: Vec<i32>) -> i32 {
+        if nums.len() < 2 { return 0; }
+        let mut max_len = 0;
+        let mut sum = 0;
+        let mut sums = HashMap::<i32, usize>::new();
+        for (i, &n) in nums.iter().enumerate() {
+            sum += if n == 0 { -1 } else { 1 };
+            if sum == 0 {
+                max_len = i + 1;
+            } else {
+                if sums.contains_key(&sum) {
+                    max_len = max(max_len, i - sums.get(&sum).unwrap().clone())
+                } else {
+                    sums.insert(sum, i);
+                }
+            }
+        }
+        max_len as i32
+    }
+
     pub fn string_shift(s: String, shift: Vec<Vec<i32>>) -> String {
         let l = s.len();
         if l < 2 { return s; }

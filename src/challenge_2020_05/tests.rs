@@ -25,3 +25,28 @@ fn can_construct_v2_test() {
     assert_eq!(Solution::can_construct_v2("aa".to_string(), "ab".to_string()), false);
     assert_eq!(Solution::can_construct_v2("aa".to_string(), "aab".to_string()), true);
 }
+
+fn get_bitwise_complement_test_cases() -> Vec<(i32, i32)> {
+    vec![
+        (1, 0),
+        (0, 1),
+        (8, 7),
+        (5, 2),
+        (7, 0),
+        (10, 5)
+    ]
+}
+
+#[test]
+fn bitwise_complement_test() {
+    for case in get_bitwise_complement_test_cases() {
+        assert_eq!(Solution::bitwise_complement(case.0), case.1);
+    }
+}
+
+#[test]
+fn bitwise_complement_v2_test() {
+    for case in get_bitwise_complement_test_cases() {
+        assert_eq!(Solution::bitwise_complement_v2(case.0), case.1);
+    }
+}

@@ -3,6 +3,7 @@ mod tests;
 
 use std::collections::{HashSet, HashMap};
 use std::collections::hash_map::Entry;
+use std::cmp::max;
 
 pub struct Solution;
 
@@ -57,5 +58,27 @@ impl Solution {
             }
         }
         true
+    }
+
+    pub fn bitwise_complement(n: i32) -> i32 {
+        let mut res = 0;
+        let mut un = n as u32;
+        let mut i = 0;
+
+        loop {
+            if un & 1 == 0 {
+                res += 1 << i;
+            }
+            i += 1;
+            un >>= 1;
+            if un == 0 {
+                break;
+            }
+        }
+        res
+    }
+
+    pub fn bitwise_complement_v2(n: i32) -> i32 {
+        max((n as u32 + 1).next_power_of_two() as i32, 2) - n - 1
     }
 }

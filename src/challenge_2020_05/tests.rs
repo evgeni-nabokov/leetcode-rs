@@ -50,3 +50,9 @@ fn bitwise_complement_v2_test() {
         assert_eq!(Solution::bitwise_complement_v2(case.0), case.1);
     }
 }
+
+#[test]
+fn first_uniq_char_test() {
+    assert_eq!(Solution::first_uniq_char("leetcode".to_string()), 0);
+    assert_eq!(Solution::first_uniq_char("loveleetcode".to_string()), 2);
+}

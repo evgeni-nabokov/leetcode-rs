@@ -81,4 +81,18 @@ impl Solution {
     pub fn bitwise_complement_v2(n: i32) -> i32 {
         max((n as u32 + 1).next_power_of_two() as i32, 2) - n - 1
     }
+
+    pub fn first_uniq_char(s: String) -> i32 {
+        if s.is_empty() { return -1; }
+        let mut chars = vec![0; 26];
+        for c in s.chars() {
+            chars[c as usize - 97] += 1;
+        }
+        for (i, c) in s.chars().enumerate() {
+            if chars[c as usize - 97] == 1 {
+                return i as i32;
+            }
+        }
+        -1
+   }
 }

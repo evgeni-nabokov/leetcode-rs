@@ -95,4 +95,22 @@ impl Solution {
         }
         -1
    }
+
+    pub fn majority_element(nums: Vec<i32>) -> i32 {
+        let mut counter_map: HashMap<i32, usize> = HashMap::with_capacity(nums.len() / 2);
+        for &n in nums.iter() {
+            match counter_map.entry(n) {
+                Entry::Occupied(mut o) if *o.get() >= nums.len() / 2 => {
+                    return n;
+                },
+                Entry::Occupied(mut o) => {
+                    *o.get_mut() += 1;
+                },
+                Entry::Vacant(mut v) => {
+                    v.insert(1);
+                }
+            }
+        }
+        *counter_map.keys().next().unwrap()
+    }
 }

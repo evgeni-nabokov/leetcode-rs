@@ -61,3 +61,10 @@ fn first_uniq_char_test() {
     assert_eq!(Solution::first_uniq_char("leetcode".to_string()), 0);
     assert_eq!(Solution::first_uniq_char("loveleetcode".to_string()), 2);
 }
+
+#[test]
+fn majority_element_test() {
+    assert_eq!(Solution::majority_element(vec![1]), 1);
+    assert_eq!(Solution::majority_element(vec![3,2,3]), 3);
+    assert_eq!(Solution::majority_element(vec![2,2,1,1,1,2,2]), 2);
+}

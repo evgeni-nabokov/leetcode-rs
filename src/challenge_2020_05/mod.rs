@@ -94,7 +94,7 @@ impl Solution {
             }
         }
         -1
-   }
+    }
 
     pub fn majority_element(nums: Vec<i32>) -> i32 {
         let mut counter_map: HashMap<i32, usize> = HashMap::with_capacity(nums.len() / 2);
@@ -112,5 +112,25 @@ impl Solution {
             }
         }
         *counter_map.keys().next().unwrap()
+    }
+
+    pub fn check_straight_line(coordinates: Vec<Vec<i32>>) -> bool {
+        // 1 or 2 points are always belong to the same line.
+        if coordinates.len() < 3 { return false; }
+        // a * x + b * y + c = 0.
+        // a = y1 - y2, b = x2 - x1, c = x1 * y2 - x2 * y1.
+        let (x_1, y_1) = (coordinates[0][0], coordinates[0][1]);
+        let (x_2, y_2) = (coordinates[1][0], coordinates[1][1]);
+        let a = y_1 - y_2;
+        let b = x_2 - x_1;
+        let c = x_1 * y_2 - x_2 * y_1;
+        // Check each point if it satisfies the equation of line above.
+        for point in coordinates.iter().skip(2) {
+            let (x, y) = (point[0], point[1]);
+            if a * x + b * y + c != 0 {
+                return false;
+            }
+        }
+        true
     }
 }

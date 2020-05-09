@@ -68,3 +68,23 @@ fn majority_element_test() {
     assert_eq!(Solution::majority_element(vec![3,2,3]), 3);
     assert_eq!(Solution::majority_element(vec![2,2,1,1,1,2,2]), 2);
 }
+
+#[test]
+fn check_straight_line_test() {
+    assert_eq!(Solution::check_straight_line(vec![
+        vec![1,2],
+        vec![2,3],
+        vec![3,4],
+        vec![4,5],
+        vec![5,6],
+    ]), true);
+
+    assert_eq!(Solution::check_straight_line(vec![
+        vec![1,1],
+        vec![2,2],
+        vec![3,4],
+        vec![4,5],
+        vec![5,6],
+        vec![7,7],
+    ]), false);
+}

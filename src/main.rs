@@ -1,3 +1,4 @@
+mod common;
 mod challenge_2020_04;
 mod challenge_2020_05;
 mod contest_184;

@@ -88,3 +88,29 @@ fn check_straight_line_test() {
         vec![7,7],
     ]), false);
 }
+
+fn get_perfect_square_test_cases() -> Vec<(i32, bool)>{
+    vec![
+        (1, true),
+        (2, false),
+        (4, true),
+        (9, true),
+        (16, true),
+        (14, false),
+        (2147483647, false),
+    ]
+}
+
+#[test]
+fn is_perfect_square_test() {
+    for case in get_perfect_square_test_cases() {
+        assert_eq!(Solution::is_perfect_square(case.0), case.1);
+    }
+}
+
+#[test]
+fn is_perfect_square_v2_test() {
+    for case in get_perfect_square_test_cases() {
+        assert_eq!(Solution::is_perfect_square_v3(case.0), case.1);
+    }
+}

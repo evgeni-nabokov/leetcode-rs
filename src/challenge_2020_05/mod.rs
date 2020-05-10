@@ -149,13 +149,13 @@ impl Solution {
         }
     }
 
-    pub fn is_perfect_square_v3(num: i32) -> bool {
+    pub fn is_perfect_square_v2(num: i32) -> bool {
         if num == 1 { return true; }
         let mut x_prev = 0f64;
         let mut x = (num / 2) as f64;
         while (x_prev - x).abs() >= 1.0 {
             x_prev = x;
-            x = x - x / 2.0 + num as f64 / (2.0 * x)
+            x = (x + num as f64 / x) / 2.0;
         }
         let mut possible_roots = vec![x_prev.floor() as i32, x.floor() as i32];
         possible_roots.sort();

@@ -111,6 +111,6 @@ fn is_perfect_square_test() {
 #[test]
 fn is_perfect_square_v2_test() {
     for case in get_perfect_square_test_cases() {
-        assert_eq!(Solution::is_perfect_square_v3(case.0), case.1);
+        assert_eq!(Solution::is_perfect_square_v2(case.0), case.1);
     }
 }

@@ -151,7 +151,7 @@ impl Solution {
 
     pub fn is_perfect_square_v2(num: i32) -> bool {
         if num == 1 { return true; }
-        let mut x_prev = 0f64;
+        let mut x_prev = 1f64;
         let mut x = (num / 2) as f64;
         while (x_prev - x).abs() >= 1.0 {
             x_prev = x;
@@ -166,5 +166,39 @@ impl Solution {
             }
         }
         false
+    }
+
+    pub fn find_judge(n: i32, trust: Vec<Vec<i32>>) -> i32 {
+        let mut who_trusts = vec![0; n as usize];
+        let mut who_is_trusted = vec![0; n as usize];
+        for t in trust.iter() {
+            who_trusts[(t[0] - 1) as usize] += 1;
+            who_is_trusted[(t[1] - 1) as usize] += 1;
+        }
+        let mut judge = -1i32;
+        for i in 0..n as usize {
+            if who_trusts[i] == 0 {
+                if judge > 0 {
+                    return -1;
+                } else if who_is_trusted[i] == n - 1 {
+                    judge = i as i32 + 1;
+                } else {
+                    return -1;
+                }
+            }
+        }
+        judge
+    }
+
+    pub fn find_judge_v2(n: i32, trust: Vec<Vec<i32>>) -> i32 {
+        let mut counter = vec![0; n as usize];
+        for t in trust.iter() {
+            counter[(t[0] - 1) as usize] -= 1;
+            counter[(t[1] - 1) as usize] += 1;
+        }
+        match counter.iter().position(|&p| p == n - 1) {
+            Some(i) => i as i32 + 1,
+            _ => -1,
+        }
     }
 }

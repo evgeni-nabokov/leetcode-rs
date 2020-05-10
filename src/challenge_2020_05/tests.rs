@@ -114,3 +114,28 @@ fn is_perfect_square_v2_test() {
         assert_eq!(Solution::is_perfect_square_v2(case.0), case.1);
     }
 }
+
+fn get_find_judge_test_cases() -> Vec<(i32, Vec<Vec<i32>>, i32)> {
+    vec![
+        (2, vec![vec![1, 2]], 2),
+        (3, vec![vec![1, 2], vec![2, 3]], -1),
+        (3, vec![vec![1, 3], vec![2, 3]], 3),
+        (3, vec![vec![1, 3], vec![2, 3], vec![3, 1]], -1),
+        (3, vec![vec![1, 2], vec![2, 3]], -1),
+        (4, vec![vec![1, 3], vec![1, 4], vec![2, 3], vec![2, 4], vec![4, 3]], 3),
+    ]
+}
+
+#[test]
+fn find_judge_test() {
+    for case in get_find_judge_test_cases() {
+        assert_eq!(Solution::find_judge(case.0, case.1), case.2);
+    }
+}
+
+#[test]
+fn find_judge_v2_test() {
+    for case in get_find_judge_test_cases() {
+        assert_eq!(Solution::find_judge_v2(case.0, case.1), case.2);
+    }
+}

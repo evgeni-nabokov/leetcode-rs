@@ -139,3 +139,58 @@ fn find_judge_v2_test() {
         assert_eq!(Solution::find_judge_v2(case.0, case.1), case.2);
     }
 }
+
+#[test]
+fn flood_fill_test() {
+    let test_cases = vec![
+        (vec![
+            vec![0,0,0],
+            vec![0,1,1],
+        ], 1, 1, 1,
+         vec![
+             vec![0,0,0],
+             vec![0,1,1],
+         ]),
+        (vec![
+            vec![0,0,0],
+            vec![0,1,0],
+        ], 1, 0, 2,
+         vec![
+             vec![2,2,2],
+             vec![2,1,2],
+        ]),
+        (vec![
+            vec![1,1,1],
+            vec![1,1,0],
+            vec![1,0,1]
+        ], 1, 1, 1,
+         vec![
+            vec![1,1,1],
+            vec![1,1,0],
+            vec![1,0,1]
+        ]),
+        (vec![
+            vec![1,1,1],
+            vec![1,1,1],
+            vec![1,1,1]
+        ], 1, 1, 2,
+        vec![
+            vec![2,2,2],
+            vec![2,2,2],
+            vec![2,2,2]
+        ]),
+        (vec![
+            vec![1,1,1],
+            vec![1,1,0],
+            vec![1,0,1]
+        ], 1, 1, 2,
+        vec![
+            vec![2,2,2],
+            vec![2,2,0],
+            vec![2,0,1]
+        ]),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::flood_fill(case.0, case.1, case.2, case.3), case.4);
+    }
+}

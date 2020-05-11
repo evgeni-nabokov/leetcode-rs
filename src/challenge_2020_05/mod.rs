@@ -201,4 +201,28 @@ impl Solution {
             _ => -1,
         }
     }
+
+    pub fn flood_fill(mut image: Vec<Vec<i32>>, sr: i32, sc: i32, new_color: i32) -> Vec<Vec<i32>> {
+        fn fill(image: &mut Vec<Vec<i32>>, r: usize, c: usize, new_color: i32, old_color: i32) {
+            if image[r][c] != old_color || image[r][c] == new_color {
+                return;
+            }
+            image[r][c] = new_color;
+            if r > 0 {
+                fill(image, r - 1, c, new_color, old_color);
+            }
+            if r < image.len() - 1 {
+                fill(image, r + 1, c, new_color, old_color);
+            }
+            if c > 0 {
+                fill(image, r, c - 1, new_color, old_color);
+            }
+            if c < image[0].len() - 1 {
+                fill(image, r, c + 1, new_color, old_color);
+            }
+        }
+        let old_color = image[sr as usize][sc as usize];
+        fill(&mut image, sr as usize, sc as usize, new_color, old_color);
+        image
+    }
 }

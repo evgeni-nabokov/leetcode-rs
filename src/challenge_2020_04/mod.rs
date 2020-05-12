@@ -513,7 +513,7 @@ impl Solution {
         let mut left = 0;
         let mut right = nums.len() - 1;
         while left <= right {
-            let mid = (left + right) / 2;
+            let mid = left + ((right - left) / 2);
             if target == nums[mid] { return mid as i32; }
             if nums[left] <= nums[mid] {
                 // Regular part is to the left of the middle.

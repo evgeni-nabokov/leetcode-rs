@@ -194,3 +194,20 @@ fn flood_fill_test() {
         assert_eq!(Solution::flood_fill(case.0, case.1, case.2, case.3), case.4);
     }
 }
+
+#[test]
+fn single_non_duplicate_test() {
+    let test_cases = vec![
+        (vec![1,2,2], 1),
+        (vec![1,1,2], 2),
+        (vec![1,1,2,3,3,4,4,8,8], 2),
+        (vec![1,1,2,3,3,4,4], 2),
+        (vec![1,1,3,3,4,4,7,8,8], 7),
+        (vec![1,1,2,3,3], 2),
+        (vec![1,1,2,2,3], 3),
+        (vec![3,3,7,7,10,11,11], 10),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::single_non_duplicate(case.0), case.1);
+    }
+}

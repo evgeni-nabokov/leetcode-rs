@@ -225,4 +225,46 @@ impl Solution {
         fill(&mut image, sr as usize, sc as usize, new_color, old_color);
         image
     }
+
+    pub fn single_non_duplicate(nums: Vec<i32>) -> i32 {
+        let mut left = 0;
+        let mut right = nums.len() - 1;
+        while left < right {
+            let mid = left + ((right - left) / 2);
+            if mid == 0 ||
+                nums[mid] != nums[mid - 1] && nums[mid] != nums[mid + 1] {
+                return nums[mid];
+            }
+            let start = if nums[mid] == nums[mid + 1] { mid } else { mid - 1 };
+            if start % 2 == 0 {
+                left = mid + 1;
+            } else  {
+                right = mid - 1;
+            }
+        }
+        nums[left]
+    }
+
+    pub fn remove_k_digits(num: String, mut k: i32) -> String {
+        if num.len() == k as usize { return "0".to_string(); }
+        let mut res: Vec<char> = Vec::with_capacity(k as usize);
+        let mut digits: Vec<char> = num.chars().collect();
+        for d in digits.iter() {
+            while k > 0 && !res.is_empty() && res.last().unwrap() > d {
+                res.pop();
+                k -= 1;
+            }
+            if !res.is_empty() || *d != '0' {
+                res.push(*d);
+            }
+        }
+        while k > 0 {
+            res.pop();
+            k -= 1;
+        }
+        while !res.is_empty() && res[0] == '0' {
+            res.remove(0);
+        }
+        if res.is_empty() { "0".to_string() } else { res.iter().collect() }
+    }
 }

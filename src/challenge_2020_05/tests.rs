@@ -211,3 +211,16 @@ fn single_non_duplicate_test() {
         assert_eq!(Solution::single_non_duplicate(case.0), case.1);
     }
 }
+
+#[test]
+fn remove_kdigits_test() {
+    let test_cases = vec![
+        ("1432219".to_string(), 3, "1219".to_string()),
+        ("10200".to_string(), 1, "200".to_string()),
+        ("10".to_string(), 2, "0".to_string()),
+    ];
+
+    for case in test_cases {
+        assert_eq!(Solution::remove_k_digits(case.0, case.1), case.2);
+    }
+}

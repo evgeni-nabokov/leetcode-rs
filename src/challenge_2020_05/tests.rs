@@ -1,4 +1,5 @@
 use super::*;
+use super::trie::Trie;
 
 #[test]
 fn num_jewels_in_stones_test() {
@@ -223,4 +224,15 @@ fn remove_kdigits_test() {
     for case in test_cases {
         assert_eq!(Solution::remove_k_digits(case.0, case.1), case.2);
     }
+}
+
+#[test]
+fn trie_test() {
+    let mut trie = Trie::new();
+    trie.insert("apple".to_string());
+    assert_eq!(trie.search("apple".to_string()), true);
+    assert_eq!(trie.search("app".to_string()), false);
+    assert_eq!(trie.starts_with("app".to_string()), true);
+    trie.insert("app".to_string());
+    assert_eq!(trie.search("app".to_string()), true);
 }

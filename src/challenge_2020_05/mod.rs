@@ -1,5 +1,7 @@
 #[cfg(test)]
 mod tests;
+mod trie;
+mod trie_node;
 
 use std::collections::{HashSet, HashMap};
 use std::collections::hash_map::Entry;

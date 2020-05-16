@@ -236,3 +236,19 @@ fn trie_test() {
     trie.insert("app".to_string());
     assert_eq!(trie.search("app".to_string()), true);
 }
+
+#[test]
+fn max_subarray_sum_circular_test() {
+    let test_cases = vec![
+        (vec![5,-3,-2,6,-1,4], 14),
+        (vec![1,-2,3,-2], 3),
+        (vec![5,-3,5], 10),
+        (vec![3,-1,2,-1], 4),
+        (vec![3,-2,2,-3], 3),
+        (vec![-2,-3,-1], -1),
+    ];
+
+    for case in test_cases {
+        assert_eq!(Solution::max_subarray_sum_circular(case.0), case.1);
+    }
+}

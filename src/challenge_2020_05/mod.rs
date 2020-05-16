@@ -269,4 +269,25 @@ impl Solution {
         }
         if res.is_empty() { "0".to_string() } else { res.iter().collect() }
     }
+
+    pub fn max_subarray_sum_circular(nums: Vec<i32>) -> i32 {
+        if nums.len() == 1 { return nums[0]; }
+        let mut sum: i32 = nums[0];
+        let mut sum_inv: i32 = -nums[0];
+        let mut max_sum: i32 = sum;
+        let mut max_sum_inv: i32 = sum_inv;
+        let mut total_sum_inv = sum_inv;
+        for &n in nums.iter().skip(1) {
+            sum = max(n, sum + n);
+            sum_inv = max(-n, sum_inv - n);
+            max_sum = max(sum, max_sum);
+            max_sum_inv = max(sum_inv, max_sum_inv);
+            total_sum_inv -= n;
+        }
+        if max_sum < 0 {
+            max_sum
+        } else {
+            max(max_sum, max_sum_inv - total_sum_inv)
+        }
+    }
 }

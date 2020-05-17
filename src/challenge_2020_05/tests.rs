@@ -252,3 +252,16 @@ fn max_subarray_sum_circular_test() {
         assert_eq!(Solution::max_subarray_sum_circular(case.0), case.1);
     }
 }
+
+#[test]
+fn odd_even_list_test() {
+    let test_cases = vec![
+        (vec![1], vec![1]),
+        (vec![1, 2], vec![1, 2]),
+        (vec![1, 2, 3, 4, 5], vec![1, 3, 5, 2, 4]),
+        (vec![2, 1, 3, 5, 6, 4, 7], vec![2, 3, 6, 7, 1, 5, 4]),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::odd_even_list(ListNode::from_slice(&case.0)).unwrap().to_vec(), case.1);
+    }
+}

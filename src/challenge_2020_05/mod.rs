@@ -2,10 +2,13 @@
 mod tests;
 mod trie;
 mod trie_node;
+mod list_node;
 
 use std::collections::{HashSet, HashMap};
 use std::collections::hash_map::Entry;
 use std::cmp::{max, min};
+
+use list_node::ListNode;
 
 pub struct Solution;
 
@@ -102,13 +105,13 @@ impl Solution {
         let mut counter_map: HashMap<i32, usize> = HashMap::with_capacity(nums.len() / 2);
         for &n in nums.iter() {
             match counter_map.entry(n) {
-                Entry::Occupied(mut o) if *o.get() >= nums.len() / 2 => {
+                Entry::Occupied(o) if *o.get() >= nums.len() / 2 => {
                     return n;
                 },
                 Entry::Occupied(mut o) => {
                     *o.get_mut() += 1;
                 },
-                Entry::Vacant(mut v) => {
+                Entry::Vacant(v) => {
                     v.insert(1);
                 }
             }
@@ -289,5 +292,32 @@ impl Solution {
         } else {
             max(max_sum, max_sum_inv - total_sum_inv)
         }
+    }
+
+    pub fn odd_even_list(head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
+        if head.is_none() { return None; }
+        let mut odd_head: Option<Box<ListNode>> = Some(Box::new(ListNode::new(head.as_ref().unwrap().val)));
+        if head.as_ref().unwrap().next.is_none() {
+            return odd_head;
+        }
+        let mut even_head: Option<Box<ListNode>> = Some(Box::new(ListNode::new(head.as_ref().unwrap().next.as_ref().unwrap().val)));;
+        let mut curr_odd_node: &mut Option<Box<ListNode>> = &mut odd_head;
+        let mut curr_even_node: &mut Option<Box<ListNode>> = &mut even_head;
+        let mut curr_node: &Option<Box<ListNode>> = &head.as_ref().unwrap().next.as_ref().unwrap().next;
+        let mut pos = 1;
+        while curr_node.is_some() {
+            let new_node = Some(Box::new(ListNode::new(curr_node.as_ref().unwrap().val)));
+            if pos % 2 == 0 {
+                curr_even_node.as_mut().unwrap().next = new_node;
+                curr_even_node = &mut curr_even_node.as_mut().unwrap().next;
+            } else {
+                curr_odd_node.as_mut().unwrap().next = new_node;
+                curr_odd_node = &mut curr_odd_node.as_mut().unwrap().next;
+            }
+            curr_node = &curr_node.as_ref().unwrap().next;
+            pos += 1;
+        }
+        curr_odd_node.as_mut().unwrap().next = even_head;
+        odd_head
     }
 }

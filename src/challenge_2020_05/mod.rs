@@ -371,4 +371,29 @@ impl Solution {
         }
         res
     }
+
+    pub fn check_inclusion(s1: String, s2: String) -> bool {
+        if s2.len() < s1.len() || s1.is_empty() || s2.is_empty() { return false; }
+        const BASE: usize = 'a' as usize;
+        let s2_chars: Vec<char> = s2.chars().collect();
+        let mut s1_counter = vec![0; 26];
+        let mut s2_counter = vec![0; 26];
+        for c in s1.chars() {
+            s1_counter[c as usize - BASE] += 1;
+        }
+        for i in 0..s1.len() {
+            s2_counter[s2_chars[i] as usize - BASE] += 1;
+        }
+        if s1_counter == s2_counter {
+            return true;
+        }
+        for i in 1..=(s2.len() - s1.len()) {
+            s2_counter[s2_chars[i - 1] as usize - BASE] -= 1;
+            s2_counter[s2_chars[i + s1.len() - 1] as usize - BASE] += 1;
+            if s1_counter == s2_counter {
+                return true;
+            }
+        }
+        false
+    }
 }

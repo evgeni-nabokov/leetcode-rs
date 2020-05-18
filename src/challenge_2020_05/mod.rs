@@ -320,4 +320,29 @@ impl Solution {
         curr_odd_node.as_mut().unwrap().next = even_head;
         odd_head
     }
+
+    pub fn find_anagrams(s: String, p: String) -> Vec<i32> {
+        if s.len() < p.len() || s.is_empty() || p.is_empty() { return vec![]; }
+        let mut res: Vec<i32> = Vec::new();
+        let schars: Vec<char> = s.chars().collect();
+        let mut pchars_counter = vec![0; 26];
+        for c in p.chars() {
+            pchars_counter[c as usize - 97] += 1;
+        }
+        for start in 0..=(s.len() - p.len()) {
+            let mut counter = pchars_counter.clone();
+            for i in 0..p.len() {
+                let j = schars[start + i] as usize - 97;
+                if counter[j] == 0 {
+                    break;
+                } else {
+                    counter[j] -= 1;
+                }
+                if i == p.len() - 1 {
+                    res.push(start as i32);
+                }
+            }
+        }
+        res
+    }
 }

@@ -265,3 +265,14 @@ fn odd_even_list_test() {
         assert_eq!(Solution::odd_even_list(ListNode::from_slice(&case.0)).unwrap().to_vec(), case.1);
     }
 }
+
+#[test]
+fn find_anagrams_test() {
+    let test_cases = vec![
+        ("cbaebabacd".to_string(), "abc".to_string(), vec![0, 6]),
+        ("abab".to_string(), "ab".to_string(), vec![0, 1, 2]),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::find_anagrams(case.0, case.1), case.2);
+    }
+}

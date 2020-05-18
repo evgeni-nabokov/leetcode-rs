@@ -345,4 +345,30 @@ impl Solution {
         }
         res
     }
+
+    pub fn find_anagrams_v2(s: String, p: String) -> Vec<i32> {
+        if s.len() < p.len() || s.is_empty() || p.is_empty() { return vec![]; }
+        const BASE: usize = 'a' as usize;
+        let mut res: Vec<i32> = Vec::new();
+        let schars: Vec<char> = s.chars().collect();
+        let mut pchars_counter = vec![0; 26];
+        let mut schars_counter = vec![0; 26];
+        for i in 0..p.len() {
+            schars_counter[schars[i] as usize - BASE] += 1;
+        }
+        for c in p.chars() {
+            pchars_counter[c as usize - BASE] += 1;
+        }
+        if schars_counter == pchars_counter {
+            res.push(0);
+        }
+        for i in 1..=(s.len() - p.len()) {
+            schars_counter[schars[i - 1] as usize - BASE] -= 1;
+            schars_counter[schars[i + p.len() - 1] as usize - BASE] += 1;
+            if schars_counter == pchars_counter {
+                res.push(i as i32);
+            }
+        }
+        res
+    }
 }

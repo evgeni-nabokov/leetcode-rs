@@ -266,13 +266,23 @@ fn odd_even_list_test() {
     }
 }
 
-#[test]
-fn find_anagrams_test() {
-    let test_cases = vec![
+fn get_find_anagrams_test_cases() -> Vec<(String, String, Vec<i32>)> {
+    vec![
         ("cbaebabacd".to_string(), "abc".to_string(), vec![0, 6]),
         ("abab".to_string(), "ab".to_string(), vec![0, 1, 2]),
-    ];
-    for case in test_cases {
+    ]
+}
+
+#[test]
+fn find_anagrams_test() {
+    for case in get_find_anagrams_test_cases() {
         assert_eq!(Solution::find_anagrams(case.0, case.1), case.2);
+    }
+}
+
+#[test]
+fn find_anagrams_v2_test() {
+    for case in get_find_anagrams_test_cases() {
+        assert_eq!(Solution::find_anagrams_v2(case.0, case.1), case.2);
     }
 }

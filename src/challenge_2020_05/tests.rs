@@ -1,5 +1,6 @@
 use super::*;
 use super::trie::Trie;
+use super::stock_spanner::{StockSpanner, StockSpanner_v2};
 
 #[test]
 fn num_jewels_in_stones_test() {
@@ -285,4 +286,44 @@ fn find_anagrams_v2_test() {
     for case in get_find_anagrams_test_cases() {
         assert_eq!(Solution::find_anagrams_v2(case.0, case.1), case.2);
     }
+}
+
+#[test]
+fn stock_spanner_test() {
+    let mut spanner = StockSpanner::new();
+    assert_eq!(spanner.next(29), 1);
+    assert_eq!(spanner.next(91), 2);
+    assert_eq!(spanner.next(62), 1);
+    assert_eq!(spanner.next(76), 2);
+    assert_eq!(spanner.next(51), 1);
+
+    spanner = StockSpanner::new();
+    assert_eq!(spanner.next(100), 1);
+    assert_eq!(spanner.next(80), 1);
+    assert_eq!(spanner.next(60), 1);
+    assert_eq!(spanner.next(70), 2);
+    assert_eq!(spanner.next(60), 1);
+    assert_eq!(spanner.next(75), 4);
+    assert_eq!(spanner.next(85), 6);
+    assert_eq!(spanner.next(84), 1);
+}
+
+#[test]
+fn stock_spanner_v2_test() {
+    let mut spanner = StockSpanner_v2::new();
+    assert_eq!(spanner.next(29), 1);
+    assert_eq!(spanner.next(91), 2);
+    assert_eq!(spanner.next(62), 1);
+    assert_eq!(spanner.next(76), 2);
+    assert_eq!(spanner.next(51), 1);
+
+    spanner = StockSpanner_v2::new();
+    assert_eq!(spanner.next(100), 1);
+    assert_eq!(spanner.next(80), 1);
+    assert_eq!(spanner.next(60), 1);
+    assert_eq!(spanner.next(70), 2);
+    assert_eq!(spanner.next(60), 1);
+    assert_eq!(spanner.next(75), 4);
+    assert_eq!(spanner.next(85), 6);
+    assert_eq!(spanner.next(84), 1);
 }

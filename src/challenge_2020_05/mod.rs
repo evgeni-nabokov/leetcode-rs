@@ -3,6 +3,7 @@ mod tests;
 mod trie;
 mod trie_node;
 mod list_node;
+mod stock_spanner;
 
 use std::collections::{HashSet, HashMap};
 use std::collections::hash_map::Entry;
@@ -300,7 +301,7 @@ impl Solution {
         if head.as_ref().unwrap().next.is_none() {
             return odd_head;
         }
-        let mut even_head: Option<Box<ListNode>> = Some(Box::new(ListNode::new(head.as_ref().unwrap().next.as_ref().unwrap().val)));;
+        let mut even_head: Option<Box<ListNode>> = Some(Box::new(ListNode::new(head.as_ref().unwrap().next.as_ref().unwrap().val)));
         let mut curr_odd_node: &mut Option<Box<ListNode>> = &mut odd_head;
         let mut curr_even_node: &mut Option<Box<ListNode>> = &mut even_head;
         let mut curr_node: &Option<Box<ListNode>> = &head.as_ref().unwrap().next.as_ref().unwrap().next;
@@ -396,4 +397,6 @@ impl Solution {
         }
         false
     }
+
+
 }

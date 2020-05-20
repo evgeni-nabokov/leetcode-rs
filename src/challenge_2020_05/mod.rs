@@ -9,7 +9,12 @@ use std::collections::{HashSet, HashMap};
 use std::collections::hash_map::Entry;
 use std::cmp::{max, min};
 
+use crate::common::tree_node::{TreeNode, BinaryTree};
+
 use list_node::ListNode;
+use std::rc::Rc;
+use std::cell::RefCell;
+use std::ops::Deref;
 
 pub struct Solution;
 
@@ -398,5 +403,22 @@ impl Solution {
         false
     }
 
-
+    pub fn kth_smallest(root: Option<Rc<RefCell<TreeNode>>>, k: i32) -> i32 {
+        let mut stack: Vec<Option<Rc<RefCell<TreeNode>>>> = Vec::new();
+        let mut node = root.clone();
+        let mut cnt = k.clone();
+        loop {
+            while node.is_some() {
+                stack.push(node.clone());
+                node = RefCell::borrow(node.clone().as_ref().unwrap()).left.clone()
+            }
+            node = stack.pop().unwrap();
+            cnt -= 1;
+            if cnt == 0 {
+                return node.as_ref().unwrap().borrow().val;
+            }
+            node = RefCell::borrow(node.clone().as_ref().unwrap()).right.clone()
+        }
+        1
+    }
 }

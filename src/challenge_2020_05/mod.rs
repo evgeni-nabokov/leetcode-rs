@@ -421,4 +421,37 @@ impl Solution {
         }
         1
     }
+
+    pub fn count_squares(matrix: Vec<Vec<i32>>) -> i32 {
+        if matrix.is_empty() { return 0; }
+        let n_rows = matrix.len();
+        let n_cols = matrix[0].len();
+        let mut cnt = 0;
+        for r in 0..n_rows {
+            for c in 0..n_cols {
+                if matrix[r][c] == 1 {
+                    cnt += 1;
+                    // Check all submatrices growing from to the right-top.
+                    let mut max_size = min(n_rows - r, n_cols - c);
+                    'outer: for s in 1..max_size {
+                        for rr in r..r + s {
+                            if matrix[rr][c + s] == 0 {
+                                break 'outer;
+                            }
+                        }
+                        for cc in c..c + s {
+                            if matrix[r + s][cc] == 0 {
+                                break 'outer;
+                            }
+                        }
+                        if matrix[r + s][c + s] == 0 {
+                            break 'outer;
+                        }
+                        cnt += 1;
+                    }
+                }
+            }
+        }
+        cnt
+    }
 }

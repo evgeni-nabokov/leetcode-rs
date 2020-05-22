@@ -339,3 +339,36 @@ fn kth_smallest_test() {
         assert_eq!(Solution::kth_smallest(tree, case.1), case.2);
     }
 }
+
+#[test]
+fn count_squares_test() {
+    let test_cases = vec![
+        (vec![
+        ], 0),
+        (vec![
+            vec![],
+        ], 0),
+        (vec![
+            vec![0],
+        ], 0),
+        (vec![
+            vec![1],
+        ], 1),
+        (vec![
+            vec![1, 1],
+        ], 2),
+        (vec![
+          vec![0,1,1,1],
+          vec![1,1,1,1],
+          vec![0,1,1,1]
+          ], 15),
+        (vec![
+            vec![1,0,1],
+            vec![1,1,0],
+            vec![1,1,0]
+        ], 7),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::count_squares(case.0), case.1);
+    }
+}

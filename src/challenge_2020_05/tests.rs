@@ -372,3 +372,28 @@ fn count_squares_test() {
         assert_eq!(Solution::count_squares(case.0), case.1);
     }
 }
+
+#[test]
+fn frequency_sort_test() {
+    let test_cases = vec![
+        ("tree".to_string(), "eert".to_string()),
+        ("cccaaa".to_string(), "aaaccc".to_string()),
+        ("Aabb".to_string(), "bbAa".to_string()),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::frequency_sort(case.0), case.1);
+    }
+}
+
+#[test]
+fn frequency_sort_v2_test() {
+    let test_cases = vec![
+        ("tree".to_string(), "eert".to_string()),
+        ("cccaaa".to_string(), "aaaccc".to_string()),
+        ("Aabb".to_string(), "bbAa".to_string()),
+        ("2a554442f544asfasssffffasss".to_string(), "sssssssffffff44444aaaa55522".to_string()),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::frequency_sort_v2(case.0), case.1);
+    }
+}

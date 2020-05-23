@@ -7,7 +7,7 @@ mod stock_spanner;
 
 use std::collections::{HashSet, HashMap};
 use std::collections::hash_map::Entry;
-use std::cmp::{max, min};
+use std::cmp::{max, min, Ordering};
 
 use crate::common::tree_node::{TreeNode, BinaryTree};
 
@@ -453,5 +453,47 @@ impl Solution {
             }
         }
         cnt
+    }
+
+    pub fn frequency_sort(s: String) -> String {
+        let mut cnt: Vec<(char, usize)> = vec![
+            ('A', 0), ('B', 0), ('C', 0), ('D', 0), ('E', 0), ('F', 0), ('G', 0), ('H', 0), ('I', 0),
+            ('J', 0), ('K', 0), ('L', 0), ('M', 0), ('N', 0), ('O', 0), ('P', 0), ('Q', 0), ('R', 0),
+            ('S', 0), ('T', 0), ('U', 0), ('V', 0), ('W', 0), ('X', 0), ('Y', 0), ('Z', 0),
+            ('a', 0), ('b', 0), ('c', 0), ('d', 0), ('e', 0), ('f', 0), ('g', 0), ('h', 0), ('i', 0),
+            ('j', 0), ('k', 0), ('l', 0), ('m', 0), ('n', 0), ('o', 0), ('p', 0), ('q', 0), ('r', 0),
+            ('s', 0), ('t', 0), ('u', 0), ('v', 0), ('w', 0), ('x', 0), ('y', 0), ('z', 0),
+        ];
+        for c in s.chars() {
+            let ascii_index = c as u8;
+            let i = ascii_index - if ascii_index < 'Z' as u8 { 'A' as u8 } else { 'a' as u8 - 26 };
+            cnt[i as usize].1 += 1;
+        }
+        cnt.sort_unstable_by(|a, b| match b.1.cmp(&a.1) {
+            Ordering::Equal => a.0.cmp(&b.0),
+            o => o,
+        });
+        let mut sorted_chars: Vec<char> = Vec::with_capacity(s.len());
+        for e in cnt.iter() {
+            sorted_chars.extend_from_slice(&vec![e.0; e.1])
+        }
+        sorted_chars.iter().collect()
+    }
+
+    pub fn frequency_sort_v2(s: String) -> String {
+        let mut map: HashMap<char, usize> = HashMap::with_capacity(s.len());
+        for c in s.chars() {
+            *map.entry(c).or_insert(0) += 1;
+        }
+        let mut chars: Vec<(char, usize)> = map.iter().map(|(&k, &v)| (k, v)).collect();
+        chars.sort_unstable_by(|a, b| match b.1.cmp(&a.1) {
+            Ordering::Equal => a.0.cmp(&b.0),
+            o => o,
+        });
+        let mut sorted_chars: Vec<char> = Vec::with_capacity(s.len());
+        for e in chars.iter() {
+            sorted_chars.extend_from_slice(&vec![e.0; e.1])
+        }
+        sorted_chars.iter().collect()
     }
 }

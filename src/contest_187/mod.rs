@@ -1,8 +1,7 @@
-use std::collections::{HashSet, HashMap};
-use std::cmp::{min, max};
-
 #[cfg(test)]
 mod tests;
+
+use std::collections::HashSet;
 
 struct Solution;
 

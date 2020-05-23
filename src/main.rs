@@ -1,3 +1,5 @@
+#![allow(dead_code)]
+
 mod common;
 mod challenge_2020_04;
 mod challenge_2020_05;

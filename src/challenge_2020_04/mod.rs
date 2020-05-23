@@ -10,7 +10,6 @@ use std::str::Chars;
 use std::collections::{HashSet, HashMap, BinaryHeap};
 
 use crate::challenge_2020_04::list_node::ListNode;
-use crate::challenge_2020_04::tree_node::TreeNode;
 
 #[inline(always)]
 pub fn apply_backspaces(iter: &mut Rev<Chars>) -> Option<char> {

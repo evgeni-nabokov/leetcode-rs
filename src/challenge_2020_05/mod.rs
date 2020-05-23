@@ -1,20 +1,20 @@
-#[cfg(test)]
-mod tests;
 mod trie;
 mod trie_node;
 mod list_node;
 mod stock_spanner;
 
+#[cfg(test)]
+mod tests;
+
 use std::collections::{HashSet, HashMap};
 use std::collections::hash_map::Entry;
 use std::cmp::{max, min, Ordering};
 
-use crate::common::tree_node::{TreeNode, BinaryTree};
+use crate::common::tree_node::TreeNode;
 
 use list_node::ListNode;
 use std::rc::Rc;
 use std::cell::RefCell;
-use std::ops::Deref;
 
 pub struct Solution;
 
@@ -259,7 +259,7 @@ impl Solution {
     pub fn remove_k_digits(num: String, mut k: i32) -> String {
         if num.len() == k as usize { return "0".to_string(); }
         let mut res: Vec<char> = Vec::with_capacity(k as usize);
-        let mut digits: Vec<char> = num.chars().collect();
+        let digits: Vec<char> = num.chars().collect();
         for d in digits.iter() {
             while k > 0 && !res.is_empty() && res.last().unwrap() > d {
                 res.pop();
@@ -419,7 +419,6 @@ impl Solution {
             }
             node = RefCell::borrow(node.clone().as_ref().unwrap()).right.clone()
         }
-        1
     }
 
     pub fn count_squares(matrix: Vec<Vec<i32>>) -> i32 {
@@ -432,7 +431,7 @@ impl Solution {
                 if matrix[r][c] == 1 {
                     cnt += 1;
                     // Check all submatrices growing from to the right-top.
-                    let mut max_size = min(n_rows - r, n_cols - c);
+                    let max_size = min(n_rows - r, n_cols - c);
                     'outer: for s in 1..max_size {
                         for rr in r..r + s {
                             if matrix[rr][c + s] == 0 {

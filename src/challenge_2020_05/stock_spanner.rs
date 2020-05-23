@@ -15,20 +15,20 @@ impl StockSpanner {
 
     pub fn next(&mut self, price: i32) -> i32 {
         self.day += 1;
-        let nearest_greater_day = *self.map.range((price + 1)..).map(|(k, v)| v).max().unwrap_or(&0);// next().unwrap_or((&0, &0));
-        let mut span = self.day - nearest_greater_day;
+        let nearest_greater_day = *self.map.range((price + 1)..).map(|(_k, v)| v).max().unwrap_or(&0);
+        let span = self.day - nearest_greater_day;
         self.map.insert(price, self.day);
         span
     }
 }
 
-pub struct StockSpanner_v2 {
+pub struct StockSpannerV2 {
     stack: Vec<(i32, i32)>,
 }
 
-impl StockSpanner_v2 {
+impl StockSpannerV2 {
     pub fn new() -> Self {
-        StockSpanner_v2 {
+        StockSpannerV2 {
             stack: Vec::new(),
         }
     }

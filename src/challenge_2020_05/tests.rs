@@ -1,6 +1,6 @@
 use super::*;
 use super::trie::Trie;
-use super::stock_spanner::{StockSpanner, StockSpanner_v2};
+use super::stock_spanner::{StockSpanner, StockSpannerV2};
 
 #[test]
 fn num_jewels_in_stones_test() {
@@ -310,14 +310,14 @@ fn stock_spanner_test() {
 
 #[test]
 fn stock_spanner_v2_test() {
-    let mut spanner = StockSpanner_v2::new();
+    let mut spanner = StockSpannerV2::new();
     assert_eq!(spanner.next(29), 1);
     assert_eq!(spanner.next(91), 2);
     assert_eq!(spanner.next(62), 1);
     assert_eq!(spanner.next(76), 2);
     assert_eq!(spanner.next(51), 1);
 
-    spanner = StockSpanner_v2::new();
+    spanner = StockSpannerV2::new();
     assert_eq!(spanner.next(100), 1);
     assert_eq!(spanner.next(80), 1);
     assert_eq!(spanner.next(60), 1);

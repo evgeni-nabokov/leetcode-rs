@@ -89,7 +89,7 @@ impl Solution {
         let modulo = 1000000007u64;
         let mut x = 6u64; // three color variants for n = 1.
         let mut y = 6u64; // two color variants for n = 1.
-       for i in 2..=n {
+       for _ in 2..=n {
             let old_x = x;
             x = (2 * x + 2 * y) % modulo;
             y = (2 * old_x + 3 * y) % modulo;

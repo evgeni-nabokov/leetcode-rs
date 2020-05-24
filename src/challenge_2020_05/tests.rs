@@ -397,3 +397,27 @@ fn frequency_sort_v2_test() {
         assert_eq!(Solution::frequency_sort_v2(case.0), case.1);
     }
 }
+
+#[test]
+fn interval_intersection_test() {
+    let test_cases = vec![
+        (
+            vec![],
+            vec![vec![1, 2]],
+            vec![],
+        ),
+        (
+            vec![vec![1, 2]],
+            vec![],
+            vec![],
+        ),
+        (
+            vec![vec![0,2],vec![5,10],vec![13,23],vec![24,25]],
+            vec![vec![1,5],vec![8,12],vec![15,24],vec![25,26]],
+            vec![vec![1,2],vec![5,5],vec![8,10],vec![15,23],vec![24,24],vec![25,25]]
+        ),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::interval_intersection(case.0, case.1), case.2);
+    }
+}

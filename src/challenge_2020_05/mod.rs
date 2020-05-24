@@ -495,4 +495,24 @@ impl Solution {
         }
         sorted_chars.iter().collect()
     }
+
+    pub fn interval_intersection(a: Vec<Vec<i32>>, b: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
+        if a.is_empty() || b.is_empty() { return vec![]; }
+        let mut a_idx = 0;
+        let mut b_idx = 0;
+        let mut res: Vec<Vec<i32>> = Vec::new();
+        while a_idx < a.len() && b_idx < b.len() {
+            let a_int = a[a_idx].clone();
+            let b_int = b[b_idx].clone();
+            if a_int[1] >= b_int[0] && a_int[0] <= b_int[1] {
+                res.push(vec![max(a_int[0], b_int[0]), min(a_int[1], b_int[1])]);
+            }
+            if a_int[1] > b_int[1] {
+                b_idx += 1;
+            } else {
+                a_idx += 1;
+            }
+        }
+        res
+    }
 }

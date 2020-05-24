@@ -168,6 +168,7 @@ impl BinaryTree for Option<Rc<RefCell<TreeNode>>> {
             res
         }
         let height = self.get_height();
+        if height == 0 { return vec![]; }
         let mut res = Vec::<Option<i32>>::with_capacity(2 ^ (height - 1));
         for i in 1..=height {
             res.append(get_given_level(&self, i).as_mut())

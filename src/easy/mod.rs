@@ -20,4 +20,24 @@ impl Solution {
         }
         vec![]
     }
+
+    // https://leetcode.com/problems/reverse-integer/
+    pub fn reverse(x: i32) -> i32 {
+        let mut xx = x.clone();
+        let mut rx = 0i32;
+        while xx != 0 {
+            if let Some(t) = rx.checked_mul(10) {
+                rx = t;
+            } else {
+                return 0;
+            }
+            if let Some(t) = rx.checked_add(xx % 10) {
+                rx = t;
+            } else {
+                return 0;
+            }
+            xx = xx / 10;
+        }
+        rx
+    }
 }

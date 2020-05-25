@@ -29,3 +29,14 @@ fn defang_ip_addr_test() {
         assert_eq!(Solution::defang_ip_addr(case.0), case.1);
     }
 }
+
+#[test]
+fn number_of_steps_test() {
+    let test_cases = vec![
+        (14, 6),
+        (8, 4),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::number_of_steps(case.0), case.1);
+    }
+}

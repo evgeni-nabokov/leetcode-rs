@@ -18,3 +18,14 @@ fn reverse_test() {
         assert_eq!(Solution::reverse(case.0), case.1);
     }
 }
+
+#[test]
+fn defang_ip_addr_test() {
+    let test_cases = vec![
+        ("1.1.1.1".to_string(), "1[.]1[.]1[.]1".to_string()),
+        ("255.100.50.0".to_string(), "255[.]100[.]50[.]0".to_string()),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::defang_ip_addr(case.0), case.1);
+    }
+}

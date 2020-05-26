@@ -446,3 +446,16 @@ fn bst_from_preorder_v2_test() {
         assert_eq!(Solution::bst_from_preorder_v2(case.0).get_level_order_values(), case.1);
     }
 }
+
+#[test]
+fn max_uncrossed_lines_test() {
+    let test_cases = vec![
+        (vec![], vec![2], 0),
+        (vec![1], vec![], 0),
+        (vec![2,5,1,2,5], vec![10,5,2,1,5,2], 3),
+        (vec![1,3,7,1,7,5], vec![1,9,2,5,1], 2),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::max_uncrossed_lines(case.0, case.1), case.2);
+    }
+}

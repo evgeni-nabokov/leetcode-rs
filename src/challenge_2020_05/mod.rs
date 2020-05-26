@@ -586,4 +586,19 @@ impl Solution {
         build_bst(&preorder, 1, RefCell::borrow_mut(root.as_ref().unwrap()), None, None);
         root
     }
+
+    pub fn max_uncrossed_lines(a: Vec<i32>, b: Vec<i32>) -> i32 {
+        if a.is_empty() || b.is_empty() { return 0; }
+        let mut table: Vec<Vec<i32>> = vec![vec![0; b.len() + 1]; a.len() + 1];
+        for row in 1..=a.len() {
+            for col in 1..=b.len() {
+                if a[row - 1] == b[col - 1] {
+                    table[row][col] = 1 + table[row - 1][col - 1];
+                } else {
+                    table[row][col] = max(table[row - 1][col], table[row][col - 1]);
+                }
+            }
+        }
+        table[a.len()][b.len()]
+    }
 }

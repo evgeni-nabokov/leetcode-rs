@@ -531,33 +531,6 @@ impl Solution {
         build_bst(&preorder)
     }
 
-    // pub fn bst_from_preorder_v2(preorder: Vec<i32>) -> Option<Rc<RefCell<TreeNode>>> {
-    //     fn build_bst(arr: &[i32], mut i: usize, curr_node: Rc<RefCell<TreeNode>>, left: Option<i32>, right: Option<i32>) -> usize {
-    //         if i == arr.len()
-    //             || (left.is_some() && arr[i] < *left.as_ref().unwrap())
-    //             || (right.is_some() && arr[i] > *right.as_ref().unwrap()) {
-    //             return i;
-    //         }
-    //
-    //         if arr[i] < RefCell::borrow(curr_node.as_ref()).val {
-    //             RefCell::borrow_mut(curr_node.as_ref()).left = Some(Rc::new(RefCell::new(TreeNode::new(arr[i]))));
-    //             i = build_bst(arr, i + 1, RefCell::borrow(curr_node.as_ref()).left.unwrap(), left, Some(RefCell::borrow(curr_node.as_ref()).val - 1));
-    //             if i == arr.len()
-    //                 || (left.is_some() && arr[i] < *left.as_ref().unwrap())
-    //                 || (right.is_some() && arr[i] > *right.as_ref().unwrap()) {
-    //                 return i;
-    //             }
-    //         }
-    //         RefCell::borrow_mut(curr_node.as_ref()).right = Some(Rc::new(RefCell::new(TreeNode::new(arr[i]))));
-    //         i = build_bst(arr, i + 1, RefCell::borrow(curr_node.as_ref()).right.unwrap(), Some(RefCell::borrow(curr_node.as_ref()).val + 1), right);
-    //         return i;
-    //     }
-    //     if preorder.is_empty() { return None; }
-    //     let root = Some(Rc::new(RefCell::new(TreeNode::new(preorder[0]))));
-    //     if preorder.len() == 1 { return root; }
-    //     build_bst(&preorder, 1, &root.as_ref().unwrap(), None, None);
-    //     root
-    // }
     pub fn bst_from_preorder_v2(preorder: Vec<i32>) -> Option<Rc<RefCell<TreeNode>>> {
         fn build_bst(arr: &[i32], mut i: usize, mut curr_node: RefMut<TreeNode>, left: Option<i32>, right: Option<i32>) -> usize {
             if i == arr.len()
@@ -600,5 +573,37 @@ impl Solution {
             }
         }
         table[a.len()][b.len()]
+    }
+
+    pub fn possible_bipartition(n: i32, dislikes: Vec<Vec<i32>>) -> bool {
+        if n < 2 || dislikes.is_empty() { return true; }
+        // Building adjacency list of the given graph.
+        let mut adj_list: Vec<Vec<usize>> = vec![vec![]; n as usize];
+        for pair in dislikes.iter() {
+            let i_1 = (pair[0] - 1) as usize;
+            let i_2 = (pair[1] - 1) as usize;
+            adj_list[i_1].push(i_2);
+            adj_list[i_2].push(i_1);
+        }
+        // Coloring the graph with two colors: -1 and 1.
+        // v keeps color of each vertex. An uncolored vertex has the color of 0.
+        let mut v: Vec<i8> = vec![0; n as usize];
+        // Using deep first search.
+        fn dfs(i: usize, color: i8, v: &mut Vec<i8>, adj_list: &Vec<Vec<usize>>) -> bool {
+            v[i] = color;
+            for &k in adj_list[i].iter() {
+                if v[k] == v[i] || v[k] == 0 && !dfs(k, -color, v, adj_list) {
+                    return false;
+                }
+            }
+            true
+        }
+        // Applying dfs for each uncolored vertex.
+        for i in 0..n as usize {
+            if v[i] == 0 && !dfs(i, 1, &mut v, &adj_list){
+                return false;
+            }
+        }
+        true
     }
 }

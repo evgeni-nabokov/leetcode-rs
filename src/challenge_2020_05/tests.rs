@@ -459,3 +459,19 @@ fn max_uncrossed_lines_test() {
         assert_eq!(Solution::max_uncrossed_lines(case.0, case.1), case.2);
     }
 }
+
+#[test]
+fn possible_bipartition_test() {
+    let test_cases = vec![
+        (0, vec![], true),
+        (1, vec![], true),
+        (2, vec![], true),
+        (2, vec![vec![1, 2]], true),
+        (4, vec![vec![1,2],vec![1,3],vec![2,4]], true),
+        (3, vec![vec![1,2],vec![1,3],vec![2,3]], false),
+        (5, vec![vec![1,2],vec![2,3],vec![3,4],vec![4, 5], vec![1, 5]], false),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::possible_bipartition(case.0, case.1), case.2);
+    }
+}

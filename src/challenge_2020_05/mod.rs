@@ -606,4 +606,33 @@ impl Solution {
         }
         true
     }
+
+    pub fn count_bits(num: i32) -> Vec<i32> {
+        let mut res: Vec<i32> = vec![0; (num + 1) as usize];
+        let mut j = 0usize;
+        for i in 1..=num as usize {
+            if i & (i - 1) == 0 {
+                j = 0;
+            }
+            res[i] = 1 + res[j];
+            j += 1;
+        }
+        res
+    }
+
+    pub fn count_bits_v2(num: i32) -> Vec<i32> {
+        let mut res: Vec<i32> = vec![0; (num + 1) as usize];
+        for i in 1..=num {
+            res[i as usize] = 1 + res[(i - (i & -i)) as usize];
+        }
+        res
+    }
+
+    pub fn count_bits_v3(num: i32) -> Vec<i32> {
+        let mut res: Vec<i32> = vec![0; (num + 1) as usize];
+        for i in 1..=num {
+            res[i as usize] = 1 + res[(i & (i - 1)) as usize];
+        }
+        res
+    }
 }

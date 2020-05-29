@@ -475,3 +475,39 @@ fn possible_bipartition_test() {
         assert_eq!(Solution::possible_bipartition(case.0, case.1), case.2);
     }
 }
+
+fn get_count_bits_test_cases() -> Vec<(i32, Vec<i32>)> {
+    vec![
+        (0, vec![0]),
+        (1, vec![0, 1]),
+        (2, vec![0, 1, 1]),
+        (3, vec![0, 1, 1, 2]),
+        (4, vec![0, 1, 1, 2, 1]),
+        (5, vec![0, 1, 1, 2, 1, 2]),
+        (6, vec![0, 1, 1, 2, 1, 2, 2]),
+        (7, vec![0, 1, 1, 2, 1, 2, 2, 3]),
+        (8, vec![0, 1, 1, 2, 1, 2, 2, 3, 1]),
+        (9, vec![0, 1, 1, 2, 1, 2, 2, 3, 1, 2]),
+    ]
+}
+
+#[test]
+fn count_bits_test() {
+    for case in get_count_bits_test_cases() {
+        assert_eq!(Solution::count_bits(case.0), case.1);
+    }
+}
+
+#[test]
+fn count_bits_v2_test() {
+    for case in get_count_bits_test_cases() {
+        assert_eq!(Solution::count_bits_v2(case.0), case.1);
+    }
+}
+
+#[test]
+fn count_bits_v3_test() {
+    for case in get_count_bits_test_cases() {
+        assert_eq!(Solution::count_bits_v3(case.0), case.1);
+    }
+}

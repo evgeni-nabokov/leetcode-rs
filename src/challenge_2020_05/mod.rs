@@ -589,10 +589,10 @@ impl Solution {
         // v keeps color of each vertex. An uncolored vertex has the color of 0.
         let mut v: Vec<i8> = vec![0; n as usize];
         // Using deep first search.
-        fn dfs(i: usize, color: i8, v: &mut Vec<i8>, adj_list: &Vec<Vec<usize>>) -> bool {
+        fn dfs(i: usize, color: i8, adj_list: &Vec<Vec<usize>>, v: &mut Vec<i8>) -> bool {
             v[i] = color;
             for &k in adj_list[i].iter() {
-                if v[k] == v[i] || v[k] == 0 && !dfs(k, -color, v, adj_list) {
+                if v[k] == v[i] || v[k] == 0 && !dfs(k, -color, adj_list, v) {
                     return false;
                 }
             }
@@ -600,7 +600,7 @@ impl Solution {
         }
         // Applying dfs for each uncolored vertex.
         for i in 0..n as usize {
-            if v[i] == 0 && !dfs(i, 1, &mut v, &adj_list){
+            if v[i] == 0 && !dfs(i, 1, &adj_list, &mut v){
                 return false;
             }
         }
@@ -634,5 +634,38 @@ impl Solution {
             res[i as usize] = 1 + res[(i & (i - 1)) as usize];
         }
         res
+    }
+
+    pub fn can_finish(n: i32, prerequisites: Vec<Vec<i32>>) -> bool {
+        if n < 2 || prerequisites.is_empty() { return true; }
+        // Building adjacency list of the given graph.
+        let mut adj_list: Vec<Vec<usize>> = vec![vec![]; n as usize];
+        for pair in prerequisites.iter() {
+            adj_list[pair[1] as usize].push(pair[0] as usize);
+        }
+        // 0 - not visited,
+        // 1 - visited, but the traversal is not finished yet,
+        // 2 - visited, traversal is finished.
+        let mut visited: Vec<i8> = vec![0; n as usize];
+        // Using deep first search.
+        fn dfs(i: usize, adj_list: &Vec<Vec<usize>>, visited: &mut Vec<i8>) -> bool {
+            if visited[i] == 1 { return false; }
+            if visited[i] == 2 { return true; }
+            visited[i] = 1;
+            for &k in adj_list[i].iter() {
+                if !dfs(k, adj_list, visited) {
+                    return false;
+                }
+            }
+            visited[i] = 2;
+            true
+        }
+
+        for i in 0..n as usize {
+            if visited[i] == 0 && !dfs(i, &adj_list, &mut visited){
+                return false;
+            }
+        }
+        true
     }
 }

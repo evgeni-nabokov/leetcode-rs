@@ -511,3 +511,17 @@ fn count_bits_v3_test() {
         assert_eq!(Solution::count_bits_v3(case.0), case.1);
     }
 }
+
+#[test]
+fn can_finish_test() {
+    let test_cases = vec![
+        (0, vec![], true),
+        (1, vec![], true),
+        (2, vec![], true),
+        (2, vec![vec![1, 0]], true),
+        (4, vec![vec![1,0],vec![0,1]], false),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::can_finish(case.0, case.1), case.2);
+    }
+}

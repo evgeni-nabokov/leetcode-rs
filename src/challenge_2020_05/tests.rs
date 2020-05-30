@@ -525,3 +525,25 @@ fn can_finish_test() {
         assert_eq!(Solution::can_finish(case.0, case.1), case.2);
     }
 }
+
+#[test]
+fn k_closest_test() {
+    let test_cases = vec![
+        (vec![vec![1,3],vec![-2,2]], 1, vec![vec![-2,2]]),
+        (vec![vec![3,3],vec![5,-1],vec![-2,4]], 2, vec![vec![3,3],vec![-2,4]]),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::k_closest(case.0, case.1), case.2);
+    }
+}
+
+#[test]
+fn k_closest_v2_test() {
+    let test_cases = vec![
+        (vec![vec![1,3],vec![-2,2]], 1, vec![vec![-2,2]]),
+        (vec![vec![3,3],vec![5,-1],vec![-2,4]], 2, vec![vec![3,3],vec![-2,4]]),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::k_closest_v2(case.0, case.1), case.2);
+    }
+}

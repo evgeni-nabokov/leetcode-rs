@@ -668,4 +668,20 @@ impl Solution {
         }
         true
     }
+
+    pub fn k_closest(points: Vec<Vec<i32>>, k: i32) -> Vec<Vec<i32>> {
+        let mut d: Vec<(i32, usize)> = points.iter()
+            .enumerate()
+            .map(|(i, p)| (p[0].pow(2) + p[1].pow(2), i))
+            .collect();
+        d.sort_unstable_by(|a, b| a.0.cmp(&b.0));
+        d.iter()
+            .take(k as usize).map(|(_, i)| points[*i].clone())
+            .collect()
+    }
+
+    pub fn k_closest_v2(mut points: Vec<Vec<i32>>, k: i32) -> Vec<Vec<i32>> {
+        points.sort_unstable_by_key(|p| p[0].pow(2) + p[1].pow(2));
+        points[..k as usize].to_vec()
+    }
 }

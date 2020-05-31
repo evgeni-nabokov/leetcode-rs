@@ -1,7 +1,9 @@
 #[cfg(test)]
 mod tests;
 
-use std::collections::HashSet;
+use std::cmp::max;
+use std::collections::{HashSet, BTreeMap};
+use std::collections::btree_map::Entry::Occupied;
 
 struct Solution;
 
@@ -39,5 +41,35 @@ impl Solution {
             }
         }
         true
+    }
+
+    pub fn longest_subarray(nums: Vec<i32>, limit: i32) -> i32 {
+        let mut left = 0usize;
+        let mut max_dist = 0usize;
+        let mut multiset: BTreeMap<i32, usize> = BTreeMap::new();
+        for right in 0..nums.len() {
+            *multiset.entry(nums[right]).or_insert(0) += 1;
+            let mut min_n = *multiset.iter().next().unwrap().0;
+            let mut max_n = *multiset.iter().next_back().unwrap().0;
+            if max_n - min_n <= limit {
+                max_dist = max(max_dist, right - left + 1);
+            } else {
+                while left <= right && max_n - min_n > limit {
+                    match multiset.entry(nums[left]) {
+                        Occupied(mut entry) => {
+                            *entry.get_mut() -= 1;
+                            if *entry.get() == 0 {
+                                entry.remove();
+                            }
+                        },
+                        _ => (),
+                    };
+                    min_n = *multiset.iter().next().unwrap().0;
+                    max_n = *multiset.iter().next_back().unwrap().0;
+                    left += 1;
+                }
+            }
+        }
+        max_dist as i32
     }
 }

@@ -684,4 +684,31 @@ impl Solution {
         points.sort_unstable_by_key(|p| p[0].pow(2) + p[1].pow(2));
         points[..k as usize].to_vec()
     }
+
+
+    pub fn min_distance(word_1: String, word_2: String) -> i32 {
+        if word_1.is_empty() { return word_2.len() as i32; }
+        if word_2.is_empty() { return word_1.len() as i32; }
+        let rows = word_1.len() + 1;
+        let cols = word_2.len() + 1;
+        let mut table: Vec<Vec<_>> = vec![vec![0usize; cols]; rows];
+        let chars_1: Vec<char> = word_1.chars().collect();
+        let chars_2: Vec<char> = word_2.chars().collect();
+        for c in 1..cols {
+            table[0][c] = c;
+        }
+        for r in 1..rows {
+            table[r][0] = r;
+        }
+        for r in 1..rows {
+            for c in 1..cols {
+                if chars_1[r - 1] == chars_2[c - 1] {
+                    table[r][c] = table[r - 1][c - 1];
+                } else {
+                    table[r][c] = 1 + min(table[r - 1][c], min(table[r - 1][c - 1], table[r][c - 1]));
+                }
+            }
+        }
+        table[rows - 1][cols - 1] as i32
+    }
 }

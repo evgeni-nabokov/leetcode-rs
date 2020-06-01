@@ -547,3 +547,17 @@ fn k_closest_v2_test() {
         assert_eq!(Solution::k_closest_v2(case.0, case.1), case.2);
     }
 }
+
+#[test]
+fn min_distance_test() {
+    let test_cases = vec![
+        ("".to_string(), "a".to_string(), 1),
+        ("b".to_string(), "".to_string(), 1),
+        ("horse".to_string(), "ros".to_string(), 3),
+        ("intention".to_string(), "execution".to_string(), 5),
+        ("zoologicoarchaeologist".to_string(), "zoogeologist".to_string(), 10),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::min_distance(case.0, case.1), case.2);
+    }
+}

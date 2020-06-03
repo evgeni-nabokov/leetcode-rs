@@ -32,4 +32,10 @@ impl Solution {
             None
         }
     }
+
+    pub fn two_city_sched_cost(mut costs: Vec<Vec<i32>>) -> i32 {
+        costs.sort_unstable_by_key(|a| a[0] - a[1]);
+        let n = costs.len() / 2;
+        costs.iter().take(n).map(|x| x[0]).sum::<i32>() + costs.iter().skip(n).map(|x| x[1]).sum::<i32>()
+    }
 }

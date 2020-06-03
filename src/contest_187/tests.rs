@@ -20,6 +20,7 @@ fn k_length_apart() {
 #[test]
 fn longest_subarray_test() {
     let test_cases = vec![
+        (vec![], 2, 0),
         (vec![8], 5, 1),
         (vec![8], 10, 1),
         (vec![8, 2], 0, 1),

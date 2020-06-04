@@ -33,3 +33,21 @@ fn two_city_sched_cost_test() {
         assert_eq!(Solution::two_city_sched_cost(case.0), case.1);
     }
 }
+
+#[test]
+fn reverse_string_test() {
+    let test_cases = vec![
+        (
+            vec![],
+            vec![],
+        ),
+        (
+            vec!['h', 'e', 'l', 'l', 'o'],
+            vec!['o', 'l', 'l', 'e', 'h'],
+        ),
+    ];
+    for mut case in test_cases {
+        Solution::reverse_string(&mut case.0);
+        assert_eq!(case.0, case.1);
+    }
+}

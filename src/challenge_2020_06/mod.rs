@@ -38,4 +38,15 @@ impl Solution {
         let n = costs.len() / 2;
         costs.iter().take(n).map(|x| x[0]).sum::<i32>() + costs.iter().skip(n).map(|x| x[1]).sum::<i32>()
     }
+
+    pub fn reverse_string(s: &mut Vec<char>) {
+        if s.is_empty() { return; }
+        let mut left = 0;
+        let mut right = s.len() - 1;
+        while left < right {
+            s.swap(left, right);
+            left += 1;
+            right -= 1;
+        }
+    }
 }

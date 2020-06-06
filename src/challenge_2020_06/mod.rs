@@ -1,3 +1,5 @@
+mod pick_index;
+
 #[cfg(test)]
 mod tests;
 

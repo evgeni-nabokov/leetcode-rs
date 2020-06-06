@@ -1,4 +1,5 @@
 use super::*;
+use super::pick_index;
 use crate::common::tree_node::{BinaryTree, TreeNode};
 
 #[test]
@@ -50,4 +51,17 @@ fn reverse_string_test() {
         Solution::reverse_string(&mut case.0);
         assert_eq!(case.0, case.1);
     }
+}
+
+#[test]
+fn pick_index_test() {
+    let mut obj = pick_index::Solution::new(vec![1]);
+    println!("{}", obj.pick_index());
+
+    obj = pick_index::Solution::new(vec![1, 3]);
+    println!("{}", obj.pick_index());
+    println!("{}", obj.pick_index());
+    println!("{}", obj.pick_index());
+    println!("{}", obj.pick_index());
+    println!("{}", obj.pick_index());
 }

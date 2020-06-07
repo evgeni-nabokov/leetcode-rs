@@ -56,12 +56,39 @@ fn reverse_string_test() {
 #[test]
 fn pick_index_test() {
     let mut obj = pick_index::Solution::new(vec![1]);
-    println!("{}", obj.pick_index());
+    // println!("{}", obj.pick_index());
 
     obj = pick_index::Solution::new(vec![1, 3]);
-    println!("{}", obj.pick_index());
-    println!("{}", obj.pick_index());
-    println!("{}", obj.pick_index());
-    println!("{}", obj.pick_index());
-    println!("{}", obj.pick_index());
+    // println!("{}", obj.pick_index());
+    // println!("{}", obj.pick_index());
+    // println!("{}", obj.pick_index());
+    // println!("{}", obj.pick_index());
+    // println!("{}", obj.pick_index());
+}
+
+fn get_reconstruct_queue_test_cases() -> Vec<(Vec<Vec<i32>>, Vec<Vec<i32>>)>{
+    vec![
+        (
+            vec![vec![3, 0], vec![4, 2], vec![6, 1], vec![8, 0]],
+            vec![vec![3, 0], vec![8, 0], vec![6, 1], vec![4, 2]],
+        ),
+        (
+            vec![vec![7, 0], vec![4, 4], vec![7, 1], vec![5, 0], vec![6, 1], vec![5, 2]],
+            vec![vec![5, 0], vec![7, 0], vec![5, 2], vec![6, 1], vec![4, 4], vec![7, 1]],
+        ),
+    ]
+}
+
+#[test]
+fn reconstruct_queue_test() {
+    for case in get_reconstruct_queue_test_cases() {
+        assert_eq!(Solution::reconstruct_queue(case.0), case.1);
+    }
+}
+
+#[test]
+fn reconstruct_queue_v2_test() {
+    for case in get_reconstruct_queue_test_cases() {
+        assert_eq!(Solution::reconstruct_queue_v2(case.0), case.1);
+    }
 }

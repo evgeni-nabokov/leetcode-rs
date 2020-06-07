@@ -5,6 +5,7 @@ mod tests;
 
 use std::rc::Rc;
 use std::cell::RefCell;
+use std::cmp::Ordering;
 
 use crate::common::tree_node::TreeNode;
 
@@ -50,5 +51,40 @@ impl Solution {
             left += 1;
             right -= 1;
         }
+    }
+
+    pub fn reconstruct_queue(mut people: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
+        people.sort_unstable_by(|x, y| match x[0].cmp(&y[0]) {
+            Ordering::Equal => x[1].cmp(&y[1]),
+            o => o,
+        });
+        let mut res: Vec<Vec<i32>> = vec![vec![]; people.len()];
+        for p in people.iter() {
+            let mut cnt = p[1];
+            let mut i = 0usize;
+            loop {
+                if res[i].is_empty() || res[i][0] >= p[0] {
+                    if cnt == 0 {
+                        break;
+                    }
+                    cnt -= 1;
+                }
+                i += 1
+            }
+            res[i] = p.clone();
+        }
+        res
+    }
+
+    pub fn reconstruct_queue_v2(mut people: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
+        people.sort_unstable_by(|x, y| match y[0].cmp(&x[0]) {
+            Ordering::Equal => x[1].cmp(&y[1]),
+            o => o,
+        });
+        let mut res: Vec<Vec<i32>> = Vec::with_capacity(people.len());
+        for p in people.iter() {
+            res.insert(p[1] as usize, p.clone());
+        }
+        res
     }
 }

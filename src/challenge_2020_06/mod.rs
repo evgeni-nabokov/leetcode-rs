@@ -87,4 +87,22 @@ impl Solution {
         }
         res
     }
+
+    pub fn change(amount: i32, coins: Vec<i32>) -> i32 {
+        if amount == 0 { return 1; }
+        if coins.is_empty() { return 0; }
+        let mut table = vec![vec![0; amount as usize]; coins.len()];
+        for row in 0..coins.len() {
+            for col in 0..amount as usize {
+                let amt = col as i32 + 1;
+                let cn = coins[row];
+                table[row][col] = match amt - cn {
+                    0 => 1,
+                    d if d > 0 => table[row][d as usize - 1],
+                    _ => 0
+                } + if row == 0 { 0 } else { table[row - 1][col] };
+            }
+        }
+        table[coins.len() - 1][amount as usize - 1]
+    }
 }

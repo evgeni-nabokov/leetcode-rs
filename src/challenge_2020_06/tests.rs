@@ -92,3 +92,24 @@ fn reconstruct_queue_v2_test() {
         assert_eq!(Solution::reconstruct_queue_v2(case.0), case.1);
     }
 }
+
+fn get_change_test_cases() -> Vec<(i32, Vec<i32>, i32)>{
+    vec![
+        (1, vec![], 0),
+        (0, vec![1, 2], 1),
+        (1, vec![1, 2], 1),
+        (2, vec![1, 2], 2),
+        (2, vec![2], 1),
+        (10, vec![2], 1),
+        (3, vec![1, 2], 2),
+        (5, vec![1, 2, 5], 4),
+        (500, vec![2, 7, 13], 717),
+    ]
+}
+
+#[test]
+fn change_test() {
+    for case in get_change_test_cases() {
+        assert_eq!(Solution::change(case.0, case.1), case.2);
+    }
+}

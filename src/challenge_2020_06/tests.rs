@@ -113,3 +113,18 @@ fn change_test() {
         assert_eq!(Solution::change(case.0, case.1), case.2);
     }
 }
+
+#[test]
+fn is_power_of_two_test() {
+    let test_cases = vec![
+        (0, false),
+        (1, true),
+        (2, true),
+        (16, true),
+        (-16, false),
+        (218, false),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::is_power_of_two(case.0), case.1);
+    }
+}

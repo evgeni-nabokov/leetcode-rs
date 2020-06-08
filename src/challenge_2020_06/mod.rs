@@ -105,4 +105,17 @@ impl Solution {
         }
         table[coins.len() - 1][amount as usize - 1]
     }
+
+    pub fn is_power_of_two(mut n: i32) -> bool {
+        if n <= 0 { return false; }
+        loop {
+            if n == 1 {
+                return true;
+            }
+            if n % 2 == 1 {
+                return false;
+            }
+            n /= 2;
+        }
+    }
 }

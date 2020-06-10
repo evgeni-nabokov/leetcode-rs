@@ -114,17 +114,35 @@ fn change_test() {
     }
 }
 
-#[test]
-fn is_power_of_two_test() {
-    let test_cases = vec![
+fn get_is_power_of_two_test_cases() -> Vec<(i32, bool)>{
+    vec![
         (0, false),
         (1, true),
         (2, true),
         (16, true),
         (-16, false),
         (218, false),
-    ];
-    for case in test_cases {
+        (-218, false),
+        (-2147483648, false),
+    ]
+}
+
+#[test]
+fn is_power_of_two_test() {
+    for case in get_is_power_of_two_test_cases() {
         assert_eq!(Solution::is_power_of_two(case.0), case.1);
+    }
+}
+
+#[test]
+fn is_power_of_two_v2_test() {
+    for case in get_is_power_of_two_test_cases() {
+        assert_eq!(Solution::is_power_of_two_v2(case.0), case.1);
+    }
+}
+
+fn is_power_of_two_v3_test() {
+    for case in get_is_power_of_two_test_cases() {
+        assert_eq!(Solution::is_power_of_two_v3(case.0), case.1);
     }
 }

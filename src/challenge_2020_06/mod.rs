@@ -118,4 +118,12 @@ impl Solution {
             n /= 2;
         }
     }
+
+    pub fn is_power_of_two_v2(n: i32) -> bool {
+        n > 0 && n == n & -n
+    }
+
+    pub fn is_power_of_two_v3(n: i32) -> bool {
+        n > 0 && n & (n - 1) == 0
+    }
 }

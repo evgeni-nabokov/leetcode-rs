@@ -181,3 +181,17 @@ fn is_subsequence_test() {
         assert_eq!(Solution::is_subsequence(case.0, case.1), case.2);
     }
 }
+
+#[test]
+fn search_insert_test() {
+    let test_cases = vec![
+        (vec![], 5, 0),
+        (vec![1,3,5,6], 5, 2),
+        (vec![1,3,5,6], 2, 1),
+        (vec![1,3,5,6], 7, 4),
+        (vec![1,3,5,6], 0, 0),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::search_insert(case.0, case.1), case.2);
+    }
+}

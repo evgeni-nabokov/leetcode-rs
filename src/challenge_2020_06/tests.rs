@@ -53,17 +53,17 @@ fn reverse_string_test() {
     }
 }
 
-#[test]
+// #[test]
 fn pick_index_test() {
     let mut obj = pick_index::Solution::new(vec![1]);
-    // println!("{}", obj.pick_index());
+    println!("{}", obj.pick_index());
 
     obj = pick_index::Solution::new(vec![1, 3]);
-    // println!("{}", obj.pick_index());
-    // println!("{}", obj.pick_index());
-    // println!("{}", obj.pick_index());
-    // println!("{}", obj.pick_index());
-    // println!("{}", obj.pick_index());
+    println!("{}", obj.pick_index());
+    println!("{}", obj.pick_index());
+    println!("{}", obj.pick_index());
+    println!("{}", obj.pick_index());
+    println!("{}", obj.pick_index());
 }
 
 fn get_reconstruct_queue_test_cases() -> Vec<(Vec<Vec<i32>>, Vec<Vec<i32>>)>{
@@ -141,8 +141,43 @@ fn is_power_of_two_v2_test() {
     }
 }
 
+#[test]
 fn is_power_of_two_v3_test() {
     for case in get_is_power_of_two_test_cases() {
         assert_eq!(Solution::is_power_of_two_v3(case.0), case.1);
+    }
+}
+
+#[test]
+fn is_subsequence_test() {
+    let test_cases = vec![
+        (
+            "".to_string(),
+            "".to_string(),
+            true
+        ),
+        (
+            "a".to_string(),
+            "".to_string(),
+            false
+        ),
+        (
+            "".to_string(),
+            "a".to_string(),
+            true
+        ),
+        (
+            "abc".to_string(),
+            "ahbgdc".to_string(),
+            true
+        ),
+        (
+            "axc".to_string(),
+            "ahbgdc".to_string(),
+            false
+        ),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::is_subsequence(case.0, case.1), case.2);
     }
 }

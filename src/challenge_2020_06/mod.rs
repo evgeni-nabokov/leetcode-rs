@@ -126,4 +126,20 @@ impl Solution {
     pub fn is_power_of_two_v3(n: i32) -> bool {
         n > 0 && n & (n - 1) == 0
     }
+
+    pub fn is_subsequence(s: String, t: String) -> bool {
+        if !s.is_empty() && t.is_empty() { return false; }
+        if s.is_empty() { return true; }
+        let mut i = 0;
+        let s_chars: Vec<char> = s.chars().collect();
+        for c in t.chars() {
+            if s_chars[i] == c {
+                i += 1;
+                if i == s.len() {
+                    return true;
+                }
+            }
+        }
+        i == s.len()
+    }
 }

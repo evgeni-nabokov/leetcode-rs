@@ -195,3 +195,25 @@ fn search_insert_test() {
         assert_eq!(Solution::search_insert(case.0, case.1), case.2);
     }
 }
+
+#[test]
+fn sort_colors_test() {
+    let test_cases = vec![
+        (vec![], vec![]),
+        (vec![0], vec![0]),
+        (vec![2], vec![2]),
+        (vec![0, 1], vec![0, 1]),
+        (vec![2, 2], vec![2, 2]),
+        (vec![1, 1], vec![1, 1]),
+        (vec![0, 1, 2], vec![0, 1, 2]),
+        (vec![2, 1, 0], vec![0, 1, 2]),
+        (vec![2, 0, 2, 1, 1, 0], vec![0, 0, 1, 1, 2, 2]),
+        (vec![2, 0, 1], vec![0, 1, 2]),
+        (vec![1,2,0], vec![0, 1, 2]),
+        (vec![2,0,2,1,1,0], vec![0,0,1,1,2,2]),
+    ];
+    for mut case in test_cases {
+        Solution::sort_colors(&mut case.0);
+        assert_eq!(case.0, case.1);
+    }
+}

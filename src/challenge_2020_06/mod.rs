@@ -1,4 +1,6 @@
 mod pick_index;
+mod randomized_set;
+mod randomized_set_v2;
 
 #[cfg(test)]
 mod tests;

@@ -1,6 +1,8 @@
 use super::*;
 use super::pick_index;
 use crate::common::tree_node::{BinaryTree, TreeNode};
+use crate::challenge_2020_06::randomized_set::{RandomizedSet as RandomizedSet};
+use crate::challenge_2020_06::randomized_set_v2::{RandomizedSet as RandomizedSetV2};
 
 #[test]
 fn invert_tree_test() {
@@ -216,4 +218,26 @@ fn sort_colors_test() {
         Solution::sort_colors(&mut case.0);
         assert_eq!(case.0, case.1);
     }
+}
+
+#[test]
+fn randomized_set_test() {
+    let mut s = RandomizedSet::new();
+    assert_eq!(s.insert(0), true);
+    assert_eq!(s.insert(1), true);
+    assert_eq!(s.remove(0), true);
+    assert_eq!(s.insert(2), true);
+    assert_eq!(s.remove(1), true);
+    assert_eq!(s.get_random(), 2);
+}
+
+#[test]
+fn randomized_set_v2_test() {
+    let mut s = RandomizedSetV2::new();
+    assert_eq!(s.insert(0), true);
+    assert_eq!(s.insert(1), true);
+    assert_eq!(s.remove(0), true);
+    assert_eq!(s.insert(2), true);
+    assert_eq!(s.remove(1), true);
+    assert_eq!(s.get_random(), 2);
 }

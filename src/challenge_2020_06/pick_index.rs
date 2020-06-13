@@ -1,5 +1,4 @@
-use rand;
-use rand::Rng;
+use rand::{Rng, thread_rng};
 
 pub struct Solution {
     points: Vec<u64>,

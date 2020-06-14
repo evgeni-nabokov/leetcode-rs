@@ -176,4 +176,31 @@ impl Solution {
             }
         }
     }
+
+    pub fn largest_divisible_subset(mut nums: Vec<i32>) -> Vec<i32> {
+        if nums.len() < 2 { return nums; }
+        let mut div_count: Vec<usize> = vec![1; nums.len()];
+        let mut prev: Vec<isize> = vec![-1; nums.len()];
+        nums.sort_unstable();
+        let mut max_idx = 0;
+        for i in 1..nums.len() {
+            for j in 0..i {
+                if nums[i] % nums[j] == 0 && div_count[i] < div_count[j] + 1 {
+                    prev[i] = j as isize;
+                    div_count[i] = div_count[j] + 1;
+                }
+            }
+            if div_count[max_idx] < div_count[i] {
+                max_idx = i;
+            }
+        }
+        let mut res: Vec<i32> = Vec::new();
+        let mut i  = max_idx as isize;
+        while i >= 0 {
+            res.push(nums[i as usize]);
+            i = prev[i as usize];
+        }
+        res
+    }
+
 }

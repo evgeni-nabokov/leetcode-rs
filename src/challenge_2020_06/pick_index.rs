@@ -19,7 +19,7 @@ impl Solution {
     }
 
     pub fn pick_index(&self) -> i32 {
-        let mut rng = rand::thread_rng();
+        let mut rng = thread_rng();
         let n = rng.gen_range(0, self.points.last().unwrap());
         let i = match self.points.binary_search(&n) {
             Ok(i) => i as i32,

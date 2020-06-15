@@ -259,3 +259,15 @@ fn largest_divisible_subset_test() {
         assert_eq!(res, case.1);
     }
 }
+
+#[test]
+fn find_cheapest_price_test() {
+    let test_cases = vec![
+        (3, vec![vec![0,1,100],vec![1,2,100],vec![0,2,500]], 0, 2, 1, 200),
+        (3, vec![vec![0,1,100],vec![1,2,100],vec![0,2,500]], 0, 2, 0, 500),
+        (5, vec![vec![4,1,1],vec![1,2,3],vec![0,3,2],vec![0,4,10],vec![3,1,1],vec![1,4,3]], 2, 1, 1, -1),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::find_cheapest_price(case.0, case.1, case.2, case.3, case.4), case.5);
+    }
+}

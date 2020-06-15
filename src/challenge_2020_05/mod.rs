@@ -685,7 +685,6 @@ impl Solution {
         points[..k as usize].to_vec()
     }
 
-
     pub fn min_distance(word_1: String, word_2: String) -> i32 {
         if word_1.is_empty() { return word_2.len() as i32; }
         if word_2.is_empty() { return word_1.len() as i32; }

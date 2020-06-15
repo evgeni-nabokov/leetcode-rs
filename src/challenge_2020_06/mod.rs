@@ -8,6 +8,7 @@ mod tests;
 use std::rc::Rc;
 use std::cell::RefCell;
 use std::cmp::Ordering;
+use std::collections::BinaryHeap;
 
 use crate::common::tree_node::TreeNode;
 
@@ -203,4 +204,60 @@ impl Solution {
         res
     }
 
+    pub fn find_cheapest_price(n: i32, flights: Vec<Vec<i32>>, src: i32, dst: i32, k: i32) -> i32 {
+        //
+        // Dijkstra's algorithm
+        //
+
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        struct State {
+            node: usize,
+            cost: usize,
+            stops: usize,
+        }
+
+        // Manually implement Ord so we get a min-heap instead of a max-heap
+        impl Ord for State {
+            fn cmp(&self, other: &Self) -> Ordering {
+                other.cost.cmp(&self.cost)
+            }
+        }
+
+        impl PartialOrd for State {
+            fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
+                Some(self.cmp(other))
+            }
+        }
+
+        let mut adj_mx: Vec<Vec<_>> = vec![vec![0usize; n as usize]; n as usize];
+        for f in flights.iter() {
+            adj_mx[f[0] as usize][f[1] as usize] = f[2] as usize;
+        }
+        let mut heap = BinaryHeap::new();
+        let mut visited = vec![-1i32; n as usize];
+        heap.push(State {
+            node: src as usize,
+            cost: 0,
+            stops: k as usize + 1,
+        });
+        while let Some(State { node, cost, stops}) = heap.pop() {
+            if node == dst as usize {
+                return cost as i32;
+            }
+            visited[node] = stops as i32;
+            if stops > 0 {
+                for i in 0..adj_mx[node].len() {
+                    if adj_mx[node][i] <= 0 || visited[i] >= stops as i32 - 1 { continue; }
+                    let edge_cost = adj_mx[node][i];
+                    let next = State {
+                        node: i,
+                        cost: cost + edge_cost,
+                        stops: stops - 1,
+                    };
+                    heap.push(next);
+                }
+            }
+        }
+        -1
+    }
 }

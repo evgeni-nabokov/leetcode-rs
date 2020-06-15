@@ -271,3 +271,16 @@ fn find_cheapest_price_test() {
         assert_eq!(Solution::find_cheapest_price(case.0, case.1, case.2, case.3, case.4), case.5);
     }
 }
+
+#[test]
+fn search_bst_test() {
+    let test_cases = vec![
+        (vec![Some(4),Some(2),Some(7),Some(1),Some(3)], 2, vec![Some(2), Some(1), Some(3)]),
+        (vec![Some(4),Some(2),Some(7),Some(1),Some(3)], 7, vec![Some(7)]),
+        (vec![Some(4),Some(2),Some(7),Some(1),Some(3)], 9, vec![]),
+    ];
+    for case in test_cases {
+        let tree = TreeNode::create_from_level_order(&case.0);
+        assert_eq!(Solution::search_bst(tree, case.1).get_level_order_values(), case.2);
+    }
+}

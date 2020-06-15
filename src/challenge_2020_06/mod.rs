@@ -260,4 +260,16 @@ impl Solution {
         }
         -1
     }
+
+    pub fn search_bst(root: Option<Rc<RefCell<TreeNode>>>, val: i32) -> Option<Rc<RefCell<TreeNode>>> {
+        if let Some(some) = root {
+            match RefCell::borrow(&some).val.cmp(&val)  {
+                Ordering::Greater => Solution::search_bst(RefCell::borrow(&some).left.clone(), val),
+                Ordering::Less => Solution::search_bst(RefCell::borrow(&some).right.clone(), val),
+                Ordering::Equal => Some(some.clone()),
+            }
+        } else {
+            None
+        }
+    }
 }

@@ -272,4 +272,49 @@ impl Solution {
             None
         }
     }
+
+    pub fn valid_ip_address(ip: String) -> String {
+        let neither = "Neither".to_string();
+        let ip_v4 = "IPv4".to_string();
+        let ip_v6 = "IPv6".to_string();
+
+        // Parsing IPv4 address.
+        if ip.contains('.') {
+            let parts = ip.split('.').collect::<Vec<&str>>();
+            if parts.len() != 4 {
+                return neither;
+            }
+            for p in parts.iter() {
+                if p.len() > 1 && p.starts_with('0') {
+                    return neither;
+                }
+                if let Ok(n) = u32::from_str_radix(p, 10) {
+                    if n > 255 {
+                        return neither;
+                    }
+                } else {
+                    return neither;
+                }
+            }
+            return ip_v4;
+        }
+
+        // Parsing IPv6 address.
+        if ip.contains(':') {
+            let parts = ip.split(':').collect::<Vec<&str>>();
+            if parts.len() != 8 {
+                return neither;
+            }
+            for p in parts.iter() {
+                if p.is_empty() || p.len() > 4 {
+                    return neither;
+                }
+                if let Err(_) = u32::from_str_radix(p, 16) {
+                    return neither;
+                }
+            }
+            return ip_v6;
+        }
+        neither
+    }
 }

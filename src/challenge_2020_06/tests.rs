@@ -307,3 +307,106 @@ fn valid_ip_address_test() {
         assert_eq!(Solution::valid_ip_address(case.0.to_string()), case.1.to_string());
     }
 }
+
+#[test]
+fn solve_test() {
+    let test_cases = vec![
+        (vec![vec!['O']], vec![vec!['O']]),
+        (vec![vec!['X']], vec![vec!['X']]),
+        (vec![vec!['O', 'O']], vec![vec!['O', 'O']]),
+        (
+            vec![
+                vec!['O', 'O'],
+                vec!['O', 'O']
+            ],
+             vec![
+                 vec!['O', 'O'],
+                 vec!['O', 'O']
+             ],
+        ),
+        (
+            vec![
+                vec!['X', 'X', 'X'],
+                vec!['X', 'X', 'X'],
+                vec!['X', 'X', 'X'],
+            ],
+            vec![
+                vec!['X', 'X', 'X'],
+                vec!['X', 'X', 'X'],
+                vec!['X', 'X', 'X'],
+            ],
+        ),
+        (
+            vec![
+                vec!['X', 'X', 'X'],
+                vec!['X', 'O', 'X'],
+                vec!['X', 'X', 'X'],
+            ],
+            vec![
+                vec!['X', 'X', 'X'],
+                vec!['X', 'X', 'X'],
+                vec!['X', 'X', 'X'],
+            ],
+        ),
+        (
+            vec![
+                vec!['X', 'X', 'X'],
+                vec!['X', 'O', 'X'],
+                vec!['X', 'O', 'X'],
+            ],
+            vec![
+                vec!['X', 'X', 'X'],
+                vec!['X', 'O', 'X'],
+                vec!['X', 'O', 'X'],
+            ],
+        ),
+        (
+            vec![
+                vec!['X', 'X', 'X'],
+                vec!['X', 'O', 'X'],
+                vec!['X', 'X', 'O'],
+            ],
+            vec![
+                vec!['X', 'X', 'X'],
+                vec!['X', 'X', 'X'],
+                vec!['X', 'X', 'O'],
+            ],
+        ),
+        (
+            vec![
+                vec!['X', 'X', 'X', 'X'],
+                vec!['X', 'O', 'O', 'X'],
+                vec!['X', 'X', 'O', 'X'],
+                vec!['X', 'O', 'X', 'X'],
+            ],
+            vec![
+                vec!['X', 'X', 'X', 'X'],
+                vec!['X', 'X', 'X', 'X'],
+                vec!['X', 'X', 'X', 'X'],
+                vec!['X', 'O', 'X', 'X'],
+            ],
+        ),
+        (
+            vec![
+                vec!['O','O','O','O','X','X'],
+                vec!['O','O','O','O','O','O'],
+                vec!['O','X','O','X','O','O'],
+                vec!['O','X','O','O','X','O'],
+                vec!['O','X','O','X','O','O'],
+                vec!['O','X','O','O','O','O']
+            ],
+            vec![
+                vec!['O','O','O','O','X','X'],
+                vec!['O','O','O','O','O','O'],
+                vec!['O','X','O','X','O','O'],
+                vec!['O','X','O','O','X','O'],
+                vec!['O','X','O','X','O','O'],
+                vec!['O','X','O','O','O','O']
+            ],
+        ),
+    ];
+    for mut case in test_cases {
+        Solution::solve(& mut case.0);
+        assert_eq!(case.0, case.1);
+    }
+}

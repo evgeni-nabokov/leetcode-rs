@@ -317,4 +317,42 @@ impl Solution {
         }
         neither
     }
+
+    pub fn solve(board: &mut Vec<Vec<char>>) {
+        if board.len() < 3 || board[0].len() < 3 { return; };
+
+        let mut reachable_from_edges: Vec<Vec<_>> = vec![vec![false; board[0].len()]; board.len()];
+        fn visit(board: &mut Vec<Vec<char>>, visited: &mut Vec<Vec<bool>>, row: isize, col: isize) {
+            let r = row as usize;
+            let c = col as usize;
+            if row < 0 || r >= board.len() || col < 0 || c >= board[r].len()
+                || visited[r][c] || board[r][c] != 'O' { return; }
+            visited[r][c] = true;
+            visit(board, visited, row + 1, col);
+            visit(board, visited, row - 1, col);
+            visit(board, visited, row, col + 1);
+            visit(board, visited, row, col - 1);
+        }
+
+        // Visiting cells on the left & right edges.
+        for row in 0..board.len() {
+            visit(board, &mut reachable_from_edges, row as isize, 0);
+            visit(board, &mut reachable_from_edges, row as isize, board[row].len() as isize - 1);
+        }
+
+        // Visiting cells on the top & bottom edges.
+        for col in 1..board[0].len() - 1 {
+            visit(board, &mut reachable_from_edges, 0, col as isize);
+            visit(board, &mut reachable_from_edges, board.len() as isize - 1, col as isize);
+        }
+
+        // Flipping O-chars which are not reachable from the edges.
+        for row in 1..board.len() - 1 {
+            for col in 1..board[row].len() - 1 {
+                if board[row][col] == 'O' && !reachable_from_edges[row][col] {
+                    board[row][col] = 'X';
+                }
+            }
+        }
+   }
 }

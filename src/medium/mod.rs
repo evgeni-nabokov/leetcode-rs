@@ -1,10 +1,13 @@
 #[cfg(test)]
 mod tests;
 
+use std::cmp::Ordering;
+
 struct Solution {}
 
-// https://leetcode.com/problems/3sum/
 impl Solution {
+    // 15. 3Sum
+    // https://leetcode.com/problems/3sum/
     pub fn three_sum(mut nums: Vec<i32>) -> Vec<Vec<i32>> {
         if nums.len() < 3 { return Vec::new(); }
         let mut result: Vec<Vec<i32>> = Vec::new();
@@ -35,5 +38,25 @@ impl Solution {
             }
         }
         result
+    }
+
+    // 274. H-Index
+    // https://leetcode.com/problems/h-index/
+    pub fn h_index(mut citations: Vec<i32>) -> i32 {
+        if citations.is_empty() { return 0; }
+        citations.sort_unstable();
+        let l = citations.len() as i32;
+        let mut left= 0;
+        let mut right = l - 1;
+        while left <= right {
+            let mid = left + (right - left) / 2;
+            let h = l - mid;
+            match citations[mid as usize].cmp(&h) {
+                Ordering::Equal => return h,
+                Ordering::Greater => right = mid - 1,
+                Ordering::Less => left = mid + 1,
+            }
+        }
+        l - left
     }
 }

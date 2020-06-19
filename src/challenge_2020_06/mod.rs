@@ -357,7 +357,7 @@ impl Solution {
    }
 
     // ~Log N
-    pub fn h_index(citations: Vec<i32>) -> i32 {
+    pub fn h_index_ii(citations: Vec<i32>) -> i32 {
         if citations.is_empty() { return 0; }
         let l = citations.len() as i32;
         let mut left= 0;
@@ -375,7 +375,7 @@ impl Solution {
     }
 
     // ~N
-    pub fn h_index_v2(citations: Vec<i32>) -> i32 {
+    pub fn h_index_ii_v2(citations: Vec<i32>) -> i32 {
         for i in 0..citations.len() {
             let h = citations.len() - i;
             if citations[i] as usize >= h {

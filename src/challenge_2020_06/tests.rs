@@ -431,15 +431,15 @@ fn get_h_index_test_cases() -> Vec<(Vec<i32>, i32)>{
 }
 
 #[test]
-fn h_index_test() {
+fn h_index_ii_test() {
     for case in get_h_index_test_cases() {
-        assert_eq!(Solution::h_index(case.0), case.1);
+        assert_eq!(Solution::h_index_ii(case.0), case.1);
     }
 }
 
 #[test]
-fn h_index_v2_test() {
+fn h_index_ii_v2_test() {
     for case in get_h_index_test_cases() {
-        assert_eq!(Solution::h_index_v2(case.0), case.1);
+        assert_eq!(Solution::h_index_ii_v2(case.0), case.1);
     }
 }

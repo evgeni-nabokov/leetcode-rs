@@ -241,7 +241,7 @@ impl Solution {
         let mut left = 0;
         let mut right = nums.len() - 1;
         while left < right {
-            let mid = left + ((right - left) / 2);
+            let mid = left + (right - left) / 2;
             if mid == 0 ||
                 nums[mid] != nums[mid - 1] && nums[mid] != nums[mid + 1] {
                 return nums[mid];

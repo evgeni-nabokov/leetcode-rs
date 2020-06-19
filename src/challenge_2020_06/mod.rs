@@ -7,7 +7,7 @@ mod tests;
 
 use std::rc::Rc;
 use std::cell::RefCell;
-use std::cmp::Ordering;
+use std::cmp::{Ordering};
 use std::collections::BinaryHeap;
 
 use crate::common::tree_node::TreeNode;
@@ -355,4 +355,33 @@ impl Solution {
             }
         }
    }
+
+    // ~Log N
+    pub fn h_index(citations: Vec<i32>) -> i32 {
+        if citations.is_empty() { return 0; }
+        let l = citations.len() as i32;
+        let mut left= 0;
+        let mut right = l - 1;
+        while left <= right {
+            let mid = left + (right - left) / 2;
+            let h = l - mid;
+            match citations[mid as usize].cmp(&h) {
+                Ordering::Equal => return h,
+                Ordering::Greater => right = mid - 1,
+                Ordering::Less => left = mid + 1,
+            }
+        }
+        l - left
+    }
+
+    // ~N
+    pub fn h_index_v2(citations: Vec<i32>) -> i32 {
+        for i in 0..citations.len() {
+            let h = citations.len() - i;
+            if citations[i] as usize >= h {
+                return h as i32;
+            }
+        }
+        0
+    }
 }

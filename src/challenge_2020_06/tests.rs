@@ -410,3 +410,36 @@ fn solve_test() {
         assert_eq!(case.0, case.1);
     }
 }
+
+fn get_h_index_test_cases() -> Vec<(Vec<i32>, i32)>{
+    vec![
+        (vec![], 0),
+        (vec![0], 0),
+        (vec![1], 1),
+        (vec![10], 1),
+        (vec![10, 10], 2),
+        (vec![0, 0, 0, 0], 0),
+        (vec![1, 1, 1, 1], 1),
+        (vec![2, 2, 2], 2),
+        (vec![3, 3, 3], 3),
+        (vec![1, 1, 1, 2], 1),
+        (vec![0, 1, 3, 5, 6], 3),
+        (vec![0, 4, 4, 5, 6], 4),
+        (vec![0, 1, 10, 10, 12, 14], 4),
+        (vec![0, 1, 1, 1, 12, 14], 2),
+    ]
+}
+
+#[test]
+fn h_index_test() {
+    for case in get_h_index_test_cases() {
+        assert_eq!(Solution::h_index(case.0), case.1);
+    }
+}
+
+#[test]
+fn h_index_v2_test() {
+    for case in get_h_index_test_cases() {
+        assert_eq!(Solution::h_index_v2(case.0), case.1);
+    }
+}

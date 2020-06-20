@@ -1,7 +1,11 @@
 #[cfg(test)]
 mod tests;
 
+use std::rc::Rc;
+use std::cell::RefCell;
 use std::cmp::Ordering;
+
+use crate::common::tree_node::TreeNode;
 
 struct Solution {}
 
@@ -58,5 +62,23 @@ impl Solution {
             }
         }
         l - left
+    }
+
+    // 1325. Delete Leaves With a Given Value
+    // https://leetcode.com/problems/delete-leaves-with-a-given-value/
+    pub fn remove_leaf_nodes(root: Option<Rc<RefCell<TreeNode>>>, target: i32) -> Option<Rc<RefCell<TreeNode>>> {
+        if let Some(some) = root {
+            let left = Solution::remove_leaf_nodes(RefCell::borrow_mut(&some).left.clone(), target);
+            let right = Solution::remove_leaf_nodes(RefCell::borrow_mut(&some).right.clone(), target);
+            if left.is_none() && right.is_none() && RefCell::borrow(&some).val == target {
+                None
+            } else {
+                RefCell::borrow_mut(&some).left = left.clone();
+                RefCell::borrow_mut(&some).right = right.clone();
+                Some(some)
+            }
+        } else {
+            None
+        }
     }
 }

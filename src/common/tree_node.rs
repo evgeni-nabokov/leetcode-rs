@@ -1,5 +1,7 @@
 use std::rc::Rc;
 use std::cell::RefCell;
+use std::cmp::max;
+use std::collections::VecDeque;
 
 // Definition for a binary tree node.
 #[derive(Debug, PartialEq, Eq)]
@@ -50,7 +52,7 @@ impl TreeNode {
 }
 
 pub trait BinaryTree {
-    fn get_val(&self) -> Option<i32>;
+    fn get_val(&self) -> i32;
 
     fn set_val(&mut self, val: i32);
 
@@ -72,8 +74,11 @@ pub trait BinaryTree {
 }
 
 impl BinaryTree for Option<Rc<RefCell<TreeNode>>> {
-    fn get_val(&self) -> Option<i32> {
-        self.as_ref().map(|some| some.borrow().val)
+    fn get_val(&self) -> i32 {
+        match self {
+            Some(some) => some.borrow().val,
+            None => panic!("Node is None"),
+        }
     }
 
     fn set_val(&mut self, val: i32) {
@@ -82,9 +87,6 @@ impl BinaryTree for Option<Rc<RefCell<TreeNode>>> {
                 RefCell::borrow_mut(some).val  = val;
             },
             None => panic!("Node is None"),
-            // None => {
-            //     replace(self, Some(Rc::new(RefCell::new(TreeNode::new(val)))));
-            // }
         };
     }
 
@@ -143,11 +145,7 @@ impl BinaryTree for Option<Rc<RefCell<TreeNode>>> {
             if node.is_some() {
                 let left_h = get_height_rec(&node.get_left_node());
                 let right_h = get_height_rec(&node.get_right_node());
-                if left_h > right_h {
-                    left_h + 1
-                } else {
-                    right_h + 1
-                }
+                max(left_h, right_h) + 1
             } else {
                 0
             }
@@ -156,22 +154,23 @@ impl BinaryTree for Option<Rc<RefCell<TreeNode>>> {
     }
 
     fn get_level_order_values(&self) -> Vec<Option<i32>> {
-        fn get_given_level(node: &Option<Rc<RefCell<TreeNode>>>, level: usize) -> Vec<Option<i32>> {
-            let mut res = Vec::<Option<i32>>::new();
-            match level {
-                1 => res.push(node.get_val()),
-                _ => {
-                    res.append(get_given_level(&node.get_left_node(), level - 1).as_mut());
-                    res.append(get_given_level(&node.get_right_node(), level - 1).as_mut());
+        let mut res = Vec::<Option<i32>>::new();
+        if self.is_none() { return res; }
+        let mut queue: VecDeque<Option<Rc<RefCell<TreeNode>>>> = VecDeque::new();
+        queue.push_front(self.clone());
+        while !queue.is_empty() {
+            let node = queue.pop_back().unwrap();
+            if node.is_some() {
+                res.push(Some(node.get_val()));
+                let left = RefCell::borrow(node.as_ref().unwrap()).left.clone();
+                let right = RefCell::borrow(node.as_ref().unwrap()).right.clone();
+                if left.is_some() || right.is_some() {
+                    queue.push_front(left);
+                    queue.push_front(right);
                 }
-            };
-            res
-        }
-        let height = self.get_height();
-        if height == 0 { return vec![]; }
-        let mut res = Vec::<Option<i32>>::with_capacity(2 ^ (height - 1));
-        for i in 1..=height {
-            res.append(get_given_level(&self, i).as_mut())
+            } else {
+                res.push(None);
+            }
         }
         res
     }

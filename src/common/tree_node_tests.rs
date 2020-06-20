@@ -3,6 +3,7 @@ use crate::common::tree_node::{TreeNode, BinaryTree};
 #[test]
 fn create_from_level_order_test() {
     let test_cases = vec![
+        vec![],
         vec![Some(1)],
         vec![Some(1), Some(2), Some(3)],
         vec![Some(1), None, Some(3)],

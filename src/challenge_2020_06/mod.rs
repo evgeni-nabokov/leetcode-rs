@@ -7,7 +7,8 @@ mod tests;
 
 use std::rc::Rc;
 use std::cell::RefCell;
-use std::cmp::{Ordering};
+use std::cmp::Ordering;
+use std::char;
 use std::collections::BinaryHeap;
 
 use crate::common::tree_node::TreeNode;
@@ -383,5 +384,21 @@ impl Solution {
             }
         }
         0
+    }
+
+    pub fn get_permutation(n: i32, k: i32) -> String {
+        if n == 1 { return "1".to_string(); }
+        let mut res: Vec<usize> = Vec::with_capacity(n as usize);
+        let block_sizes: [usize; 8] = [1, 2, 6, 24, 120, 720, 5040, 40320];
+        let mut digits: Vec<usize> = (1..=n as usize).collect();
+        let mut curr_k = k as usize;
+        for i in (0..n as usize - 1).rev() {
+            let block_size = block_sizes[i];
+            let digit_index = curr_k / block_size - if curr_k > 0 && curr_k % block_size == 0 { 1 } else { 0 };
+            curr_k -= block_size * digit_index;
+            res.push(digits.remove(digit_index));
+        }
+        res.push(digits.pop().unwrap());
+        res.iter().map(|x| char::from_digit(*x as u32, 10).unwrap()).collect()
     }
 }

@@ -443,3 +443,15 @@ fn h_index_ii_v2_test() {
         assert_eq!(Solution::h_index_ii_v2(case.0), case.1);
     }
 }
+
+#[test]
+fn get_permutation_test() {
+    let test_cases = vec![
+        (3, 3, "213"),
+        (4, 14, "3142"),
+        (9, 362880, "987654321"),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::get_permutation(case.0, case.1), case.2);
+    }
+}

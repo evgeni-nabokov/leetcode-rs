@@ -388,20 +388,20 @@ fn solve_test() {
         ),
         (
             vec![
-                vec!['O','O','O','O','X','X'],
-                vec!['O','O','O','O','O','O'],
-                vec!['O','X','O','X','O','O'],
-                vec!['O','X','O','O','X','O'],
-                vec!['O','X','O','X','O','O'],
-                vec!['O','X','O','O','O','O']
+                vec!['O', 'O', 'O', 'O', 'X', 'X'],
+                vec!['O', 'O', 'O', 'O', 'O', 'O'],
+                vec!['O', 'X', 'O', 'X', 'O', 'O'],
+                vec!['O', 'X', 'O', 'O', 'X', 'O'],
+                vec!['O', 'X', 'O', 'X', 'O', 'O'],
+                vec!['O', 'X', 'O', 'O', 'O', 'O']
             ],
             vec![
-                vec!['O','O','O','O','X','X'],
-                vec!['O','O','O','O','O','O'],
-                vec!['O','X','O','X','O','O'],
-                vec!['O','X','O','O','X','O'],
-                vec!['O','X','O','X','O','O'],
-                vec!['O','X','O','O','O','O']
+                vec!['O', 'O', 'O', 'O', 'X', 'X'],
+                vec!['O', 'O', 'O', 'O', 'O', 'O'],
+                vec!['O', 'X', 'O', 'X', 'O', 'O'],
+                vec!['O', 'X', 'O', 'O', 'X', 'O'],
+                vec!['O', 'X', 'O', 'X', 'O', 'O'],
+                vec!['O', 'X', 'O', 'O', 'O', 'O']
             ],
         ),
     ];
@@ -453,5 +453,32 @@ fn get_permutation_test() {
     ];
     for case in test_cases {
         assert_eq!(Solution::get_permutation(case.0, case.1), case.2);
+    }
+}
+
+#[test]
+fn calculate_minimum_hp_test() {
+    let test_cases = vec![
+        (
+            vec![vec![]],
+            1,
+        ),
+        (
+            vec![
+                vec![-2, -3, 3],
+                vec![-5, -10, 1],
+                vec![10, 30, -5],
+            ], 7
+        ),
+        (
+            vec![
+                vec![1, 3, 3],
+                vec![-5, -10, 1],
+                vec![10, 30, -5],
+            ], 1
+        ),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::calculate_minimum_hp(case.0), case.1);
     }
 }

@@ -7,7 +7,7 @@ mod tests;
 
 use std::rc::Rc;
 use std::cell::RefCell;
-use std::cmp::Ordering;
+use std::cmp::{Ordering, max};
 use std::char;
 use std::collections::BinaryHeap;
 
@@ -400,5 +400,23 @@ impl Solution {
         }
         res.push(digits.pop().unwrap());
         res.iter().map(|x| char::from_digit(*x as u32, 10).unwrap()).collect()
+    }
+
+    pub fn calculate_minimum_hp(mut dungeon: Vec<Vec<i32>>) -> i32 {
+        if dungeon.is_empty() || dungeon[0].is_empty() { return 1; }
+        let last_r = dungeon.len() - 1;
+        let last_c = dungeon[0].len() - 1;
+        for row in (0..=last_r).rev() {
+            for col in (0..=last_c).rev() {
+                dungeon[row][col] += if col == last_c && row == last_r { 0 }
+                else if col == last_c { dungeon[row + 1][col] }
+                else if row == last_r { dungeon[row][col + 1] }
+                else { max(dungeon[row][col + 1], dungeon[row + 1][col]) };
+                if dungeon[row][col] > 0 {
+                    dungeon[row][col] = 0;
+                }
+            }
+        }
+        dungeon[0][0].abs() + 1
     }
 }

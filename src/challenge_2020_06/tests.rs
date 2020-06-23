@@ -482,3 +482,14 @@ fn calculate_minimum_hp_test() {
         assert_eq!(Solution::calculate_minimum_hp(case.0), case.1);
     }
 }
+
+#[test]
+fn single_number_ii_test() {
+    let test_cases = vec![
+        (vec![2, 2, 3, 2], 3),
+        (vec![0, 1, 0, 1, 0, 1, 99], 99),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::single_number_ii(case.0), case.1);
+    }
+}

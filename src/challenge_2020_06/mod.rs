@@ -419,4 +419,18 @@ impl Solution {
         }
         dungeon[0][0].abs() + 1
     }
+
+    pub fn single_number_ii(mut nums: Vec<i32>) -> i32 {
+        nums.sort_unstable();
+        let mut i = 0;
+        loop {
+            if i == nums.len() - 1 { return nums[i]; }
+            if nums[i] == nums[i + 1] && nums[i + 1] == nums[i + 2] { i += 3; continue; }
+            if nums[i] == nums[i + 1] { return nums[i + 2]; }
+            if nums[i] == nums[i + 2] { return nums[i + 1]; }
+            if nums[i + 1] == nums[i + 2] { return nums[i]; }
+            break;
+        }
+        0
+    }
 }

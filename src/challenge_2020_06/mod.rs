@@ -433,4 +433,31 @@ impl Solution {
         }
         0
     }
+
+    pub fn count_nodes(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
+        if let Some(some) = root {
+            let mut left_height = 0;
+            let mut left = RefCell::borrow(&some).left.clone();
+            while left.is_some() {
+                left_height += 1;
+                let tmp = RefCell::borrow(left.as_ref().unwrap()).left.clone();
+                left = tmp;
+            }
+            let mut right_height = 0;
+            let mut right = RefCell::borrow(&some).right.clone();
+            while right.is_some() {
+                right_height += 1;
+                let tmp = RefCell::borrow(right.as_ref().unwrap()).right.clone();
+                right = tmp;
+            }
+            if left_height == right_height {
+                2i32.pow(left_height + 1) - 1
+            } else {
+                1 + Solution::count_nodes(RefCell::borrow(&some).left.clone())
+                  + Solution::count_nodes(RefCell::borrow(&some).right.clone())
+            }
+        } else {
+            0
+        }
+    }
 }

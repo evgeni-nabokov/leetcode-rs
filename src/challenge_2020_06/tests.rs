@@ -493,3 +493,17 @@ fn single_number_ii_test() {
         assert_eq!(Solution::single_number_ii(case.0), case.1);
     }
 }
+
+#[test]
+fn count_nodes_test() {
+    let test_cases = vec![
+        (vec![], 0),
+        (vec![Some(1)], 1),
+        (vec![Some(1), Some(2), Some(3), Some(4), Some(5), Some(6), Some(7)], 7),
+        (vec![Some(1), Some(2), Some(3), Some(4), Some(5), Some(6), None], 6),
+    ];
+    for case in test_cases {
+        let tree = TreeNode::create_from_level_order(&case.0);
+        assert_eq!(Solution::count_nodes(tree), case.1);
+    }
+}

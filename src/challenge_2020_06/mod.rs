@@ -460,4 +460,13 @@ impl Solution {
             0
         }
     }
+
+    pub fn num_trees(n: i32) -> i32 {
+        // To understand the algorithm, learn what the Catalan numbers are.
+        let mut c_k: u64 = 1;
+        for k in 0..n as u64 {
+            c_k = c_k * 2 *(2 * k + 1) / (k + 2);
+        }
+        c_k as i32
+    }
 }

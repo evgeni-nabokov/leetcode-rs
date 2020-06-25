@@ -507,3 +507,14 @@ fn count_nodes_test() {
         assert_eq!(Solution::count_nodes(tree), case.1);
     }
 }
+
+#[test]
+fn num_trees_test() {
+    let test_cases = vec![
+        (3, 5),
+        (19, 1767263190),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::num_trees(case.0), case.1);
+    }
+}

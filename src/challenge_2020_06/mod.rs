@@ -469,4 +469,20 @@ impl Solution {
         }
         c_k as i32
     }
+
+    pub fn find_duplicate(nums: Vec<i32>) -> i32 {
+        if nums.is_empty() { return 0; }
+        let mut slow = nums[nums[0] as usize] as usize;
+        let mut fast = nums[slow] as usize;
+        while slow != fast {
+            slow = nums[slow] as usize;
+            fast = nums[nums[fast] as usize] as usize;
+        }
+        fast = nums[0] as usize;
+        while slow != fast {
+            fast = nums[fast] as usize;
+            slow = nums[slow] as usize;
+        }
+        fast as i32
+    }
 }

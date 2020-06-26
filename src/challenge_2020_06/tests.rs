@@ -518,3 +518,14 @@ fn num_trees_test() {
         assert_eq!(Solution::num_trees(case.0), case.1);
     }
 }
+
+#[test]
+fn find_duplicate_test() {
+    let test_cases = vec![
+        (vec![1, 1], 1),
+        (vec![1, 3, 4, 2, 2], 2),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::find_duplicate(case.0), case.1);
+    }
+}

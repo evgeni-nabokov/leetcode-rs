@@ -7,7 +7,7 @@ mod tests;
 
 use std::rc::Rc;
 use std::cell::RefCell;
-use std::cmp::{Ordering, max};
+use std::cmp::{Ordering, max, min};
 use std::char;
 use std::collections::BinaryHeap;
 
@@ -507,5 +507,25 @@ impl Solution {
         }
         dfs(root, 0, &mut nums);
         nums.iter().sum()
+    }
+
+    pub fn num_squares(n: i32) -> i32 {
+        if n <= 3 { return n; }
+        let mut dp: Vec<usize> = Vec::with_capacity(n as usize + 1);
+        dp.push(0);
+        dp.push(1);
+        dp.push(2);
+        dp.push(3);
+        for i in 4..=n as usize {
+            dp.push(i);
+            let mut j = 1;
+            loop {
+                let pn = j * j;
+                if pn > i { break; }
+                dp[i] = min(dp[i], 1 + dp[i - pn]);
+                j += 1;
+            }
+        }
+        *dp.last().unwrap() as i32
     }
 }

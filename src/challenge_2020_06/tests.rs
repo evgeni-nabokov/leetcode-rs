@@ -542,3 +542,16 @@ fn sum_numbers_test() {
         assert_eq!(Solution::sum_numbers(TreeNode::create_from_level_order(&case.0)), case.1);
     }
 }
+
+#[test]
+fn num_squares_test() {
+    let test_cases = vec![
+        (6, 3),
+        (12, 3),
+        (13, 2),
+        (100, 1),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::num_squares(case.0), case.1);
+    }
+}

@@ -529,3 +529,16 @@ fn find_duplicate_test() {
         assert_eq!(Solution::find_duplicate(case.0), case.1);
     }
 }
+
+#[test]
+fn sum_numbers_test() {
+    let test_cases = vec![
+        (vec![], 0),
+        (vec![Some(1)], 1),
+        (vec![Some(1), Some(2), Some(3)], 25),
+        (vec![Some(4), Some(9), Some(0), Some(5), Some(1)], 1026),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::sum_numbers(TreeNode::create_from_level_order(&case.0)), case.1);
+    }
+}

@@ -485,4 +485,27 @@ impl Solution {
         }
         fast as i32
     }
+
+    pub fn sum_numbers(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
+        let mut nums: Vec<i32> = Vec::new();
+        fn dfs(root: Option<Rc<RefCell<TreeNode>>>, mut num: i32, nums: &mut Vec<i32>) {
+            if let Some(some) = root {
+                num = num * 10 + RefCell::borrow(&some).val;
+                let left = RefCell::borrow(&some).left.clone();
+                let right = RefCell::borrow(&some).right.clone();
+                if left.is_none() && right.is_none() {
+                    nums.push(num);
+                } else {
+                    if left.is_some() {
+                        dfs(left, num, nums);
+                    }
+                    if right.is_some() {
+                        dfs(right, num, nums);
+                    }
+                }
+            }
+        }
+        dfs(root, 0, &mut nums);
+        nums.iter().sum()
+    }
 }

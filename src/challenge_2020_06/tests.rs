@@ -555,3 +555,28 @@ fn num_squares_test() {
         assert_eq!(Solution::num_squares(case.0), case.1);
     }
 }
+
+#[test]
+fn find_itinerary_test() {
+    let test_cases = vec![
+        (
+            vec![],
+            vec![],
+        ),
+        (
+            vec![vec!["MUC".to_string(), "LHR".to_string()], vec!["JFK".to_string(), "MUC".to_string()], vec!["SFO".to_string(), "SJC".to_string()], vec!["LHR".to_string(), "SFO".to_string()]],
+            vec!["JFK".to_string(), "MUC".to_string(), "LHR".to_string(), "SFO".to_string(), "SJC".to_string()],
+        ),
+        (
+            vec![vec!["JFK".to_string(), "SFO".to_string()], vec!["JFK".to_string(), "ATL".to_string()], vec!["SFO".to_string(), "ATL".to_string()], vec!["ATL".to_string(), "JFK".to_string()], vec!["ATL".to_string(), "SFO".to_string()]],
+            vec!["JFK".to_string(), "ATL".to_string(), "JFK".to_string(), "SFO".to_string(), "ATL".to_string(), "SFO".to_string()],
+        ),
+        (
+            vec![vec!["JFK".to_string(), "KUL".to_string()], vec!["JFK".to_string(), "NRT".to_string()], vec!["NRT".to_string(), "JFK".to_string()]],
+            vec!["JFK".to_string(), "NRT".to_string(), "JFK".to_string(), "KUL".to_string()],
+        )
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::find_itinerary(case.0), case.1);
+    }
+}

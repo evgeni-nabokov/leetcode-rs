@@ -9,7 +9,7 @@ use std::rc::Rc;
 use std::cell::RefCell;
 use std::cmp::{Ordering, max, min};
 use std::char;
-use std::collections::BinaryHeap;
+use std::collections::{BinaryHeap, HashMap};
 
 use crate::common::tree_node::TreeNode;
 
@@ -527,5 +527,32 @@ impl Solution {
             }
         }
         *dp.last().unwrap() as i32
+    }
+
+    pub fn find_itinerary(tickets: Vec<Vec<String>>) -> Vec<String> {
+        if tickets.is_empty() { return vec![]; }
+        let mut adj_map: HashMap<String, Vec<String>> = HashMap::with_capacity(tickets.len() + 1);
+        for tk in tickets.iter() {
+            let list = adj_map.entry(tk[0].clone()).or_insert(Vec::new());
+            list.push(tk[1].clone());
+            list.sort_unstable();
+            adj_map.entry(tk[1].clone()).or_insert(Vec::new());
+        }
+        let mut stack: Vec<String> = Vec::with_capacity(tickets.len() + 1);
+        let mut res: Vec<String> = Vec::with_capacity(tickets.len() + 1);
+        stack.push("JFK".to_string());
+        while !stack.is_empty() {
+            let airport = stack.last().unwrap();
+            let list = adj_map.get_mut(airport).unwrap();
+            if list.is_empty() {
+                res.push(airport.clone());
+                stack.pop();
+            } else {
+                stack.push(list[0].clone());
+                list.remove(0);
+            }
+        }
+        res.reverse();
+        res
     }
 }

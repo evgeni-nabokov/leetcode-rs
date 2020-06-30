@@ -580,3 +580,15 @@ fn find_itinerary_test() {
         assert_eq!(Solution::find_itinerary(case.0), case.1);
     }
 }
+
+#[test]
+fn unique_paths_test() {
+    let test_cases = vec![
+        (1, 1, 1),
+        (3, 2, 3),
+        (7, 3, 28),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::unique_paths(case.0, case.1), case.2);
+    }
+}

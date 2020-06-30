@@ -555,4 +555,15 @@ impl Solution {
         res.reverse();
         res
     }
+
+    pub fn unique_paths(cols: i32, rows: i32) -> i32 {
+        let mut table: Vec<Vec<i32>> = vec![vec![1i32; cols as usize]; rows as usize];
+        for r in 1..rows as usize {
+            for c in 1..cols as usize {
+                table[r][c] = table[r - 1][c] + table[r][c - 1]
+            }
+        }
+        table[rows as usize - 1][cols as usize - 1]
+    }
+
 }

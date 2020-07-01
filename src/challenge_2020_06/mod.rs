@@ -566,4 +566,71 @@ impl Solution {
         table[rows as usize - 1][cols as usize - 1]
     }
 
+    pub fn find_words_ii(mut board: Vec<Vec<char>>, words: Vec<String>) -> Vec<String> {
+        #[derive(Clone, Debug, Default)]
+        pub struct TrieNode {
+            children: HashMap<char, TrieNode>,
+            terminal: bool
+        }
+
+        impl TrieNode {
+            pub fn new() -> Self {
+                TrieNode::default()
+            }
+
+            pub fn insert(&mut self, word: &[char]) {
+                if word.is_empty() {
+                    self.terminal = true;
+                    return;
+                }
+
+                self.children
+                    .entry(word[0])
+                    .or_insert(TrieNode::default())
+                    .insert(&word[1..]);
+            }
+        }
+
+        fn dfs(board: &mut Vec<Vec<char>>, mut num_words: usize,
+               node: &mut TrieNode, r: isize, c: isize, path: &mut Vec<char>, res: &mut Vec<String>) {
+            if num_words == 0 { return; }
+
+            if node.terminal {
+                res.push(path.iter().collect::<String>());
+                node.terminal = false;
+                num_words -= 1;
+            }
+
+            if r < 0 || c < 0 || r as usize >= board.len() || c as usize >= board[0].len() { return; }
+
+            let ur = r as usize;
+            let uc = c as usize;
+            let ch = board[ur][uc];
+            if !node.children.contains_key(&ch) { return; }
+
+            board[ur][uc] = '#';
+            path.push(ch);
+            for (x, y) in vec![(0, -1), (0, 1), (1, 0), (-1, 0)].into_iter() {
+                dfs(board, num_words, node.children.get_mut(&ch).unwrap(), r + y, c + x, path, res);
+            }
+            path.pop();
+            board[ur][uc] = ch;
+        }
+
+        let mut trie = TrieNode::new();
+        let num_words = words.len();
+        let mut ch_words: Vec<Vec<char>> = Vec::with_capacity(num_words);
+        for w in words.into_iter() {
+            ch_words.push(w.chars().collect::<Vec<char>>());
+            trie.insert(ch_words.last().unwrap());
+        }
+
+        let mut res: Vec<String> = Vec::with_capacity(num_words);
+        for r in 0..board.len() as isize{
+            for c in 0..board[0].len() as isize {
+                dfs(&mut board, num_words, &mut trie, r, c, &mut Vec::<char>::new(), &mut res);
+            }
+        }
+        res
+    }
 }

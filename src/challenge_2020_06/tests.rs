@@ -592,3 +592,32 @@ fn unique_paths_test() {
         assert_eq!(Solution::unique_paths(case.0, case.1), case.2);
     }
 }
+
+#[test]
+fn find_words_ii_test() {
+    let test_cases = vec![
+        (
+            vec![
+                vec!['o','a','a','n'],
+                vec!['e','t','a','e'],
+                vec!['i','h','k','r'],
+                vec!['i','f','l','v']
+            ],
+
+            vec![
+                "oath".to_string(),
+                "pea".to_string(),
+                "eat".to_string(),
+                "rain".to_string()
+            ],
+
+            vec![
+                "oath".to_string(),
+                "eat".to_string(),
+            ],
+        )
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::find_words_ii(case.0, case.1), case.2);
+    }
+}

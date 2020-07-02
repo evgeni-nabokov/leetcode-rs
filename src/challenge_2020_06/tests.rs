@@ -17,7 +17,7 @@ fn invert_tree_test() {
         ),
     ];
     for case in test_cases {
-        let tree = TreeNode::create_from_level_order(&case.0);
+        let tree = TreeNode::from_level_order(&case.0);
         assert_eq!(Solution::invert_tree(tree).get_level_order_values(), case.1);
     }
 }
@@ -280,7 +280,7 @@ fn search_bst_test() {
         (vec![Some(4),Some(2),Some(7),Some(1),Some(3)], 9, vec![]),
     ];
     for case in test_cases {
-        let tree = TreeNode::create_from_level_order(&case.0);
+        let tree = TreeNode::from_level_order(&case.0);
         assert_eq!(Solution::search_bst(tree, case.1).get_level_order_values(), case.2);
     }
 }
@@ -503,7 +503,7 @@ fn count_nodes_test() {
         (vec![Some(1), Some(2), Some(3), Some(4), Some(5), Some(6), None], 6),
     ];
     for case in test_cases {
-        let tree = TreeNode::create_from_level_order(&case.0);
+        let tree = TreeNode::from_level_order(&case.0);
         assert_eq!(Solution::count_nodes(tree), case.1);
     }
 }
@@ -539,7 +539,7 @@ fn sum_numbers_test() {
         (vec![Some(4), Some(9), Some(0), Some(5), Some(1)], 1026),
     ];
     for case in test_cases {
-        assert_eq!(Solution::sum_numbers(TreeNode::create_from_level_order(&case.0)), case.1);
+        assert_eq!(Solution::sum_numbers(TreeNode::from_level_order(&case.0)), case.1);
     }
 }
 

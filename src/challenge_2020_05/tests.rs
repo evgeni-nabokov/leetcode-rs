@@ -336,7 +336,7 @@ fn kth_smallest_test() {
         (vec![Some(5), Some(3), Some(6), Some(2), Some(4), None, None, Some(1)], 3, 3),
     ];
     for case in test_cases {
-        let tree = TreeNode::create_from_level_order(&case.0);
+        let tree = TreeNode::from_level_order(&case.0);
         assert_eq!(Solution::kth_smallest(tree, case.1), case.2);
     }
 }

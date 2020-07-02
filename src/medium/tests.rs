@@ -82,7 +82,7 @@ fn remove_leaf_nodes_test() {
         ),
     ];
     for case in test_cases {
-        let tree = TreeNode::create_from_level_order(&case.0);
+        let tree = TreeNode::from_level_order(&case.0);
         assert_eq!(Solution::remove_leaf_nodes(tree, case.1).get_level_order_values(), case.2);
     }
 }

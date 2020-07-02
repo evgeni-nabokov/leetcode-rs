@@ -12,7 +12,7 @@ pub struct TreeNode {
 }
 
 impl TreeNode {
-    pub fn create_from_level_order(values: &[Option<i32>]) -> Option<Rc<RefCell<TreeNode>>> {
+    pub fn from_level_order(values: &[Option<i32>]) -> Option<Rc<RefCell<TreeNode>>> {
         fn insert_level_order(values: &[Option<i32>], i: usize) -> Option<Rc<RefCell<TreeNode>>> {
             if i >= values.len() {
                 None

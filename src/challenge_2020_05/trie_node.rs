@@ -2,7 +2,7 @@ use std::collections::HashMap;
 
 #[derive(Clone, Debug, Default)]
 pub struct TrieNode {
-    children: HashMap<char, TrieNode>,
+    children: HashMap<char, TrieNode>, 
     terminal: bool
 }
 

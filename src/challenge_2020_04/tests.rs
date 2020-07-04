@@ -552,3 +552,32 @@ fn max_path_sum_test() {
         assert_eq!(Solution::max_path_sum(TreeNode::from_level_order(&case.0)), case.1);
     }
 }
+
+#[test]
+fn is_valid_sequence_test() {
+    let test_cases = vec![
+        (
+            vec![Some(0), Some(1), Some(0), Some(0), Some(1), Some(0), None, None, Some(1), Some(0), Some(0)],
+            vec![0, 1, 0, 1],
+            true
+        ),
+        (
+            vec![Some(0), Some(1), Some(0), Some(0), Some(1), Some(0), None, None, Some(1), Some(0), Some(0)],
+            vec![0, 1, 1],
+            false
+        ),
+        (
+            vec![Some(0), Some(1), Some(0), Some(0), Some(1), Some(0), None, None, Some(1), Some(0), Some(0)],
+            vec![0, 1, 1],
+            false
+        ),
+        (
+            vec![Some(8), Some(3), None, Some(2), Some(1), Some(5), Some(4)],
+            vec![8],
+            false,
+        )
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::is_valid_sequence(TreeNode::from_level_order(&case.0), case.1), case.2);
+    }
+}

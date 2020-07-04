@@ -6,6 +6,3 @@ https://leetcode.com/problems/leftmost-column-with-at-least-a-one/
 
 1429. First Unique Number - solved in C#.
 https://leetcode.com/problems/first-unique-number/
-
-1430. Check If a String Is a Valid Sequence from Root to Leaves Path in a Binary Tree - solved in Python
-https://leetcode.com/problems/check-if-a-string-is-a-valid-sequence-from-root-to-leaves-path-in-a-binary-tree/

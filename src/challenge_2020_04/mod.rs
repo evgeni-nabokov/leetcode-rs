@@ -808,4 +808,42 @@ impl Solution {
         dfs(root, &mut max);
         max
     }
+
+    // 1430. Check If a String Is a Valid Sequence from Root to Leaves Path in a Binary Tree.
+    // https://leetcode.com/problems/check-if-a-string-is-a-valid-sequence-from-root-to-leaves-path-in-a-binary-tree/
+    pub fn is_valid_sequence(root: Option<Rc<RefCell<TreeNode>>>, arr: Vec<i32>) -> bool {
+        fn dfs(node: Option<Rc<RefCell<TreeNode>>>, arr: &Vec<i32>, i: usize) -> bool {
+            if let Some(some) = node {
+                let val = RefCell::borrow_mut(&some).val;
+                if val == arr[i] {
+                    // Values are equal.
+
+                    let left = RefCell::borrow_mut(&some).left.clone();
+                    let right = RefCell::borrow_mut(&some).right.clone();
+                    if i == arr.len() - 1 {
+                        // Last element.
+
+                        if  left.is_none() && right.is_none() {
+                            // Last element & leaf node.
+                            true
+                        } else {
+                            // Last element & but not leaf node.
+                            false
+                        }
+                    } else {
+                        // Not last element -- go further.
+                        dfs(left, &arr, i + 1) || dfs(right, &arr, i + 1)
+                    }
+                } else {
+                    // Values are not equal.
+                    false
+                }
+            } else {
+                // If it is not last element -- return false.
+                !(i < arr.len())
+            }
+        }
+        // Start validation.
+        dfs(root, &arr, 0)
+    }
 }

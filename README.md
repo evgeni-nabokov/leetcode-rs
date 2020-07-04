@@ -1,4 +1,4 @@
-### List of solved problems (34)
+### List of solved problems (35)
 1. **1** Two Sum https://leetcode.com/problems/two-sum/ *Easy*
 1. **7** Reverse Integer https://leetcode.com/problems/reverse-integer/ *Easy*
 1. **15** 3Sum https://leetcode.com/problems/3sum/ *Medium*
@@ -17,6 +17,7 @@
 1. **202** Happy Number https://leetcode.com/problems/happy-number/ *Easy*
 1. **221** Maximal Square https://leetcode.com/problems/maximal-square/ *Medium*
 1. **238** Product of Array Except Self https://leetcode.com/problems/product-of-array-except-self/ *Medium*
+1. **264** Ugly Number II https://leetcode.com/problems/ugly-number-ii/ *Medium*
 1. **274** H-Index https://leetcode.com/problems/h-index/ *Medium*
 1. **283** Move Zeroes https://leetcode.com/problems/move-zeroes/ *Easy*
 1. **525** Contiguous Array https://leetcode.com/problems/contiguous-array/ *Medium*

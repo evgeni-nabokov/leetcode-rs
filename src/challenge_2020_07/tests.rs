@@ -82,3 +82,22 @@ fn prison_after_n_days_v2_test() {
         assert_eq!(Solution::prison_after_n_days_v2(case.0, case.1), case.2);
     }
 }
+
+#[test]
+fn nth_ugly_number_test() {
+    let test_cases = vec![
+        (1, 1),
+        (2, 2),
+        (3, 3),
+        (4, 4),
+        (5, 5),
+        (6, 6),
+        (7, 8),
+        (8, 9),
+        (9, 10),
+        (10, 12),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::nth_ugly_number(case.0), case.1);
+    }
+}

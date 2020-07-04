@@ -4,8 +4,41 @@ mod tests;
 use std::rc::Rc;
 use std::cell::RefCell;
 use std::collections::HashMap;
+use std::cmp::min;
 
-use crate::common::tree_node::{TreeNode};
+use lazy_static::lazy_static;
+
+use crate::common::tree_node::TreeNode;
+
+lazy_static! {
+    static ref UGLY_NUMBERS: Vec<i32> = {
+        let mut n = 1690;
+        let mut u = 1;
+        let mut i2 = 0;
+        let mut i3 = 0;
+        let mut i5 = 0;
+        let mut nums: Vec<i32> = Vec::with_capacity(n);
+        nums.push(1);
+        n -= 1;
+        while n > 0 {
+            u = min(min(nums[i2] * 2, nums[i3] * 3), nums[i5] * 5);
+            if u == nums[i2] * 2 {
+                i2 += 1;
+            }
+            if u == nums[i3] * 3 {
+                i3 += 1;
+            }
+            if u == nums[i5] * 5 {
+                i5 += 1;
+            }
+            nums.push(u);
+            n -= 1;
+        }
+        nums
+    };
+}
+
+
 
 struct Solution {}
 
@@ -100,5 +133,11 @@ impl Solution {
             }
         }
         cells
+    }
+
+    // 264. Ugly Number II.
+    // https://leetcode.com/problems/ugly-number-ii/
+    pub fn nth_ugly_number(n: i32) -> i32 {
+        UGLY_NUMBERS[n as usize - 1]
     }
 }

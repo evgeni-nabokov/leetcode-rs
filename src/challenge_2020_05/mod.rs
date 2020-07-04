@@ -14,7 +14,7 @@ use crate::common::tree_node::TreeNode;
 
 use list_node::ListNode;
 use std::rc::Rc;
-use std::cell::{RefCell, RefMut};
+use std::cell::RefCell;
 
 pub struct Solution;
 
@@ -514,50 +514,6 @@ impl Solution {
             }
         }
         res
-    }
-
-    pub fn bst_from_preorder(preorder: Vec<i32>) -> Option<Rc<RefCell<TreeNode>>> {
-        fn build_bst(arr: &[i32]) -> Option<Rc<RefCell<TreeNode>>> {
-            if arr.is_empty() { return None; }
-            let val = arr[0];
-            let root = Some(Rc::new(RefCell::new(TreeNode::new(val))));
-            if arr.len() == 1 { return root; }
-            let mut i = 1;
-            while i < arr.len() && arr[i] < val { i += 1; };
-            RefCell::borrow_mut(root.as_ref().unwrap()).left = build_bst(&arr[1..i]);
-            RefCell::borrow_mut(root.as_ref().unwrap()).right = build_bst(&arr[i..]);
-            root
-        }
-        build_bst(&preorder)
-    }
-
-    pub fn bst_from_preorder_v2(preorder: Vec<i32>) -> Option<Rc<RefCell<TreeNode>>> {
-        fn build_bst(arr: &[i32], mut i: usize, mut curr_node: RefMut<TreeNode>, left: Option<i32>, right: Option<i32>) -> usize {
-            if i == arr.len()
-                || (left.is_some() && arr[i] < *left.as_ref().unwrap())
-                || (right.is_some() && arr[i] > *right.as_ref().unwrap()) {
-                return i;
-            }
-
-            if arr[i] < curr_node.val {
-                curr_node.left = Some(Rc::new(RefCell::new(TreeNode::new(arr[i]))));
-                //let aa = RefCell::borrow_mut(curr_node.left.as_ref().unwrap());
-                i = build_bst(arr, i + 1, RefCell::borrow_mut(curr_node.left.as_ref().unwrap()), left, Some(curr_node.val - 1));
-                if i == arr.len()
-                    || (left.is_some() && arr[i] < *left.as_ref().unwrap())
-                    || (right.is_some() && arr[i] > *right.as_ref().unwrap()) {
-                    return i;
-                }
-            }
-            curr_node.right = Some(Rc::new(RefCell::new(TreeNode::new(arr[i]))));
-            i = build_bst(arr, i + 1, RefCell::borrow_mut(curr_node.right.as_ref().unwrap()), Some(curr_node.val + 1), right);
-            return i;
-        }
-        if preorder.is_empty() { return None; }
-        let root = Some(Rc::new(RefCell::new(TreeNode::new(preorder[0]))));
-        if preorder.len() == 1 { return root; }
-        build_bst(&preorder, 1, RefCell::borrow_mut(root.as_ref().unwrap()), None, None);
-        root
     }
 
     pub fn max_uncrossed_lines(a: Vec<i32>, b: Vec<i32>) -> i32 {

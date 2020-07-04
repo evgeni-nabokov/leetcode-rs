@@ -1,5 +1,6 @@
 use super::*;
 use super::min_stack::MinStack;
+use crate::common::tree_node::BinaryTree;
 
 #[test]
 fn single_number_test() {
@@ -412,6 +413,30 @@ fn search_test() {
     assert_eq!(Solution::search(vec![3, 1, 2], 3), 0);
     assert_eq!(Solution::search(vec![4, 5, 6, 7, 0, 1, 2], 0), 4);
     assert_eq!(Solution::search(vec![4, 5, 6, 7, 0, 1, 2], 3), -1);
+}
+
+fn get_bst_from_preorder_test_cases() -> Vec<(Vec<i32>, Vec<Option<i32>>)> {
+    vec![
+        (vec![], vec![]),
+        (vec![1], vec![Some(1)]),
+        (vec![10, 5], vec![Some(10), Some(5), None]),
+        (vec![10, 20], vec![Some(10), None, Some(20)]),
+        (vec![8, 5, 1, 7, 10, 12], vec![Some(8), Some(5), Some(10), Some(1), Some(7), None, Some(12)]),
+    ]
+}
+
+#[test]
+fn bst_from_preorder_test() {
+    for case in get_bst_from_preorder_test_cases() {
+        assert_eq!(Solution::bst_from_preorder(case.0).get_level_order_values(), case.1);
+    }
+}
+
+#[test]
+fn bst_from_preorder_v2_test() {
+    for case in get_bst_from_preorder_test_cases() {
+        assert_eq!(Solution::bst_from_preorder_v2(case.0).get_level_order_values(), case.1);
+    }
 }
 
 #[test]

@@ -4,11 +4,14 @@ mod list_node;
 mod min_stack;
 
 use std::cmp::{max, min};
+use std::cell::{RefCell, RefMut};
+use std::rc::Rc;
 use std::iter::Rev;
 use std::str::Chars;
 use std::collections::{HashSet, HashMap, BinaryHeap};
 
-use crate::challenge_2020_04::list_node::ListNode;
+use crate::common::tree_node::TreeNode;
+use list_node::ListNode;
 
 #[inline(always)]
 pub fn apply_backspaces(iter: &mut Rev<Chars>) -> Option<char> {
@@ -27,6 +30,7 @@ pub fn apply_backspaces(iter: &mut Rev<Chars>) -> Option<char> {
 struct Solution;
 
 impl Solution {
+    // 136. Single Number.
     // https://leetcode.com/problems/single-number/
     pub fn single_number(mut nums: Vec<i32>) -> i32 {
         nums.sort_unstable();
@@ -56,6 +60,7 @@ impl Solution {
         a
     }
 
+    // 202. Happy Number.
     // https://leetcode.com/problems/happy-number/
     pub fn is_happy(n: i32) -> bool {
         if n == 0 { return false; }
@@ -82,6 +87,7 @@ impl Solution {
         }
     }
 
+    // 53. Maximum Subarray.
     // https://leetcode.com/problems/maximum-subarray/
     pub fn max_sub_array(nums: Vec<i32>) -> i32 {
         if nums.len() == 1 { return nums[0]; }
@@ -118,6 +124,7 @@ impl Solution {
         max_sum
     }
 
+    // 283. Move Zeroes.
     // https://leetcode.com/problems/move-zeroes/
     pub fn move_zeroes(nums: &mut Vec<i32>) {
         if nums.len() < 2 { return; }
@@ -153,6 +160,7 @@ impl Solution {
         }
     }
 
+    // 122. Best Time to Buy and Sell Stock II.
     // https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/
     pub fn max_profit(prices: Vec<i32>) -> i32 {
         if prices.len() < 2 { return 0; }
@@ -205,6 +213,7 @@ impl Solution {
         profit
     }
 
+    // 49. Group Anagrams.
     // https://leetcode.com/problems/group-anagrams/
     pub fn group_anagrams(strs: Vec<String>) -> Vec<Vec<String>> {
         let mut cntr: HashMap<String, Vec<String>> = HashMap::new();
@@ -242,6 +251,8 @@ impl Solution {
         res
     }
 
+    // 1426. Counting Elements.
+    // https://leetcode.com/problems/counting-elements/
     pub fn count_elements(mut arr: Vec<i32>) -> i32 {
         arr.sort_unstable();
         let mut prev_x = arr[0];
@@ -261,6 +272,7 @@ impl Solution {
         cnt
     }
 
+    // 876. Middle of the Linked List.
     // https://leetcode.com/problems/middle-of-the-linked-list/
     pub fn middle_node(head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
         if head.is_none() { return None; }
@@ -278,6 +290,7 @@ impl Solution {
         res.clone()
     }
 
+    // 844. Backspace String Compare.
     // https://leetcode.com/problems/backspace-string-compare/
     pub fn backspace_compare(s: String, t: String) -> bool {
         if s.len() == 0 && t.len() == 0 { return true; }
@@ -291,6 +304,7 @@ impl Solution {
         }
     }
 
+    // 1046. Last Stone Weight.
     // https://leetcode.com/problems/last-stone-weight/
     pub fn last_stone_weight(stones: Vec<i32>) -> i32 {
         if stones.is_empty() { return 0; }
@@ -309,6 +323,7 @@ impl Solution {
         heap.pop().unwrap_or(0)
     }
 
+    // 525. Contiguous Array.
     // https://leetcode.com/problems/contiguous-array/
     pub fn find_max_length(nums: Vec<i32>) -> i32 {
         if nums.len() < 2 { return 0; }
@@ -347,6 +362,8 @@ impl Solution {
         max_len as i32
     }
 
+    // 1427. Perform String Shifts.
+    // https://leetcode.com/problems/perform-string-shifts/
     pub fn string_shift(s: String, shift: Vec<Vec<i32>>) -> String {
         let l = s.len();
         if l < 2 { return s; }
@@ -364,6 +381,8 @@ impl Solution {
         res
     }
 
+    // 238. Product of Array Except Self.
+    // https://leetcode.com/problems/product-of-array-except-self/
     pub fn product_except_self(nums: Vec<i32>) -> Vec<i32> {
         let l = nums.len();
         if l == 0 { return vec![]; }
@@ -395,6 +414,8 @@ impl Solution {
         res
     }
 
+    // 678. Valid Parenthesis String.
+    // https://leetcode.com/problems/valid-parenthesis-string/
     pub fn check_valid_string(s: String) -> bool {
         if s.is_empty() { return true; }
         let mut par_stack = Vec::<usize>::with_capacity(s.len());
@@ -420,6 +441,8 @@ impl Solution {
         false
     }
 
+    // 200. Number of Islands.
+    // https://leetcode.com/problems/number-of-islands/
     pub fn num_islands(grid: Vec<Vec<char>>) -> i32 {
         if grid.is_empty() { return 0; }
         let mut res = 0;
@@ -487,6 +510,8 @@ impl Solution {
         res
     }
 
+    // 64. Minimum Path Sum.
+    // https://leetcode.com/problems/minimum-path-sum/
     pub fn min_path_sum(grid: Vec<Vec<i32>>) -> i32 {
         if grid.is_empty() { return 0; }
         let (h, w) = (grid.len(), grid[0].len());
@@ -506,6 +531,8 @@ impl Solution {
         sums[h - 1usize][w - 1usize]
     }
 
+    // 33. Search in Rotated Sorted Array.
+    // https://leetcode.com/problems/search-in-rotated-sorted-array/
     pub fn search(nums: Vec<i32>, target: i32) -> i32 {
         if nums.is_empty() { return -1; }
         let mut left = 0;
@@ -536,6 +563,54 @@ impl Solution {
         -1
     }
 
+    // 1008. Construct Binary Search Tree from Preorder Traversal.
+    // https://leetcode.com/problems/construct-binary-search-tree-from-preorder-traversal/
+    pub fn bst_from_preorder(preorder: Vec<i32>) -> Option<Rc<RefCell<TreeNode>>> {
+        fn build_bst(arr: &[i32]) -> Option<Rc<RefCell<TreeNode>>> {
+            if arr.is_empty() { return None; }
+            let val = arr[0];
+            let root = Some(Rc::new(RefCell::new(TreeNode::new(val))));
+            if arr.len() == 1 { return root; }
+            let mut i = 1;
+            while i < arr.len() && arr[i] < val { i += 1; };
+            RefCell::borrow_mut(root.as_ref().unwrap()).left = build_bst(&arr[1..i]);
+            RefCell::borrow_mut(root.as_ref().unwrap()).right = build_bst(&arr[i..]);
+            root
+        }
+        build_bst(&preorder)
+    }
+
+    pub fn bst_from_preorder_v2(preorder: Vec<i32>) -> Option<Rc<RefCell<TreeNode>>> {
+        fn build_bst(arr: &[i32], mut i: usize, mut curr_node: RefMut<TreeNode>, left: Option<i32>, right: Option<i32>) -> usize {
+            if i == arr.len()
+                || (left.is_some() && arr[i] < *left.as_ref().unwrap())
+                || (right.is_some() && arr[i] > *right.as_ref().unwrap()) {
+                return i;
+            }
+
+            if arr[i] < curr_node.val {
+                curr_node.left = Some(Rc::new(RefCell::new(TreeNode::new(arr[i]))));
+                //let aa = RefCell::borrow_mut(curr_node.left.as_ref().unwrap());
+                i = build_bst(arr, i + 1, RefCell::borrow_mut(curr_node.left.as_ref().unwrap()), left, Some(curr_node.val - 1));
+                if i == arr.len()
+                    || (left.is_some() && arr[i] < *left.as_ref().unwrap())
+                    || (right.is_some() && arr[i] > *right.as_ref().unwrap()) {
+                    return i;
+                }
+            }
+            curr_node.right = Some(Rc::new(RefCell::new(TreeNode::new(arr[i]))));
+            i = build_bst(arr, i + 1, RefCell::borrow_mut(curr_node.right.as_ref().unwrap()), Some(curr_node.val + 1), right);
+            return i;
+        }
+        if preorder.is_empty() { return None; }
+        let root = Some(Rc::new(RefCell::new(TreeNode::new(preorder[0]))));
+        if preorder.len() == 1 { return root; }
+        build_bst(&preorder, 1, RefCell::borrow_mut(root.as_ref().unwrap()), None, None);
+        root
+    }
+
+    // 560. Subarray Sum Equals K.
+    // https://leetcode.com/problems/subarray-sum-equals-k/
     pub fn subarray_sum(nums: Vec<i32>, k: i32) -> i32 {
         if nums.is_empty() { return 0; }
         let mut cnt = 0;
@@ -604,6 +679,8 @@ impl Solution {
         cnt
     }
 
+    // 201. Bitwise AND of Numbers Range.
+    // https://leetcode.com/problems/bitwise-and-of-numbers-range/
     pub fn range_bitwise_and(mut m: i32, mut n: i32) -> i32 {
         let mut cnt = 0;
         while m != n {
@@ -614,22 +691,25 @@ impl Solution {
         m << cnt
     }
 
+    // 55. Jump Game.
+    // https://leetcode.com/problems/jump-game/
     pub fn can_jump(nums: Vec<i32>) -> bool {
         if nums.len() < 2 { return true; }
-        Solution::can_jump_recursive(&nums[..])
-    }
 
-    fn can_jump_recursive(nums: &[i32]) -> bool {
-        for i in (0..(nums.len() - 1)).rev() {
-            if i + nums[i] as usize >= nums.len() - 1 {
-                if i == 0 {
-                    return true
-                } else if Solution::can_jump_recursive(&nums[0..=i]) == true {
-                    return true;
+        fn solve(nums: &[i32]) -> bool {
+            for i in (0..(nums.len() - 1)).rev() {
+                if i + nums[i] as usize >= nums.len() - 1 {
+                    if i == 0 {
+                        return true
+                    } else if solve(&nums[0..=i]) == true {
+                        return true;
+                    }
                 }
             }
+            false
         }
-        false
+
+        solve(&nums[..])
     }
 
     pub fn can_jump_v2(nums: Vec<i32>) -> bool {
@@ -645,6 +725,8 @@ impl Solution {
         true
     }
 
+    // 1143. Longest Common Subsequence.
+    // https://leetcode.com/problems/longest-common-subsequence/
     pub fn longest_common_subsequence(text_1: String, text_2: String) -> i32 {
         if text_1.is_empty() || text_2.is_empty() { return 0; }
         let rows = text_1.len() + 1;
@@ -664,6 +746,8 @@ impl Solution {
         table[rows - 1][cols - 1] as i32
     }
 
+    // 221. Maximal Square.
+    // https://leetcode.com/problems/maximal-square/
     pub fn maximal_square(matrix: Vec<Vec<char>>) -> i32 {
         if matrix.is_empty() { return 0; }
         let rows = matrix.len() + 1;

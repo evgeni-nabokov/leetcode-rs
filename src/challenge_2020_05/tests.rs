@@ -1,7 +1,6 @@
 use super::*;
 use super::trie::Trie;
 use super::stock_spanner::{StockSpanner, StockSpannerV2};
-use crate::common::tree_node::BinaryTree;
 
 #[test]
 fn num_jewels_in_stones_test() {
@@ -420,30 +419,6 @@ fn interval_intersection_test() {
     ];
     for case in test_cases {
         assert_eq!(Solution::interval_intersection(case.0, case.1), case.2);
-    }
-}
-
-fn get_bst_from_preorder_test_cases() -> Vec<(Vec<i32>, Vec<Option<i32>>)> {
-    vec![
-        (vec![], vec![]),
-        (vec![1], vec![Some(1)]),
-        (vec![10, 5], vec![Some(10), Some(5), None]),
-        (vec![10, 20], vec![Some(10), None, Some(20)]),
-        (vec![8, 5, 1, 7, 10, 12], vec![Some(8), Some(5), Some(10), Some(1), Some(7), None, Some(12)]),
-    ]
-}
-
-#[test]
-fn bst_from_preorder_test() {
-    for case in get_bst_from_preorder_test_cases() {
-        assert_eq!(Solution::bst_from_preorder(case.0).get_level_order_values(), case.1);
-    }
-}
-
-#[test]
-fn bst_from_preorder_v2_test() {
-    for case in get_bst_from_preorder_test_cases() {
-        assert_eq!(Solution::bst_from_preorder_v2(case.0).get_level_order_values(), case.1);
     }
 }
 

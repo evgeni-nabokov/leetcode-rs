@@ -1,6 +1,6 @@
 use super::*;
 use super::min_stack::MinStack;
-use crate::common::tree_node::BinaryTree;
+use crate::common::tree_node::{TreeNode, BinaryTree};
 
 #[test]
 fn single_number_test() {
@@ -534,4 +534,21 @@ fn maximal_square_v2_test() {
         vec!['1', '1', '1', '1', '1'],
         vec!['1', '0', '0', '1', '0'],
     ]), 4);
+}
+
+#[test]
+fn max_path_sum_test() {
+    let test_cases = vec![
+        (
+            vec![Some(1), Some(2), Some(3)],
+            6
+        ),
+        (
+            vec![Some(-10), Some(9), Some(20), None, None, Some(15), Some(7)],
+            42
+        )
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::max_path_sum(TreeNode::from_level_order(&case.0)), case.1);
+    }
 }

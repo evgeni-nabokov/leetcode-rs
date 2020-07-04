@@ -1,6 +1,3 @@
-124. Binary Tree Maximum Path Sum - solved in Python
-https://leetcode.com/problems/binary-tree-maximum-path-sum/
-
 146. LRU Cache - solved in C#.
 https://leetcode.com/problems/lru-cache/
 

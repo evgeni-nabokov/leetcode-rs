@@ -788,4 +788,24 @@ impl Solution {
         }
         max_sz * max_sz
     }
+
+    // 124. Binary Tree Maximum Path Sum.
+    // https://leetcode.com/problems/binary-tree-maximum-path-sum/
+    pub fn max_path_sum(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
+        fn dfs(node: Option<Rc<RefCell<TreeNode>>>, curr_max: &mut i32) -> i32 {
+            if let Some(some) = node {
+                let left_sum = max(0, dfs(RefCell::borrow_mut(&some).left.clone(), curr_max));
+                let right_sum = max(0, dfs(RefCell::borrow_mut(&some).right.clone(), curr_max));
+                let val = RefCell::borrow_mut(&some).val;
+                *curr_max = max(*curr_max, left_sum + right_sum + val);
+                max(left_sum, right_sum) + val
+            } else {
+                0
+            }
+        }
+
+        let mut max = i32::MIN;
+        dfs(root, &mut max);
+        max
+    }
 }

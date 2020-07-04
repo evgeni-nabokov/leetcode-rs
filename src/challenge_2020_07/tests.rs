@@ -29,3 +29,56 @@ fn level_order_bottom_test() {
     }
 }
 
+fn get_prison_after_n_days_test_cases() -> Vec<(Vec<i32>, i32, Vec<i32>)> {
+    vec![
+        (
+            vec![],
+            7,
+            vec![],
+        ),
+        (
+            vec![0, 1, 0, 1, 1, 0, 0, 1],
+            0,
+            vec![0, 1, 0, 1, 1, 0, 0, 1],
+        ),
+        (
+            vec![0, 1, 0, 1, 1, 0, 0, 1],
+            7,
+            vec![0, 0, 1, 1, 0, 0, 0, 0],
+        ),
+        (
+            vec![1, 0, 0, 1, 0, 0, 1, 0],
+            1000000000,
+            vec![0, 0, 1, 1, 1, 1, 1, 0],
+        ),
+        (
+            vec![0, 0, 1, 1, 1, 1, 0, 0],
+            8,
+            vec![0,0,0,1,1,0,0,0]
+        ),
+        (
+            vec![1, 1, 0, 1, 1, 0, 1, 1],
+            6,
+            vec![0, 0, 1, 0, 0, 1, 0, 0]
+        ),
+        (
+            vec![1,0,0,1,0,0,0,1],
+            826,
+            vec![0,1,1,0,1,1,1,0]
+        ),
+    ]
+}
+
+#[test]
+fn prison_after_n_days_test() {
+    for case in get_prison_after_n_days_test_cases() {
+        assert_eq!(Solution::prison_after_n_days(case.0, case.1), case.2);
+    }
+}
+
+#[test]
+fn prison_after_n_days_v2_test() {
+    for case in get_prison_after_n_days_test_cases() {
+        assert_eq!(Solution::prison_after_n_days_v2(case.0, case.1), case.2);
+    }
+}

@@ -5,8 +5,9 @@ mod tests;
 
 struct Solution {}
 
-// https://leetcode.com/problems/two-sum/
 impl Solution {
+    // 1. Two Sum.
+    // https://leetcode.com/problems/two-sum/
     pub fn two_sum(nums: Vec<i32>, target: i32) -> Vec<i32> {
         let mut cache: HashMap<i32, usize> = HashMap::new();
         cache.insert(nums[0], 0);
@@ -21,6 +22,7 @@ impl Solution {
         vec![]
     }
 
+    // 7. Reverse Integer.
     // https://leetcode.com/problems/reverse-integer/
     pub fn reverse(x: i32) -> i32 {
         let mut xx = x;
@@ -41,11 +43,13 @@ impl Solution {
         rx
     }
 
+    // 1108. Defanging an IP Address.
     // https://leetcode.com/problems/defanging-an-ip-address/
     pub fn defang_ip_addr(address: String) -> String {
         address.replace(".", "[.]")
     }
 
+    // 1342. Number of Steps to Reduce a Number to Zero (Easy).
     // https://leetcode.com/problems/number-of-steps-to-reduce-a-number-to-zero/
     pub fn number_of_steps (num: i32) -> i32 {
         let mut cnt = 0;

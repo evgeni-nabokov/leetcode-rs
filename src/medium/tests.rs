@@ -113,3 +113,20 @@ fn exist_test() {
         assert_eq!(Solution::exist(board.clone(), case.0), case.1);
     }
 }
+
+#[test]
+fn level_order_test() {
+    let test_cases = vec![
+        (
+            vec![Some(3), Some(9), Some(20), None, None, Some(15), Some(7)],
+            vec![
+                vec![3],
+                vec![9, 20],
+                vec![15, 7],
+            ]
+        )
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::level_order(TreeNode::from_level_order(&case.0)), case.1);
+    }
+}

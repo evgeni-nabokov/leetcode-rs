@@ -10,7 +10,7 @@ use crate::common::tree_node::TreeNode;
 struct Solution {}
 
 impl Solution {
-    // 15. 3Sum
+    // 15. 3Sum.
     // https://leetcode.com/problems/3sum/
     pub fn three_sum(mut nums: Vec<i32>) -> Vec<Vec<i32>> {
         if nums.len() < 3 { return Vec::new(); }
@@ -28,14 +28,26 @@ impl Solution {
                 match a + b + c {
                     0 => {
                         result.push(vec![a, b, c]);
-                        while { b_index += 1; b_index < c_index && nums[b_index] == nums[b_index - 1] }{};
-                        while { c_index -= 1; b_index < c_index && nums[c_index] == nums[c_index + 1] }{};
+                        while {
+                            b_index += 1;
+                            b_index < c_index && nums[b_index] == nums[b_index - 1]
+                        } {};
+                        while {
+                            c_index -= 1;
+                            b_index < c_index && nums[c_index] == nums[c_index + 1]
+                        } {};
                     },
                     x if x > 0 => {
-                        while { c_index -= 1; b_index < c_index && nums[c_index] == nums[c_index + 1] }{};
+                        while {
+                            c_index -= 1;
+                            b_index < c_index && nums[c_index] == nums[c_index + 1]
+                        } {};
                     }
                     x if x < 0 => {
-                        while { b_index += 1; b_index < c_index && nums[b_index] == nums[b_index - 1] }{};
+                        while {
+                            b_index += 1;
+                            b_index < c_index && nums[b_index] == nums[b_index - 1]
+                        } {};
                     },
                     _ => ()
                 }
@@ -50,7 +62,7 @@ impl Solution {
         if citations.is_empty() { return 0; }
         citations.sort_unstable();
         let l = citations.len() as i32;
-        let mut left= 0;
+        let mut left = 0;
         let mut right = l - 1;
         while left <= right {
             let mid = left + (right - left) / 2;
@@ -64,7 +76,7 @@ impl Solution {
         l - left
     }
 
-    // 1325. Delete Leaves With a Given Value
+    // 1325. Delete Leaves With a Given Value.
     // https://leetcode.com/problems/delete-leaves-with-a-given-value/
     pub fn remove_leaf_nodes(root: Option<Rc<RefCell<TreeNode>>>, target: i32) -> Option<Rc<RefCell<TreeNode>>> {
         if let Some(some) = root {
@@ -83,6 +95,7 @@ impl Solution {
     }
 
     // 79. Word Search.
+    // https://leetcode.com/problems/word-search/
     pub fn exist(mut board: Vec<Vec<char>>, word: String) -> bool {
         fn dfs(board: &mut Vec<Vec<char>>, word: &[char], i: usize, r: isize, c: isize) -> bool {
             if i >= word.len() { return false; }
@@ -96,7 +109,7 @@ impl Solution {
 
             board[ur][uc] = '#';
             for (x, y) in vec![(0, -1), (0, 1), (1, 0), (-1, 0)].into_iter() {
-                if dfs(board, word,  i + 1, r + y, c + x) {
+                if dfs(board, word, i + 1, r + y, c + x) {
                     return true;
                 }
             }
@@ -104,7 +117,7 @@ impl Solution {
             false
         }
 
-        for r in 0..board.len() as isize{
+        for r in 0..board.len() as isize {
             for c in 0..board[0].len() as isize {
                 if dfs(&mut board, &word.chars().collect::<Vec<char>>(), 0, r, c) {
                     return true;
@@ -112,5 +125,23 @@ impl Solution {
             }
         }
         false
+    }
+
+    // 102. Binary Tree Level Order Traversal.
+    // https://leetcode.com/problems/binary-tree-level-order-traversal/
+    pub fn level_order(root: Option<Rc<RefCell<TreeNode>>>) -> Vec<Vec<i32>> {
+        fn dfs(node: Option<Rc<RefCell<TreeNode>>>, levels: &mut Vec<Vec<i32>>, level: usize) {
+            if node.is_none() { return; }
+            if level == levels.len() {
+                levels.push(vec![]);
+            }
+            levels[level].push(RefCell::borrow(node.as_ref().unwrap()).val);
+            dfs(RefCell::borrow(node.as_ref().unwrap()).left.clone(), levels, level + 1);
+            dfs(RefCell::borrow(node.as_ref().unwrap()).right.clone(), levels, level + 1);
+        }
+
+        let mut levels: Vec<Vec<i32>> = Vec::new();
+        dfs(root, &mut levels, 0);
+        levels
     }
 }

@@ -13,7 +13,6 @@ use crate::common::tree_node::TreeNode;
 lazy_static! {
     static ref UGLY_NUMBERS: Vec<i32> = {
         let mut n = 1690;
-        let mut u = 1;
         let mut i2 = 0;
         let mut i3 = 0;
         let mut i5 = 0;
@@ -21,7 +20,7 @@ lazy_static! {
         nums.push(1);
         n -= 1;
         while n > 0 {
-            u = min(min(nums[i2] * 2, nums[i3] * 3), nums[i5] * 5);
+            let u = min(min(nums[i2] * 2, nums[i3] * 3), nums[i5] * 5);
             if u == nums[i2] * 2 {
                 i2 += 1;
             }
@@ -108,7 +107,7 @@ impl Solution {
         while n > 0 {
             if !is_fast_forwarded {
                 if let Some(start) = state_map.get(&cells) {
-                    n %= (*start as i32 - n);
+                    n %= *start as i32 - n;
                     is_fast_forwarded = true;
                 } else {
                     state_map.insert(cells.clone(), n);

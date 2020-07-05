@@ -101,3 +101,33 @@ fn nth_ugly_number_test() {
         assert_eq!(Solution::nth_ugly_number(case.0), case.1);
     }
 }
+
+#[test]
+fn hamming_distance_test() {
+    let test_cases = vec![
+        (1, 4, 2),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::hamming_distance(case.0, case.1), case.2);
+    }
+}
+
+#[test]
+fn hamming_distance_v2_test() {
+    let test_cases = vec![
+        (1, 4, 2),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::hamming_distance_v2(case.0, case.1), case.2);
+    }
+}
+
+#[test]
+fn hamming_distance_v3_test() {
+    let test_cases = vec![
+        (1, 4, 2),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::hamming_distance_v3(case.0, case.1), case.2);
+    }
+}

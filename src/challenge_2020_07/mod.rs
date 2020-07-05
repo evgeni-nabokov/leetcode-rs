@@ -38,8 +38,6 @@ lazy_static! {
     };
 }
 
-
-
 struct Solution {}
 
 impl Solution {
@@ -139,5 +137,33 @@ impl Solution {
     // https://leetcode.com/problems/ugly-number-ii/
     pub fn nth_ugly_number(n: i32) -> i32 {
         UGLY_NUMBERS[n as usize - 1]
+    }
+
+    // 461. Hamming Distance.
+    // https://leetcode.com/problems/hamming-distance/
+    pub fn hamming_distance(x: i32, y: i32) -> i32 {
+        let mut n = 1;
+        let mut cnt = 0;
+        for _ in 1..32 {
+            if x & n != y & n {
+                cnt += 1;
+            }
+            n <<= 1;
+        }
+        cnt
+    }
+
+    pub fn hamming_distance_v2(x: i32, y: i32) -> i32 {
+        let mut z = x ^ y;
+        let mut distance = 0;
+        while z != 0 {
+            distance += 1;
+            z = z & (z - 1);
+        }
+        distance
+    }
+
+    pub fn hamming_distance_v3(x: i32, y: i32) -> i32 {
+        (x ^ y).count_ones() as i32
     }
 }

@@ -20,6 +20,7 @@
 1. **264** Ugly Number II https://leetcode.com/problems/ugly-number-ii/ *Medium*
 1. **274** H-Index https://leetcode.com/problems/h-index/ *Medium*
 1. **283** Move Zeroes https://leetcode.com/problems/move-zeroes/ *Easy*
+1. **461** Hamming Distance https://leetcode.com/problems/hamming-distance/ *Easy*
 1. **525** Contiguous Array https://leetcode.com/problems/contiguous-array/ *Medium*
 1. **560** Subarray Sum Equals K https://leetcode.com/problems/subarray-sum-equals-k/ *Medium*
 1. **678** Valid Parenthesis String https://leetcode.com/problems/valid-parenthesis-string/ *Medium*

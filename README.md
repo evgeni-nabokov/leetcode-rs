@@ -10,6 +10,7 @@
 1. **60** Permutation Sequence https://leetcode.com/problems/permutation-sequence/ *Medium*
 1. **62** Unique Paths https://leetcode.com/problems/unique-paths/ *Medium*
 1. **64** Minimum Path Sum https://leetcode.com/problems/minimum-path-sum/ *Medium*
+1. **66** Plus One https://leetcode.com/problems/plus-one/ *Easy*
 1. **72** Edit Distance https://leetcode.com/problems/edit-distance/ *Hard*
 1. **75** Sort Colors https://leetcode.com/problems/sort-colors/ *Medium*
 1. **79** Word Search https://leetcode.com/problems/word-search/ *Medium*

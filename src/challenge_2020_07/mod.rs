@@ -171,4 +171,25 @@ impl Solution {
     pub fn hamming_distance_v3(x: i32, y: i32) -> i32 {
         (x ^ y).count_ones() as i32
     }
+
+    // 66. Plus One.
+    // https://leetcode.com/problems/plus-one/
+    pub fn plus_one(mut digits: Vec<i32>) -> Vec<i32> {
+        let mut i: isize = digits.len() as isize - 1;
+        while i >= 0 {
+            let ui = i as usize;
+            if digits[ui] == 9 {
+                digits[ui] = 0;
+                i -= 1
+            } else {
+                digits[ui] += 1;
+                break;
+            }
+        }
+        if i < 0 {
+            digits.push(0);
+            digits[0] = 1;
+        }
+        digits
+    }
 }

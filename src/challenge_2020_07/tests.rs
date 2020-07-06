@@ -131,3 +131,28 @@ fn hamming_distance_v3_test() {
         assert_eq!(Solution::hamming_distance_v3(case.0, case.1), case.2);
     }
 }
+
+#[test]
+fn plus_one_test() {
+    let test_cases = vec![
+        (
+            vec![0],
+            vec![1],
+        ),
+        (
+            vec![1, 2, 3],
+            vec![1, 2, 4],
+        ),
+        (
+            vec![4, 3, 2, 1],
+            vec![4, 3, 2, 2],
+        ),
+        (
+            vec![9],
+            vec![1, 0],
+        ),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::plus_one(case.0), case.1);
+    }
+}

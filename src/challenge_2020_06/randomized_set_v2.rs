@@ -1,10 +1,13 @@
-use std::collections::HashMap;
-use std::collections::hash_map::Entry::Vacant;
-use rand::{Rng, thread_rng};
+// 380. Insert Delete GetRandom O(1).
+// https://leetcode.com/problems/insert-delete-getrandom-o1/
 
 // insert O(1)
 // remove O(1)
 // get_random O(1)
+
+use std::collections::HashMap;
+use std::collections::hash_map::Entry::Vacant;
+use rand::{Rng, thread_rng};
 
 pub struct RandomizedSet {
     map: HashMap<i32, usize>,

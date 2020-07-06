@@ -1,10 +1,13 @@
-use std::collections::HashSet;
-use rand::seq::SliceRandom;
-use rand::thread_rng;
+// 380. Insert Delete GetRandom O(1).
+// https://leetcode.com/problems/insert-delete-getrandom-o1/
 
 // insert O(1)
 // remove O(1)
-// get_random O(n)
+// get_random O(n) <-- not good.
+
+use std::collections::HashSet;
+use rand::seq::SliceRandom;
+use rand::thread_rng;
 
 pub struct RandomizedSet {
     set: HashSet<i32>,

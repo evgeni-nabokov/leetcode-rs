@@ -16,6 +16,8 @@ use crate::common::tree_node::TreeNode;
 struct Solution {}
 
 impl Solution {
+    // 226. Invert Binary Tree.
+    // https://leetcode.com/problems/invert-binary-tree/
     pub fn invert_tree(root: Option<Rc<RefCell<TreeNode>>>) -> Option<Rc<RefCell<TreeNode>>> {
         if let Some(some) = root {
             let left = RefCell::borrow_mut(&some).left.clone();
@@ -40,12 +42,16 @@ impl Solution {
         }
     }
 
+    // 1029. Two City Scheduling.
+    // https://leetcode.com/problems/two-city-scheduling/
     pub fn two_city_sched_cost(mut costs: Vec<Vec<i32>>) -> i32 {
         costs.sort_unstable_by_key(|a| a[0] - a[1]);
         let n = costs.len() / 2;
         costs.iter().take(n).map(|x| x[0]).sum::<i32>() + costs.iter().skip(n).map(|x| x[1]).sum::<i32>()
     }
 
+    // 344. Reverse String.
+    // https://leetcode.com/problems/reverse-string/
     pub fn reverse_string(s: &mut Vec<char>) {
         if s.is_empty() { return; }
         let mut left = 0;
@@ -57,6 +63,8 @@ impl Solution {
         }
     }
 
+    // 406. Queue Reconstruction by Height.
+    // https://leetcode.com/problems/queue-reconstruction-by-height/
     pub fn reconstruct_queue(mut people: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
         people.sort_unstable_by(|x, y| match x[0].cmp(&y[0]) {
             Ordering::Equal => x[1].cmp(&y[1]),
@@ -92,6 +100,8 @@ impl Solution {
         res
     }
 
+    // 518. Coin Change 2.
+    // https://leetcode.com/problems/coin-change-2/
     pub fn change(amount: i32, coins: Vec<i32>) -> i32 {
         if amount == 0 { return 1; }
         if coins.is_empty() { return 0; }
@@ -110,6 +120,8 @@ impl Solution {
         table[coins.len() - 1][amount as usize - 1]
     }
 
+    // 231. Power of Two.
+    // https://leetcode.com/problems/power-of-two/
     pub fn is_power_of_two(mut n: i32) -> bool {
         if n <= 0 { return false; }
         loop {
@@ -131,6 +143,8 @@ impl Solution {
         n > 0 && n & (n - 1) == 0
     }
 
+    // 392. Is Subsequence.
+    // https://leetcode.com/problems/is-subsequence/
     pub fn is_subsequence(s: String, t: String) -> bool {
         if !s.is_empty() && t.is_empty() { return false; }
         if s.is_empty() { return true; }
@@ -147,6 +161,8 @@ impl Solution {
         i == s.len()
     }
 
+    // 35. Search Insert Position.
+    // https://leetcode.com/problems/search-insert-position/
     pub fn search_insert(nums: Vec<i32>, target: i32) -> i32 {
         (match nums.binary_search(&target) {
             Ok(i) => i,
@@ -154,6 +170,8 @@ impl Solution {
         }) as i32
     }
 
+    // 75. Sort Colors.
+    // https://leetcode.com/problems/sort-colors/.
     pub fn sort_colors(nums: &mut Vec<i32>) {
         if nums.len() < 2 { return; }
         let mut left = 0;
@@ -179,6 +197,8 @@ impl Solution {
         }
     }
 
+    // 368. Largest Divisible Subset.
+    // https://leetcode.com/problems/largest-divisible-subset/
     pub fn largest_divisible_subset(mut nums: Vec<i32>) -> Vec<i32> {
         if nums.len() < 2 { return nums; }
         let mut div_count: Vec<usize> = vec![1; nums.len()];
@@ -205,6 +225,8 @@ impl Solution {
         res
     }
 
+    // 787. Cheapest Flights Within K Stops.
+    // https://leetcode.com/problems/cheapest-flights-within-k-stops/
     pub fn find_cheapest_price(n: i32, flights: Vec<Vec<i32>>, src: i32, dst: i32, k: i32) -> i32 {
         //
         // Dijkstra's algorithm
@@ -217,7 +239,7 @@ impl Solution {
             stops: usize,
         }
 
-        // Manually implement Ord so we get a min-heap instead of a max-heap
+        // Manually implement Ord so we get a min-heap instead of a max-heap.
         impl Ord for State {
             fn cmp(&self, other: &Self) -> Ordering {
                 other.cost.cmp(&self.cost)
@@ -262,6 +284,8 @@ impl Solution {
         -1
     }
 
+    // 700. Search in a Binary Search Tree.
+    // https://leetcode.com/problems/search-in-a-binary-search-tree/
     pub fn search_bst(root: Option<Rc<RefCell<TreeNode>>>, val: i32) -> Option<Rc<RefCell<TreeNode>>> {
         if let Some(some) = root {
             match RefCell::borrow(&some).val.cmp(&val)  {
@@ -274,6 +298,8 @@ impl Solution {
         }
     }
 
+    // 468. Validate IP Address.
+    // https://leetcode.com/problems/validate-ip-address/
     pub fn valid_ip_address(ip: String) -> String {
         let neither = "Neither".to_string();
         let ip_v4 = "IPv4".to_string();
@@ -319,6 +345,8 @@ impl Solution {
         neither
     }
 
+    // 130. Surrounded Regions.
+    // https://leetcode.com/problems/surrounded-regions/
     pub fn solve(board: &mut Vec<Vec<char>>) {
         if board.len() < 3 || board[0].len() < 3 { return; };
 
@@ -357,6 +385,8 @@ impl Solution {
         }
    }
 
+    // 275. H-Index II.
+    // https://leetcode.com/problems/h-index-ii/
     // ~Log N
     pub fn h_index_ii(citations: Vec<i32>) -> i32 {
         if citations.is_empty() { return 0; }
@@ -386,6 +416,8 @@ impl Solution {
         0
     }
 
+    // 60. Permutation Sequence.
+    // https://leetcode.com/problems/permutation-sequence/
     pub fn get_permutation(n: i32, k: i32) -> String {
         if n == 1 { return "1".to_string(); }
         let mut res: Vec<usize> = Vec::with_capacity(n as usize);
@@ -402,6 +434,8 @@ impl Solution {
         res.iter().map(|x| char::from_digit(*x as u32, 10).unwrap()).collect()
     }
 
+    // 174. Dungeon Game.
+    // https://leetcode.com/problems/dungeon-game/
     pub fn calculate_minimum_hp(mut dungeon: Vec<Vec<i32>>) -> i32 {
         if dungeon.is_empty() || dungeon[0].is_empty() { return 1; }
         let last_r = dungeon.len() - 1;
@@ -420,6 +454,8 @@ impl Solution {
         dungeon[0][0].abs() + 1
     }
 
+    // 137. Single Number II.
+    // https://leetcode.com/problems/single-number-ii/
     pub fn single_number_ii(mut nums: Vec<i32>) -> i32 {
         nums.sort_unstable();
         let mut i = 0;
@@ -434,6 +470,8 @@ impl Solution {
         0
     }
 
+    // 222. Count Complete Tree Nodes.
+    // https://leetcode.com/problems/count-complete-tree-nodes/
     pub fn count_nodes(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
         if let Some(some) = root {
             let mut left_height = 0;
@@ -461,6 +499,8 @@ impl Solution {
         }
     }
 
+    // 96. Unique Binary Search Trees.
+    // https://leetcode.com/problems/unique-binary-search-trees/
     pub fn num_trees(n: i32) -> i32 {
         // To understand the algorithm, learn what the Catalan numbers are.
         let mut c_k: u64 = 1;
@@ -470,6 +510,8 @@ impl Solution {
         c_k as i32
     }
 
+    // 287. Find the Duplicate Number.
+    // https://leetcode.com/problems/find-the-duplicate-number/.
     pub fn find_duplicate(nums: Vec<i32>) -> i32 {
         if nums.is_empty() { return 0; }
         let mut slow = nums[nums[0] as usize] as usize;
@@ -486,6 +528,8 @@ impl Solution {
         fast as i32
     }
 
+    // 129. Sum Root to Leaf Numbers.
+    // https://leetcode.com/problems/sum-root-to-leaf-numbers/
     pub fn sum_numbers(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
         let mut nums: Vec<i32> = Vec::new();
         fn dfs(root: Option<Rc<RefCell<TreeNode>>>, mut num: i32, nums: &mut Vec<i32>) {
@@ -509,6 +553,8 @@ impl Solution {
         nums.iter().sum()
     }
 
+    // 279. Perfect Squares.
+    // https://leetcode.com/problems/perfect-squares/
     pub fn num_squares(n: i32) -> i32 {
         if n <= 3 { return n; }
         let mut dp: Vec<usize> = Vec::with_capacity(n as usize + 1);
@@ -529,6 +575,8 @@ impl Solution {
         *dp.last().unwrap() as i32
     }
 
+    // 332. Reconstruct Itinerary.
+    // https://leetcode.com/problems/reconstruct-itinerary/
     pub fn find_itinerary(tickets: Vec<Vec<String>>) -> Vec<String> {
         if tickets.is_empty() { return vec![]; }
         let mut adj_map: HashMap<String, Vec<String>> = HashMap::with_capacity(tickets.len() + 1);
@@ -556,6 +604,8 @@ impl Solution {
         res
     }
 
+    // 62. Unique Paths.
+    // https://leetcode.com/problems/unique-paths/
     pub fn unique_paths(cols: i32, rows: i32) -> i32 {
         let mut table: Vec<Vec<i32>> = vec![vec![1i32; cols as usize]; rows as usize];
         for r in 1..rows as usize {
@@ -566,6 +616,8 @@ impl Solution {
         table[rows as usize - 1][cols as usize - 1]
     }
 
+    // 212. Word Search II.
+    // https://leetcode.com/problems/word-search-ii/
     pub fn find_words_ii(mut board: Vec<Vec<char>>, words: Vec<String>) -> Vec<String> {
         #[derive(Clone, Debug, Default)]
         pub struct TrieNode {

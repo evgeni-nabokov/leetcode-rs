@@ -1,0 +1,5 @@
+237. Delete Node in a Linked List - solved in Python, Rust is not available.
+https://leetcode.com/problems/delete-node-in-a-linked-list/
+
+1044. Longest Duplicate Substring - to solve (debt).
+https://leetcode.com/problems/longest-duplicate-substring/

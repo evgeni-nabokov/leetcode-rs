@@ -1,3 +1,6 @@
+// 528. Random Pick with Weight.
+// https://leetcode.com/problems/random-pick-with-weight/
+
 use rand::{Rng, thread_rng};
 
 pub struct Solution {
@@ -5,7 +8,7 @@ pub struct Solution {
 }
 
 impl Solution {
-    pub(crate) fn new(weights: Vec<i32>) -> Self {
+    pub fn new(weights: Vec<i32>) -> Self {
         let mut points: Vec<u64>  = Vec::with_capacity(weights.len() + 1);
         points.push(0);
         let mut sum = 0u64;

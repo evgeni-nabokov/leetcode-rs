@@ -1,6 +1,7 @@
 use super::*;
 use super::trie::Trie;
 use super::stock_spanner::{StockSpanner, StockSpannerV2};
+use crate::common::tree_node::TreeNode;
 
 #[test]
 fn num_jewels_in_stones_test() {
@@ -69,6 +70,33 @@ fn majority_element_test() {
     assert_eq!(Solution::majority_element(vec![1]), 1);
     assert_eq!(Solution::majority_element(vec![3,2,3]), 3);
     assert_eq!(Solution::majority_element(vec![2,2,1,1,1,2,2]), 2);
+}
+
+#[test]
+fn is_cousins_test() {
+    let test_cases = vec![
+        (
+            vec![Some(1), Some(2), Some(3), Some(4)],
+            4,
+            3,
+            false,
+        ),
+        (
+            vec![Some(1), Some(2), Some(3), None, Some(4), None, Some(5)],
+            5,
+            4,
+            true,
+        ),
+        (
+            vec![Some(1), Some(2), Some(3), None, Some(4)],
+            2,
+            3,
+            false,
+        ),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::is_cousins(TreeNode::from_level_order(&case.0), case.1, case.2), case.3);
+    }
 }
 
 #[test]

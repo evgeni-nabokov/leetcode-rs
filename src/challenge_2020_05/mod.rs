@@ -135,6 +135,38 @@ impl Solution {
         *counter_map.keys().next().unwrap()
     }
 
+    // 993. Cousins in Binary Tree.
+    // https://leetcode.com/problems/cousins-in-binary-tree/
+    pub fn is_cousins(root: Option<Rc<RefCell<TreeNode>>>, x: i32, y: i32) -> bool {
+        fn dfs(node: Option<Rc<RefCell<TreeNode>>>, val_to_find: i32, parent_val: i32, level: i32) -> (i32, i32) {
+            if let Some(some) = node {
+                let node_val = RefCell::borrow_mut(&some).val;
+                if node_val == val_to_find {
+                    (parent_val, level)
+                } else {
+                    let left = dfs(RefCell::borrow_mut(&some).left.clone(), val_to_find, node_val, level + 1);
+                    if left != (-1, -1) {
+                        left
+                    } else {
+                        let right = dfs(RefCell::borrow_mut(&some).right.clone(), val_to_find, node_val, level + 1);
+                        if right != (-1, -1) {
+                            right
+                        } else {
+                            (-1, -1)
+                        }
+                    }
+                }
+            } else {
+                (-1, -1)
+            }
+        }
+
+        let (x_parent_val, x_level) = dfs(root.clone(), x, -1, 0);
+        let (y_parent_val, y_level) = dfs(root.clone(), y, -1, 0);
+
+        x_parent_val != y_parent_val && x_level == y_level
+    }
+
     // 1232. Check If It Is a Straight Line.
     // https://leetcode.com/problems/check-if-it-is-a-straight-line/
     pub fn check_straight_line(coordinates: Vec<Vec<i32>>) -> bool {

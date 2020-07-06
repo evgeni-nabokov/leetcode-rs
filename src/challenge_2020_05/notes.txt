@@ -4,8 +4,5 @@ https://leetcode.com/problems/first-bad-version/
 525. Contiguous Array - solved in April Challenge.
 https://leetcode.com/problems/contiguous-array/
 
-993. Cousins in Binary Tree - solved in Python.
-https://leetcode.com/problems/cousins-in-binary-tree/
-
 1008. Construct Binary Search Tree from Preorder Traversal - solved in Python in April Challenge.
 https://leetcode.com/problems/construct-binary-search-tree-from-preorder-traversal/

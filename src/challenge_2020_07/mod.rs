@@ -40,10 +40,14 @@ lazy_static! {
 struct Solution {}
 
 impl Solution {
+    // 441. Arranging Coins.
+    // https://leetcode.com/problems/arranging-coins/
     pub fn arrange_coins(n: i32) -> i32 {
         (((8f64 * n as f64 + 1f64).sqrt() - 1f64) / 2f64).floor() as i32
     }
 
+    // 107. Binary Tree Level Order Traversal II.
+    // https://leetcode.com/problems/binary-tree-level-order-traversal-ii/
     pub fn level_order_bottom(root: Option<Rc<RefCell<TreeNode>>>) -> Vec<Vec<i32>> {
         fn dfs(node: Option<Rc<RefCell<TreeNode>>>, levels: &mut Vec<Vec<i32>>, level: usize) {
             if node.is_none() { return; }
@@ -60,6 +64,8 @@ impl Solution {
         levels.into_iter().rev().collect()
     }
 
+    // 957. Prison Cells After N Days.
+    // https://leetcode.com/problems/prison-cells-after-n-days/
     pub fn prison_after_n_days(mut cells: Vec<i32>, n: i32) -> Vec<i32> {
         if cells.is_empty() { return vec![]; }
         if n == 0 { return cells; }

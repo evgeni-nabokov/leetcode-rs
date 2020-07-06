@@ -1,7 +1,7 @@
 146. LRU Cache - solved in C#.
 https://leetcode.com/problems/lru-cache/
 
-1428. Leftmost Column with at Least a One - solved in Python, Rust not available.
+1428. Leftmost Column with at Least a One - solved in Python, Rust is not available.
 https://leetcode.com/problems/leftmost-column-with-at-least-a-one/
 
 1429. First Unique Number - solved in C#.

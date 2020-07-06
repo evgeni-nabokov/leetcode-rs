@@ -19,6 +19,8 @@ use std::cell::RefCell;
 pub struct Solution;
 
 impl Solution {
+    // 771. Jewels and Stones.
+    // https://leetcode.com/problems/jewels-and-stones/
     pub fn num_jewels_in_stones(jewels: String, stones: String) -> i32 {
         if jewels.is_empty() || stones.is_empty() { return 0; }
         let mut cnt = 0;
@@ -34,6 +36,8 @@ impl Solution {
         cnt
     }
 
+    // 383. Ransom Note.
+    // https://leetcode.com/problems/ransom-note/
     pub fn can_construct(ransom_note: String, magazine: String) -> bool {
         if ransom_note.len() > 0 && magazine.len() == 0 { return false; }
         let mut avail_chars = HashMap::<char, usize>::with_capacity(magazine.len());
@@ -71,6 +75,8 @@ impl Solution {
         true
     }
 
+    // 476. Number Complement.
+    // https://leetcode.com/problems/number-complement/
     pub fn bitwise_complement(n: i32) -> i32 {
         let mut res = 0;
         let mut un = n as u32;
@@ -93,6 +99,8 @@ impl Solution {
         max((n as u32 + 1).next_power_of_two() as i32, 2) - n - 1
     }
 
+    // 387. First Unique Character in a String.
+    // https://leetcode.com/problems/first-unique-character-in-a-string/
     pub fn first_uniq_char(s: String) -> i32 {
         if s.is_empty() { return -1; }
         let mut chars = vec![0; 26];
@@ -107,6 +115,8 @@ impl Solution {
         -1
     }
 
+    // 169. Majority Element.
+    // https://leetcode.com/problems/majority-element/
     pub fn majority_element(nums: Vec<i32>) -> i32 {
         let mut counter_map: HashMap<i32, usize> = HashMap::with_capacity(nums.len() / 2);
         for &n in nums.iter() {
@@ -125,6 +135,8 @@ impl Solution {
         *counter_map.keys().next().unwrap()
     }
 
+    // 1232. Check If It Is a Straight Line.
+    // https://leetcode.com/problems/check-if-it-is-a-straight-line/
     pub fn check_straight_line(coordinates: Vec<Vec<i32>>) -> bool {
         // 1 or 2 points are always belong to the same line.
         if coordinates.len() < 3 { return false; }
@@ -145,6 +157,8 @@ impl Solution {
         true
     }
 
+    // 367. Valid Perfect Square.
+    // https://leetcode.com/problems/valid-perfect-square/
     pub fn is_perfect_square(num: i32) -> bool {
         let mut sum = 0;
         let mut odd_n = 1;
@@ -179,6 +193,8 @@ impl Solution {
         false
     }
 
+    // 997. Find the Town Judge.
+    // https://leetcode.com/problems/find-the-town-judge/
     pub fn find_judge(n: i32, trust: Vec<Vec<i32>>) -> i32 {
         let mut who_trusts = vec![0; n as usize];
         let mut who_is_trusted = vec![0; n as usize];
@@ -213,6 +229,8 @@ impl Solution {
         }
     }
 
+    // 733. Flood Fill.
+    // https://leetcode.com/problems/flood-fill/.
     pub fn flood_fill(mut image: Vec<Vec<i32>>, sr: i32, sc: i32, new_color: i32) -> Vec<Vec<i32>> {
         fn fill(image: &mut Vec<Vec<i32>>, r: usize, c: usize, new_color: i32, old_color: i32) {
             if image[r][c] != old_color || image[r][c] == new_color {
@@ -237,6 +255,8 @@ impl Solution {
         image
     }
 
+    // 540. Single Element in a Sorted Array.
+    // https://leetcode.com/problems/single-element-in-a-sorted-array/
     pub fn single_non_duplicate(nums: Vec<i32>) -> i32 {
         let mut left = 0;
         let mut right = nums.len() - 1;
@@ -256,6 +276,8 @@ impl Solution {
         nums[left]
     }
 
+    // 402. Remove K Digits.
+    // https://leetcode.com/problems/remove-k-digits/
     pub fn remove_k_digits(num: String, mut k: i32) -> String {
         if num.len() == k as usize { return "0".to_string(); }
         let mut res: Vec<char> = Vec::with_capacity(k as usize);
@@ -279,6 +301,8 @@ impl Solution {
         if res.is_empty() { "0".to_string() } else { res.iter().collect() }
     }
 
+    // 918. Maximum Sum Circular Subarray.
+    // https://leetcode.com/problems/maximum-sum-circular-subarray/
     pub fn max_subarray_sum_circular(nums: Vec<i32>) -> i32 {
         if nums.len() == 1 { return nums[0]; }
         let mut sum: i32 = nums[0];
@@ -300,6 +324,8 @@ impl Solution {
         }
     }
 
+    // 328. Odd Even Linked List.
+    // https://leetcode.com/problems/odd-even-linked-list/
     pub fn odd_even_list(head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
         if head.is_none() { return None; }
         let mut odd_head: Option<Box<ListNode>> = Some(Box::new(ListNode::new(head.as_ref().unwrap().val)));
@@ -327,6 +353,8 @@ impl Solution {
         odd_head
     }
 
+    // 438. Find All Anagrams in a String.
+    // https://leetcode.com/problems/find-all-anagrams-in-a-string/
     pub fn find_anagrams(s: String, p: String) -> Vec<i32> {
         if s.len() < p.len() || s.is_empty() || p.is_empty() { return vec![]; }
         let mut res: Vec<i32> = Vec::new();
@@ -378,6 +406,8 @@ impl Solution {
         res
     }
 
+    // 567. Permutation in String.
+    // https://leetcode.com/problems/permutation-in-string/
     pub fn check_inclusion(s1: String, s2: String) -> bool {
         if s2.len() < s1.len() || s1.is_empty() || s2.is_empty() { return false; }
         const BASE: usize = 'a' as usize;
@@ -403,6 +433,8 @@ impl Solution {
         false
     }
 
+    // 230. Kth Smallest Element in a BST.
+    // https://leetcode.com/problems/kth-smallest-element-in-a-bst/
     pub fn kth_smallest(root: Option<Rc<RefCell<TreeNode>>>, k: i32) -> i32 {
         let mut stack: Vec<Option<Rc<RefCell<TreeNode>>>> = Vec::new();
         let mut node = root.clone();
@@ -421,6 +453,8 @@ impl Solution {
         }
     }
 
+    // 1277. Count Square Submatrices with All Ones.
+    // https://leetcode.com/problems/count-square-submatrices-with-all-ones/
     pub fn count_squares(matrix: Vec<Vec<i32>>) -> i32 {
         if matrix.is_empty() { return 0; }
         let n_rows = matrix.len();
@@ -454,6 +488,8 @@ impl Solution {
         cnt
     }
 
+    // 451. Sort Characters By Frequency.
+    // https://leetcode.com/problems/sort-characters-by-frequency/
     pub fn frequency_sort(s: String) -> String {
         let mut cnt: Vec<(char, usize)> = vec![
             ('A', 0), ('B', 0), ('C', 0), ('D', 0), ('E', 0), ('F', 0), ('G', 0), ('H', 0), ('I', 0),
@@ -496,6 +532,8 @@ impl Solution {
         sorted_chars.iter().collect()
     }
 
+    // 986. Interval List Intersections.
+    // https://leetcode.com/problems/interval-list-intersections/
     pub fn interval_intersection(a: Vec<Vec<i32>>, b: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
         if a.is_empty() || b.is_empty() { return vec![]; }
         let mut a_idx = 0;
@@ -516,6 +554,8 @@ impl Solution {
         res
     }
 
+    // 1035. Uncrossed Lines.
+    // https://leetcode.com/problems/uncrossed-lines/
     pub fn max_uncrossed_lines(a: Vec<i32>, b: Vec<i32>) -> i32 {
         if a.is_empty() || b.is_empty() { return 0; }
         let mut table: Vec<Vec<i32>> = vec![vec![0; b.len() + 1]; a.len() + 1];
@@ -531,6 +571,8 @@ impl Solution {
         table[a.len()][b.len()]
     }
 
+    // 886. Possible Bipartition.
+    // https://leetcode.com/problems/possible-bipartition/
     pub fn possible_bipartition(n: i32, dislikes: Vec<Vec<i32>>) -> bool {
         if n < 2 || dislikes.is_empty() { return true; }
         // Building adjacency list of the given graph.
@@ -563,6 +605,8 @@ impl Solution {
         true
     }
 
+    // 338. Counting Bits.
+    // https://leetcode.com/problems/counting-bits/
     pub fn count_bits(num: i32) -> Vec<i32> {
         let mut res: Vec<i32> = vec![0; (num + 1) as usize];
         let mut j = 0usize;
@@ -592,6 +636,8 @@ impl Solution {
         res
     }
 
+    // 338. Counting Bits.
+    // https://leetcode.com/problems/counting-bits/
     pub fn can_finish(n: i32, prerequisites: Vec<Vec<i32>>) -> bool {
         if n < 2 || prerequisites.is_empty() { return true; }
         // Building adjacency list of the given graph.
@@ -625,6 +671,8 @@ impl Solution {
         true
     }
 
+    // 973. K Closest Points to Origin.
+    // https://leetcode.com/problems/k-closest-points-to-origin/
     pub fn k_closest(points: Vec<Vec<i32>>, k: i32) -> Vec<Vec<i32>> {
         let mut d: Vec<(i32, usize)> = points.iter()
             .enumerate()
@@ -641,6 +689,8 @@ impl Solution {
         points[..k as usize].to_vec()
     }
 
+    // 72. Edit Distance.
+    // https://leetcode.com/problems/edit-distance/
     pub fn min_distance(word_1: String, word_2: String) -> i32 {
         if word_1.is_empty() { return word_2.len() as i32; }
         if word_2.is_empty() { return word_1.len() as i32; }

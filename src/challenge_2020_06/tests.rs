@@ -618,6 +618,6 @@ fn find_words_ii_test() {
         )
     ];
     for case in test_cases {
-        assert_eq!(Solution::find_words_ii(case.0, case.1), case.2);
+        assert_eq!(Solution::find_words(case.0, case.1), case.2);
     }
 }

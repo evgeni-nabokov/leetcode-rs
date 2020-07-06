@@ -618,7 +618,7 @@ impl Solution {
 
     // 212. Word Search II.
     // https://leetcode.com/problems/word-search-ii/
-    pub fn find_words_ii(mut board: Vec<Vec<char>>, words: Vec<String>) -> Vec<String> {
+    pub fn find_words(mut board: Vec<Vec<char>>, words: Vec<String>) -> Vec<String> {
         #[derive(Clone, Debug, Default)]
         pub struct TrieNode {
             children: HashMap<char, TrieNode>,

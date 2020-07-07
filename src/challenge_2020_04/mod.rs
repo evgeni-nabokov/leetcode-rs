@@ -1,7 +1,9 @@
-#[cfg(test)]
-mod tests;
 mod list_node;
 mod min_stack;
+mod lru_cache;
+
+#[cfg(test)]
+mod tests;
 
 use std::cmp::{max, min};
 use std::cell::{RefCell, RefMut};

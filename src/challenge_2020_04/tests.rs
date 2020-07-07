@@ -1,6 +1,7 @@
 use super::*;
 use super::min_stack::MinStack;
 use crate::common::tree_node::{TreeNode, BinaryTree};
+use crate::challenge_2020_04::lru_cache::LRUCache;
 
 #[test]
 fn single_number_test() {
@@ -465,6 +466,20 @@ fn subarray_sum_v4_test() {
     assert_eq!(Solution::subarray_sum_v4(vec![1, 1, 1], 2), 2);
     assert_eq!(Solution::subarray_sum_v4(vec![2, 5, 4, 1, 0], 2), 1);
     assert_eq!(Solution::subarray_sum_v4(vec![2, 5, 4, 1, 0], 1), 2);
+}
+
+#[test]
+fn lru_cache_test() {
+    let mut cache = LRUCache::new(2);
+    cache.put(1, 1);
+    cache.put(2, 2);
+    assert_eq!(cache.get(1), 1);
+    cache.put(3, 3);
+    assert_eq!(cache.get(2), -1);
+    cache.put(4, 4);
+    assert_eq!(cache.get(1), -1);
+    assert_eq!(cache.get(3), 3);
+    assert_eq!(cache.get(4), 4);
 }
 
 #[test]

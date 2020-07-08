@@ -210,4 +210,74 @@ impl Solution {
         }
         p
     }
+
+    // 15. 3Sum.
+    // https://leetcode.com/problems/3sum/
+    pub fn three_sum(mut nums: Vec<i32>) -> Vec<Vec<i32>> {
+        if nums.len() < 3 { return Vec::new(); }
+        let mut result: Vec<Vec<i32>> = Vec::new();
+        nums.sort_unstable();
+        let n: usize = nums.len();
+        for a_index in 0..=n - 2 {
+            if a_index > 0 && nums[a_index] == nums[a_index - 1] { continue; }
+            let a = nums[a_index];
+            let mut b_index = a_index + 1 as usize;
+            let mut c_index = n - 1 as usize;
+            while b_index < c_index {
+                let b = nums[b_index];
+                let c = nums[c_index];
+                match a + b + c {
+                    0 => {
+                        result.push(vec![a, b, c]);
+                        while {
+                            b_index += 1;
+                            b_index < c_index && nums[b_index] == nums[b_index - 1]
+                        } {};
+                        while {
+                            c_index -= 1;
+                            b_index < c_index && nums[c_index] == nums[c_index + 1]
+                        } {};
+                    },
+                    x if x > 0 => {
+                        while {
+                            c_index -= 1;
+                            b_index < c_index && nums[c_index] == nums[c_index + 1]
+                        } {};
+                    }
+                    x if x < 0 => {
+                        while {
+                            b_index += 1;
+                            b_index < c_index && nums[b_index] == nums[b_index - 1]
+                        } {};
+                    },
+                    _ => ()
+                }
+            }
+        }
+        result
+    }
+
+    pub fn three_sum_v2(mut nums: Vec<i32>) -> Vec<Vec<i32>> {
+        if nums.len() < 3 { return Vec::new(); }
+        let mut result: Vec<Vec<i32>> = Vec::new();
+        nums.sort_unstable();
+        let n: usize = nums.len();
+        for a_index in 0..n - 2 {
+            if a_index > 0 && nums[a_index] == nums[a_index - 1] { continue; }
+            let a = nums[a_index];
+            let mut b_index = a_index + 1;
+            while b_index < n - 1 {
+                let b = nums[b_index];
+                let c = 0 - a - b;
+                if let Ok(_) = nums[b_index + 1..n].binary_search(&c) {
+                    result.push(vec![a, b, c]);
+                }
+                loop {
+                    b_index += 1;
+                    if b_index >= n - 1 || nums[b_index] != nums[b_index - 1] { break; }
+                }
+            }
+        }
+        result
+    }
 }

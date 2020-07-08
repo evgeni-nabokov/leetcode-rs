@@ -186,3 +186,26 @@ fn island_perimeter_test() {
         assert_eq!(Solution::island_perimeter(case.0), case.1);
     }
 }
+
+fn get_three_sum_test_cases() -> Vec<(Vec<i32>, Vec<Vec<i32>>)>{
+    vec![
+        (vec![], vec![]),
+        (vec![0], vec![]),
+        (vec![0, 0, 0], vec![vec![0, 0, 0]]),
+        (vec![-1, 0, 1, 2, -1, -4], vec![vec![-1, -1, 2], vec![-1, 0, 1]]),
+    ]
+}
+
+#[test]
+fn three_sum_test() {
+    for case in get_three_sum_test_cases() {
+        assert_eq!(Solution::three_sum(case.0), case.1);
+    }
+}
+
+#[test]
+fn three_sum_test_v2() {
+    for case in get_three_sum_test_cases() {
+        assert_eq!(Solution::three_sum_v2(case.0), case.1);
+    }
+}

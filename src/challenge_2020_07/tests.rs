@@ -156,3 +156,33 @@ fn plus_one_test() {
         assert_eq!(Solution::plus_one(case.0), case.1);
     }
 }
+
+#[test]
+fn island_perimeter_test() {
+    let test_cases = vec![
+        (
+            vec![],
+            0
+        ),
+        (
+            vec![vec![0]],
+            0
+        ),
+        (
+            vec![vec![1]],
+            4
+        ),
+        (
+            vec![
+                vec![0,1,0,0],
+                vec![1,1,1,0],
+                vec![0,1,0,0],
+                vec![1,1,0,0],
+            ],
+            16
+        ),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::island_perimeter(case.0), case.1);
+    }
+}

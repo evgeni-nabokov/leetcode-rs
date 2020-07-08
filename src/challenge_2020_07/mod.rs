@@ -192,4 +192,22 @@ impl Solution {
         }
         digits
     }
+
+    // 463. Island Perimeter.
+    // https://leetcode.com/problems/island-perimeter/
+    pub fn island_perimeter(grid: Vec<Vec<i32>>) -> i32 {
+        if grid.is_empty() { return 0; }
+        let mut p = 0;
+        for row in 0..grid.len() {
+            for col in 0..grid[0].len() {
+                let c = grid[row][col];
+                if c == 0 { continue; }
+                if row == 0 || grid[row - 1][col] == 0 { p += 1; }
+                if col == 0 || grid[row][col - 1] == 0 { p += 1; }
+                if row == grid.len() - 1 || grid[row + 1][col] == 0 { p += 1; }
+                if col == grid[0].len() - 1 || grid[row][col + 1] == 0 { p += 1; }
+            }
+        }
+        p
+    }
 }

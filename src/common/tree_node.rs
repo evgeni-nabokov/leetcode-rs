@@ -2,6 +2,7 @@ use std::rc::Rc;
 use std::cell::RefCell;
 use std::cmp::max;
 use std::collections::VecDeque;
+use std::mem::swap;
 
 // Definition for a binary tree node.
 #[derive(Debug, PartialEq, Eq)]
@@ -156,20 +157,24 @@ impl BinaryTree for Option<Rc<RefCell<TreeNode>>> {
     fn get_level_order_values(&self) -> Vec<Option<i32>> {
         let mut res = Vec::<Option<i32>>::new();
         if self.is_none() { return res; }
-        let mut queue: VecDeque<Option<Rc<RefCell<TreeNode>>>> = VecDeque::new();
-        queue.push_front(self.clone());
-        while !queue.is_empty() {
-            let node = queue.pop_back().unwrap();
-            if node.is_some() {
-                res.push(Some(node.get_val()));
-                let left = RefCell::borrow(node.as_ref().unwrap()).left.clone();
-                let right = RefCell::borrow(node.as_ref().unwrap()).right.clone();
-                if left.is_some() || right.is_some() {
-                    queue.push_front(left);
-                    queue.push_front(right);
+        let mut queue_1: VecDeque<Option<Rc<RefCell<TreeNode>>>> = VecDeque::new();
+        let mut queue_2: VecDeque<Option<Rc<RefCell<TreeNode>>>> = VecDeque::new();
+
+        queue_1.push_front(self.clone());
+        while !queue_1.is_empty() {
+            if !queue_1.iter().any(|x| x.is_some()) { break; }
+            swap(&mut queue_1, &mut queue_2);
+            while !queue_2.is_empty() {
+                let node = queue_2.pop_back().unwrap();
+                if node.is_some() {
+                    res.push(Some(node.get_val()));
+                    let left = RefCell::borrow(node.as_ref().unwrap()).left.clone();
+                    let right = RefCell::borrow(node.as_ref().unwrap()).right.clone();
+                    queue_1.push_front(left);
+                    queue_1.push_front(right);
+                } else {
+                    res.push(None);
                 }
-            } else {
-                res.push(None);
             }
         }
         res

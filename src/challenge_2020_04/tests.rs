@@ -20,38 +20,36 @@ fn happy_number_test() {
     assert_eq!(Solution::is_happy(19), true);
 }
 
+
+fn get_max_sub_array_test_cases() -> Vec<(Vec<i32>, i32)> {
+    vec![
+        (vec![0], 0),
+        (vec![1], 1),
+        (vec![-1], -1),
+        (vec![-1,-2,-3,-4], -1),
+        (vec![-2,-1,-3,-4], -1),
+        (vec![-2,-3,-4,-1], -1),
+        (vec![1,-2,-3,-4], 1),
+        (vec![-2,1,-3,-4], 1),
+        (vec![-2,-3,-4,1], 1),
+        (vec![-2,1,-3,4,-1,2,1,-5,4], 6),
+        (vec![10,1,-3,4,-1,2,1,-5,4], 14),
+        (vec![-2,1,-3,4,-3,2,1,-5,4], 4)
+    ]
+}
+
 #[test]
 fn max_sub_array_test() {
-    assert_eq!(Solution::max_sub_array(vec![0]), 0);
-    assert_eq!(Solution::max_sub_array(vec![1]), 1);
-    assert_eq!(Solution::max_sub_array(vec![-1]), -1);
-    assert_eq!(Solution::max_sub_array(vec![-1,-2,-3,-4]), -1);
-    assert_eq!(Solution::max_sub_array(vec![-2,-1,-3,-4]), -1);
-    assert_eq!(Solution::max_sub_array(vec![-2,-3,-4,-1]), -1);
-    assert_eq!(Solution::max_sub_array(vec![1,-2,-3,-4]), 1);
-    assert_eq!(Solution::max_sub_array(vec![-2,1,-3,-4]), 1);
-    assert_eq!(Solution::max_sub_array(vec![-2,-3,-4,1]), 1);
-
-    assert_eq!(Solution::max_sub_array(vec![-2,1,-3,4,-1,2,1,-5,4]), 6);
-    assert_eq!(Solution::max_sub_array(vec![10,1,-3,4,-1,2,1,-5,4]), 14);
-    assert_eq!(Solution::max_sub_array(vec![-2,1,-3,4,-3,2,1,-5,4]), 4);
+    for case in get_max_sub_array_test_cases() {
+        assert_eq!(Solution::max_sub_array(case.0), case.1);
+    }
 }
 
 #[test]
 fn max_sub_array_v2_test() {
-    assert_eq!(Solution::max_sub_array_v2(vec![0]), 0);
-    assert_eq!(Solution::max_sub_array_v2(vec![1]), 1);
-    assert_eq!(Solution::max_sub_array_v2(vec![-1]), -1);
-    assert_eq!(Solution::max_sub_array_v2(vec![-1,-2,-3,-4]), -1);
-    assert_eq!(Solution::max_sub_array_v2(vec![-2,-1,-3,-4]), -1);
-    assert_eq!(Solution::max_sub_array_v2(vec![-2,-3,-4,-1]), -1);
-    assert_eq!(Solution::max_sub_array_v2(vec![1,-2,-3,-4]), 1);
-    assert_eq!(Solution::max_sub_array_v2(vec![-2,1,-3,-4]), 1);
-    assert_eq!(Solution::max_sub_array_v2(vec![-2,-3,-4,1]), 1);
-
-    assert_eq!(Solution::max_sub_array_v2(vec![-2,1,-3,4,-1,2,1,-5,4]), 6);
-    assert_eq!(Solution::max_sub_array_v2(vec![10,1,-3,4,-1,2,1,-5,4]), 14);
-    assert_eq!(Solution::max_sub_array_v2(vec![-2,1,-3,4,-3,2,1,-5,4]), 4);
+    for case in get_max_sub_array_test_cases() {
+        assert_eq!(Solution::max_sub_array_v2(case.0), case.1);
+    }
 }
 
 #[test]

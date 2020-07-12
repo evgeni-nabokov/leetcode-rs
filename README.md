@@ -1,4 +1,4 @@
-### List of solved problems (98)
+### List of solved problems (99)
 1. **1** Two Sum https://leetcode.com/problems/two-sum/ *Easy*
 1. **7** Reverse Integer https://leetcode.com/problems/reverse-integer/ *Easy*
 1. **15** 3Sum https://leetcode.com/problems/3sum/ *Medium*
@@ -69,6 +69,7 @@
 1. **540** Single Element in a Sorted Array https://leetcode.com/problems/single-element-in-a-sorted-array/ *Medium*
 1. **560** Subarray Sum Equals K https://leetcode.com/problems/subarray-sum-equals-k/ *Medium*
 1. **567** Permutation in String https://leetcode.com/problems/permutation-in-string/ *Medium*
+1. **662** Maximum Width of Binary Tree https://leetcode.com/problems/maximum-width-of-binary-tree/ *Medium*
 1. **678** Valid Parenthesis String https://leetcode.com/problems/valid-parenthesis-string/ *Medium*
 1. **700** Search in a Binary Search Tree https://leetcode.com/problems/search-in-a-binary-search-tree/ *Easy*
 1. **733** Flood Fill https://leetcode.com/problems/flood-fill/ *Easy*

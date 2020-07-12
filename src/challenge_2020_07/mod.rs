@@ -3,8 +3,8 @@ mod tests;
 
 use std::rc::Rc;
 use std::cell::RefCell;
-use std::collections::HashMap;
-use std::cmp::min;
+use std::collections::{HashMap, VecDeque};
+use std::cmp::{min, max};
 
 use lazy_static::lazy_static;
 
@@ -279,6 +279,32 @@ impl Solution {
             }
         }
         result
+    }
+
+    // 662. Maximum Width of Binary Tree.
+    // https://leetcode.com/problems/maximum-width-of-binary-tree/
+    pub fn width_of_binary_tree(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
+        if root.is_none() { return 0; }
+        let mut max_width = 0u32;
+        let mut queue: VecDeque<(Rc<RefCell<TreeNode>>, u32)> = VecDeque::new();
+        queue.push_back((root.unwrap(), 0));
+        while !queue.is_empty() {
+            let level_head_index = queue[0].1;
+            let mut col_index = 0u32;
+            let lev_len = queue.len();
+            for _ in 0..lev_len {
+                let (node, i) = queue.pop_front().unwrap();
+                col_index = i;
+                if RefCell::borrow(&node).left.is_some() {
+                    queue.push_back((RefCell::borrow(&node).left.clone().unwrap(), 2 * col_index));
+                }
+                if RefCell::borrow(&node).right.is_some() {
+                    queue.push_back((RefCell::borrow(&node).right.clone().unwrap(), 2 * col_index + 1));
+                }
+            }
+            max_width = max(max_width, col_index - level_head_index + 1);
+        }
+        max_width as i32
     }
 
     // 78. Subsets.

@@ -204,9 +204,34 @@ fn three_sum_test() {
 }
 
 #[test]
-fn three_sum_test_v2() {
+fn three_sum_v2_test() {
     for case in get_three_sum_test_cases() {
         assert_eq!(Solution::three_sum_v2(case.0), case.1);
+    }
+}
+
+#[test]
+fn width_of_binary_tree_test() {
+    let test_cases = vec![
+        (
+            vec![Some(1), Some(3), Some(2), Some(5), Some(3), None, Some(9)],
+            4
+        ),
+        (
+            vec![Some(1), Some(3), None, Some(5), Some(3), None, None],
+            2
+        ),
+        (
+            vec![Some(1), Some(3), Some(2), Some(5), None, None, None],
+            2
+        ),
+        (
+            vec![Some(1), Some(3), Some(2), Some(5), None, None, Some(9), Some(6), None, None, None, None, None, None, Some(9)],
+            8
+        ),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::width_of_binary_tree(TreeNode::from_level_order(&case.0)), case.1);
     }
 }
 

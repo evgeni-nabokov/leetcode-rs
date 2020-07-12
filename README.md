@@ -1,4 +1,4 @@
-### List of solved problems (97)
+### List of solved problems (98)
 1. **1** Two Sum https://leetcode.com/problems/two-sum/ *Easy*
 1. **7** Reverse Integer https://leetcode.com/problems/reverse-integer/ *Easy*
 1. **15** 3Sum https://leetcode.com/problems/3sum/ *Medium*
@@ -13,6 +13,7 @@
 1. **66** Plus One https://leetcode.com/problems/plus-one/ *Easy*
 1. **72** Edit Distance https://leetcode.com/problems/edit-distance/ *Hard*
 1. **75** Sort Colors https://leetcode.com/problems/sort-colors/ *Medium*
+1. **78** Subsets https://leetcode.com/problems/subsets/ *Medium*
 1. **79** Word Search https://leetcode.com/problems/word-search/ *Medium*
 1. **96** Unique Binary Search Trees https://leetcode.com/problems/unique-binary-search-trees/ *Medium*
 1. **102** Binary Tree Level Order Traversal https://leetcode.com/problems/binary-tree-level-order-traversal/ *Medium*

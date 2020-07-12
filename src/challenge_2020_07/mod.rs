@@ -280,4 +280,45 @@ impl Solution {
         }
         result
     }
+
+    // 78. Subsets.
+    // https://leetcode.com/problems/subsets/
+    pub fn subsets(nums: Vec<i32>) -> Vec<Vec<i32>> {
+        if nums.is_empty() { return vec![nums]; }
+        if nums.len() == 1 { return vec![vec![], nums]; }
+        let max_len = nums.len();
+        let mut res: Vec<Vec<i32>> = Vec::new();
+        res.push(Vec::new());
+        for l in 1..=nums.len() {
+            let mut idx: Vec<usize> = vec![0; l];
+            for i in 1..l {
+                idx[i] = i;
+            }
+            let mut max: Vec<usize> = vec![0; l];
+            for i in 0..l {
+                max[i] = i + max_len - l;
+            }
+            loop {
+                let mut set: Vec<i32> = Vec::with_capacity(l);
+                for i in 0..l {
+                    set.push(nums[idx[i]]);
+                }
+                res.push(set);
+                let mut i = l as isize - 1;
+                while i >= 0 && idx[i as usize] == max[i as usize] {
+                    i -= 1;
+                }
+                if i < 0 {
+                    break;
+                }
+                idx[i as usize] += 1;
+                let mut k = idx[i as usize] + 1;
+                for j in i as usize + 1..l {
+                    idx[j] = k;
+                    k += 1;
+                }
+            }
+        }
+        res
+    }
 }

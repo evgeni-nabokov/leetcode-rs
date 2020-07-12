@@ -209,3 +209,56 @@ fn three_sum_test_v2() {
         assert_eq!(Solution::three_sum_v2(case.0), case.1);
     }
 }
+
+#[test]
+fn subsets_test() {
+    let test_cases = vec![
+        (
+            vec![1, 2],
+            vec![
+                vec![],
+                vec![1],
+                vec![2],
+                vec![1, 2],
+            ]
+        ),
+        (
+            vec![1, 2, 3],
+            vec![
+                vec![],
+                vec![1],
+                vec![2],
+                vec![3],
+                vec![1, 2],
+                vec![1, 3],
+                vec![2, 3],
+                vec![1, 2, 3],
+            ]
+        ),
+        (
+            //vec![3,2,4,1],
+            vec![1,2,3,4],
+            vec![
+                vec![],
+                vec![1],
+                vec![2],
+                vec![3],
+                vec![4],
+                vec![1, 2],
+                vec![1, 3],
+                vec![1, 4],
+                vec![2, 3],
+                vec![2, 4],
+                vec![3, 4],
+                vec![1, 2, 3],
+                vec![1, 2, 4],
+                vec![1, 3, 4],
+                vec![2, 3, 4],
+                vec![1, 2, 3, 4],
+            ]
+        )
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::subsets(case.0), case.1);
+    }
+}

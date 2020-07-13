@@ -287,3 +287,42 @@ fn subsets_test() {
         assert_eq!(Solution::subsets(case.0), case.1);
     }
 }
+
+fn get_is_same_tree_test_cases() -> Vec<(Vec<Option<i32>>, Vec<Option<i32>>, bool)>{
+    vec![
+        (
+            vec![],
+            vec![Some(1)],
+            false
+        ),
+        (
+            vec![Some(1), Some(2), Some(3)],
+            vec![Some(1), Some(2), Some(3)],
+            true
+        ),
+        (
+            vec![Some(1), Some(2)],
+            vec![Some(1), None, Some(2)],
+            false
+        ),
+        (
+            vec![Some(1), Some(2), Some(1)],
+            vec![Some(1), Some(1), Some(2)],
+            false
+        ),
+    ]
+}
+
+#[test]
+fn is_same_tree_test() {
+    for case in get_is_same_tree_test_cases() {
+        assert_eq!(Solution::is_same_tree(TreeNode::from_level_order(&case.0), TreeNode::from_level_order(&case.1)), case.2);
+    }
+}
+
+#[test]
+fn is_same_tree_v2_test() {
+    for case in get_is_same_tree_test_cases() {
+        assert_eq!(Solution::is_same_tree_v2(TreeNode::from_level_order(&case.0), TreeNode::from_level_order(&case.1)), case.2);
+    }
+}

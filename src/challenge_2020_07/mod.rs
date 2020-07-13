@@ -347,4 +347,25 @@ impl Solution {
         }
         res
     }
+
+    // 100. Same Tree.
+    // https://leetcode.com/problems/same-tree/
+    pub fn is_same_tree(p: Option<Rc<RefCell<TreeNode>>>, q: Option<Rc<RefCell<TreeNode>>>) -> bool {
+        fn solve(p: &Option<Rc<RefCell<TreeNode>>>, q: &Option<Rc<RefCell<TreeNode>>>) -> bool {
+            match (p, q) {
+                (None, None) => true,
+                (Some(pref), Some(qref)) => {
+                    let pnode = RefCell::borrow(pref);
+                    let qnode = RefCell::borrow(qref);
+                    pnode.val == qnode.val && solve(&pnode.left, &qnode.left) && solve(&pnode.right, &qnode.right)
+                }
+                _ => false
+            }
+        }
+        solve(&p, &q)
+    }
+
+    pub fn is_same_tree_v2(p: Option<Rc<RefCell<TreeNode>>>, q: Option<Rc<RefCell<TreeNode>>>) -> bool {
+        p == q
+    }
 }

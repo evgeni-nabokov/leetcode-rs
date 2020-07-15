@@ -1,6 +1,7 @@
 #![allow(dead_code)]
 
 mod common;
+mod arrays_101;
 mod challenge_2020_04;
 mod challenge_2020_05;
 mod challenge_2020_06;

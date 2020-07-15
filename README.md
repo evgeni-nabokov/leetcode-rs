@@ -1,4 +1,4 @@
-### List of solved problems (101)
+### List of solved problems (102)
 1. **1** Two Sum https://leetcode.com/problems/two-sum/ *Easy*
 1. **7** Reverse Integer https://leetcode.com/problems/reverse-integer/ *Easy*
 1. **15** 3Sum https://leetcode.com/problems/3sum/ *Medium*
@@ -64,6 +64,7 @@
 1. **463** Island Perimeter https://leetcode.com/problems/island-perimeter/ *Easy*
 1. **468** Validate IP Address https://leetcode.com/problems/validate-ip-address/ *Medium*
 1. **476** Number Complement https://leetcode.com/problems/number-complement/ *Easy*
+1. **485** Max Consecutive Ones https://leetcode.com/problems/max-consecutive-ones/  *Easy*
 1. **518** Coin Change 2 https://leetcode.com/problems/coin-change-2/ *Medium*
 1. **525** Contiguous Array https://leetcode.com/problems/contiguous-array/ *Medium*
 1. **528** Random Pick with Weight https://leetcode.com/problems/random-pick-with-weight/ *Medium*

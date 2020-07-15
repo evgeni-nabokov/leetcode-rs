@@ -39,4 +39,21 @@ impl Solution {
         }
         res
     }
+
+    // 977. Squares of a Sorted Array.
+    // https://leetcode.com/problems/squares-of-a-sorted-array/
+    pub fn sorted_squares(nums: Vec<i32>) -> Vec<i32> {
+        let mut res = vec![0; nums.len()];
+        for i in 0..nums.len() {
+            res[i] = nums[i] * nums[i];
+        }
+        res.sort_unstable();
+        res
+    }
+
+    pub fn sorted_squares_v2(nums: Vec<i32>) -> Vec<i32> {
+        let mut res = nums.iter().map(|x| x * x).collect::<Vec::<i32>>();
+        res.sort_unstable();
+        res
+    }
 }

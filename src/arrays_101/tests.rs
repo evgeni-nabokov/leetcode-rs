@@ -28,3 +28,27 @@ fn find_numbers_test() {
         assert_eq!(Solution::find_numbers(case.0), case.1);
     }
 }
+
+fn get_sorted_squares_test_cases() -> Vec<(Vec<i32>, Vec<i32>)> {
+    vec![
+        (vec![], vec![]),
+        (vec![-2, 0], vec![0, 4]),
+        (vec![1, 2], vec![1, 4]),
+        (vec![-4,-1,0,3,10], vec![0,1,9,16,100]),
+        (vec![-7,-3,2,3,11], vec![4,9,9,49,121]),
+    ]
+}
+
+#[test]
+fn sorted_squares_test() {
+    for case in get_sorted_squares_test_cases() {
+        assert_eq!(Solution::sorted_squares(case.0), case.1);
+    }
+}
+
+#[test]
+fn sorted_squares_v2_test() {
+    for case in get_sorted_squares_test_cases() {
+        assert_eq!(Solution::sorted_squares_v2(case.0), case.1);
+    }
+}

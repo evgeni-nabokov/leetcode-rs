@@ -21,4 +21,22 @@ impl Solution {
         }
         max(max_len, one_cntr)
     }
+
+    // 1295. Find Numbers with Even Number of Digits.
+    // https://leetcode.com/problems/find-numbers-with-even-number-of-digits/
+    pub fn find_numbers(nums: Vec<i32>) -> i32 {
+        let mut res = 0;
+        for mut n in nums {
+            n = n.abs();
+            let mut len = 1;
+            while n > 9 {
+                len += 1;
+                n /= 10;
+            }
+            if len > 0 && len % 2 == 0 {
+                res += 1;
+            }
+        }
+        res
+    }
 }

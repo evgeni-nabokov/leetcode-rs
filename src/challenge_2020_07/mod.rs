@@ -377,4 +377,10 @@ impl Solution {
         let a = (m * 6f64 - (h + m / 60f64) * 30f64).abs();
         if a > 180f64 { 360f64 - a } else { a }
     }
+
+    // 151. Reverse Words in a String.
+    // https://leetcode.com/problems/reverse-words-in-a-string/
+    pub fn reverse_words(s: String) -> String {
+        s.split_ascii_whitespace().rev().collect::<Vec<_>>().join(" ")
+    }
 }

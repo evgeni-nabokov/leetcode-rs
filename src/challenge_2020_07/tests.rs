@@ -342,3 +342,16 @@ fn angle_clock_test() {
         assert_eq!(Solution::angle_clock(case.0, case.1), case.2);
     }
 }
+
+#[test]
+fn reverse_words_test() {
+    let test_cases = vec![
+        ("the sky is blue".to_string(), "blue is sky the".to_string()),
+        ("  hello world!  ".to_string(), "world! hello".to_string()),
+        ("a good   example".to_string(), "example good a".to_string()),
+    ];
+
+    for case in test_cases {
+        assert_eq!(Solution::reverse_words(case.0), case.1);
+    }
+}

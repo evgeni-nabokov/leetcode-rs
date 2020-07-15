@@ -326,3 +326,19 @@ fn is_same_tree_v2_test() {
         assert_eq!(Solution::is_same_tree_v2(TreeNode::from_level_order(&case.0), TreeNode::from_level_order(&case.1)), case.2);
     }
 }
+
+#[test]
+fn angle_clock_test() {
+    let test_cases = vec![
+        (12, 30, 165f64),
+        (3, 30, 75f64),
+        (4, 50, 155f64),
+        (12, 0, 0f64),
+        (3, 15, 7.5f64),
+        (1, 57, 76.5f64),
+    ];
+
+    for case in test_cases {
+        assert_eq!(Solution::angle_clock(case.0, case.1), case.2);
+    }
+}

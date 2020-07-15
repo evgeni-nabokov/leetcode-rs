@@ -368,4 +368,13 @@ impl Solution {
     pub fn is_same_tree_v2(p: Option<Rc<RefCell<TreeNode>>>, q: Option<Rc<RefCell<TreeNode>>>) -> bool {
         p == q
     }
+
+    // 1344. Angle Between Hands of a Clock.
+    // https://leetcode.com/problems/angle-between-hands-of-a-clock/
+    pub fn angle_clock(hours: i32, minutes: i32) -> f64 {
+        let h = if hours == 12 { 0f64 } else { hours as f64 };
+        let m = minutes as f64;
+        let a = (m * 6f64 - (h + m / 60f64) * 30f64).abs();
+        if a > 180f64 { 360f64 - a } else { a }
+    }
 }

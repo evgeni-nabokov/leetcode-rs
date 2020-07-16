@@ -1,4 +1,4 @@
-### List of solved problems (106)
+### List of solved problems (107)
 1. **1** Two Sum https://leetcode.com/problems/two-sum/ *Easy*
 1. **7** Reverse Integer https://leetcode.com/problems/reverse-integer/ *Easy*
 1. **15** 3Sum https://leetcode.com/problems/3sum/ *Medium*
@@ -94,6 +94,7 @@
 1. **1029** Two City Scheduling https://leetcode.com/problems/two-city-scheduling/ *Easy*
 1. **1035** Uncrossed Lines https://leetcode.com/problems/uncrossed-lines/ *Medium*
 1. **1046** Last Stone Weight https://leetcode.com/problems/last-stone-weight/ *Easy*
+1. **1089** Duplicate Zeros https://leetcode.com/problems/duplicate-zeros/ *Easy*
 1. **1108** Defanging an IP Address https://leetcode.com/problems/defanging-an-ip-address/ *Easy*
 1. **1143** Longest Common Subsequence https://leetcode.com/problems/longest-common-subsequence/ *Medium*
 1. **1232** Check If It Is a Straight Line https://leetcode.com/problems/check-if-it-is-a-straight-line/ *Easy*

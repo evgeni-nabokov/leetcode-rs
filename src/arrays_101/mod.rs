@@ -56,4 +56,42 @@ impl Solution {
         res.sort_unstable();
         res
     }
+
+    // 1089. Duplicate Zeros.
+    // https://leetcode.com/problems/duplicate-zeros/
+    pub fn duplicate_zeros(nums: &mut Vec<i32>) {
+        // Two scans.
+        // First scan: counting zeros.
+        // Second scan: moving elements at appropriate positions starting from the last (in backward direction).
+        // Special case: should we duplicate the last zero? Yes when we count it, no otherwise.
+        // The elements are moved at most once.
+        let mut zero_cntr = 0;
+        let mut ignore_last_zero = false;
+        for i in 0..nums.len() {
+            if i + zero_cntr == nums.len() - 1 {
+                ignore_last_zero = true;
+                break;
+            }
+            if nums[i] == 0 {
+                zero_cntr += 1;
+            }
+            if i + zero_cntr == nums.len() - 1 {
+                break;
+            }
+        }
+        if zero_cntr == 0 { return; }
+        let last_i = nums.len() - zero_cntr - 1;
+        let mut i = last_i;
+        loop {
+            nums[i + zero_cntr] = nums[i];
+            if nums[i] == 0 && (i != last_i || !ignore_last_zero) {
+                zero_cntr -= 1;
+                nums[i + zero_cntr] = 0;
+            }
+            if zero_cntr == 0 {
+                break;
+            }
+            i -= 1;
+        }
+    }
 }

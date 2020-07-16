@@ -1,10 +1,11 @@
-### List of solved problems (105)
+### List of solved problems (106)
 1. **1** Two Sum https://leetcode.com/problems/two-sum/ *Easy*
 1. **7** Reverse Integer https://leetcode.com/problems/reverse-integer/ *Easy*
 1. **15** 3Sum https://leetcode.com/problems/3sum/ *Medium*
 1. **33** Search in Rotated Sorted Array https://leetcode.com/problems/search-in-rotated-sorted-array/ *Medium*
 1. **35** Search Insert Position https://leetcode.com/problems/search-insert-position/ *Easy*
 1. **49** Group Anagrams https://leetcode.com/problems/group-anagrams/ *Medium*
+1. **50** Pow(x, n) https://leetcode.com/problems/powx-n/ *Medium*
 1. **53** Maximum Subarray https://leetcode.com/problems/maximum-subarray/ *Easy*
 1. **55** Jump Game https://leetcode.com/problems/jump-game/ *Medium*
 1. **60** Permutation Sequence https://leetcode.com/problems/permutation-sequence/ *Medium*

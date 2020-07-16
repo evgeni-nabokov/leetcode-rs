@@ -355,3 +355,18 @@ fn reverse_words_test() {
         assert_eq!(Solution::reverse_words(case.0), case.1);
     }
 }
+
+#[test]
+fn my_pow_test() {
+    let test_cases = vec![
+        (2.00000, 10, 1024.00000),
+        (2.10000, 3, 9.26100),
+        (2.00000, -2, 0.25000),
+        (0.00001, 2147483647, 0f64),
+        (2.00000, -2147483648, 0f64)
+    ];
+
+    for case in test_cases {
+        assert!(Solution::my_pow(case.0, case.1) - case.2 < 0.0001);
+    }
+}

@@ -383,4 +383,26 @@ impl Solution {
     pub fn reverse_words(s: String) -> String {
         s.split_ascii_whitespace().rev().collect::<Vec<_>>().join(" ")
     }
+
+    // 50. Pow(x, n).
+    // https://leetcode.com/problems/powx-n/
+    pub fn my_pow(mut x: f64, n: i32) -> f64 {
+        if n == 0 { return 1f64; }
+        let mut p: i64 = n as i64;
+        if p < 0 {
+            x = 1f64 / x;
+            p = -p;
+        }
+        let mut res = 1f64;
+        let mut curr_prod = x;
+        let mut i = p;
+        while i > 0 {
+            if i % 2 == 1 {
+                res *= curr_prod;
+            }
+            curr_prod *= curr_prod;
+            i /= 2;
+        }
+        res
+    }
 }

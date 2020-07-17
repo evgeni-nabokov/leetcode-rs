@@ -72,3 +72,16 @@ fn duplicate_zeros_test() {
         assert_eq!(case.0, case.1);
     }
 }
+
+#[test]
+fn merge_test() {
+    let test_cases = vec![
+        (vec![], 0, vec![], 0),
+        (vec![1], 1, vec![], 0),
+        (vec![1, 2, 3, 0, 0, 0], 3, vec![2, 5, 6], 3),
+    ];
+    for mut case in test_cases {
+        Solution::merge(&mut case.0, case.1, &mut case.2, case.3);
+        assert!(case.0.windows(2).all(|x| x[0] <= x[1]));
+    }
+}

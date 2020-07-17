@@ -1,7 +1,7 @@
 #[cfg(test)]
 mod tests;
 
-use std::cmp::max;
+use std::cmp::{Ordering, max};
 
 struct Solution;
 
@@ -91,6 +91,32 @@ impl Solution {
             if zero_cntr == 0 {
                 break;
             }
+            i -= 1;
+        }
+    }
+
+    // 88. Merge Sorted Array.
+    // https://leetcode.com/problems/merge-sorted-array/
+    pub fn merge(nums_1: &mut Vec<i32>, mut m: i32, nums_2: &mut Vec<i32>, mut n: i32) {
+        if nums_1.is_empty() || nums_2.is_empty() { return; }
+        let mut i = nums_1.len() - 1;
+        m -= 1; n -= 1;
+        while n >= 0 && m >= 0 {
+            match nums_1[m as usize].cmp(&nums_2[n as usize]) {
+                Ordering::Greater => {
+                    nums_1[i] = nums_1[m as usize];
+                    m -= 1;
+                },
+                _ => {
+                    nums_1[i] = nums_2[n as usize];
+                    n -= 1;
+                },
+            }
+            i -= 1;
+        }
+        while n >= 0 {
+            nums_1[i] = nums_2[n as usize];
+            n -= 1;
             i -= 1;
         }
     }

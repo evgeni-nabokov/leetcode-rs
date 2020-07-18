@@ -118,10 +118,11 @@ impl Solution {
     // 169. Majority Element.
     // https://leetcode.com/problems/majority-element/
     pub fn majority_element(nums: Vec<i32>) -> i32 {
-        let mut counter_map: HashMap<i32, usize> = HashMap::with_capacity(nums.len() / 2);
-        for &n in nums.iter() {
+        let half_len = nums.len() / 2;
+        let mut counter_map: HashMap<i32, usize> = HashMap::with_capacity(half_len);
+        for n in nums {
             match counter_map.entry(n) {
-                Entry::Occupied(o) if *o.get() >= nums.len() / 2 => {
+                Entry::Occupied(o) if *o.get() >= half_len => {
                     return n;
                 },
                 Entry::Occupied(mut o) => {
@@ -180,7 +181,7 @@ impl Solution {
         let b = x_2 - x_1;
         let c = x_1 * y_2 - x_2 * y_1;
         // Check each point if it satisfies the equation of line above.
-        for point in coordinates.iter().skip(2) {
+        for point in coordinates.into_iter().skip(2) {
             let (x, y) = (point[0], point[1]);
             if a * x + b * y + c != 0 {
                 return false;
@@ -230,7 +231,7 @@ impl Solution {
     pub fn find_judge(n: i32, trust: Vec<Vec<i32>>) -> i32 {
         let mut who_trusts = vec![0; n as usize];
         let mut who_is_trusted = vec![0; n as usize];
-        for t in trust.iter() {
+        for t in trust {
             who_trusts[(t[0] - 1) as usize] += 1;
             who_is_trusted[(t[1] - 1) as usize] += 1;
         }
@@ -251,11 +252,11 @@ impl Solution {
 
     pub fn find_judge_v2(n: i32, trust: Vec<Vec<i32>>) -> i32 {
         let mut counter = vec![0; n as usize];
-        for t in trust.iter() {
+        for t in trust {
             counter[(t[0] - 1) as usize] -= 1;
             counter[(t[1] - 1) as usize] += 1;
         }
-        match counter.iter().position(|&p| p == n - 1) {
+        match counter.into_iter().position(|p| p == n - 1) {
             Some(i) => i as i32 + 1,
             _ => -1,
         }
@@ -314,13 +315,13 @@ impl Solution {
         if num.len() == k as usize { return "0".to_string(); }
         let mut res: Vec<char> = Vec::with_capacity(k as usize);
         let digits: Vec<char> = num.chars().collect();
-        for d in digits.iter() {
-            while k > 0 && !res.is_empty() && res.last().unwrap() > d {
+        for d in digits {
+            while k > 0 && !res.is_empty() && *res.last().unwrap() > d {
                 res.pop();
                 k -= 1;
             }
-            if !res.is_empty() || *d != '0' {
-                res.push(*d);
+            if !res.is_empty() || d != '0' {
+                res.push(d);
             }
         }
         while k > 0 {
@@ -330,7 +331,7 @@ impl Solution {
         while !res.is_empty() && res[0] == '0' {
             res.remove(0);
         }
-        if res.is_empty() { "0".to_string() } else { res.iter().collect() }
+        if res.is_empty() { "0".to_string() } else { res.into_iter().collect() }
     }
 
     // 918. Maximum Sum Circular Subarray.
@@ -342,7 +343,7 @@ impl Solution {
         let mut max_sum: i32 = sum;
         let mut max_sum_inv: i32 = sum_inv;
         let mut total_sum_inv = sum_inv;
-        for &n in nums.iter().skip(1) {
+        for n in nums.into_iter().skip(1) {
             sum = max(n, sum + n);
             sum_inv = max(-n, sum_inv - n);
             max_sum = max(sum, max_sum);
@@ -541,10 +542,10 @@ impl Solution {
             o => o,
         });
         let mut sorted_chars: Vec<char> = Vec::with_capacity(s.len());
-        for e in cnt.iter() {
+        for e in cnt {
             sorted_chars.extend_from_slice(&vec![e.0; e.1])
         }
-        sorted_chars.iter().collect()
+        sorted_chars.into_iter().collect()
     }
 
     pub fn frequency_sort_v2(s: String) -> String {
@@ -558,10 +559,10 @@ impl Solution {
             o => o,
         });
         let mut sorted_chars: Vec<char> = Vec::with_capacity(s.len());
-        for e in chars.iter() {
+        for e in chars {
             sorted_chars.extend_from_slice(&vec![e.0; e.1])
         }
-        sorted_chars.iter().collect()
+        sorted_chars.into_iter().collect()
     }
 
     // 986. Interval List Intersections.
@@ -609,7 +610,7 @@ impl Solution {
         if n < 2 || dislikes.is_empty() { return true; }
         // Building adjacency list of the given graph.
         let mut adj_list: Vec<Vec<usize>> = vec![vec![]; n as usize];
-        for pair in dislikes.iter() {
+        for pair in dislikes {
             let i_1 = (pair[0] - 1) as usize;
             let i_2 = (pair[1] - 1) as usize;
             adj_list[i_1].push(i_2);
@@ -621,7 +622,7 @@ impl Solution {
         // Using deep first search.
         fn dfs(i: usize, color: i8, adj_list: &Vec<Vec<usize>>, v: &mut Vec<i8>) -> bool {
             v[i] = color;
-            for &k in adj_list[i].iter() {
+            for &k in &adj_list[i] {
                 if v[k] == v[i] || v[k] == 0 && !dfs(k, -color, adj_list, v) {
                     return false;
                 }
@@ -674,7 +675,7 @@ impl Solution {
         if n < 2 || prerequisites.is_empty() { return true; }
         // Building adjacency list of the given graph.
         let mut adj_list: Vec<Vec<usize>> = vec![vec![]; n as usize];
-        for pair in prerequisites.iter() {
+        for pair in prerequisites {
             adj_list[pair[1] as usize].push(pair[0] as usize);
         }
         // 0 - not visited,
@@ -686,7 +687,7 @@ impl Solution {
             if visited[i] == 1 { return false; }
             if visited[i] == 2 { return true; }
             visited[i] = 1;
-            for &k in adj_list[i].iter() {
+            for &k in &adj_list[i] {
                 if !dfs(k, adj_list, visited) {
                     return false;
                 }

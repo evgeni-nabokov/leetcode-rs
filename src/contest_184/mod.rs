@@ -12,7 +12,7 @@ impl Solution {
         let mut res = Vec::<String>::with_capacity(100);
         words.sort_unstable_by(|x, y| x.len().cmp(&y.len()));
         let mut skip = 1;
-        for sub_word in words.iter() {
+        for sub_word in &words {
             for word in words.iter().skip(skip) {
                 if sub_word.len() != word.len() {
                     if word.contains(sub_word) {
@@ -30,8 +30,8 @@ impl Solution {
     pub fn entity_parser(text: String) -> String {
         let mut res = Vec::<char>::with_capacity(text.len());
         let entity_map: HashMap<&str, char> =
-            [("quot", '"'), ("apos", '\''), ("amp", '&'), ("gt", '>'), ("lt", '<'), ("frasl", '/')]
-                .iter().cloned().collect();
+            vec![("quot", '"'), ("apos", '\''), ("amp", '&'), ("gt", '>'), ("lt", '<'), ("frasl", '/')]
+                .into_iter().collect();
         let mut entity_vec = Vec::<char>::with_capacity(5);
         let mut is_collecting_entity = false;
         for c in text.chars() {
@@ -58,7 +58,7 @@ impl Solution {
                 res.push(c);
             }
         }
-        res.iter().collect()
+        res.into_iter().collect()
     }
 
     // https://leetcode.com/problems/queries-on-a-permutation-with-key/

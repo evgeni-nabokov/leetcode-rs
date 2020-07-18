@@ -52,7 +52,7 @@ impl Solution {
     }
 
     pub fn sorted_squares_v2(nums: Vec<i32>) -> Vec<i32> {
-        let mut res = nums.iter().map(|x| x * x).collect::<Vec::<i32>>();
+        let mut res = nums.into_iter().map(|x| x * x).collect::<Vec::<i32>>();
         res.sort_unstable();
         res
     }

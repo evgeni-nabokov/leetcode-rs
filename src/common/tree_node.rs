@@ -159,10 +159,9 @@ impl BinaryTree for Option<Rc<RefCell<TreeNode>>> {
         if self.is_none() { return res; }
         let mut queue_1: VecDeque<Option<Rc<RefCell<TreeNode>>>> = VecDeque::new();
         let mut queue_2: VecDeque<Option<Rc<RefCell<TreeNode>>>> = VecDeque::new();
-
         queue_1.push_front(self.clone());
         while !queue_1.is_empty() {
-            if !queue_1.iter().any(|x| x.is_some()) { break; }
+            if queue_1.iter().all(|x| x.is_none()) { break; }
             swap(&mut queue_1, &mut queue_2);
             while !queue_2.is_empty() {
                 let node = queue_2.pop_back().unwrap();

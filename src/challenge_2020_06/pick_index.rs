@@ -12,7 +12,7 @@ impl Solution {
         let mut points: Vec<u64>  = Vec::with_capacity(weights.len() + 1);
         points.push(0);
         let mut sum = 0u64;
-        for &w in weights.iter() {
+        for w in weights {
             sum += w as u64;
             points.push(sum);
         }

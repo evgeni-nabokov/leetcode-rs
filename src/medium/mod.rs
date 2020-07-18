@@ -62,7 +62,7 @@ impl Solution {
             if i == word.len() - 1 { return true; }
 
             board[ur][uc] = '#';
-            for (x, y) in vec![(0, -1), (0, 1), (1, 0), (-1, 0)].into_iter() {
+            for (x, y) in vec![(0, -1), (0, 1), (1, 0), (-1, 0)] {
                 if dfs(board, word, i + 1, r + y, c + x) {
                     return true;
                 }

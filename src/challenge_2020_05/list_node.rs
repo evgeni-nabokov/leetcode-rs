@@ -31,8 +31,8 @@ impl ListNode {
         let mut head: Option<Box<ListNode>> = Some(Box::new(ListNode::new(values[0])));
         if values.len() == 1 { return head; }
         let mut curr_node: &mut Option<Box<ListNode>> = &mut head;
-        for &val in values.iter().skip(1) {
-            curr_node.as_mut().unwrap().next = Some(Box::new(ListNode::new(val)));
+        for val in values.iter().skip(1) {
+            curr_node.as_mut().unwrap().next = Some(Box::new(ListNode::new(*val)));
             curr_node = &mut curr_node.as_mut().unwrap().next;
         }
         head

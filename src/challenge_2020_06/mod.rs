@@ -71,7 +71,7 @@ impl Solution {
             o => o,
         });
         let mut res: Vec<Vec<i32>> = vec![vec![]; people.len()];
-        for p in people.iter() {
+        for p in people {
             let mut cnt = p[1];
             let mut i = 0usize;
             loop {
@@ -83,7 +83,7 @@ impl Solution {
                 }
                 i += 1
             }
-            res[i] = p.clone();
+            res[i] = p;
         }
         res
     }
@@ -94,8 +94,8 @@ impl Solution {
             o => o,
         });
         let mut res: Vec<Vec<i32>> = Vec::with_capacity(people.len());
-        for p in people.iter() {
-            res.insert(p[1] as usize, p.clone());
+        for p in people {
+            res.insert(p[1] as usize, p);
         }
         res
     }
@@ -253,7 +253,7 @@ impl Solution {
         }
 
         let mut adj_mx: Vec<Vec<_>> = vec![vec![0usize; n as usize]; n as usize];
-        for f in flights.iter() {
+        for f in flights {
             adj_mx[f[0] as usize][f[1] as usize] = f[2] as usize;
         }
         let mut heap = BinaryHeap::new();
@@ -311,7 +311,7 @@ impl Solution {
             if parts.len() != 4 {
                 return neither;
             }
-            for p in parts.iter() {
+            for p in parts {
                 if p.len() > 1 && p.starts_with('0') {
                     return neither;
                 }
@@ -332,7 +332,7 @@ impl Solution {
             if parts.len() != 8 {
                 return neither;
             }
-            for p in parts.iter() {
+            for p in parts {
                 if p.is_empty() || p.len() > 4 {
                     return neither;
                 }
@@ -550,7 +550,7 @@ impl Solution {
             }
         }
         dfs(root, 0, &mut nums);
-        nums.iter().sum()
+        nums.into_iter().sum()
     }
 
     // 279. Perfect Squares.
@@ -579,15 +579,16 @@ impl Solution {
     // https://leetcode.com/problems/reconstruct-itinerary/
     pub fn find_itinerary(tickets: Vec<Vec<String>>) -> Vec<String> {
         if tickets.is_empty() { return vec![]; }
-        let mut adj_map: HashMap<String, Vec<String>> = HashMap::with_capacity(tickets.len() + 1);
-        for tk in tickets.iter() {
+        let len = tickets.len() + 1;
+        let mut adj_map: HashMap<String, Vec<String>> = HashMap::with_capacity(len);
+        for tk in tickets {
             let list = adj_map.entry(tk[0].clone()).or_insert(Vec::new());
             list.push(tk[1].clone());
             list.sort_unstable();
             adj_map.entry(tk[1].clone()).or_insert(Vec::new());
         }
-        let mut stack: Vec<String> = Vec::with_capacity(tickets.len() + 1);
-        let mut res: Vec<String> = Vec::with_capacity(tickets.len() + 1);
+        let mut stack: Vec<String> = Vec::with_capacity(len);
+        let mut res: Vec<String> = Vec::with_capacity(len);
         stack.push("JFK".to_string());
         while !stack.is_empty() {
             let airport = stack.last().unwrap();
@@ -662,7 +663,7 @@ impl Solution {
 
             board[ur][uc] = '#';
             path.push(ch);
-            for (x, y) in vec![(0, -1), (0, 1), (1, 0), (-1, 0)].into_iter() {
+            for (x, y) in vec![(0, -1), (0, 1), (1, 0), (-1, 0)] {
                 dfs(board, num_words, node.children.get_mut(&ch).unwrap(), r + y, c + x, path, res);
             }
             path.pop();
@@ -672,7 +673,7 @@ impl Solution {
         let mut trie = TrieNode::new();
         let num_words = words.len();
         let mut ch_words: Vec<Vec<char>> = Vec::with_capacity(num_words);
-        for w in words.into_iter() {
+        for w in words {
             ch_words.push(w.chars().collect::<Vec<char>>());
             trie.insert(ch_words.last().unwrap());
         }

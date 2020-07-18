@@ -37,14 +37,14 @@ impl Solution {
     pub fn single_number(mut nums: Vec<i32>) -> i32 {
         nums.sort_unstable();
         nums.push(0); // A stub for one more iteration.
-        let mut prev: &i32 = &nums[0];
+        let mut prev: i32 = nums[0];
         let mut cnt: u32 = 1;
-        for n in nums.iter().skip(1) {
-            if *n == *prev {
+        for n in nums.into_iter().skip(1) {
+            if n == prev {
                 cnt += 1;
             } else {
                 if cnt == 1 {
-                    return *prev;
+                    return prev;
                 } else {
                     cnt = 1;
                     prev = n;
@@ -56,8 +56,8 @@ impl Solution {
 
     pub fn single_number_v2(nums: Vec<i32>) -> i32 {
         let mut a: i32 = 0;
-        for n in nums.iter() {
-            a ^= *n;
+        for n in nums {
+            a ^= n;
         }
         a
     }
@@ -95,7 +95,7 @@ impl Solution {
         if nums.len() == 1 { return nums[0]; }
         let mut sum: i32 = nums[0];
         let mut max_sum: i32 = sum;
-        for &n in nums.iter().skip(1) {
+        for n in nums.into_iter().skip(1) {
             match n {
                 n if n >= 0 && sum < 0 => sum = n,
                 n if n >= 0 && sum >= 0 => sum += n,
@@ -119,7 +119,7 @@ impl Solution {
         if nums.len() == 1 { return nums[0]; }
         let mut sum: i32 = nums[0];
         let mut max_sum: i32 = sum;
-        for &n in nums.iter().skip(1) {
+        for n in nums.into_iter().skip(1) {
             sum = max(n, sum + n);
             max_sum = max(sum, max_sum);
         }
@@ -219,14 +219,14 @@ impl Solution {
     // https://leetcode.com/problems/group-anagrams/
     pub fn group_anagrams(strs: Vec<String>) -> Vec<Vec<String>> {
         let mut cntr: HashMap<String, Vec<String>> = HashMap::new();
-        for s in strs.iter() {
+        for s in strs {
             let mut chars: Vec<char> = s.chars().collect();
             chars.sort_unstable();
             let key: String = chars.into_iter().collect();
             cntr.entry(key).or_insert(Vec::<String>::new()).push(s.clone());
         }
         let mut res: Vec<Vec<String>> = Vec::new();
-        for (_, anagrams) in cntr.into_iter() {
+        for (_, anagrams) in cntr {
             res.push(anagrams);
         }
         for anagrams in res.iter_mut() {
@@ -238,7 +238,7 @@ impl Solution {
 
     pub fn group_anagrams_v2(strs: Vec<String>) -> Vec<Vec<String>> {
         let mut cntr: HashMap<[i32; 26], Vec<String>> = HashMap::new();
-        for s in strs.into_iter() {
+        for s in strs {
             let mut key = [0; 26];
             for c in s.chars() {
                 key[c as usize - 'a' as usize] += 1;
@@ -260,7 +260,7 @@ impl Solution {
         let mut prev_x = arr[0];
         let mut cnt = 0;
         let mut rep_cnt = 1;
-        for &x in arr.iter().skip(1) {
+        for x in arr.into_iter().skip(1) {
             if x == prev_x {
                 rep_cnt += 1;
             } else {
@@ -312,8 +312,8 @@ impl Solution {
         if stones.is_empty() { return 0; }
         if stones.len() == 1 { return stones[0]; }
         let mut heap = BinaryHeap::with_capacity(30);
-        for s in stones.iter() {
-            heap.push(*s);
+        for s in stones {
+            heap.push(s);
         }
         while heap.len() > 1 {
             let x = heap.pop().unwrap();
@@ -333,7 +333,7 @@ impl Solution {
         let mut sum = 0;
         let mut sums = HashMap::<i32, i32>::new();
         sums.insert(0, -1);
-        for (i, &n) in nums.iter().enumerate() {
+        for (i, n) in nums.into_iter().enumerate() {
             if n == 0 { sum -= 1; } else { sum += 1 }
             if sums.contains_key(&sum) {
                 max_len = max(max_len, i as i32 - sums.get(&sum).unwrap().clone())
@@ -349,7 +349,7 @@ impl Solution {
         let mut max_len = 0;
         let mut sum = 0;
         let mut sums = HashMap::<i32, usize>::new();
-        for (i, &n) in nums.iter().enumerate() {
+        for (i,  n) in nums.into_iter().enumerate() {
             sum += if n == 0 { -1 } else { 1 };
             if sum == 0 {
                 max_len = i + 1;
@@ -369,7 +369,7 @@ impl Solution {
     pub fn string_shift(s: String, shift: Vec<Vec<i32>>) -> String {
         let l = s.len();
         if l < 2 { return s; }
-        let sum = shift.iter().fold(0, |sum, val| sum + if val[0] == 0 { -val[1] } else { val[1] }) % l as i32;
+        let sum = shift.into_iter().fold(0, |sum, val| sum + if val[0] == 0 { -val[1] } else { val[1] }) % l as i32;
         if sum == 0 { return s; }
         let mut res = String::with_capacity(l);
         let sh = i32::abs(sum) as usize;
@@ -397,7 +397,7 @@ impl Solution {
         for i in (1..l).rev() {
             right_products[i - 1] = right_products[i] * nums[i];
         }
-        left_products.iter().zip(right_products.iter()).map(|(lp, rp)| *lp * *rp).collect()
+        left_products.into_iter().zip(right_products.into_iter()).map(|(lp, rp)| lp * rp).collect()
     }
 
     pub fn product_except_self_v2(nums: Vec<i32>) -> Vec<i32> {
@@ -455,7 +455,7 @@ impl Solution {
             let mut cell_num = y * w + x;
             visited_cells.insert(cell_num);
             let neighbor_cells = [(x + 1, y), (x, y + 1), (x - 1, y), (x, y - 1)];
-            for &(ax, ay) in neighbor_cells.iter() {
+            for &(ax, ay) in &neighbor_cells {
                 if ax >= 0 && ax < w && ay >= 0 && ay < h {
                     cell_num = ay * w + ax;
                     if grid[ay as usize][ax as usize] == '1' && !visited_cells.contains(&cell_num) {
@@ -493,7 +493,7 @@ impl Solution {
         fn visit_cell((x, y): (i32, i32), &(w, h): &(i32, i32), grid: &mut Vec<Vec<char>>) {
             grid[y as usize][x as usize] = '#';
             let neighbor_cells = [(x + 1, y), (x, y + 1), (x - 1, y), (x, y - 1)];
-            for &(ax, ay) in neighbor_cells.iter() {
+            for &(ax, ay) in &neighbor_cells {
                 if ax >= 0 && ax < w && ay >= 0 && ay < h
                     && grid[ay as usize][ax as usize] == '1' {
                     visit_cell((ax, ay), &(w, h), grid);
@@ -618,8 +618,8 @@ impl Solution {
         let mut cnt = 0;
         let mut sums: Vec<i32> = Vec::with_capacity(nums.len() + 1);
         sums.push(0);
-        for n in nums.iter() {
-            sums.push(sums.last().unwrap() + n);
+        for n in &nums {
+            sums.push(sums.last().unwrap() + *n);
         }
         for curr_len in 1..=nums.len() {
             for i in 0..=(nums.len() - curr_len) {
@@ -637,7 +637,7 @@ impl Solution {
         let mut cnt = 0;
         let mut sums: Vec<i32> = Vec::with_capacity(nums.len());
         sums.push(0);
-        for n in nums.iter() {
+        for n in &nums {
             sums.push(sums.last().unwrap() + n);
         }
         for start in 0..nums.len() {
@@ -672,7 +672,7 @@ impl Solution {
         let mut map: HashMap<i32, i32> = HashMap::new();
         map.insert(0, 1);
         let mut sum = 0;
-        for &n in nums.iter() {
+        for n in nums {
             sum += n;
             let key = sum - k;
             cnt += *map.get(&key).unwrap_or(&0);
@@ -717,7 +717,7 @@ impl Solution {
     pub fn can_jump_v2(nums: Vec<i32>) -> bool {
         if nums.len() < 2 { return true; }
         let mut reach_dist = 0;
-        for n in nums[..nums.len() - 1].iter() {
+        for n in &nums[..nums.len() - 1] {
             if *n == 0 && reach_dist == 0 {
                 return false;
             } else {

@@ -11,19 +11,19 @@ impl Solution {
     pub fn dest_city(paths: Vec<Vec<String>>) -> String {
         let mut origin_city_set = HashSet::with_capacity(paths.len());
         let mut dest_city_set = HashSet::with_capacity(paths.len());
-        for edge in paths.iter() {
+        for edge in &paths {
             origin_city_set.insert(&edge[0]);
             dest_city_set.insert(&edge[1]);
         }
-        for city in origin_city_set.iter() {
+        for city in origin_city_set {
             dest_city_set.remove(city);
         }
-        dest_city_set.iter().next().cloned().cloned().unwrap()
+        dest_city_set.into_iter().next().unwrap().clone()
     }
 
     pub fn k_length_apart(nums: Vec<i32>, k: i32) -> bool {
         let mut dist = -1;
-        for &n in nums.iter() {
+        for n in nums {
             if n == 0 {
                 if dist >= 0 {
                     dist += 1;

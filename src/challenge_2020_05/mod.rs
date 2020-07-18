@@ -669,8 +669,8 @@ impl Solution {
         res
     }
 
-    // 338. Counting Bits.
-    // https://leetcode.com/problems/counting-bits/
+    // 207. Course Schedule.
+    // https://leetcode.com/problems/course-schedule/
     pub fn can_finish(n: i32, prerequisites: Vec<Vec<i32>>) -> bool {
         if n < 2 || prerequisites.is_empty() { return true; }
         // Building adjacency list of the given graph.

@@ -4,7 +4,7 @@ mod tests;
 use std::rc::Rc;
 use std::cell::RefCell;
 use std::collections::{HashMap, VecDeque};
-use std::cmp::{min, max};
+use std::cmp::{max, min};
 
 use lazy_static::lazy_static;
 
@@ -404,5 +404,56 @@ impl Solution {
             i /= 2;
         }
         res
+    }
+
+    // 210. Course Schedule II.
+    // https://leetcode.com/problems/course-schedule-ii/
+    pub fn find_order(n: i32, prerequisites: Vec<Vec<i32>>) -> Vec<i32> {
+        if n == 0 { return vec![]; }
+        if n == 1 { return vec![0]; }
+
+        // Building adjacency list of the given graph.
+        let mut adj_list: Vec<Vec<i32>> = vec![vec![]; n as usize];
+        for pair in prerequisites {
+            adj_list[pair[0] as usize].push(pair[1]);
+        }
+
+        #[derive(Clone, Debug, PartialEq, Eq)]
+        enum Color {
+            White, // Not visited.
+            Gray, // Visited, but the traversal is not finished yet.
+            Black, // Visited, traversal is finished.
+        }
+
+        // Using deep first search.
+        fn dfs(v: i32, adj_list: &Vec<Vec<i32>>, visited: &mut Vec<Color>, order: &mut Vec<i32>, mut c: i32) -> i32 {
+            let i = v as usize;
+            visited[i] = Color::Gray;
+            for &k in &adj_list[i] {
+                if visited[k as usize] == Color::Gray {
+                    return -1;
+                }
+                if visited[k as usize] == Color::White {
+                    c = dfs(k, adj_list, visited, order, c);
+                    if c == -1 { return -1; }
+                }
+            }
+            visited[i] = Color::Black;
+            order[c as usize] = v;
+            c + 1
+        }
+
+        let mut visited: Vec<Color> = vec![Color::White; n as usize];
+        let mut order: Vec<i32> = vec![0; n as usize];
+        let mut c = 0;
+        for v in 0..n {
+            if visited[v as usize] == Color::White {
+                c = dfs(v, &adj_list, &mut visited, &mut order, c);
+                if c == -1 {
+                    return vec![];
+                }
+            }
+        }
+        order
     }
 }

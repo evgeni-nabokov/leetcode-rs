@@ -370,3 +370,17 @@ fn my_pow_test() {
         assert!(Solution::my_pow(case.0, case.1) - case.2 < 0.0001);
     }
 }
+
+#[test]
+fn find_order_test() {
+    let test_cases = vec![
+        (2, vec![vec![1, 0]], vec![0, 1]),
+        (4, vec![vec![1, 0], vec![2, 0], vec![3, 1], vec![3, 2]], vec![0, 1, 2, 3]),
+        (2, vec![vec![1, 0], vec![0, 1]], vec![]),
+        (4, vec![vec![1, 0], vec![2, 0], vec![3, 1], vec![3, 2], vec![0, 3]], vec![]),
+    ];
+
+    for case in test_cases {
+        assert_eq!(Solution::find_order(case.0, case.1), case.2);
+    }
+}

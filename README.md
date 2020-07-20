@@ -1,4 +1,4 @@
-### List of solved problems (110)
+### List of solved problems (111)
 1. **1** Two Sum https://leetcode.com/problems/two-sum/ *Easy*
 1. **7** Reverse Integer https://leetcode.com/problems/reverse-integer/ *Easy*
 1. **15** 3Sum https://leetcode.com/problems/3sum/ *Medium*
@@ -12,6 +12,7 @@
 1. **62** Unique Paths https://leetcode.com/problems/unique-paths/ *Medium*
 1. **64** Minimum Path Sum https://leetcode.com/problems/minimum-path-sum/ *Medium*
 1. **66** Plus One https://leetcode.com/problems/plus-one/ *Easy*
+1. **67** Add Binary https://leetcode.com/problems/add-binary/ *Easy*
 1. **72** Edit Distance https://leetcode.com/problems/edit-distance/ *Hard*
 1. **75** Sort Colors https://leetcode.com/problems/sort-colors/ *Medium*
 1. **78** Subsets https://leetcode.com/problems/subsets/ *Medium*

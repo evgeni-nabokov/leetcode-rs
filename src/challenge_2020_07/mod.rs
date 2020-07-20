@@ -5,6 +5,7 @@ use std::rc::Rc;
 use std::cell::RefCell;
 use std::collections::{HashMap, VecDeque};
 use std::cmp::{max, min};
+use std::mem::swap;
 
 use lazy_static::lazy_static;
 
@@ -455,5 +456,51 @@ impl Solution {
             }
         }
         order
+    }
+
+    // 67. Add Binary.
+    // https://leetcode.com/problems/add-binary/
+    pub fn add_binary(a: String, b: String) -> String {
+        let mut ac: Vec<char> = a.chars().collect();
+        let mut bc: Vec<char> = b.chars().collect();
+        if ac.len() > bc.len() {
+            swap(&mut ac, &mut bc);
+        }
+        let mut ai = ac.len() - 1;
+        let mut bi = bc.len() - 1;
+        let mut carry = false;
+        loop {
+            match (ac[ai], bc[bi], carry) {
+                ('1', '1', true) => { bc[bi] = '1'; carry = true },
+                ('0', '0', false) => { bc[bi] = '0'; carry = false },
+                ('1', '1', false) | ('1', '0', true) | ('0', '1', true) => { bc[bi] = '0'; carry = true },
+                ('0', '0', true) | ('1', '0', false) | ('0', '1', false) => { bc[bi] = '1'; carry = false },
+                _ => unreachable!(),
+            }
+            if ai == 0 { break; }
+            ai -= 1;
+            bi -= 1;
+        }
+
+        if carry && bi != 0 {
+            bi -= 1;
+            loop {
+                if bc[bi] == '0' {
+                    bc[bi] = '1';
+                    carry = false;
+                    break;
+                } else {
+                    bc[bi] = '0';
+                }
+                if bi == 0 { break; }
+                bi -= 1;
+            }
+        }
+
+        if carry {
+            vec!['1'].into_iter().chain(bc.into_iter()).collect()
+        } else {
+            bc.into_iter().collect()
+        }
     }
 }

@@ -384,3 +384,18 @@ fn find_order_test() {
         assert_eq!(Solution::find_order(case.0, case.1), case.2);
     }
 }
+
+#[test]
+fn add_binary_test() {
+    let test_cases = vec![
+        ("0".to_string(), "0".to_string(), "0".to_string()),
+        ("1".to_string(), "0".to_string(), "1".to_string()),
+        ("1".to_string(), "1".to_string(), "10".to_string()),
+        ("11".to_string(), "1".to_string(), "100".to_string()),
+        ("1010".to_string(), "1011".to_string(), "10101".to_string()),
+        ("110010".to_string(), "10111".to_string(), "1001001".to_string()),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::add_binary(case.0, case.1), case.2);
+    }
+}

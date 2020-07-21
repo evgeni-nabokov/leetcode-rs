@@ -80,33 +80,6 @@ fn remove_leaf_nodes_test() {
 }
 
 #[test]
-fn exist_test() {
-    let board = vec![
-        vec!['A','B','C','E'],
-        vec!['S','F','C','S'],
-        vec!['A','D','E','E']
-    ];
-
-    let test_cases = vec![
-        (
-            "ABCCED".to_string(),
-            true
-        ),
-        (
-            "SEE".to_string(),
-            true
-        ),
-        (
-            "ABCB".to_string(),
-            false
-        ),
-    ];
-    for case in test_cases {
-        assert_eq!(Solution::exist(board.clone(), case.0), case.1);
-    }
-}
-
-#[test]
 fn level_order_test() {
     let test_cases = vec![
         (

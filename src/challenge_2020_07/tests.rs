@@ -427,3 +427,30 @@ fn remove_elements_test() {
         assert_eq!(Solution::remove_elements(ListNode::from_slice(&case.0), case.1).to_vec(), case.2);
     }
 }
+
+#[test]
+fn exist_test() {
+    let board = vec![
+        vec!['A','B','C','E'],
+        vec!['S','F','C','S'],
+        vec!['A','D','E','E']
+    ];
+
+    let test_cases = vec![
+        (
+            "ABCCED".to_string(),
+            true
+        ),
+        (
+            "SEE".to_string(),
+            true
+        ),
+        (
+            "ABCB".to_string(),
+            false
+        ),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::exist(board.clone(), case.0), case.1);
+    }
+}

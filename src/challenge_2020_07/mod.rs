@@ -1,3 +1,5 @@
+mod list_node;
+
 #[cfg(test)]
 mod tests;
 
@@ -10,6 +12,7 @@ use std::mem::swap;
 use lazy_static::lazy_static;
 
 use crate::common::tree_node::TreeNode;
+use crate::challenge_2020_07::list_node::ListNode;
 
 lazy_static! {
     static ref UGLY_NUMBERS: Vec<i32> = {
@@ -471,10 +474,10 @@ impl Solution {
         let mut carry = false;
         loop {
             match (ac[ai], bc[bi], carry) {
-                ('1', '1', true) => { bc[bi] = '1'; carry = true },
-                ('0', '0', false) => { bc[bi] = '0'; carry = false },
-                ('1', '1', false) | ('1', '0', true) | ('0', '1', true) => { bc[bi] = '0'; carry = true },
-                ('0', '0', true) | ('1', '0', false) | ('0', '1', false) => { bc[bi] = '1'; carry = false },
+                ('1', '1', true) => { bc[bi] = '1'; carry = true; },
+                ('0', '0', false) => { bc[bi] = '0'; carry = false; },
+                ('1', '1', false) | ('1', '0', true) | ('0', '1', true) => { bc[bi] = '0'; carry = true; },
+                ('0', '0', true) | ('1', '0', false) | ('0', '1', false) => { bc[bi] = '1'; carry = false; },
                 _ => unreachable!(),
             }
             if ai == 0 { break; }
@@ -502,5 +505,20 @@ impl Solution {
         } else {
             bc.into_iter().collect()
         }
+    }
+
+    // 203. Remove Linked List Elements.
+    // https://leetcode.com/problems/remove-linked-list-elements/
+    pub fn remove_elements(head: Option<Box<ListNode>>, val: i32) -> Option<Box<ListNode>> {
+        let mut fake_head = Box::new(ListNode { val: -1, next: head });
+        let mut prev_node: &mut Box<ListNode> = &mut fake_head;
+        while let Some(some) = prev_node.next.as_ref() {
+            if some.val == val {
+                prev_node.next = prev_node.next.as_mut().unwrap().next.take();
+            } else {
+                prev_node = prev_node.next.as_mut().unwrap();
+            }
+        }
+        fake_head.next
     }
 }

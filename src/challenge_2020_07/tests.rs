@@ -1,4 +1,5 @@
 use super::*;
+use crate::challenge_2020_07::list_node::LinkedList;
 
 #[test]
 fn arrange_coins_test() {
@@ -397,5 +398,21 @@ fn add_binary_test() {
     ];
     for case in test_cases {
         assert_eq!(Solution::add_binary(case.0, case.1), case.2);
+    }
+}
+
+#[test]
+fn remove_elements_test() {
+    let test_cases = vec![
+        (vec![], 0, vec![]),
+        (vec![1], 0, vec![1]),
+        (vec![1], 1, vec![]),
+        (vec![1, 1], 1, vec![]),
+        (vec![1, 2], 1, vec![2]),
+        (vec![1, 2, 3], 2, vec![1, 3]),
+        (vec![1, 2, 6, 3, 4, 5, 6], 6, vec![1, 2, 3, 4, 5]),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::remove_elements(ListNode::from_slice(&case.0), case.1).to_vec(), case.2);
     }
 }

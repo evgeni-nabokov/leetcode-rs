@@ -5,8 +5,8 @@ mod tests;
 
 use std::rc::Rc;
 use std::cell::RefCell;
-use std::collections::{HashMap, VecDeque};
-use std::cmp::{max, min};
+use std::collections::{HashMap, VecDeque, BinaryHeap};
+use std::cmp::{max, min, Ordering};
 use std::mem::swap;
 
 use lazy_static::lazy_static;
@@ -408,6 +408,44 @@ impl Solution {
             i /= 2;
         }
         res
+    }
+
+    // 347. Top K Frequent Elements.
+    // https://leetcode.com/problems/top-k-frequent-elements/
+    pub fn top_k_frequent(nums: Vec<i32>, k: i32) -> Vec<i32> {
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        struct Entry {
+            number: i32,
+            count: usize,
+        }
+
+        // Manually implement Ord so we get a min-heap instead of a max-heap.
+        impl Ord for Entry {
+            fn cmp(&self, other: &Self) -> Ordering {
+                other.count.cmp(&self.count)
+            }
+        }
+
+        impl PartialOrd for Entry {
+            fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
+                Some(self.cmp(other))
+            }
+        }
+
+        if nums.len() == k as usize {
+            return nums;
+        }
+
+        let mut counter: HashMap<i32, usize> = HashMap::new();
+        for n in nums {
+            *counter.entry(n).or_insert(0) += 1;
+        }
+
+        let mut heap: BinaryHeap<Entry> = BinaryHeap::with_capacity(counter.len());
+        for (number, count) in counter.into_iter() {
+            heap.push(Entry { number, count });
+        }
+        heap.into_sorted_vec().into_iter().take(k as usize).map(|x| x.number).collect()
     }
 
     // 210. Course Schedule II.

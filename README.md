@@ -1,4 +1,4 @@
-### List of solved problems (112)
+### List of solved problems (113)
 1. **1** Two Sum https://leetcode.com/problems/two-sum/ *Easy*
 1. **7** Reverse Integer https://leetcode.com/problems/reverse-integer/ *Easy*
 1. **15** 3Sum https://leetcode.com/problems/3sum/ *Medium*
@@ -56,6 +56,7 @@
 1. **332** Reconstruct Itinerary https://leetcode.com/problems/reconstruct-itinerary/ *Medium*
 1. **338** Counting Bits https://leetcode.com/problems/counting-bits/ *Medium*
 1. **344** Reverse String https://leetcode.com/problems/reverse-string/ *Easy*
+1. **347** Top K Frequent Elements https://leetcode.com/problems/top-k-frequent-elements/ *Medium*
 1. **367** Valid Perfect Square https://leetcode.com/problems/valid-perfect-square/ *Easy*
 1. **368** Largest Divisible Subset https://leetcode.com/problems/largest-divisible-subset/ *Medium*
 1. **380** Insert Delete GetRandom O(1) https://leetcode.com/problems/insert-delete-getrandom-o1/ *Medium*

@@ -373,6 +373,17 @@ fn my_pow_test() {
 }
 
 #[test]
+fn top_k_frequent_test() {
+    let test_cases = vec![
+        (vec![1, 1, 1, 2, 2, 3], 2, vec![1, 2]),
+        (vec![1], 1, vec![1]),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::top_k_frequent(case.0, case.1), case.2);
+    }
+}
+
+#[test]
 fn find_order_test() {
     let test_cases = vec![
         (2, vec![vec![1, 0]], vec![0, 1]),

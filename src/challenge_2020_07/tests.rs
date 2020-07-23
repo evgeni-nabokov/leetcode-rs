@@ -454,3 +454,28 @@ fn exist_test() {
         assert_eq!(Solution::exist(board.clone(), case.0), case.1);
     }
 }
+
+#[test]
+fn zigzag_level_order_test() {
+    let test_cases = vec![
+        (
+            vec![Some(3), Some(9), Some(20), None, None, Some(15), Some(7)],
+            vec![
+                vec![3],
+                vec![20, 9],
+                vec![15, 7],
+            ]
+        ),
+        (
+            vec![Some(1), Some(2), Some(3), Some(4), None, None, Some(5)],
+            vec![
+                vec![1],
+                vec![3, 2],
+                vec![4, 5],
+            ]
+        ),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::zigzag_level_order(TreeNode::from_level_order(&case.0)), case.1);
+    }
+}

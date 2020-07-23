@@ -89,7 +89,15 @@ fn level_order_test() {
                 vec![9, 20],
                 vec![15, 7],
             ]
-        )
+        ),
+        (
+            vec![Some(1), Some(2), Some(3), Some(4), None, None, Some(5)],
+            vec![
+                vec![1],
+                vec![2, 3],
+                vec![4, 5],
+            ]
+        ),
     ];
     for case in test_cases {
         assert_eq!(Solution::level_order(TreeNode::from_level_order(&case.0)), case.1);

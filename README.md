@@ -1,4 +1,4 @@
-### List of solved problems (114)
+### List of solved problems (115)
 1. **1** Two Sum https://leetcode.com/problems/two-sum/ *Easy*
 1. **7** Reverse Integer https://leetcode.com/problems/reverse-integer/ *Easy*
 1. **15** 3Sum https://leetcode.com/problems/3sum/ *Medium*
@@ -47,6 +47,7 @@
 1. **230** Kth Smallest Element in a BST https://leetcode.com/problems/kth-smallest-element-in-a-bst/ *Medium*
 1. **231** Power of Two https://leetcode.com/problems/power-of-two/ *Easy*
 1. **238** Product of Array Except Self https://leetcode.com/problems/product-of-array-except-self/ *Medium*
+1. **260** Single Number III https://leetcode.com/problems/single-number-iii/ *Medium*
 1. **264** Ugly Number II https://leetcode.com/problems/ugly-number-ii/ *Medium*
 1. **274** H-Index https://leetcode.com/problems/h-index/ *Medium*
 1. **275** H-Index II https://leetcode.com/problems/h-index-ii/ *Medium*

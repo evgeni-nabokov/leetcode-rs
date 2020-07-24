@@ -5,7 +5,7 @@ mod tests;
 
 use std::rc::Rc;
 use std::cell::RefCell;
-use std::collections::{HashMap, VecDeque, BinaryHeap};
+use std::collections::{HashMap, VecDeque, BinaryHeap, HashSet};
 use std::cmp::{max, min, Ordering};
 use std::mem::swap;
 
@@ -611,5 +611,33 @@ impl Solution {
             levels[i].reverse();
         }
         levels
+    }
+
+    pub fn single_number(nums: Vec<i32>) -> Vec<i32> {
+        let mut cntr: HashMap<i32, usize> = HashMap::new();
+        for n in nums {
+            *cntr.entry(n).or_insert(0) += 1
+        }
+        let mut res: Vec<i32> = Vec::with_capacity(2);
+        for (n, c) in cntr {
+            if c == 1 {
+                res.push(n);
+            }
+        }
+        res
+    }
+
+    // 260. Single Number III.
+    // https://leetcode.com/problems/single-number-iii/
+    pub fn single_number_v2(nums: Vec<i32>) -> Vec<i32> {
+        let mut set: HashSet<i32> = HashSet::with_capacity(nums.len() / 2);
+        for n in nums {
+            if set.contains(&n) {
+                set.remove(&n);
+            } else {
+                set.insert(n);
+            }
+        }
+        set.into_iter().collect()
     }
 }

@@ -479,3 +479,27 @@ fn zigzag_level_order_test() {
         assert_eq!(Solution::zigzag_level_order(TreeNode::from_level_order(&case.0)), case.1);
     }
 }
+
+#[test]
+fn single_number_test() {
+    let test_cases = vec![
+        (vec![1, 2, 1, 3, 2, 5], vec![3, 5]),
+    ];
+    for case in test_cases {
+        let mut res = Solution::single_number_v2(case.0);
+        res.sort_unstable();
+        assert_eq!(res, case.1);
+    }
+}
+
+#[test]
+fn single_number_v2_test() {
+    let test_cases = vec![
+        (vec![1, 2, 1, 3, 2, 5], vec![3, 5]),
+    ];
+    for case in test_cases {
+        let mut res = Solution::single_number_v2(case.0);
+        res.sort_unstable();
+        assert_eq!(res, case.1);
+    }
+}

@@ -503,3 +503,13 @@ fn single_number_v2_test() {
         assert_eq!(res, case.1);
     }
 }
+
+#[test]
+fn all_paths_source_target_test() {
+    let test_cases = vec![
+        (vec![vec![1, 2], vec![3], vec![3], vec![]] , vec![vec![0, 1, 3], vec![0, 2, 3]]),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::all_paths_source_target(case.0), case.1);
+    }
+}

@@ -613,13 +613,15 @@ impl Solution {
         levels
     }
 
+    // 260. Single Number III.
+    // https://leetcode.com/problems/single-number-iii/
     pub fn single_number(nums: Vec<i32>) -> Vec<i32> {
-        let mut cntr: HashMap<i32, usize> = HashMap::new();
+        let mut map: HashMap<i32, usize> = HashMap::new();
         for n in nums {
-            *cntr.entry(n).or_insert(0) += 1
+            *map.entry(n).or_insert(0) += 1
         }
         let mut res: Vec<i32> = Vec::with_capacity(2);
-        for (n, c) in cntr {
+        for (n, c) in map {
             if c == 1 {
                 res.push(n);
             }
@@ -627,8 +629,6 @@ impl Solution {
         res
     }
 
-    // 260. Single Number III.
-    // https://leetcode.com/problems/single-number-iii/
     pub fn single_number_v2(nums: Vec<i32>) -> Vec<i32> {
         let mut set: HashSet<i32> = HashSet::with_capacity(nums.len() / 2);
         for n in nums {
@@ -639,5 +639,28 @@ impl Solution {
             }
         }
         set.into_iter().collect()
+    }
+
+    // 797. All Paths From Source to Target.
+    // https://leetcode.com/problems/all-paths-from-source-to-target/
+    pub fn all_paths_source_target(graph: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
+        fn dfs(graph: &Vec<Vec<i32>>, res: &mut Vec<Vec<i32>>, path: &mut Vec<i32>) {
+            let target = graph.len() as i32 - 1;
+            let last = *path.last().unwrap();
+            if last == target {
+                res.push(path.clone());
+                return;
+            }
+            for v in &graph[last as usize] {
+                path.push(*v);
+                dfs(graph, res, path);
+                path.pop();
+            }
+        }
+        let mut res = Vec::<Vec<i32>>::new();
+        let mut path = Vec::<i32>::with_capacity(graph.len());
+        path.push(0);
+        dfs(&graph, &mut res, &mut path);
+        res
     }
 }

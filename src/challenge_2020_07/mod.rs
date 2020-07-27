@@ -669,4 +669,21 @@ impl Solution {
     pub fn add_digits(num: i32) -> i32 {
         if num == 0 { 0 } else { 1 + (num - 1) % 9 }
     }
+
+    // 106. Construct Binary Tree from Inorder and Postorder Traversal.
+    // https://leetcode.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/
+    pub fn build_tree(inorder: Vec<i32>, postorder: Vec<i32>) -> Option<Rc<RefCell<TreeNode>>> {
+        fn build_bt(inorder: &[i32], postorder: &[i32]) -> Option<Rc<RefCell<TreeNode>>> {
+            if inorder.is_empty() || postorder.is_empty() { return None; }
+            let val = *postorder.last().unwrap();
+            let node = Some(Rc::new(RefCell::new(TreeNode::new(val))));
+            if postorder.len() == 1 { return node; }
+            let i = inorder.iter().position(|x| *x == val).unwrap();
+            RefCell::borrow_mut(node.as_ref().unwrap()).left = build_bt(&inorder[..i], &postorder[0..i]);
+            RefCell::borrow_mut(node.as_ref().unwrap()).right = build_bt(&inorder[(i + 1)..], &postorder[i..(postorder.len() - 1)]);
+            node
+        }
+
+        build_bt(&inorder, &postorder)
+    }
 }

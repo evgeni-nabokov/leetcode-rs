@@ -103,3 +103,16 @@ fn level_order_test() {
         assert_eq!(Solution::level_order(TreeNode::from_level_order(&case.0)), case.1);
     }
 }
+
+#[test]
+fn build_tree_test() {
+    let test_cases = vec![
+        (vec![], vec![], vec![]),
+        (vec![1, 2], vec![2, 1], vec![Some(1), Some(2), None]),
+        (vec![5, 3, 2, 4, 6], vec![2, 4, 3, 6, 5], vec![Some(5), Some(3), Some(6), Some(2), Some(4), None, None]),
+        (vec![1, 2, 4, 5, 3, 6, 7], vec![4, 5, 2, 6, 7, 3, 1], vec![Some(1), Some(2), Some(3), Some(4), Some(5), Some(6), Some(7)])
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::build_tree(case.0, case.1).get_level_order_values(), case.2);
+    }
+}

@@ -568,16 +568,15 @@ impl Solution {
     // 1008. Construct Binary Search Tree from Preorder Traversal.
     // https://leetcode.com/problems/construct-binary-search-tree-from-preorder-traversal/
     pub fn bst_from_preorder(preorder: Vec<i32>) -> Option<Rc<RefCell<TreeNode>>> {
-        fn build_bst(arr: &[i32]) -> Option<Rc<RefCell<TreeNode>>> {
-            if arr.is_empty() { return None; }
-            let val = arr[0];
-            let root = Some(Rc::new(RefCell::new(TreeNode::new(val))));
-            if arr.len() == 1 { return root; }
-            let mut i = 1;
-            while i < arr.len() && arr[i] < val { i += 1; };
-            RefCell::borrow_mut(root.as_ref().unwrap()).left = build_bst(&arr[1..i]);
-            RefCell::borrow_mut(root.as_ref().unwrap()).right = build_bst(&arr[i..]);
-            root
+        fn build_bst(preorder: &[i32]) -> Option<Rc<RefCell<TreeNode>>> {
+            if preorder.is_empty() { return None; }
+            let val = preorder[0];
+            let node = Some(Rc::new(RefCell::new(TreeNode::new(val))));
+            if preorder.len() == 1 { return node; }
+            let i = preorder.iter().position(|x| *x > val).unwrap_or(preorder.len());
+            RefCell::borrow_mut(node.as_ref().unwrap()).left = build_bst(&preorder[1..i]);
+            RefCell::borrow_mut(node.as_ref().unwrap()).right = build_bst(&preorder[i..]);
+            node
         }
         build_bst(&preorder)
     }

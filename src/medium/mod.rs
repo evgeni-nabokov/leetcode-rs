@@ -83,4 +83,21 @@ impl Solution {
 
         build_bt(&preorder, &postorder)
     }
+
+    // 105. Construct Binary Tree from Preorder and Inorder Traversal.
+    // https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/
+    pub fn build_tree_ii(preorder: Vec<i32>, inorder: Vec<i32>) -> Option<Rc<RefCell<TreeNode>>> {
+        fn build_bt(preorder: &[i32], inorder: &[i32]) -> Option<Rc<RefCell<TreeNode>>> {
+            if preorder.is_empty() || inorder.is_empty() { return None; }
+            let val = preorder[0];
+            let node = Some(Rc::new(RefCell::new(TreeNode::new(val))));
+            if preorder.len() == 1 { return node; }
+            let i = inorder.iter().position(|x| *x == val).unwrap();
+            RefCell::borrow_mut(node.as_ref().unwrap()).left = build_bt(&preorder[1..(i + 1)], &inorder[..i]);
+            RefCell::borrow_mut(node.as_ref().unwrap()).right = build_bt(&preorder[(i + 1)..], &inorder[(i + 1)..]);
+            node
+        }
+
+        build_bt(&preorder, &inorder)
+    }
 }

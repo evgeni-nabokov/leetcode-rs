@@ -513,3 +513,18 @@ fn all_paths_source_target_test() {
         assert_eq!(Solution::all_paths_source_target(case.0), case.1);
     }
 }
+
+#[test]
+fn add_digits_test() {
+    let test_cases = vec![
+        (0, 0),
+        (1, 1),
+        (11, 2),
+        (99, 9),
+        (38, 2),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::add_digits(case.0), case.1);
+    }
+}
+

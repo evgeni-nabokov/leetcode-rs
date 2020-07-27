@@ -663,4 +663,10 @@ impl Solution {
         dfs(&graph, &mut res, &mut path);
         res
     }
+
+    // 258. Add Digits.
+    // https://leetcode.com/problems/add-digits/
+    pub fn add_digits(num: i32) -> i32 {
+        if num == 0 { 0 } else { 1 + (num - 1) % 9 }
+    }
 }

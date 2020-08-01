@@ -686,4 +686,18 @@ impl Solution {
 
         build_bt(&inorder, &postorder)
     }
+
+    // 70. Climbing Stairs.
+    // https://leetcode.com/problems/climbing-stairs/
+    pub fn climb_stairs(n: i32) -> i32 {
+        if n < 2 { return 1; }
+        let mut f0 = 1;
+        let mut f1 = 1;
+        for _ in 2..=n {
+            let t = f1;
+            f1 += f0;
+            f0 = t;
+        }
+        f1
+    }
 }

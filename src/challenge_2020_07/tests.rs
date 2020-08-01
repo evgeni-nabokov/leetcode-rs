@@ -541,3 +541,16 @@ fn build_tree_test() {
         assert_eq!(Solution::build_tree(case.0, case.1).get_level_order_values(), case.2);
     }
 }
+
+#[test]
+fn climb_stairs_test() {
+    let test_cases = vec![
+        (1, 1),
+        (2, 2),
+        (3, 3),
+        (4, 5),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::climb_stairs(case.0), case.1);
+    }
+}

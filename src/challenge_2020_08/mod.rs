@@ -1,3 +1,6 @@
+mod logger_v1;
+mod logger_v2;
+
 #[cfg(test)]
 mod tests;
 

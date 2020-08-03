@@ -23,4 +23,30 @@ impl Solution {
         }
         true
     }
+
+    // 125. Valid Palindrome.
+    // https://leetcode.com/problems/valid-palindrome/
+    pub fn is_palindrome(s: String) -> bool {
+        if s.len() < 2 { return true; }
+        let mut left = 0;
+        let mut right = s.len() - 1;
+        let chars: Vec<_> = s.chars().collect();
+        loop {
+            while left < right && !chars[left].is_alphanumeric() {
+                left += 1;
+            }
+            while left < right && !chars[right].is_alphanumeric() {
+                right -= 1;
+            }
+            if !chars[left].eq_ignore_ascii_case(&chars[right]) {
+                return false;
+            }
+            if left >= right {
+                return true;
+            }
+            left += 1;
+            right -= 1;
+        }
+        true
+    }
 }

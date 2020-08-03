@@ -1,4 +1,4 @@
-### List of solved problems (124)
+### List of solved problems (125)
 1. **1** Two Sum https://leetcode.com/problems/two-sum/ *Easy*
 1. **7** Reverse Integer https://leetcode.com/problems/reverse-integer/ *Easy*
 1. **15** 3Sum https://leetcode.com/problems/3sum/ *Medium*
@@ -28,6 +28,7 @@
 1. **107** Binary Tree Level Order Traversal II https://leetcode.com/problems/binary-tree-level-order-traversal-ii/ *Easy*
 1. **122** Best Time to Buy and Sell Stock II https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/ *Easy*
 1. **124** Binary Tree Maximum Path Sum https://leetcode.com/problems/binary-tree-maximum-path-sum/ *Hard*
+1. **125** Valid Palindrome https://leetcode.com/problems/valid-palindrome/ *Easy*
 1. **129** Sum Root to Leaf Numbers https://leetcode.com/problems/sum-root-to-leaf-numbers/ *Medium*
 1. **130** Surrounded Regions https://leetcode.com/problems/surrounded-regions/ *Medium*
 1. **136** Single Number https://leetcode.com/problems/single-number/ *Easy*

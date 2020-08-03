@@ -57,3 +57,19 @@ fn myhashset_test() {
     set.remove(2);
     assert_eq!(set.contains(2), false);
 }
+
+#[test]
+fn is_palindrome_test() {
+    let test_cases = vec![
+        ("", true),
+        ("a", true),
+        ("aa", true),
+        ("ab", false),
+        ("a.", true),
+        ("race a car", false),
+        ("A man, a plan, a canal: Panama", true),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::is_palindrome(case.0.to_string()), case.1);
+    }
+}

@@ -1,5 +1,6 @@
 mod logger_v1;
 mod logger_v2;
+mod myhashset;
 
 #[cfg(test)]
 mod tests;

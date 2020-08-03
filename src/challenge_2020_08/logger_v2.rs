@@ -1,3 +1,6 @@
+// 359. Logger Rate Limiter.
+// https://leetcode.com/problems/logger-rate-limiter/
+
 use std::collections::HashMap;
 use std::collections::hash_map::Entry::{Vacant, Occupied};
 

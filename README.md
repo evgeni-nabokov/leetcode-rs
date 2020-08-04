@@ -1,4 +1,4 @@
-### List of solved problems (125)
+### List of solved problems (126)
 1. **1** Two Sum https://leetcode.com/problems/two-sum/ *Easy*
 1. **7** Reverse Integer https://leetcode.com/problems/reverse-integer/ *Easy*
 1. **15** 3Sum https://leetcode.com/problems/3sum/ *Medium*
@@ -62,6 +62,7 @@
 1. **328** Odd Even Linked List https://leetcode.com/problems/odd-even-linked-list/ *Medium*
 1. **332** Reconstruct Itinerary https://leetcode.com/problems/reconstruct-itinerary/ *Medium*
 1. **338** Counting Bits https://leetcode.com/problems/counting-bits/ *Medium*
+1. **342** Power of Four https://leetcode.com/problems/power-of-four/ *Easy*
 1. **344** Reverse String https://leetcode.com/problems/reverse-string/ *Easy*
 1. **347** Top K Frequent Elements https://leetcode.com/problems/top-k-frequent-elements/ *Medium*
 1. **359** Logger Rate Limiter https://leetcode.com/problems/logger-rate-limiter/ *Easy*

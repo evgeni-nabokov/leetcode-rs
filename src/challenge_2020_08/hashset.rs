@@ -4,21 +4,21 @@
 const TABLE_SIZE: usize = 1009; // Prime number.
 const LIST_CAPACITY: usize = 100;
 
-pub struct MyHashSet {
+pub struct HashSet {
     table: Vec<Option<Vec<i32>>>,
     sorted: Vec<bool>,
 }
 
-impl MyHashSet {
+impl HashSet {
     pub fn new() -> Self {
-        MyHashSet {
+        HashSet {
             table: vec![None; TABLE_SIZE],
             sorted: vec![false; TABLE_SIZE],
         }
     }
 
     pub fn add(&mut self, key: i32) {
-        let i = MyHashSet::get_index(key);
+        let i = HashSet::get_index(key);
         self.sort_list_if_necessary(i);
         if let Some(list) = &mut self.table[i] {
             if list.binary_search(&key).is_err() {
@@ -34,7 +34,7 @@ impl MyHashSet {
     }
 
     pub fn remove(&mut self, key: i32) {
-        let i = MyHashSet::get_index(key);
+        let i = HashSet::get_index(key);
         self.sort_list_if_necessary(i);
         if let Some(list) = &mut self.table[i] {
             if let Ok(j) = list.binary_search(&key) {
@@ -44,7 +44,7 @@ impl MyHashSet {
     }
 
     pub fn contains(&mut self, key: i32) -> bool {
-        let i = MyHashSet::get_index(key);
+        let i = HashSet::get_index(key);
         self.sort_list_if_necessary(i);
         if let Some(list) = &mut self.table[i] {
             list.binary_search(&key).is_ok()

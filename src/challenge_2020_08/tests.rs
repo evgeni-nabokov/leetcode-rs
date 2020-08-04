@@ -1,7 +1,7 @@
 use super::*;
 use crate::challenge_2020_08::logger_v1::Logger as LoggerV1;
 use crate::challenge_2020_08::logger_v2::Logger as LoggerV2;
-use crate::challenge_2020_08::myhashset::MyHashSet;
+use crate::challenge_2020_08::hashset::HashSet;
 
 fn get_logger_test_cases<'a>() -> Vec<(i32, &'a str, bool)>{
     vec![
@@ -47,7 +47,7 @@ fn detect_capital_use_test() {
 
 #[test]
 fn myhashset_test() {
-    let mut set = MyHashSet::new();
+    let mut set = HashSet::new();
     set.add(1);
     set.add(2);
     assert_eq!(set.contains(1), true);
@@ -71,5 +71,52 @@ fn is_palindrome_test() {
     ];
     for case in test_cases {
         assert_eq!(Solution::is_palindrome(case.0.to_string()), case.1);
+    }
+}
+
+fn get_is_power_of_four_test_cases() -> Vec<(i32, bool)> {
+    vec![
+        (-4, false),
+        (0, false),
+        (1, true),
+        (2, false),
+        (3, false),
+        (4, true),
+        (5, false),
+        (6, false),
+        (7, false),
+        (8, false),
+        (9, false),
+        (10, false),
+        (12, false),
+        (12, false),
+        (13, false),
+        (14, false),
+        (15, false),
+        (16, true),
+        (17, false),
+        (64, true),
+        (65, false),
+    ]
+}
+
+#[test]
+fn is_power_of_four_test() {
+    for case in get_is_power_of_four_test_cases() {
+        assert_eq!(Solution::is_power_of_four(case.0), case.1);
+    }
+}
+
+#[test]
+fn is_power_of_four_v2_test() {
+    for case in get_is_power_of_four_test_cases() {
+        assert_eq!(Solution::is_power_of_four_v2(case.0), case.1);
+    }
+}
+
+#[test]
+fn is_power_of_four_v3_test() {
+    for case in get_is_power_of_four_test_cases() {
+        assert_eq!(Solution::is_power_of_four_v3(case.0), case.1);
     }
 }

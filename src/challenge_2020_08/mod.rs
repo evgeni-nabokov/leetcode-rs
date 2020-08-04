@@ -1,6 +1,6 @@
 mod logger_v1;
 mod logger_v2;
-mod myhashset;
+mod hashset;
 
 #[cfg(test)]
 mod tests;
@@ -48,5 +48,28 @@ impl Solution {
             right -= 1;
         }
         true
+    }
+
+    // 342. Power of Four.
+    // https://leetcode.com/problems/power-of-four/
+    pub fn is_power_of_four(mut num: i32) -> bool {
+        if num == 1 { return true; }
+        if num < 4 || num & (num - 1) != 0 { return false; }
+        let mut count = 0;
+        while num > 1 {
+            num >>= 1;
+            count += 1;
+        }
+        count % 2 == 0
+    }
+
+    pub fn is_power_of_four_v2(num: i32) -> bool {
+        let is_power_of_two = num > 0 && num & (-num) == num;
+        is_power_of_two && (num & 0b1010101010101010101010101010101 != 0)
+    }
+
+    pub fn is_power_of_four_v3(num: i32) -> bool {
+        let is_power_of_two = num > 0 && num & (-num) == num;
+        is_power_of_two && num % 3 == 1
     }
 }

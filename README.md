@@ -1,4 +1,4 @@
-### List of solved problems (127)
+### List of solved problems (128)
 1. **1** Two Sum https://leetcode.com/problems/two-sum/ *Easy*
 1. **7** Reverse Integer https://leetcode.com/problems/reverse-integer/ *Easy*
 1. **15** 3Sum https://leetcode.com/problems/3sum/ *Medium*
@@ -33,6 +33,7 @@
 1. **130** Surrounded Regions https://leetcode.com/problems/surrounded-regions/ *Medium*
 1. **136** Single Number https://leetcode.com/problems/single-number/ *Easy*
 1. **137** Single Number II https://leetcode.com/problems/single-number-ii/ *Medium*
+1. **140** Word Break II https://leetcode.com/problems/word-break-ii/ *Hard*
 1. **146** LRU Cache https://leetcode.com/problems/lru-cache/ *Medium*
 1. **151** Reverse Words in a String https://leetcode.com/problems/reverse-words-in-a-string/ *Medium*
 1. **169** Majority Element https://leetcode.com/problems/majority-element/ *Easy*

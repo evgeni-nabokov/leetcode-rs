@@ -543,6 +543,67 @@ fn build_tree_test() {
 }
 
 #[test]
+fn word_break_test() {
+    let test_cases = vec![
+        (
+            "cat",
+            vec!["cat"],
+            vec![
+                "cat",
+            ]
+        ),
+        (
+            "catcat",
+            vec!["cat"],
+            vec![
+                "cat cat",
+            ]
+        ),
+        (
+            "catdog",
+            vec!["cat", "dog"],
+            vec![
+                "cat dog",
+            ]
+        ),
+        (
+            "catsanddog",
+            vec!["cat", "cats", "and", "sand", "dog"],
+            vec![
+                "cat sand dog",
+                "cats and dog",
+            ]
+        ),
+        (
+            "pineapplepenapple",
+            vec!["apple", "pen", "applepen", "pine", "pineapple"],
+            vec![
+                "pine apple pen apple",
+                "pine applepen apple",
+                "pineapple pen apple",
+            ]
+        ),
+        (
+            "catsandog",
+            vec!["cats", "dog", "sand", "and", "cat"],
+            vec![]
+        ),
+        (
+            "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            vec!["a","aa","aaa","aaaa","aaaaa","aaaaaa","aaaaaaa","aaaaaaaa","aaaaaaaaa","aaaaaaaaaa"],
+            vec![]
+        ),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::word_break(
+            case.0.to_string(),
+            case.1.into_iter().map(|x| x.to_string()).collect::<Vec<String>>()),
+             case.2.into_iter().map(|x| x.to_string()).collect::<Vec<String>>());
+    }
+}
+
+
+#[test]
 fn climb_stairs_test() {
     let test_cases = vec![
         (1, 1),

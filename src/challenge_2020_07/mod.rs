@@ -6,13 +6,16 @@ mod tests;
 use std::rc::Rc;
 use std::cell::RefCell;
 use std::collections::{HashMap, VecDeque, BinaryHeap, HashSet};
+use std::collections::hash_map::Entry;
 use std::cmp::{max, min, Ordering};
 use std::mem::swap;
+use std::iter::FromIterator;
 
 use lazy_static::lazy_static;
 
 use crate::common::tree_node::TreeNode;
 use crate::challenge_2020_07::list_node::ListNode;
+
 
 lazy_static! {
     static ref UGLY_NUMBERS: Vec<i32> = {
@@ -685,6 +688,48 @@ impl Solution {
         }
 
         build_bt(&inorder, &postorder)
+    }
+
+    // 140. Word Break II.
+    // https://leetcode.com/problems/word-break-ii/
+    pub fn word_break(s: String, word_dict: Vec<String>) -> Vec<String> {
+        if s.is_empty() || word_dict.is_empty() { return vec![]; }
+
+        let word_set: HashSet<&str> = HashSet::from_iter(word_dict.iter().map(|x| x.as_str()));
+        let mut memo: HashMap<&str, Vec<Vec<&str>>> = HashMap::new();
+
+        fn solve<'a>(word_set: &'a HashSet<&'a str>, memo: &mut HashMap<&'a str, Vec<Vec<&'a str>>>, s: &'a str) -> Vec<Vec<&'a str>> {
+            if s.is_empty() {
+                // It is crucial to return vec of an empty vec, not just an empty vec.
+                // The caller will extend it with a word.
+                return vec![vec![]]
+            }
+
+            if let Entry::Occupied(o) = memo.entry(s) {
+                return o.get().clone();
+            }
+            let mut sentences: Vec<Vec<&str>> = Vec::new();
+            for end_index in 1..=s.len() {
+                let word = &s[..end_index];
+                if word_set.contains(word) {
+                    for mut subsentences in solve(word_set, memo, &s[end_index..]) {
+                        subsentences.push(word);
+                        sentences.push(subsentences);
+                    }
+                }
+            }
+            memo.insert(s, sentences.clone());
+            sentences
+        }
+
+        solve(&word_set, &mut memo, &s)
+            .into_iter()
+            .map(|list| list
+                .into_iter()
+                .rev()
+                .collect::<Vec<&str>>()
+                .join(" ").to_string())
+            .collect()
     }
 
     // 70. Climbing Stairs.

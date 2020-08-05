@@ -2,6 +2,7 @@ use super::*;
 use crate::challenge_2020_08::logger_v1::Logger as LoggerV1;
 use crate::challenge_2020_08::logger_v2::Logger as LoggerV2;
 use crate::challenge_2020_08::hashset::HashSet;
+use crate::challenge_2020_08::word_dictionary::WordDictionary;
 
 fn get_logger_test_cases<'a>() -> Vec<(i32, &'a str, bool)>{
     vec![
@@ -119,4 +120,16 @@ fn is_power_of_four_v3_test() {
     for case in get_is_power_of_four_test_cases() {
         assert_eq!(Solution::is_power_of_four_v3(case.0), case.1);
     }
+}
+
+#[test]
+fn word_dictionary_test() {
+    let mut obj = WordDictionary::new();
+    obj.add_word("bad".to_string());
+    obj.add_word("dad".to_string());
+    obj.add_word("mad".to_string());
+    assert_eq!(obj.search("pad".to_string()), false);
+    assert_eq!(obj.search("bad".to_string()), true);
+    assert_eq!(obj.search(".ad".to_string()), true);
+    assert_eq!(obj.search("b..".to_string()), true);
 }

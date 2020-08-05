@@ -1,6 +1,8 @@
 mod logger_v1;
 mod logger_v2;
 mod hashset;
+mod trie_node;
+mod word_dictionary;
 
 #[cfg(test)]
 mod tests;

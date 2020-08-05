@@ -1,4 +1,4 @@
-### List of solved problems (126)
+### List of solved problems (127)
 1. **1** Two Sum https://leetcode.com/problems/two-sum/ *Easy*
 1. **7** Reverse Integer https://leetcode.com/problems/reverse-integer/ *Easy*
 1. **15** 3Sum https://leetcode.com/problems/3sum/ *Medium*
@@ -44,6 +44,7 @@
 1. **207** Course Schedule https://leetcode.com/problems/course-schedule/ *Medium*
 1. **208** Implement Trie (Prefix Tree) https://leetcode.com/problems/implement-trie-prefix-tree/ *Medium*
 1. **210** Course Schedule II https://leetcode.com/problems/course-schedule-ii/ *Medium*
+1. **211** Add and Search Word - Data structure design https://leetcode.com/problems/add-and-search-word-data-structure-design/ *Medium*
 1. **212** Word Search II https://leetcode.com/problems/word-search-ii/ *Hard*
 1. **221** Maximal Square https://leetcode.com/problems/maximal-square/ *Medium*
 1. **222** Count Complete Tree Nodes https://leetcode.com/problems/count-complete-tree-nodes/ *Medium* 

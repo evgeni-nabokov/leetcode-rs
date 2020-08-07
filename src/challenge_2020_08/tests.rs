@@ -133,3 +133,25 @@ fn word_dictionary_test() {
     assert_eq!(obj.search(".ad".to_string()), true);
     assert_eq!(obj.search("b..".to_string()), true);
 }
+
+#[test]
+fn find_duplicates_test() {
+    let test_cases = vec![
+        (vec![], vec![]),
+        (vec![4, 3, 2, 7, 8, 2, 3, 1], vec![2, 3]),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::find_duplicates(case.0), case.1);
+    }
+}
+
+#[test]
+fn find_duplicates_v2_test() {
+    let test_cases = vec![
+        (vec![], vec![]),
+        (vec![4, 3, 2, 7, 8, 2, 3, 1], vec![2, 3]),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::find_duplicates_v2(case.0), case.1);
+    }
+}

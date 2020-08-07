@@ -1,3 +1,5 @@
+use std::collections::HashSet;
+
 mod logger_v1;
 mod logger_v2;
 mod hashset;
@@ -73,5 +75,35 @@ impl Solution {
     pub fn is_power_of_four_v3(num: i32) -> bool {
         let is_power_of_two = num > 0 && num & (-num) == num;
         is_power_of_two && num % 3 == 1
+    }
+
+    // 442. Find All Duplicates in an Array.
+    // https://leetcode.com/problems/find-all-duplicates-in-an-array/
+    pub fn find_duplicates(nums: Vec<i32>) -> Vec<i32> {
+        let mut res: Vec<i32> = Vec::new();
+        let mut set: HashSet<i32> = HashSet::with_capacity(nums.len() / 2);
+        for n in nums {
+            if set.contains(&n) {
+                set.remove(&n);
+                res.push(n);
+            } else {
+                set.insert(n);
+            }
+        }
+        res
+    }
+
+    pub fn find_duplicates_v2(mut nums: Vec<i32>) -> Vec<i32> {
+        let mut res: Vec<i32> = Vec::new();
+        for i in 0..nums.len() {
+            let n = nums[i].abs();
+            let j = n as usize - 1;
+            if nums[j] > 0 {
+                nums[j] = -nums[j];
+            } else {
+                res.push(n);
+            }
+        }
+        res
     }
 }

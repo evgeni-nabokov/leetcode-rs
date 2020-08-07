@@ -1,4 +1,4 @@
-### List of solved problems (128)
+### List of solved problems (129)
 1. **1** Two Sum https://leetcode.com/problems/two-sum/ *Easy*
 1. **7** Reverse Integer https://leetcode.com/problems/reverse-integer/ *Easy*
 1. **15** 3Sum https://leetcode.com/problems/3sum/ *Medium*
@@ -78,6 +78,7 @@
 1. **406** Queue Reconstruction by Height https://leetcode.com/problems/queue-reconstruction-by-height/ *Medium*
 1. **438** Find All Anagrams in a String https://leetcode.com/problems/find-all-anagrams-in-a-string/ *Medium*
 1. **441** Arranging Coins https://leetcode.com/problems/arranging-coins/ *Easy*
+1. **442** Find All Duplicates in an Array https://leetcode.com/problems/find-all-duplicates-in-an-array/ *Medium*
 1. **451** Sort Characters By Frequency https://leetcode.com/problems/sort-characters-by-frequency/ *Medium*
 1. **461** Hamming Distance https://leetcode.com/problems/hamming-distance/ *Easy*
 1. **463** Island Perimeter https://leetcode.com/problems/island-perimeter/ *Easy*

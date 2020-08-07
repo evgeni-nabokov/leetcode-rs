@@ -683,7 +683,7 @@ impl Solution {
             if postorder.len() == 1 { return node; }
             let i = inorder.iter().position(|x| *x == val).unwrap();
             RefCell::borrow_mut(node.as_ref().unwrap()).left = build_bt(&inorder[..i], &postorder[0..i]);
-            RefCell::borrow_mut(node.as_ref().unwrap()).right = build_bt(&inorder[(i + 1)..], &postorder[i..(postorder.len() - 1)]);
+            RefCell::borrow_mut(node.as_ref().unwrap()).right = build_bt(&inorder[i + 1..], &postorder[i..postorder.len() - 1]);
             node
         }
 
@@ -702,7 +702,7 @@ impl Solution {
             if s.is_empty() {
                 // It is crucial to return vec of an empty vec, not just an empty vec.
                 // The caller will extend it with a word.
-                return vec![vec![]]
+                return vec![Vec::with_capacity(1)]
             }
 
             if let Entry::Occupied(o) = memo.entry(s) {

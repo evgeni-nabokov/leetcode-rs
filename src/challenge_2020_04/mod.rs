@@ -375,10 +375,10 @@ impl Solution {
         let sh = i32::abs(sum) as usize;
         if sum > 0 {
             res.push_str(&s[l - sh..l]);
-            res.push_str(&s[0..l - sh]);
+            res.push_str(&s[..l - sh]);
         } else {
             res.push_str(&s[sh..l]);
-            res.push_str(&s[0..sh]);
+            res.push_str(&s[..sh]);
         }
         res
     }
@@ -702,7 +702,7 @@ impl Solution {
                 if i + nums[i] as usize >= nums.len() - 1 {
                     if i == 0 {
                         return true
-                    } else if solve(&nums[0..=i]) == true {
+                    } else if solve(&nums[..=i]) == true {
                         return true;
                     }
                 }

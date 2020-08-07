@@ -9,11 +9,10 @@ pub struct Trie {
 }
 
 impl Trie {
-
     /** Initialize your data structure here. */
     pub fn new() -> Self {
         Trie {
-            root: TrieNode::default(),
+            root: TrieNode::new(),
         }
     }
 

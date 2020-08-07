@@ -76,8 +76,8 @@ impl Solution {
             if preorder.len() == 1 { return node; }
             val = preorder[1];
             let i = postorder.iter().position(|x| *x == val).unwrap();
-            RefCell::borrow_mut(node.as_ref().unwrap()).left = build_bt(&preorder[1..=(1 + i)], &postorder[..=i]);
-            RefCell::borrow_mut(node.as_ref().unwrap()).right = build_bt(&preorder[(i + 2)..], &postorder[(i + 1)..(postorder.len() - 1)]);
+            RefCell::borrow_mut(node.as_ref().unwrap()).left = build_bt(&preorder[1..=1 + i], &postorder[..=i]);
+            RefCell::borrow_mut(node.as_ref().unwrap()).right = build_bt(&preorder[i + 2..], &postorder[i + 1..postorder.len() - 1]);
             node
         }
 
@@ -93,8 +93,8 @@ impl Solution {
             let node = Some(Rc::new(RefCell::new(TreeNode::new(val))));
             if preorder.len() == 1 { return node; }
             let i = inorder.iter().position(|x| *x == val).unwrap();
-            RefCell::borrow_mut(node.as_ref().unwrap()).left = build_bt(&preorder[1..(i + 1)], &inorder[..i]);
-            RefCell::borrow_mut(node.as_ref().unwrap()).right = build_bt(&preorder[(i + 1)..], &inorder[(i + 1)..]);
+            RefCell::borrow_mut(node.as_ref().unwrap()).left = build_bt(&preorder[1..i + 1], &inorder[..i]);
+            RefCell::borrow_mut(node.as_ref().unwrap()).right = build_bt(&preorder[i + 1..], &inorder[i + 1..]);
             node
         }
 

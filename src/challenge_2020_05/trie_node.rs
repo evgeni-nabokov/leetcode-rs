@@ -1,6 +1,3 @@
-// 208. Implement Trie (Prefix Tree).
-// https://leetcode.com/problems/implement-trie-prefix-tree/
-
 use std::collections::HashMap;
 
 #[derive(Clone, Debug, Default)]
@@ -10,6 +7,10 @@ pub struct TrieNode {
 }
 
 impl TrieNode {
+    pub fn new() -> Self {
+        TrieNode::default()
+    }
+
     pub fn insert(&mut self, word: &[char]) {
         if word.is_empty() {
             self.terminal = true;

@@ -1,4 +1,9 @@
-use std::collections::HashSet;
+use std::collections::{HashSet, HashMap};
+use std::rc::Rc;
+use std::cell::RefCell;
+use std::cmp::Ordering;
+
+use crate::common::tree_node::TreeNode;
 
 mod logger_v1;
 mod logger_v2;
@@ -102,6 +107,66 @@ impl Solution {
                 nums[j] = -nums[j];
             } else {
                 res.push(n);
+            }
+        }
+        res
+    }
+
+    // 987. Vertical Order Traversal of a Binary Tree.
+    // https://leetcode.com/problems/vertical-order-traversal-of-a-binary-tree/
+    pub fn vertical_traversal(root: Option<Rc<RefCell<TreeNode>>>) -> Vec<Vec<i32>> {
+        fn dfs(node: Option<Rc<RefCell<TreeNode>>>, x: i32, y: i32, map: &mut HashMap<i32, Vec<(i32, i32)>>) {
+            if let Some(some) = node {
+                map.entry(x).or_insert(Vec::new()).push((y, RefCell::borrow(&some).val));
+                dfs(RefCell::borrow(&some).left.clone(), x - 1, y - 1, map);
+                dfs(RefCell::borrow(&some).right.clone(), x + 1, y - 1, map);
+            }
+        }
+
+        let mut map: HashMap<i32, Vec<(i32, i32)>> = HashMap::new();
+        dfs(root, 0, 0, &mut map);
+        let mut vec: Vec<_> = map.into_iter().map(|(x, a)| (x, a)).collect();
+        vec.sort_unstable_by_key(|a| a.0);
+        vec
+            .into_iter()
+            .map(|(x, mut yv)| {
+                yv.sort_unstable_by(|(y1, v1), (y2, v2)|
+                    match y2.cmp(y1) {
+                        Ordering::Equal => v1.cmp(v2),
+                        a => a,
+                    }
+                );
+                yv.into_iter().map(|(y, v)| v).collect()
+            })
+            .collect()
+    }
+
+    pub fn vertical_traversal_v2(root: Option<Rc<RefCell<TreeNode>>>) -> Vec<Vec<i32>> {
+        fn dfs(node: Option<Rc<RefCell<TreeNode>>>, x: i32, y: i32, list: &mut Vec<(i32, i32, i32)>) {
+            if let Some(some) = node {
+                list.push((x, y, RefCell::borrow(&some).val));
+                dfs(RefCell::borrow(&some).left.clone(), x - 1, y - 1, list);
+                dfs(RefCell::borrow(&some).right.clone(), x + 1, y - 1, list);
+            }
+        }
+
+        let mut list = Vec::new();
+        dfs(root, 0, 0, &mut list);
+        list.sort_unstable_by(|(x1, y1, v1), (x2, y2, v2)|
+              match x1.cmp(x2) {
+                  Ordering::Equal => match y2.cmp(y1) {
+                      Ordering::Equal => v1.cmp(v2),
+                      a => a,
+                  },
+                  b => b,
+              }
+        );
+        let mut slice_start = 0;
+        let mut res: Vec<Vec<i32>> = Vec::new();
+        for i in 1..=list.len() {
+            if i == list.len() || list[i].0 != list[i - 1].0 {
+                res.push(list[slice_start..i].iter().map(|(x, y, v)| *v).collect());
+                slice_start = i;
             }
         }
         res

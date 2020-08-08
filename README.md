@@ -1,4 +1,4 @@
-### List of solved problems (129)
+### List of solved problems (130)
 1. **1** Two Sum https://leetcode.com/problems/two-sum/ *Easy*
 1. **7** Reverse Integer https://leetcode.com/problems/reverse-integer/ *Easy*
 1. **15** 3Sum https://leetcode.com/problems/3sum/ *Medium*
@@ -110,6 +110,7 @@
 1. **973** K Closest Points to Origin https://leetcode.com/problems/k-closest-points-to-origin/ *Medium*
 1. **977** Squares of a Sorted Array https://leetcode.com/problems/squares-of-a-sorted-array/ *Easy*
 1. **986** Interval List Intersections https://leetcode.com/problems/interval-list-intersections/ *Medium*
+1. **987** Vertical Order Traversal of a Binary Tree https://leetcode.com/problems/vertical-order-traversal-of-a-binary-tree/ *Medium*
 1. **993** Cousins in Binary Tree https://leetcode.com/problems/cousins-in-binary-tree/ *Easy*
 1. **997** Find the Town Judge https://leetcode.com/problems/find-the-town-judge/ *Easy*
 1. **1008** Construct Binary Search Tree from Preorder Traversal https://leetcode.com/problems/construct-binary-search-tree-from-preorder-traversal/ *Medium*

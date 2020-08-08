@@ -155,3 +155,30 @@ fn find_duplicates_v2_test() {
         assert_eq!(Solution::find_duplicates_v2(case.0), case.1);
     }
 }
+
+fn get_vertical_traversal_test_cases() -> Vec<(Vec<Option<i32>>, Vec<Vec<i32>>)> {
+    vec![
+        (
+            vec![Some(3), Some(9), Some(20), None, None, Some(15), Some(7)],
+            vec![vec![9], vec![3, 15], vec![20], vec![7]]
+        ),
+        (
+            vec![Some(1), Some(2), Some(3), Some(4), Some(5), Some(6), Some(7)],
+            vec![vec![4], vec![2], vec![1, 5, 6], vec![3], vec![7]]
+        ),
+    ]
+}
+
+#[test]
+fn vertical_traversal_test() {
+    for case in get_vertical_traversal_test_cases() {
+        assert_eq!(Solution::vertical_traversal(TreeNode::from_level_order(&case.0)), case.1);
+    }
+}
+
+#[test]
+fn vertical_traversal_v2_test() {
+    for case in get_vertical_traversal_test_cases() {
+        assert_eq!(Solution::vertical_traversal_v2(TreeNode::from_level_order(&case.0)), case.1);
+    }
+}

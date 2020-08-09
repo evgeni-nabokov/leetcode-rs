@@ -171,4 +171,54 @@ impl Solution {
         }
         res
     }
+
+    // 270. Closest Binary Search Tree Value.
+    // https://leetcode.com/problems/closest-binary-search-tree-value/
+    pub fn closest_value(root: Option<Rc<RefCell<TreeNode>>>, target: f64) -> i32 {
+        fn get_closest_val(val_1: i32, val_2: i32, target: f64) -> i32 {
+            if (val_1 as f64 - target).abs() < (val_2 as f64 - target).abs() {
+                val_1
+            } else {
+                val_2
+            }
+        }
+
+        fn dfs(node: &Rc<RefCell<TreeNode>>, target: f64) -> i32 {
+            let n = RefCell::borrow(node);
+            if ((n.val as f64) - target).abs() > 0.5 {
+                if (n.val as f64) > target && n.left.is_some() {
+                    get_closest_val(dfs(n.left.as_ref().unwrap(), target), n.val, target)
+                } else if (n.val as f64) < target && n.right.is_some() {
+                    get_closest_val(dfs(n.right.as_ref().unwrap(), target), n.val, target)
+                } else {
+                    n.val
+                }
+            } else {
+                n.val
+            }
+        }
+
+        dfs(root.as_ref().unwrap(), target)
+    }
+
+    pub fn closest_value_v2(root: Option<Rc<RefCell<TreeNode>>>, target: f64) -> i32 {
+        let mut closest = RefCell::borrow(root.as_ref().unwrap()).val;
+        let mut diff = (closest as f64 - target).abs();
+        let mut node = root;
+        while let Some(some) = node {
+            let n = RefCell::borrow(&some);
+            if (n.val as f64 - target).abs() < diff {
+                closest = n.val;
+                diff = (closest as f64 - target).abs();
+            }
+            if target < n.val as f64 {
+                node = n.left.clone();
+            } else if target > n.val as f64 {
+                node = n.right.clone();
+            } else {
+                break;
+            }
+        }
+        closest
+    }
 }

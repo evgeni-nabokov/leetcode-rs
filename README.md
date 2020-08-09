@@ -1,4 +1,4 @@
-### List of solved problems (130)
+### List of solved problems (131)
 1. **1** Two Sum https://leetcode.com/problems/two-sum/ *Easy*
 1. **7** Reverse Integer https://leetcode.com/problems/reverse-integer/ *Easy*
 1. **15** 3Sum https://leetcode.com/problems/3sum/ *Medium*
@@ -56,6 +56,7 @@
 1. **258** Add Digits https://leetcode.com/problems/add-digits/ *Easy*
 1. **260** Single Number III https://leetcode.com/problems/single-number-iii/ *Medium*
 1. **264** Ugly Number II https://leetcode.com/problems/ugly-number-ii/ *Medium*
+1. **270** Closest Binary Search Tree Value https://leetcode.com/problems/closest-binary-search-tree-value/ *Easy*
 1. **274** H-Index https://leetcode.com/problems/h-index/ *Medium*
 1. **275** H-Index II https://leetcode.com/problems/h-index-ii/ *Medium*
 1. **279** Perfect Squares https://leetcode.com/problems/perfect-squares/ *Medium*

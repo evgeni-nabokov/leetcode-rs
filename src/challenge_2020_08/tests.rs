@@ -182,3 +182,42 @@ fn vertical_traversal_v2_test() {
         assert_eq!(Solution::vertical_traversal_v2(TreeNode::from_level_order(&case.0)), case.1);
     }
 }
+
+fn get_closest_value_test_cases() -> Vec<(Vec<Option<i32>>, f64, i32)>{
+    vec![
+        (
+            vec![Some(4), Some(2), Some(5), Some(1), Some(3)],
+            3.714286,
+            4
+        ),
+        (
+            vec![Some(4), Some(2), Some(5), Some(1), Some(3)],
+            1.1,
+            1
+        ),
+        (
+            vec![Some(1), None, Some(2)],
+            3.428571,
+            2
+        ),
+        (
+            vec![Some(8), Some(1)],
+            6.0,
+            8
+        ),
+    ]
+}
+
+#[test]
+fn closest_value_test() {
+    for case in get_closest_value_test_cases() {
+        assert_eq!(Solution::closest_value(TreeNode::from_level_order(&case.0), case.1), case.2);
+    }
+}
+
+#[test]
+fn closest_value_test_v2() {
+    for case in get_closest_value_test_cases() {
+        assert_eq!(Solution::closest_value_v2(TreeNode::from_level_order(&case.0), case.1), case.2);
+    }
+}

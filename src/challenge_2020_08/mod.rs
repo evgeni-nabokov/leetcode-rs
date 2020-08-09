@@ -7,7 +7,7 @@ use crate::common::tree_node::TreeNode;
 
 mod logger_v1;
 mod logger_v2;
-mod hashset;
+mod hash_set;
 mod trie_node;
 mod word_dictionary;
 
@@ -115,16 +115,16 @@ impl Solution {
     // 987. Vertical Order Traversal of a Binary Tree.
     // https://leetcode.com/problems/vertical-order-traversal-of-a-binary-tree/
     pub fn vertical_traversal(root: Option<Rc<RefCell<TreeNode>>>) -> Vec<Vec<i32>> {
-        fn dfs(node: Option<Rc<RefCell<TreeNode>>>, x: i32, y: i32, map: &mut HashMap<i32, Vec<(i32, i32)>>) {
+        fn dfs(node: &Option<Rc<RefCell<TreeNode>>>, x: i32, y: i32, map: &mut HashMap<i32, Vec<(i32, i32)>>) {
             if let Some(some) = node {
                 map.entry(x).or_insert(Vec::new()).push((y, RefCell::borrow(&some).val));
-                dfs(RefCell::borrow(&some).left.clone(), x - 1, y - 1, map);
-                dfs(RefCell::borrow(&some).right.clone(), x + 1, y - 1, map);
+                dfs(&RefCell::borrow(&some).left, x - 1, y - 1, map);
+                dfs(&RefCell::borrow(&some).right, x + 1, y - 1, map);
             }
         }
 
         let mut map: HashMap<i32, Vec<(i32, i32)>> = HashMap::new();
-        dfs(root, 0, 0, &mut map);
+        dfs(&root, 0, 0, &mut map);
         let mut vec: Vec<_> = map.into_iter().map(|(x, a)| (x, a)).collect();
         vec.sort_unstable_by_key(|a| a.0);
         vec
@@ -142,16 +142,16 @@ impl Solution {
     }
 
     pub fn vertical_traversal_v2(root: Option<Rc<RefCell<TreeNode>>>) -> Vec<Vec<i32>> {
-        fn dfs(node: Option<Rc<RefCell<TreeNode>>>, x: i32, y: i32, list: &mut Vec<(i32, i32, i32)>) {
+        fn dfs(node: &Option<Rc<RefCell<TreeNode>>>, x: i32, y: i32, list: &mut Vec<(i32, i32, i32)>) {
             if let Some(some) = node {
                 list.push((x, y, RefCell::borrow(&some).val));
-                dfs(RefCell::borrow(&some).left.clone(), x - 1, y - 1, list);
-                dfs(RefCell::borrow(&some).right.clone(), x + 1, y - 1, list);
+                dfs(&RefCell::borrow(&some).left, x - 1, y - 1, list);
+                dfs(&RefCell::borrow(&some).right, x + 1, y - 1, list);
             }
         }
 
         let mut list = Vec::new();
-        dfs(root, 0, 0, &mut list);
+        dfs(&root, 0, 0, &mut list);
         list.sort_unstable_by(|(x1, y1, v1), (x2, y2, v2)|
               match x1.cmp(x2) {
                   Ordering::Equal => match y2.cmp(y1) {

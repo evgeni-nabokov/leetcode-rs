@@ -1,7 +1,7 @@
 use super::*;
 use crate::challenge_2020_08::logger_v1::Logger as LoggerV1;
 use crate::challenge_2020_08::logger_v2::Logger as LoggerV2;
-use crate::challenge_2020_08::hashset::HashSet;
+use crate::challenge_2020_08::hash_set::HashSet;
 use crate::challenge_2020_08::word_dictionary::WordDictionary;
 
 fn get_logger_test_cases<'a>() -> Vec<(i32, &'a str, bool)>{

@@ -221,3 +221,17 @@ fn closest_value_test_v2() {
         assert_eq!(Solution::closest_value_v2(TreeNode::from_level_order(&case.0), case.1), case.2);
     }
 }
+
+#[test]
+fn path_sum_test() {
+    let test_cases = vec![
+        (
+            vec![Some(10), Some(5), Some(-3), Some(3), Some(2), None, Some(11), Some(3), Some(-2), None, Some(1)],
+            8,
+            3,
+        ),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::path_sum(TreeNode::from_level_order(&case.0), case.1), case.2);
+    }
+}

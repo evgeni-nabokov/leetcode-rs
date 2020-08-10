@@ -221,4 +221,27 @@ impl Solution {
         }
         closest
     }
+
+    // 437. Path Sum III.
+    // https://leetcode.com/problems/path-sum-iii/
+    pub fn path_sum(root: Option<Rc<RefCell<TreeNode>>>, k: i32) -> i32 {
+        fn dfs(node: Option<Rc<RefCell<TreeNode>>>, k: i32, mut sum: i32, sums: &mut HashMap<i32, i32>) -> i32 {
+            if let Some(some) = node {
+                let n = RefCell::borrow(&some);
+                sum += n.val;
+                let key = sum - k;
+                let mut cnt = *sums.get(&key).unwrap_or(&0);
+                *sums.entry(sum).or_insert(0) += 1;
+                cnt += dfs(n.left.clone(), k, sum, sums) + dfs(n.right.clone(), k, sum, sums);
+                *sums.get_mut(&sum).unwrap() -= 1;
+                cnt
+            } else {
+                0
+            }
+        }
+
+        let mut sums: HashMap<i32, i32> = HashMap::new();
+        sums.insert(0, 1);
+        dfs(root, k, 0, &mut sums)
+    }
 }

@@ -1,4 +1,4 @@
-use std::collections::{HashSet, HashMap};
+use std::collections::{HashSet, HashMap, VecDeque};
 use std::rc::Rc;
 use std::cell::RefCell;
 use std::cmp::Ordering;
@@ -243,5 +243,39 @@ impl Solution {
         let mut sums: HashMap<i32, i32> = HashMap::new();
         sums.insert(0, 1);
         dfs(root, k, 0, &mut sums)
+    }
+
+    // 994. Rotting Oranges.
+    // https://leetcode.com/problems/rotting-oranges/
+    pub fn oranges_rotting(mut grid: Vec<Vec<i32>>) -> i32 {
+        if grid.is_empty() || grid[0].is_empty() { return -1; }
+        let mut fresh_cnt = 0usize;
+        let mut rotten_oranges: VecDeque<(isize, isize)> = VecDeque::new();
+        for r in 0..grid.len() {
+            for c in 0..grid[r].len() {
+                match grid[r][c] {
+                    1 => fresh_cnt += 1,
+                    2 => rotten_oranges.push_back((r as isize, c as isize)),
+                    _ => (),
+                }
+            }
+        }
+        let mut step = 0;
+        loop {
+            for _ in 0..rotten_oranges.len() {
+                let (r, c) = rotten_oranges.pop_front().unwrap();
+                for (y, x) in vec![(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)] {
+                    let are_xy_valid = y >= 0 && y < grid.len() as isize && x >= 0 && x < grid[y as usize].len() as isize;
+                    if are_xy_valid && grid[y as usize][x as usize] == 1 {
+                        grid[y as usize][x as usize] = 2;
+                        fresh_cnt -= 1;
+                        rotten_oranges.push_back((y, x));
+                    }
+                }
+            }
+            if rotten_oranges.is_empty() { break; }
+            step += 1;
+        }
+        if fresh_cnt == 0 { step } else { -1 }
     }
 }

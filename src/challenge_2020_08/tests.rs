@@ -235,3 +235,40 @@ fn path_sum_test() {
         assert_eq!(Solution::path_sum(TreeNode::from_level_order(&case.0), case.1), case.2);
     }
 }
+
+#[test]
+fn oranges_rotting_test() {
+    let test_cases = vec![
+        (
+            vec![],
+            -1,
+        ),
+        (
+            vec![vec![]],
+            -1,
+        ),
+        (
+            vec![vec![0]],
+            0,
+        ),
+        (
+            vec![vec![1]],
+            -1,
+        ),
+        (
+            vec![vec![2]],
+            0,
+        ),
+        (
+            vec![vec![2, 1, 1], vec![1, 1, 0], vec![0, 1, 1]],
+            4,
+        ),
+        (
+            vec![vec![2, 1, 1], vec![0, 1, 1], vec![1, 0, 1]],
+            -1,
+        ),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::oranges_rotting(case.0), case.1);
+    }
+}

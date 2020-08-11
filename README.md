@@ -1,4 +1,4 @@
-### List of solved problems (132)
+### List of solved problems (134)
 1. **1** Two Sum https://leetcode.com/problems/two-sum/ *Easy*
 1. **7** Reverse Integer https://leetcode.com/problems/reverse-integer/ *Easy*
 1. **15** 3Sum https://leetcode.com/problems/3sum/ *Medium*
@@ -37,6 +37,7 @@
 1. **146** LRU Cache https://leetcode.com/problems/lru-cache/ *Medium*
 1. **151** Reverse Words in a String https://leetcode.com/problems/reverse-words-in-a-string/ *Medium*
 1. **169** Majority Element https://leetcode.com/problems/majority-element/ *Easy*
+1. **171** Excel Sheet Column Number https://leetcode.com/problems/excel-sheet-column-number/ *Easy*
 1. **174** Dungeon Game https://leetcode.com/problems/dungeon-game/ *Hard*
 1. **200** Number of Islands https://leetcode.com/problems/number-of-islands/ *Medium*
 1. **201** Bitwise AND of Numbers Range https://leetcode.com/problems/bitwise-and-of-numbers-range/ *Medium*

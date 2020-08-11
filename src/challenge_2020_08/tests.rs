@@ -272,3 +272,15 @@ fn oranges_rotting_test() {
         assert_eq!(Solution::oranges_rotting(case.0), case.1);
     }
 }
+
+#[test]
+fn title_to_number_test() {
+    let test_cases = vec![
+        ("A", 1),
+        ("AB", 28),
+        ("ZY", 701),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::title_to_number(case.0.to_string()), case.1);
+    }
+}

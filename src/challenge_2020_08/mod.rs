@@ -278,4 +278,10 @@ impl Solution {
         }
         if fresh_cnt == 0 { step } else { -1 }
     }
+
+    // 171. Excel Sheet Column Number
+    // https://leetcode.com/problems/excel-sheet-column-number/
+    pub fn title_to_number(s: String) -> i32 {
+        s.chars().fold(0, |acc, c| acc * 26 + (c as i32 - 64))
+    }
 }

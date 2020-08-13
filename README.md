@@ -1,4 +1,4 @@
-### List of solved problems (134)
+### List of solved problems (135)
 1. **1** Two Sum https://leetcode.com/problems/two-sum/ *Easy*
 1. **7** Reverse Integer https://leetcode.com/problems/reverse-integer/ *Easy*
 1. **15** 3Sum https://leetcode.com/problems/3sum/ *Medium*
@@ -26,6 +26,7 @@
 1. **105** Construct Binary Tree from Preorder and Inorder Traversal https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/ *Medium*
 1. **106** Construct Binary Tree from Inorder and Postorder Traversal https://leetcode.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/ *Medium*
 1. **107** Binary Tree Level Order Traversal II https://leetcode.com/problems/binary-tree-level-order-traversal-ii/ *Easy*
+1. **119** Pascal's Triangle II https://leetcode.com/problems/pascals-triangle-ii/ *Easy*
 1. **122** Best Time to Buy and Sell Stock II https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/ *Easy*
 1. **124** Binary Tree Maximum Path Sum https://leetcode.com/problems/binary-tree-maximum-path-sum/ *Hard*
 1. **125** Valid Palindrome https://leetcode.com/problems/valid-palindrome/ *Easy*

@@ -284,4 +284,17 @@ impl Solution {
     pub fn title_to_number(s: String) -> i32 {
         s.chars().fold(0, |acc, c| acc * 26 + (c as i32 - 64))
     }
+
+    // 119. Pascal's Triangle II.
+    // https://leetcode.com/problems/pascals-triangle-ii/
+    pub fn get_row(row_index: i32) -> Vec<i32> {
+        let mut row: Vec<i32> = Vec::with_capacity(row_index as usize + 1);
+        row.push(1);
+        for i in 0..row_index {
+            row.push((row[i as usize] as u64 * (row_index - i) as u64 / (i + 1) as u64) as i32);
+        }
+        row
+    }
+
+
 }

@@ -296,6 +296,25 @@ impl Solution {
         row
     }
 
+    // 409. Longest Palindrome.
+    // https://leetcode.com/problems/longest-palindrome/
+    pub fn longest_palindrome(s: String) -> i32 {
+        let mut char_counter = vec![0; 52];
+        for c in s.chars() {
+            let mut i = c as usize;
+            i = if i > 90 { i - 71 } else { i - 65 };
+            char_counter[i] += 1;
+        }
+        let mut counter = 0;
+        for cnt in char_counter {
+            counter += cnt / 2 * 2;
+            if counter % 2 == 0 && cnt % 2 == 1 {
+                counter += 1;
+            }
+        }
+        counter
+    }
+
     // 824. Goat Latin.
     // https://leetcode.com/problems/goat-latin/
     pub fn to_goat_latin(s: String) -> String {

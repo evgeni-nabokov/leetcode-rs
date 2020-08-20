@@ -302,6 +302,19 @@ fn get_row_test() {
 }
 
 #[test]
+fn longest_palindrome_test() {
+    let test_cases = vec![
+        ("abccccdd", 7),
+        ("a", 1),
+        ("bb", 2),
+        ("aaaAaaaa", 7),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::longest_palindrome(case.0.to_string()), case.1);
+    }
+}
+
+#[test]
 fn to_goat_latin_test() {
     let test_cases = vec![
         (

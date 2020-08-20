@@ -296,5 +296,22 @@ impl Solution {
         row
     }
 
-
+    // 824. Goat Latin.
+    // https://leetcode.com/problems/goat-latin/
+    pub fn to_goat_latin(s: String) -> String {
+        let mut transformed_words: Vec<String> = Vec::new();
+        for (i, w) in s.split_ascii_whitespace().enumerate() {
+            let mut word_chars: VecDeque<_> = w.chars().collect();
+            match word_chars[0] {
+                'a' | 'e' | 'i' | 'o' | 'u' | 'A' | 'E' | 'I' | 'O' | 'U' => word_chars.extend(&['m', 'a']),
+                _ => {
+                    let first = word_chars.pop_front().unwrap();
+                    word_chars.extend(&[first, 'm', 'a'])
+                }
+            }
+            word_chars.extend(vec!['a'; i + 1]);
+            transformed_words.push(word_chars.iter().collect());
+        }
+        transformed_words.join(" ")
+    }
 }

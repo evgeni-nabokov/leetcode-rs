@@ -300,3 +300,19 @@ fn get_row_test() {
         assert_eq!(Solution::get_row(case.0), case.1);
     }
 }
+
+#[test]
+fn to_goat_latin_test() {
+    let test_cases = vec![
+        (
+            "I speak Goat Latin",
+            "Imaa peaksmaaa oatGmaaaa atinLmaaaaa"),
+        (
+            "The quick brown fox jumped over the lazy dog",
+            "heTmaa uickqmaaa rownbmaaaa oxfmaaaaa umpedjmaaaaaa overmaaaaaaa hetmaaaaaaaa azylmaaaaaaaaa ogdmaaaaaaaaaa"
+        ),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::to_goat_latin(case.0.to_string()), case.1.to_string());
+    }
+}

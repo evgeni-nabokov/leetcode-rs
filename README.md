@@ -1,4 +1,4 @@
-### List of solved problems (137)
+### List of solved problems (138)
 1. **1** Two Sum https://leetcode.com/problems/two-sum/ *Easy*
 1. **7** Reverse Integer https://leetcode.com/problems/reverse-integer/ *Easy*
 1. **15** 3Sum https://leetcode.com/problems/3sum/ *Medium*
@@ -111,6 +111,7 @@
 1. **886** Possible Bipartition https://leetcode.com/problems/possible-bipartition/ *Medium*
 1. **889** Construct Binary Tree from Preorder and Postorder Traversal https://leetcode.com/problems/construct-binary-tree-from-preorder-and-postorder-traversal/ *Medium*
 1. **901** Online Stock Span https://leetcode.com/problems/online-stock-span/ *Medium*
+1. **905** Sort Array By Parity https://leetcode.com/problems/sort-array-by-parity/ *Easy*
 1. **918** Maximum Sum Circular Subarray https://leetcode.com/problems/maximum-sum-circular-subarray/ *Medium*
 1. **957** Prison Cells After N Days https://leetcode.com/problems/prison-cells-after-n-days/ *Medium*
 1. **973** K Closest Points to Origin https://leetcode.com/problems/k-closest-points-to-origin/ *Medium*

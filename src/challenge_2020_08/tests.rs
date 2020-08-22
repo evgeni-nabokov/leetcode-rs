@@ -329,3 +329,27 @@ fn to_goat_latin_test() {
         assert_eq!(Solution::to_goat_latin(case.0.to_string()), case.1.to_string());
     }
 }
+
+#[test]
+fn sort_array_by_parity_test() {
+    let test_cases = vec![
+        (vec![1], vec![1]),
+        (vec![1, 2], vec![2, 1]),
+        (vec![3,1,2,4], vec![2, 4, 1, 3]),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::sort_array_by_parity(case.0), case.1);
+    }
+}
+
+#[test]
+fn sort_array_by_parity_v2_test() {
+    let test_cases = vec![
+        (vec![1], vec![1]),
+        (vec![1, 2], vec![2, 1]),
+        (vec![3,1,2,4], vec![2, 4, 3, 1]),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::sort_array_by_parity_v2(case.0), case.1);
+    }
+}

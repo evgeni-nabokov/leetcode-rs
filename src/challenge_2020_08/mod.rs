@@ -333,4 +333,20 @@ impl Solution {
         }
         transformed_words.join(" ")
     }
+
+    // 905. Sort Array By Parity.
+    // https://leetcode.com/problems/sort-array-by-parity/
+    pub fn sort_array_by_parity(mut a: Vec<i32>) -> Vec<i32> {
+        a.sort_unstable_by(|x, y| match (x % 2 == 0, y % 2 == 0) {
+            (true, true) | (false, false) => x.cmp(y),
+            (true, false) => Ordering::Less,
+            (false, true) => Ordering::Greater,
+        });
+        a
+    }
+
+    pub fn sort_array_by_parity_v2(mut a: Vec<i32>) -> Vec<i32> {
+        a.sort_by_key(|k| k % 2);
+        a
+    }
 }

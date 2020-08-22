@@ -1,4 +1,5 @@
 use super::*;
+use crate::common::linked_list::LinkedList;
 
 #[test]
 fn two_sum_test() {
@@ -38,5 +39,27 @@ fn number_of_steps_test() {
     ];
     for case in test_cases {
         assert_eq!(Solution::number_of_steps(case.0), case.1);
+    }
+}
+
+fn get_reverse_list_test_cases() -> Vec<(Vec<i32>, Vec<i32>)> {
+    vec![
+        (vec![], vec![]),
+        (vec![1], vec![1]),
+        (vec![1, 2, 3], vec![3, 2, 1]),
+    ]
+}
+
+#[test]
+fn reverse_list_test() {
+    for case in get_reverse_list_test_cases() {
+        assert_eq!(Solution::reverse_list(ListNode::from_slice(&case.0)).to_vec(), case.1);
+    }
+}
+
+#[test]
+fn reverse_list_v2_test() {
+    for case in get_reverse_list_test_cases() {
+        assert_eq!(Solution::reverse_list_v2(ListNode::from_slice(&case.0)).to_vec(), case.1);
     }
 }

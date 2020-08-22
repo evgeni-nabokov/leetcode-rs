@@ -1,4 +1,5 @@
 use std::collections::HashMap;
+use crate::common::list_node::ListNode;
 
 #[cfg(test)]
 mod tests;
@@ -64,4 +65,38 @@ impl Solution {
         }
         cnt
     }
+
+    // 206. Reverse Linked List.
+    // https://leetcode.com/problems/reverse-linked-list/
+    // Iterative solution.
+    pub fn reverse_list(mut head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
+        let mut prev_node = None;
+        let mut current_node = head.take();
+
+        while let Some(mut current_node_inner) = current_node.take() {
+            let next_node = current_node_inner.next.take();
+            current_node_inner.next = prev_node.take();
+            prev_node = Some(current_node_inner);
+            current_node = next_node;
+        }
+
+        prev_node.take()
+    }
+
+    // Recursive solution.
+    pub fn reverse_list_v2(mut head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
+        fn solve(mut prev_node: Option<Box<ListNode>>, mut current_node: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
+            if let Some(mut current_node_inner) = current_node.take() {
+                let next_node = current_node_inner.next.take();
+                current_node_inner.next = prev_node.take();
+                prev_node = Some(current_node_inner);
+                current_node = next_node;
+                solve(prev_node, current_node)
+            } else {
+                prev_node
+            }
+        }
+        solve(None, head)
+    }
+
 }

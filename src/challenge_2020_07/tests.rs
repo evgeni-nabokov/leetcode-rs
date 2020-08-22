@@ -1,6 +1,7 @@
 use super::*;
 use crate::common::tree_node::BinaryTree;
-use crate::challenge_2020_07::list_node::LinkedList;
+use crate::common::list_node::ListNode;
+use crate::common::linked_list::LinkedList;
 
 #[test]
 fn arrange_coins_test() {
@@ -415,7 +416,7 @@ fn add_binary_test() {
 
 #[test]
 fn remove_elements_test() {
-    let test_cases = vec![
+    let test_cases: Vec<(Vec<i32>, i32, Vec<i32>)> = vec![
         (vec![], 0, vec![]),
         (vec![1], 0, vec![1]),
         (vec![1], 1, vec![]),
@@ -425,7 +426,8 @@ fn remove_elements_test() {
         (vec![1, 2, 6, 3, 4, 5, 6], 6, vec![1, 2, 3, 4, 5]),
     ];
     for case in test_cases {
-        assert_eq!(Solution::remove_elements(ListNode::from_slice(&case.0), case.1).to_vec(), case.2);
+        let head: Option<Box<ListNode>> = ListNode::from_slice(&case.0);
+        assert_eq!(Solution::remove_elements(head, case.1).to_vec(), case.2);
     }
 }
 

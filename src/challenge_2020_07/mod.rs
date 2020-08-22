@@ -1,5 +1,3 @@
-mod list_node;
-
 #[cfg(test)]
 mod tests;
 
@@ -14,7 +12,7 @@ use std::iter::FromIterator;
 use lazy_static::lazy_static;
 
 use crate::common::tree_node::TreeNode;
-use crate::challenge_2020_07::list_node::ListNode;
+use crate::common::list_node::ListNode;
 
 
 lazy_static! {

@@ -63,3 +63,19 @@ fn reverse_list_v2_test() {
         assert_eq!(Solution::reverse_list_v2(ListNode::from_slice(&case.0)).to_vec(), case.1);
     }
 }
+
+#[test]
+fn merge_two_lists_test() {
+    let test_cases = vec![
+        (vec![], vec![], vec![]),
+        (vec![1, 3, 5], vec![], vec![1, 3, 5]),
+        (vec![], vec![2, 4, 6], vec![2, 4, 6]),
+        (vec![1, 3, 5], vec![2, 4, 6], vec![1, 2, 3, 4, 5, 6]),
+        (vec![1, 3, 5, 7, 9], vec![2, 4, 6], vec![1, 2, 3, 4, 5, 6, 7, 9]),
+        (vec![1, 3, 5], vec![2, 4, 6, 8, 10], vec![1, 2, 3, 4, 5, 6, 8, 10]),
+        (vec![1,2,4], vec![1,3,4], vec![1,1,2,3,4,4]),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::merge_two_lists(ListNode::from_slice(&case.0), ListNode::from_slice(&case.1)).to_vec(), case.2);
+    }
+}

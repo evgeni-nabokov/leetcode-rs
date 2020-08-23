@@ -99,4 +99,38 @@ impl Solution {
         solve(None, head)
     }
 
+    // 21. Merge Two Sorted Lists.
+    // https://leetcode.com/problems/merge-two-sorted-lists/
+    pub fn merge_two_lists(mut l1: Option<Box<ListNode>>, mut l2: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
+        if l1.is_none() { return l2; }
+        if l2.is_none() { return l1; }
+
+        let mut l3: Box<ListNode> = Box::new(ListNode::new(0)); // Sentinel node.
+        let mut prev_node: &mut Box<ListNode> = &mut l3;
+
+        while let Some(mut l1_inner) = l1 {
+            if l2.is_none() {
+                // Shortcut.
+                prev_node.next = Some(l1_inner);
+                break;
+            }
+            while let Some(mut l2_inner) = l2 {
+                if l1_inner.val > l2_inner.val {
+                    l2 = l2_inner.next.take();
+                    prev_node.next = Some(l2_inner);
+                    prev_node = prev_node.next.as_mut().unwrap();
+                } else {
+                    l2 = Some(l2_inner);
+                    break;
+                }
+            }
+            l1 = l1_inner.next.take();
+            prev_node.next = Some(l1_inner);
+            prev_node = prev_node.next.as_mut().unwrap();
+        }
+        if l2.is_some() {
+            prev_node.next = l2;
+        }
+        l3.next.take()
+    }
 }

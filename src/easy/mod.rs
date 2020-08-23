@@ -84,7 +84,7 @@ impl Solution {
     }
 
     // Recursive solution.
-    pub fn reverse_list_v2(mut head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
+    pub fn reverse_list_v2(head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
         fn solve(mut prev_node: Option<Box<ListNode>>, mut current_node: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
             if let Some(mut current_node_inner) = current_node.take() {
                 let next_node = current_node_inner.next.take();

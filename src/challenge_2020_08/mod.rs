@@ -56,7 +56,6 @@ impl Solution {
             left += 1;
             right -= 1;
         }
-        true
     }
 
     // 342. Power of Four.
@@ -129,14 +128,14 @@ impl Solution {
         vec.sort_unstable_by_key(|a| a.0);
         vec
             .into_iter()
-            .map(|(x, mut yv)| {
+            .map(|(_, mut yv)| {
                 yv.sort_unstable_by(|(y1, v1), (y2, v2)|
                     match y2.cmp(y1) {
                         Ordering::Equal => v1.cmp(v2),
                         a => a,
                     }
                 );
-                yv.into_iter().map(|(y, v)| v).collect()
+                yv.into_iter().map(|(_, v)| v).collect()
             })
             .collect()
     }
@@ -165,7 +164,7 @@ impl Solution {
         let mut res: Vec<Vec<i32>> = Vec::new();
         for i in 1..=list.len() {
             if i == list.len() || list[i].0 != list[i - 1].0 {
-                res.push(list[slice_start..i].iter().map(|(x, y, v)| *v).collect());
+                res.push(list[slice_start..i].iter().map(|(_, _, v)| *v).collect());
                 slice_start = i;
             }
         }

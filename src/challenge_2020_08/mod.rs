@@ -4,6 +4,7 @@ use std::cell::RefCell;
 use std::cmp::Ordering;
 
 use crate::common::tree_node::TreeNode;
+use crate::common::list_node::ListNode;
 
 mod logger_v1;
 mod logger_v2;
@@ -347,5 +348,75 @@ impl Solution {
     pub fn sort_array_by_parity_v2(mut a: Vec<i32>) -> Vec<i32> {
         a.sort_by_key(|k| k % 2);
         a
+    }
+
+    // 143. Reorder List.
+    // https://leetcode.com/problems/reorder-list/
+    pub fn reorder_list(head: &mut Option<Box<ListNode>>) {
+        if head.is_none() { return; }
+        if head.as_ref().unwrap().next.is_none() { return; }
+
+        fn get_length(head: &Option<Box<ListNode>>) -> usize {
+            let mut res = 0;
+            let mut current_node = head;
+            while current_node.is_some() {
+                current_node = &current_node.as_ref().unwrap().next;
+                res += 1;
+            }
+            res
+        }
+
+        fn split(mut head: Option<Box<ListNode>>, len: usize) -> (Option<Box<ListNode>>, Option<Box<ListNode>>) {
+            let mut curr_node = &mut head;
+            for _ in 0..len {
+                let curr_node_inner = curr_node.as_mut().unwrap();
+                curr_node = &mut curr_node_inner.next;
+            }
+            let tail = curr_node.take();
+            (head, tail)
+        }
+
+        fn reverse(head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
+            let mut prev_node = None;
+            let mut head = head;
+            let mut curr_node = head.take();
+
+            while let Some(mut current_node_inner) = curr_node.take() {
+                let next_node = current_node_inner.next.take();
+                current_node_inner.next = prev_node.take();
+                prev_node = Some(current_node_inner);
+                curr_node = next_node;
+            }
+
+            prev_node.take()
+        }
+
+        fn merge(head_1: Option<Box<ListNode>>, head_2: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
+            let mut head_3: Box<ListNode> = Box::new(ListNode::new(0)); // Sentinel node.
+            let mut prev_node: &mut Box<ListNode> = &mut head_3;
+            let mut node_1 = head_1;
+            let mut node_2 = head_2;
+
+            while let Some(mut node_1_inner) = node_1 {
+                node_1 = node_1_inner.next.take();
+                if let Some(mut node_2_inner) = node_2 {
+                    node_2 = node_2_inner.next.take();
+                    node_1_inner.next = Some(node_2_inner);
+                    prev_node.next = Some(node_1_inner);
+                    prev_node = prev_node.next.as_mut().unwrap().next.as_mut().unwrap();
+                } else {
+                    prev_node.next = Some(node_1_inner);
+                    prev_node = prev_node.next.as_mut().unwrap();
+                    node_2 = None;
+                }
+            }
+            head_3.next.take()
+        }
+
+        let node = head.take();
+        let len = get_length(&node);
+        let (head_1, mut head_2) = split(node, len / 2 + len % 2);
+        head_2 = reverse(head_2);
+        head.replace(merge(head_1, head_2).unwrap());
     }
 }

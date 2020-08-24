@@ -3,6 +3,7 @@ use crate::challenge_2020_08::logger_v1::Logger as LoggerV1;
 use crate::challenge_2020_08::logger_v2::Logger as LoggerV2;
 use crate::challenge_2020_08::hash_set::HashSet;
 use crate::challenge_2020_08::word_dictionary::WordDictionary;
+use crate::common::linked_list::LinkedList;
 
 fn get_logger_test_cases<'a>() -> Vec<(i32, &'a str, bool)>{
     vec![
@@ -351,5 +352,22 @@ fn sort_array_by_parity_v2_test() {
     ];
     for case in test_cases {
         assert_eq!(Solution::sort_array_by_parity_v2(case.0), case.1);
+    }
+}
+
+#[test]
+fn reorder_list_test() {
+    let test_cases = vec![
+        (vec![], vec![]),
+        (vec![1], vec![1]),
+        (vec![1, 2], vec![1, 2]),
+        (vec![1, 2, 3], vec![1, 3, 2]),
+        (vec![1, 2, 3, 4, 5], vec![1, 5, 2, 4, 3]),
+    ];
+
+    for case in test_cases {
+        let mut head = ListNode::from_slice(&case.0);
+        Solution::reorder_list(&mut head);
+        assert_eq!(head.to_vec(), case.1);
     }
 }

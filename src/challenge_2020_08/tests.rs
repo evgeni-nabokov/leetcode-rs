@@ -371,3 +371,24 @@ fn reorder_list_test() {
         assert_eq!(head.to_vec(), case.1);
     }
 }
+
+fn get_sum_of_left_leaves_test_cases() -> Vec<(Vec<Option<i32>>, i32)>{
+    vec![
+        (vec![Some(3), Some(9), Some(20), None, None, Some(15), Some(7)], 24),
+        (vec![Some(1), Some(2), Some(3), Some(4), Some(5)], 4),
+    ]
+}
+
+#[test]
+fn sum_of_left_leaves_test() {
+    for case in get_sum_of_left_leaves_test_cases() {
+        assert_eq!(Solution::sum_of_left_leaves(TreeNode::from_level_order(&case.0)), case.1);
+    }
+}
+
+#[test]
+fn sum_of_left_leaves_v2_test() {
+    for case in get_sum_of_left_leaves_test_cases() {
+        assert_eq!(Solution::sum_of_left_leaves_v2(TreeNode::from_level_order(&case.0)), case.1);
+    }
+}

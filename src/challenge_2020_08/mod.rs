@@ -419,4 +419,49 @@ impl Solution {
         head_2 = reverse(head_2);
         head.replace(merge(head_1, head_2).unwrap());
     }
+
+    // 404. Sum of Left Leaves.
+    // https://leetcode.com/problems/sum-of-left-leaves/
+    // Recursive solution.
+    pub fn sum_of_left_leaves(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
+        if root.is_none() { return 0; }
+
+        fn dfs(node: &Option<Rc<RefCell<TreeNode>>>, is_left: bool) -> i32 {
+            let node_inner = node.as_ref().unwrap();
+            let node_borrowed = RefCell::borrow(&node_inner);
+            if node_borrowed.left.is_none() && node_borrowed.right.is_none() {
+                if is_left { node_borrowed.val } else { 0 }
+            } else {
+                let mut sum = 0;
+                if node_borrowed.left.is_some() {
+                    sum += dfs(&node_borrowed.left, true);
+                }
+                if node_borrowed.right.is_some() {
+                    sum += dfs(&node_borrowed.right, false);
+                }
+                sum
+            }
+        }
+        dfs(&root, false)
+    }
+
+    // Iterative solution.
+    pub fn sum_of_left_leaves_v2(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
+        let mut stack = vec![];
+        let mut sum = 0;
+
+        stack.push((root, false)); // is_left: false
+        while let Some((node, is_left)) = stack.pop() {
+            if let Some(node_inner) = node {
+                let node_borrowed = node_inner.borrow();
+                if is_left && node_borrowed.left.is_none() && node_borrowed.right.is_none() {
+                    sum += node_borrowed.val;
+                }
+                stack.push((node_borrowed.left.clone(), true));
+                stack.push((node_borrowed.right.clone(), false));
+            }
+        }
+
+        sum
+    }
 }

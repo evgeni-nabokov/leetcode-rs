@@ -2,6 +2,7 @@
 mod tests;
 
 use std::cmp::max;
+use std::collections::VecDeque;
 
 struct Solution;
 
@@ -31,24 +32,21 @@ impl Solution {
         max_score
     }
 
+    // 1424. Diagonal Traverse II.
+    // https://leetcode.com/problems/diagonal-traverse-ii/
     pub fn find_diagonal_order(nums: Vec<Vec<i32>>) -> Vec<i32> {
-        if nums.is_empty() { return Vec::new(); }
-        let mut res: Vec<i32> = Vec::with_capacity(nums.len() ^ 2);
-        let mut max_row_len = 0;
-        for row_index in 0..nums.len() {
-            for col_index in 0..=row_index {
-                max_row_len = max(max_row_len, nums[row_index - col_index].len());
-                if col_index < nums[row_index - col_index].len() {
-                    res.push(nums[row_index - col_index][col_index]);
-                }
+        if nums.is_empty() { return vec![]; }
+        let mut queue: VecDeque<(usize, usize)> = VecDeque::with_capacity(10000);
+        let mut res: Vec<i32> = Vec::with_capacity(10000);
+        queue.push_front((0, 0));
+        while !queue.is_empty() {
+            let (i, j) = queue.pop_back().unwrap();
+            res.push(nums[i][j]);
+            if j == 0 && i < nums.len() - 1 && j < nums[i + 1].len() {
+                queue.push_front((i + 1, j));
             }
-        }
-        for col_index in 1..max_row_len {
-            for i in 0..nums.len() {
-                let row_index = nums.len() - i - 1;
-                if col_index + i < nums[row_index].len() {
-                    res.push(nums[row_index][col_index + i]);
-                }
+            if j < nums[i].len() - 1 {
+                queue.push_front((i, j + 1));
             }
         }
         res

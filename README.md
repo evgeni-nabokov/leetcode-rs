@@ -1,4 +1,4 @@
-### List of solved problems (142)
+### List of solved problems (143)
 1. **1** Two Sum https://leetcode.com/problems/two-sum/ *Easy*
 1. **7** Reverse Integer https://leetcode.com/problems/reverse-integer/ *Easy*
 1. **15** 3Sum https://leetcode.com/problems/3sum/ *Medium*
@@ -138,6 +138,7 @@
 1. **1325** Delete Leaves With a Given Value https://leetcode.com/problems/delete-leaves-with-a-given-value/ *Medium*
 1. **1342** Number of Steps to Reduce a Number to Zero https://leetcode.com/problems/number-of-steps-to-reduce-a-number-to-zero/ *Easy*
 1. **1344** Angle Between Hands of a Clock https://leetcode.com/problems/angle-between-hands-of-a-clock/ *Medium*
+1. **1424** Diagonal Traverse II https://leetcode.com/problems/diagonal-traverse-ii/ *Medium*
 1. **1426** Counting Elements https://leetcode.com/problems/counting-elements/ *Easy*
 1. **1427** Perform String Shifts https://leetcode.com/problems/perform-string-shifts/ *Easy*
 1. **1430** Check If a String Is a Valid Sequence from Root to Leaves Path in a Binary Tree https://leetcode.com/problems/check-if-a-string-is-a-valid-sequence-from-root-to-leaves-path-in-a-binary-tree/ *Medium*

@@ -334,22 +334,6 @@ impl Solution {
         transformed_words.join(" ")
     }
 
-    // 905. Sort Array By Parity.
-    // https://leetcode.com/problems/sort-array-by-parity/
-    pub fn sort_array_by_parity(mut a: Vec<i32>) -> Vec<i32> {
-        a.sort_unstable_by(|x, y| match (x % 2 == 0, y % 2 == 0) {
-            (true, true) | (false, false) => x.cmp(y),
-            (true, false) => Ordering::Less,
-            (false, true) => Ordering::Greater,
-        });
-        a
-    }
-
-    pub fn sort_array_by_parity_v2(mut a: Vec<i32>) -> Vec<i32> {
-        a.sort_by_key(|k| k % 2);
-        a
-    }
-
     // 143. Reorder List.
     // https://leetcode.com/problems/reorder-list/
     pub fn reorder_list(head: &mut Option<Box<ListNode>>) {
@@ -418,6 +402,149 @@ impl Solution {
         let (head_1, mut head_2) = split(node, len / 2 + len % 2);
         head_2 = reverse(head_2);
         head.replace(merge(head_1, head_2).unwrap());
+    }
+
+    // 905. Sort Array By Parity.
+    // https://leetcode.com/problems/sort-array-by-parity/
+    pub fn sort_array_by_parity(mut a: Vec<i32>) -> Vec<i32> {
+        a.sort_unstable_by(|x, y| match (x % 2 == 0, y % 2 == 0) {
+            (true, true) | (false, false) => x.cmp(y),
+            (true, false) => Ordering::Less,
+            (false, true) => Ordering::Greater,
+        });
+        a
+    }
+
+    pub fn sort_array_by_parity_v2(mut a: Vec<i32>) -> Vec<i32> {
+        a.sort_by_key(|k| k % 2);
+        a
+    }
+
+    // 490. The Maze.
+    // https://leetcode.com/problems/the-maze/
+    // My first solution. It is more complex dfs, but
+    // 1) it doesn't use extra space,
+    // 2) it doesn't rolls backward,
+    // 3) it stops rolling further if the stop point lays on a visited cell.
+    pub fn has_path(mut maze: Vec<Vec<i32>>, start: Vec<i32>, destination: Vec<i32>) -> bool {
+        #[derive(PartialEq, Eq, Clone, Debug)]
+        enum Direction { X, Y };
+
+        fn find_directions(maze: &Vec<Vec<i32>>, r: usize, c: usize, prev_direction: Option<Direction>) -> Vec<(Direction, i32)> {
+            let mut res: Vec<(Direction, i32)> = Vec::with_capacity(4);
+            if prev_direction.is_none() || *prev_direction.as_ref().unwrap() != Direction::Y {
+                if r > 0 && maze[r - 1][c] != 1 {
+                    res.push((Direction::Y, -1));
+                }
+                if r < maze.len() - 1 && maze[r + 1][c] != 1 {
+                    res.push((Direction::Y, 1));
+                }
+            }
+
+            if prev_direction.is_none() || *prev_direction.as_ref().unwrap() != Direction::X {
+                if c > 0 && maze[r][c - 1] != 1 {
+                    res.push((Direction::X, -1));
+                }
+                if c < maze[r].len() - 1 && maze[r][c + 1] != 1 {
+                    res.push((Direction::X, 1));
+                }
+            }
+            res
+        }
+
+        fn roll_along_x(maze: &mut Vec<Vec<i32>>, r: usize, mut c: usize, step: i32) -> (usize, usize, i32) {
+            let mut last_value;
+            loop {
+                last_value = maze[r][c];
+                if maze[r][c] != 3 {
+                    maze[r][c] = 2;
+                }
+                let new_c = c as i32 + step;
+                if (new_c < 0 || new_c > maze[r].len() as i32 - 1) || maze[r][new_c as usize] == 1 {
+                    maze[r][c] = 3;
+                    break;
+                }
+                c = new_c as usize;
+            }
+            (r, c, last_value)
+        }
+
+        fn roll_along_y(maze: &mut Vec<Vec<i32>>, mut r: usize, c: usize, step: i32) -> (usize, usize, i32) {
+            let mut last_value;
+            loop {
+                last_value= maze[r][c];
+                if maze[r][c] != 3 {
+                    maze[r][c] = 2;
+                }
+                let new_r = r as i32 + step;
+                if (new_r < 0 || new_r > maze.len() as i32 - 1) || maze[new_r as usize][c] == 1 {
+                    maze[r][c] = 3;
+                    break;
+                }
+                r = new_r as usize;
+            }
+            (r, c, last_value)
+        }
+
+        fn solve(maze: &mut Vec<Vec<i32>>, r: usize, c: usize, dest_r: usize, dest_c: usize, prev_direction: Option<Direction>) -> bool {
+            let dirs = find_directions(&maze, r, c, prev_direction);
+            for (dir, step) in dirs {
+                let (stop_r, stop_c, last_value) = match (&dir, step) {
+                    (Direction::X, s) => roll_along_x(maze, r, c, s),
+                    (Direction::Y, s) => roll_along_y(maze, r, c, s),
+                };
+
+                if stop_r == dest_r && stop_c == dest_c { return true; }
+                if last_value == 0 && solve(maze, stop_r, stop_c, dest_r, dest_c, Some(dir)) { return true; }
+            }
+            false
+        }
+
+        solve(&mut maze, start[0] as usize, start[1] as usize, destination[0] as usize, destination[1] as usize, None)
+    }
+
+    // Simple dfs-solution.
+    pub fn has_path_v2(mut maze: Vec<Vec<i32>>, start: Vec<i32>, destination: Vec<i32>) -> bool {
+        let mut visited: Vec<Vec<bool>> = vec![vec![false; maze[0].len()]; maze.len()];
+        fn dfs(maze: &Vec<Vec<i32>>, start_r: usize, start_c: usize, dest_r: usize, dest_c: usize, visited: &mut Vec<Vec<bool>>) -> bool {
+            if visited[start_r][start_c] { return false; }
+
+            if start_r == dest_r && start_c == dest_c { return true; }
+            visited[start_r][start_c] = true;
+
+            // Right.
+            let mut r = start_c as i32 + 1;
+            while r < maze[start_r].len() as i32 && maze[start_r][r as usize] == 0 {
+                r += 1;
+            }
+            if dfs(maze, start_r, (r - 1) as usize , dest_r, dest_c, visited) { return true; }
+
+            // Left.
+            let mut l = start_c as i32 - 1;
+            while l >= 0 && maze[start_r][l as usize] == 0 {
+                l -= 1;
+            }
+            if dfs(maze, start_r, (l + 1) as usize , dest_r, dest_c, visited) { return true; }
+
+            // Up.
+            let mut u = start_r as i32 - 1;
+            while u >= 0 && maze[u as usize][start_c] == 0 {
+                u -= 1;
+            }
+            if dfs(maze, (u + 1) as usize , start_c, dest_r, dest_c, visited) { return true; }
+
+
+            // Down.
+            let mut d = start_r as i32 + 1;
+            while d < maze.len() as i32 && maze[d as usize][start_c] == 0 {
+                d += 1;
+            }
+            if dfs(maze, (d - 1) as usize, start_c, dest_r, dest_c, visited) { return true; }
+
+            false
+        }
+
+        dfs(&mut maze, start[0] as usize, start[1] as usize, destination[0] as usize, destination[1] as usize, &mut visited)
     }
 
     // 404. Sum of Left Leaves.

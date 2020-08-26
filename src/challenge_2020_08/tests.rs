@@ -392,3 +392,78 @@ fn sum_of_left_leaves_v2_test() {
         assert_eq!(Solution::sum_of_left_leaves_v2(TreeNode::from_level_order(&case.0)), case.1);
     }
 }
+
+fn get_has_path_test_cases() -> Vec<(Vec<Vec<i32>>, Vec<i32>, Vec<i32>, bool)> {
+    let maze_1 = vec![
+        vec![0, 0, 1, 0, 0],
+        vec![0, 0, 0, 0, 0],
+        vec![0, 0, 0, 1, 0],
+        vec![1, 1, 0, 1, 1],
+        vec![0, 0, 0, 0, 0],
+    ];
+
+    let maze_2 = vec![
+        vec![0, 0, 0, 0, 1, 0, 0],
+        vec![0, 0, 1, 0, 0, 0, 0],
+        vec![0, 0, 0, 0, 0, 0, 0],
+        vec![0, 0, 0, 0, 0, 0, 1],
+        vec![0, 1, 0, 0, 0, 0, 0],
+        vec![0, 0, 0, 1, 0, 0, 0],
+        vec![0, 0, 0, 0, 0, 0, 0],
+        vec![0, 0, 1, 0, 0, 0, 1],
+        vec![0, 0, 0, 0, 1, 0, 0],
+    ];
+
+    vec![
+        (
+            maze_1.clone(),
+            vec![0, 4],
+            vec![4, 4],
+            true,
+        ),
+        (
+            maze_1.clone(),
+            vec![0, 4],
+            vec![3, 2],
+            false,
+        ),
+        (
+            maze_1.clone(),
+            vec![0, 4],
+            vec![4, 2],
+            true,
+        ),
+        (
+            maze_1.clone(),
+            vec![0, 4],
+            vec![1, 2],
+            true,
+        ),
+        (
+            maze_1.clone(),
+            vec![0, 4],
+            vec![0, 1],
+            true,
+        ),
+        (
+            maze_2.clone(),
+            vec![0, 0],
+            vec![8, 6],
+            true,
+        ),
+    ]
+}
+
+#[test]
+fn has_path_test() {
+    for case in get_has_path_test_cases() {
+        assert_eq!(Solution::has_path(case.0.clone(), case.1, case.2), case.3);
+    }
+}
+
+#[test]
+fn has_path_v2_test() {
+    for case in get_has_path_test_cases() {
+        assert_eq!(Solution::has_path_v2(case.0.clone(), case.1, case.2), case.3);
+    }
+}

@@ -467,3 +467,31 @@ fn has_path_v2_test() {
         assert_eq!(Solution::has_path_v2(case.0.clone(), case.1, case.2), case.3);
     }
 }
+
+#[test]
+fn fizz_buzz_test() {
+    let test_cases = vec![
+        (
+            15, vec![
+            "1",
+            "2",
+            "Fizz",
+            "4",
+            "Buzz",
+            "Fizz",
+            "7",
+            "8",
+            "Fizz",
+            "Buzz",
+            "11",
+            "Fizz",
+            "13",
+            "14",
+            "FizzBuzz"
+        ]),
+    ];
+
+    for case in test_cases {
+        assert_eq!(Solution::fizz_buzz(case.0), case.1);
+    }
+}

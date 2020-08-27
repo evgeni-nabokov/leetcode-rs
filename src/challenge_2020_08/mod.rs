@@ -591,4 +591,24 @@ impl Solution {
 
         sum
     }
+
+    // 412. Fizz Buzz.
+    // https://leetcode.com/problems/fizz-buzz/
+    pub fn fizz_buzz(n: i32) -> Vec<String> {
+        let mut res: Vec<String> = Vec::with_capacity(n as usize);
+        let buzz = "Buzz".to_string();
+        let fizz = "Fizz".to_string();
+        let fizz_buzz = "FizzBuzz".to_string();
+        for i in 1..=n {
+            let is_mul_of_5 = i % 5 == 0;
+            let is_mul_of_3 = i % 3 == 0;
+            match (is_mul_of_5, is_mul_of_3) {
+                (true, true) => res.push(fizz_buzz.clone()),
+                (true, false) => res.push(buzz.clone()),
+                (false, true) => res.push(fizz.clone()),
+                _ => res.push(i.to_string()),
+            }
+        }
+        res
+    }
 }

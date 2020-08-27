@@ -1,4 +1,4 @@
-### List of solved problems (144)
+### List of solved problems (145)
 1. **1** Two Sum https://leetcode.com/problems/two-sum/ *Easy*
 1. **7** Reverse Integer https://leetcode.com/problems/reverse-integer/ *Easy*
 1. **15** 3Sum https://leetcode.com/problems/3sum/ *Medium*
@@ -84,6 +84,7 @@
 1. **404** Sum of Left Leaves https://leetcode.com/problems/sum-of-left-leaves/ *Easy*
 1. **406** Queue Reconstruction by Height https://leetcode.com/problems/queue-reconstruction-by-height/ *Medium*
 1. **409** Longest Palindrome https://leetcode.com/problems/longest-palindrome/ *Easy*
+1. **412** Fizz Buzz https://leetcode.com/problems/fizz-buzz/ *Easy*
 1. **437** Path Sum III https://leetcode.com/problems/path-sum-iii/ *Medium*
 1. **438** Find All Anagrams in a String https://leetcode.com/problems/find-all-anagrams-in-a-string/ *Medium*
 1. **441** Arranging Coins https://leetcode.com/problems/arranging-coins/ *Easy*

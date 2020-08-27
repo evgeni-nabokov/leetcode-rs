@@ -611,4 +611,29 @@ impl Solution {
         }
         res
     }
+
+    // 436. Find Right Interval.
+    // https://leetcode.com/problems/find-right-interval/
+    pub fn find_right_interval(intervals: Vec<Vec<i32>>) -> Vec<i32> {
+        if intervals.len() == 1 { return vec![-1]; }
+
+        let mut indexed_intervals: Vec<(usize, Vec<i32>)> = intervals
+            .into_iter()
+            .enumerate()
+            .collect();
+        indexed_intervals.sort_unstable_by_key(|x| x.1[0]);
+
+        let mut res: Vec<i32> = vec![-1; indexed_intervals.len()];
+        for i in 0..indexed_intervals.len() - 1 {
+            let mut j = i + 1;
+            while j < indexed_intervals.len() {
+                if indexed_intervals[i].1[1] <= indexed_intervals[j].1[0] {
+                    res[indexed_intervals[i].0] = indexed_intervals[j].0 as i32;
+                    break;
+                }
+                j += 1;
+            }
+        }
+        res
+    }
 }

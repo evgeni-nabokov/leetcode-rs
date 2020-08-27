@@ -495,3 +495,25 @@ fn fizz_buzz_test() {
         assert_eq!(Solution::fizz_buzz(case.0), case.1);
     }
 }
+
+#[test]
+fn find_right_interval_test() {
+    let test_cases = vec![
+        (
+            vec![vec![1, 2]],
+            vec![-1],
+        ),
+        (
+            vec![vec![3, 4], vec![2, 3], vec![1, 2]],
+            vec![-1, 0, 1],
+        ),
+        (
+            vec![vec![1, 4], vec![2, 3], vec![3, 4]],
+            vec![-1, 2, -1],
+        ),
+    ];
+
+    for case in test_cases {
+        assert_eq!(Solution::find_right_interval(case.0), case.1);
+    }
+}

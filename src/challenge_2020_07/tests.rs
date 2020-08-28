@@ -545,6 +545,18 @@ fn build_tree_test() {
 }
 
 #[test]
+fn least_interval_test() {
+    let test_cases = vec![
+        (vec!['A', 'A', 'A', 'B', 'B', 'B'], 2, 8),
+        (vec!['A', 'A', 'A', 'B', 'B', 'B'], 0, 6),
+        (vec!['A', 'A', 'A', 'A', 'A', 'A', 'B', 'C', 'D', 'E', 'F', 'G'], 2, 16),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::least_interval(case.0, case.1), case.2);
+    }
+}
+
+#[test]
 fn word_break_test() {
     let test_cases = vec![
         (

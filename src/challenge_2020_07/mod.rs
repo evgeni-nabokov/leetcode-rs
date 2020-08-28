@@ -688,6 +688,23 @@ impl Solution {
         build_bt(&inorder, &postorder)
     }
 
+    // 621. Task Scheduler.
+    // https://leetcode.com/problems/task-scheduler/
+    pub fn least_interval(tasks: Vec<char>, n: i32) -> i32 {
+        let mut task_counter = vec![0i32; 26];
+        for t in &tasks {
+            let i = *t as usize;
+            task_counter[i - 65] += 1;
+        }
+        task_counter.sort_unstable();
+        let f_max_1 = task_counter.pop().unwrap() - 1;
+        let mut idle_time = f_max_1 * n;
+        while !task_counter.is_empty() && idle_time >0 {
+            idle_time -= min(f_max_1, task_counter.pop().unwrap());
+        }
+        tasks.len() as i32 + idle_time
+    }
+
     // 140. Word Break II.
     // https://leetcode.com/problems/word-break-ii/
     pub fn word_break(s: String, word_dict: Vec<String>) -> Vec<String> {

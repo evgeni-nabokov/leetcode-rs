@@ -1,6 +1,8 @@
 #[cfg(test)]
 mod tests;
 
+use std::collections::BTreeSet;
+
 struct Solution;
 
 impl Solution {
@@ -49,5 +51,30 @@ impl Solution {
         res.push(a.pop().unwrap());
 
         format!("{}{}:{}{}", res[0], res[1], res[2], res[3])
+    }
+
+    // 220. Contains Duplicate III.
+    // https://leetcode.com/problems/contains-duplicate-iii/
+    pub fn contains_nearby_almost_duplicate(nums: Vec<i32>, k: i32, t: i32) -> bool {
+        let k = k as usize;
+        let t = t as i64;
+        let mut set: BTreeSet<i64> = BTreeSet::new();
+        for i in 0..nums.len() {
+            let n = nums[i] as i64;
+
+            if let Some(&s) = set.range(n..).next() {
+                if s <= n + t { return true; }
+            }
+
+            if let Some(&s) = set.range(..=n).next_back() {
+                if s >= n - t { return true; }
+            }
+
+            set.insert(n);
+            if set.len() > k {
+                set.remove(&(nums[i - k] as i64));
+            }
+        }
+        false
     }
 }

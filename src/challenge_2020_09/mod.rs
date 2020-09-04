@@ -77,4 +77,14 @@ impl Solution {
         }
         false
     }
+
+    // 459. Repeated Substring Pattern.
+    // https://leetcode.com/problems/repeated-substring-pattern/
+    pub fn repeated_substring_pattern(s: String) -> bool {
+        if s.len() < 2 { return false; }
+        let mut together = format!("{}{}", s, s);
+        together.remove(0);
+        together.remove(together.len() - 1);
+        together.contains(&s)
+    }
 }

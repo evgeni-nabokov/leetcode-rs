@@ -26,3 +26,20 @@ fn contains_nearby_almost_duplicate_test() {
         assert_eq!(Solution::contains_nearby_almost_duplicate(case.0, case.1, case.2), case.3);
     }
 }
+
+#[test]
+fn repeated_substring_pattern_test() {
+    let test_cases = vec![
+        ("", false),
+        ("a", false),
+        ("aa", true),
+        ("abab", true),
+        ("xyxy", true),
+        ("aba", false),
+        ("abcabcabcabc", true),
+        ("abcaabca", true),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::repeated_substring_pattern(case.0.to_string()), case.1);
+    }
+}

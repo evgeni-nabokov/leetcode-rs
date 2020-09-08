@@ -1,7 +1,7 @@
 #[cfg(test)]
 mod tests;
 
-use std::collections::BTreeSet;
+use std::collections::{BTreeSet, HashSet};
 
 struct Solution;
 
@@ -86,5 +86,33 @@ impl Solution {
         together.remove(0);
         together.remove(together.len() - 1);
         together.contains(&s)
+    }
+
+    // 290. Word Pattern.
+    // https://leetcode.com/problems/word-pattern/
+    pub fn word_pattern(pattern: String, str: String) -> bool {
+        if pattern.is_empty() || str.is_empty() { return false; }
+
+        let p_chars: Vec<char> = pattern.chars().collect();
+        let s_words: Vec<&str> = str.split_ascii_whitespace().collect();
+        if p_chars.len() != s_words.len() { return false; }
+
+        let mut map: Vec<Option<&str>> = vec![None; 26];
+        let mut set: HashSet<&str> = HashSet::new();
+        for i in 0..p_chars.len() {
+            let ch_i = p_chars[i] as usize - 97;
+            if let Some(w) = map[ch_i] {
+                if s_words[i] != w {
+                    return false;
+                }
+            } else {
+                if set.contains(s_words[i]) {
+                    return false;
+                }
+                map[ch_i] = Some(s_words[i]);
+                set.insert(s_words[i]);
+            }
+        }
+        true
     }
 }

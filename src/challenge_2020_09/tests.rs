@@ -43,3 +43,19 @@ fn repeated_substring_pattern_test() {
         assert_eq!(Solution::repeated_substring_pattern(case.0.to_string()), case.1);
     }
 }
+
+#[test]
+fn word_pattern_test() {
+    let test_cases = vec![
+        ("", "", false),
+        ("a", "", false),
+        ("abba", "dog cat cat dog", true),
+        ("abba", "dog cat cat fish", false),
+        ("aaaa", "dog cat cat dog", false),
+        ("aaaa", "dog dog dog dog", true),
+        ("abba", "dog dog dog dog", false),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::word_pattern(case.0.to_string(), case.1.to_string()), case.2);
+    }
+}

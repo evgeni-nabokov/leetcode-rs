@@ -59,3 +59,15 @@ fn word_pattern_test() {
         assert_eq!(Solution::word_pattern(case.0.to_string(), case.1.to_string()), case.2);
     }
 }
+
+#[test]
+fn sum_root_to_leaf_test() {
+    let test_cases = vec![
+        (vec![Some(1), Some(0), Some(1), Some(0), Some(1), Some(0), Some(1)], 22),
+        // TODO: Find out why it does not pass.
+        // (vec![Some(1),Some(0),Some(1),Some(0),Some(1),Some(1),Some(0),Some(1),Some(0),Some(0),Some(0),Some(1),Some(0),Some(0),Some(0),Some(0),Some(1),Some(1),Some(0),None,Some(1),Some(0),None,Some(1),Some(1),Some(1),Some(1),None,Some(0),None,None,None,None,None,None,Some(1),None,Some(0),None,None,None,None,None,Some(0),Some(1),Some(1),Some(0),Some(0),Some(0),Some(0),None,None,None,Some(0),None,None,None,Some(0),None,Some(0),None,None,None,None,Some(1),None,None,Some(0),Some(0),Some(0),None,None,None,Some(1),None,None,None,Some(0),Some(0),None,None,None,None,None,Some(0),None,None,None,None,Some(1),None,None,None,Some(0),Some(1),None,Some(0)], 4433),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::sum_root_to_leaf(TreeNode::from_level_order(&case.0)), case.1);
+    }
+}

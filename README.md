@@ -1,4 +1,4 @@
-### List of solved problems (151)
+### List of solved problems (152)
 1. **1** Two Sum https://leetcode.com/problems/two-sum/ *Easy*
 1. **7** Reverse Integer https://leetcode.com/problems/reverse-integer/ *Easy*
 1. **15** 3Sum https://leetcode.com/problems/3sum/ *Medium*
@@ -134,6 +134,7 @@
 1. **994** Rotting Oranges https://leetcode.com/problems/rotting-oranges/ *Medium*
 1. **997** Find the Town Judge https://leetcode.com/problems/find-the-town-judge/ *Easy*
 1. **1008** Construct Binary Search Tree from Preorder Traversal https://leetcode.com/problems/construct-binary-search-tree-from-preorder-traversal/ *Medium*
+1. **1022** Sum of Root To Leaf Binary Numbers https://leetcode.com/problems/sum-of-root-to-leaf-binary-numbers/ *Easy*
 1. **1029** Two City Scheduling https://leetcode.com/problems/two-city-scheduling/ *Easy*
 1. **1035** Uncrossed Lines https://leetcode.com/problems/uncrossed-lines/ *Medium*
 1. **1046** Last Stone Weight https://leetcode.com/problems/last-stone-weight/ *Easy*

@@ -2,6 +2,10 @@
 mod tests;
 
 use std::collections::{BTreeSet, HashSet};
+use std::rc::Rc;
+use std::cell::RefCell;
+
+use crate::common::tree_node::TreeNode;
 
 struct Solution;
 
@@ -114,5 +118,25 @@ impl Solution {
             }
         }
         true
+    }
+
+    // 1022. Sum of Root To Leaf Binary Numbers.
+    // https://leetcode.com/problems/sum-of-root-to-leaf-binary-numbers/
+    pub fn sum_root_to_leaf(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
+        fn dfs(node: &Option<Rc<RefCell<TreeNode>>>, mut n: u32) -> u32 {
+            if let Some(node_inner) = node {
+                let node_borrowed = node_inner.borrow();
+                n = (n << 1) ^ (node_borrowed.val as u32);
+                if node_borrowed.left.is_none() && node_borrowed.right.is_none() {
+                    n
+                } else {
+                    dfs(&node_borrowed.left, n) + dfs(&node_borrowed.right, n)
+                }
+            } else {
+                0
+            }
+        }
+
+        dfs(&root, 0) as i32
     }
 }

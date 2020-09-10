@@ -1,4 +1,4 @@
-### List of solved problems (152)
+### List of solved problems (153)
 1. **1** Two Sum https://leetcode.com/problems/two-sum/ *Easy*
 1. **7** Reverse Integer https://leetcode.com/problems/reverse-integer/ *Easy*
 1. **15** 3Sum https://leetcode.com/problems/3sum/ *Medium*
@@ -74,6 +74,7 @@
 1. **338** Counting Bits https://leetcode.com/problems/counting-bits/ *Medium*
 1. **342** Power of Four https://leetcode.com/problems/power-of-four/ *Easy*
 1. **344** Reverse String https://leetcode.com/problems/reverse-string/ *Easy*
+1. **346** Moving Average from Data Stream https://leetcode.com/problems/moving-average-from-data-stream/ *Easy*
 1. **347** Top K Frequent Elements https://leetcode.com/problems/top-k-frequent-elements/ *Medium*
 1. **359** Logger Rate Limiter https://leetcode.com/problems/logger-rate-limiter/ *Easy*
 1. **367** Valid Perfect Square https://leetcode.com/problems/valid-perfect-square/ *Easy*

@@ -1,3 +1,5 @@
+mod moving_average;
+
 #[cfg(test)]
 mod tests;
 
@@ -139,4 +141,6 @@ impl Solution {
 
         dfs(&root, 0) as i32
     }
+
+
 }

@@ -1,4 +1,5 @@
 use super::*;
+use crate::challenge_2020_09::moving_average::MovingAverage;
 
 #[test]
 fn largest_time_from_digits_test() {
@@ -70,4 +71,13 @@ fn sum_root_to_leaf_test() {
     for case in test_cases {
         assert_eq!(Solution::sum_root_to_leaf(TreeNode::from_level_order(&case.0)), case.1);
     }
+}
+
+#[test]
+fn moving_average_test() {
+    let mut obj = MovingAverage::new(3);
+    assert_eq!((obj.next(1) * 100_000.0).round() / 100_000.0, 1.0);
+    assert_eq!((obj.next(10) * 100_000.0).round() / 100_000.0, 5.5);
+    assert_eq!((obj.next(3) * 100_000.0).round() / 100_000.0, 4.66667);
+    assert_eq!((obj.next(5) * 100_000.0).round() / 100_000.0, 6.0);
 }

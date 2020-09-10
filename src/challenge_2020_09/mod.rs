@@ -6,6 +6,7 @@ mod tests;
 use std::collections::{BTreeSet, HashSet};
 use std::rc::Rc;
 use std::cell::RefCell;
+use std::cmp::Ordering;
 
 use crate::common::tree_node::TreeNode;
 
@@ -142,5 +143,23 @@ impl Solution {
         dfs(&root, 0) as i32
     }
 
-
+    // 165. Compare Version Numbers.
+    // https://leetcode.com/problems/compare-version-numbers/
+    pub fn compare_version(version1: String, version2: String) -> i32 {
+        let mut p1: Vec<u32> = version1.split('.').map(|x| u32::from_str_radix(x, 10).unwrap()).collect();
+        let mut p2: Vec<u32> = version2.split('.').map(|x| u32::from_str_radix(x, 10).unwrap()).collect();
+        match p1.len().cmp(&p2.len()) {
+            Ordering::Greater => p2.extend_from_slice(&vec![0; p1.len() - p2.len()]),
+            Ordering::Less => p1.extend_from_slice(&vec![0; p2.len() - p1.len()]),
+            _ => ()
+        }
+        for (v1, v2) in p1.into_iter().zip(p2.into_iter()) {
+            match v1.cmp(&v2) {
+                Ordering::Greater => return 1,
+                Ordering::Less => return -1,
+                _ => (),
+            }
+        }
+        0
+    }
 }

@@ -81,3 +81,17 @@ fn moving_average_test() {
     assert_eq!((obj.next(3) * 100_000.0).round() / 100_000.0, 4.66667);
     assert_eq!((obj.next(5) * 100_000.0).round() / 100_000.0, 6.0);
 }
+
+#[test]
+fn compare_version_test() {
+    let test_cases = vec![
+        ("0.1", "1.1", -1),
+        ("1.0.1", "1", 1),
+        ("7.5.2.4", "7.5.3", -1),
+        ("1.01", "1.001", 0),
+        ("1.0", "1.0.0", 0)
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::compare_version(case.0.to_string(), case.1.to_string()), case.2);
+    }
+}

@@ -6,7 +6,7 @@ mod tests;
 use std::collections::{BTreeSet, HashSet};
 use std::rc::Rc;
 use std::cell::RefCell;
-use std::cmp::Ordering;
+use std::cmp::{Ordering, min};
 
 use crate::common::tree_node::TreeNode;
 
@@ -161,5 +161,28 @@ impl Solution {
             }
         }
         0
+    }
+
+    // 299. Bulls and Cows.
+    // https://leetcode.com/problems/bulls-and-cows/
+    pub fn get_hint(secret: String, guess: String) -> String {
+        let mut s_counter = vec![0; 10];
+        let mut g_counter = vec![0; 10];
+        let mut bulls = 0;
+        for (s, g) in secret.chars().zip(guess.chars()) {
+            if s == g {
+                bulls += 1;
+            } else {
+                s_counter[s as usize - 48] += 1;
+                g_counter[g as usize - 48] += 1;
+            }
+        }
+
+        let mut cows = 0;
+        for i in 0..=9 {
+            cows += min(s_counter[i], g_counter[i]);
+        }
+
+        format!("{}A{}B", bulls, cows)
     }
 }

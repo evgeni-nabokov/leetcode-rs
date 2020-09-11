@@ -95,3 +95,15 @@ fn compare_version_test() {
         assert_eq!(Solution::compare_version(case.0.to_string(), case.1.to_string()), case.2);
     }
 }
+
+#[test]
+fn get_hint_test() {
+    let test_cases = vec![
+        ("1807", "7810", "1A3B"),
+        ("1123", "0111", "1A1B"),
+        ("1234", "1234", "4A0B"),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::get_hint(case.0.to_string(), case.1.to_string()), case.2.to_string());
+    }
+}

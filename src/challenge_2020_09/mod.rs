@@ -6,7 +6,7 @@ mod tests;
 use std::collections::{BTreeSet, HashSet};
 use std::rc::Rc;
 use std::cell::RefCell;
-use std::cmp::{Ordering, min};
+use std::cmp::{Ordering, min, max};
 
 use crate::common::tree_node::TreeNode;
 
@@ -184,5 +184,21 @@ impl Solution {
         }
 
         format!("{}A{}B", bulls, cows)
+    }
+
+    // 152. Maximum Product Subarray.
+    // https://leetcode.com/problems/maximum-product-subarray/
+    pub fn max_product(nums: Vec<i32>) -> i32 {
+        if nums.len() == 1 { return nums[0]; }
+        let mut max_prod: i32 = nums[0];
+        let mut min_prod: i32 = nums[0];
+        let mut res = nums[0];
+        for n in nums.into_iter().skip(1) {
+            let max_prod_temp = max(n, max(max_prod * n, min_prod * n));
+            min_prod = min(n, min(max_prod * n, min_prod * n));
+            max_prod = max_prod_temp;
+            res = max(max_prod, res);
+        }
+        res
     }
 }

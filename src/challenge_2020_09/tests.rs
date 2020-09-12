@@ -107,3 +107,15 @@ fn get_hint_test() {
         assert_eq!(Solution::get_hint(case.0.to_string(), case.1.to_string()), case.2.to_string());
     }
 }
+
+#[test]
+fn max_product_test() {
+    let test_cases = vec![
+        (vec![2, 3, -2, 4], 6),
+        (vec![-2, 0, -1], 0),
+        (vec![-2, 3, -4], 24),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::max_product(case.0), case.1);
+    }
+}

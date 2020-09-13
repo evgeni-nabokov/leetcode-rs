@@ -100,4 +100,32 @@ impl Solution {
 
         build_bt(&preorder, &inorder)
     }
+
+    // 39. Combination Sum.
+    // https://leetcode.com/problems/combination-sum/
+    pub fn combination_sum(mut candidates: Vec<i32>, target: i32) -> Vec<Vec<i32>> {
+        candidates.sort_unstable();
+
+        fn backtrack(candidates: &Vec<i32>, target: i32, start: usize) -> Vec<Vec<i32>> {
+            let mut res: Vec<Vec<i32>> = vec![vec![]; 0];
+            for i in start..candidates.len() {
+                match candidates[i].cmp(&target) {
+                    Ordering::Equal => {
+                        res.push(vec![candidates[i]]);
+                        break;
+                    },
+                    Ordering::Less => {
+                        for mut v in backtrack(candidates, target - candidates[i], i) {
+                            v.push(candidates[i]);
+                            res.push(v);
+                        }
+                    },
+                    _ => break,
+                }
+            }
+            res
+        }
+
+        backtrack(&candidates, target, 0)
+    }
 }

@@ -129,3 +129,15 @@ fn build_tree_ii_test() {
         assert_eq!(Solution::build_tree_ii(case.0, case.1).get_level_order_values(), case.2);
     }
 }
+
+#[test]
+fn combination_sum_test() {
+    let test_cases = vec![
+        (vec![2, 3, 6, 7], 7, vec![vec![3, 2, 2], vec![7]]),
+        (vec![2, 3, 5], 8, vec![vec![2, 2, 2, 2], vec![3, 3, 2], vec![5, 3]]),
+        (vec![8, 7, 4, 3], 11, vec![vec![4, 4, 3], vec![8, 3], vec![7, 4]]),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::combination_sum(case.0, case.1), case.2);
+    }
+}

@@ -128,4 +128,37 @@ impl Solution {
 
         backtrack(&candidates, target, 0)
     }
+
+    // 40. Combination Sum II.
+    // https://leetcode.com/problems/combination-sum-ii/
+    pub fn combination_sum_ii(mut candidates: Vec<i32>, target: i32) -> Vec<Vec<i32>> {
+        candidates.sort_unstable();
+
+        fn backtrack(candidates: &Vec<i32>, target: i32, start: usize) -> Vec<Vec<i32>> {
+            let mut res: Vec<Vec<i32>> = vec![vec![]; 0];
+            for i in start..candidates.len() {
+                match candidates[i].cmp(&target) {
+                    Ordering::Equal => {
+                        res.push(vec![candidates[i]]);
+                        break;
+                    },
+                    Ordering::Less if i < candidates.len() - 1 => {
+                        // Extra check to eliminate duplicate sets.
+                        // We don't need to analyze sets with the same number at the same position,
+                        // because we analyzed them at previous iteration.
+                        if i > start && candidates[i - 1] == candidates[i] { continue; }
+
+                        for mut v in backtrack(candidates, target - candidates[i], i + 1) {
+                            v.push(candidates[i]);
+                            res.push(v);
+                        }
+                    },
+                    _ => break,
+                }
+            }
+            res
+        }
+
+        backtrack(&candidates, target, 0)
+    }
 }

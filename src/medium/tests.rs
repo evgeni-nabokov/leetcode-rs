@@ -141,3 +141,14 @@ fn combination_sum_test() {
         assert_eq!(Solution::combination_sum(case.0, case.1), case.2);
     }
 }
+
+#[test]
+fn combination_sum_ii_test() {
+    let test_cases = vec![
+        (vec![10, 1, 2, 7, 6, 1, 5], 8, vec![vec![6, 1, 1], vec![5, 2, 1], vec![7, 1], vec![6, 2]]),
+        (vec![2, 5, 2, 1, 2], 5, vec![vec![2, 2, 1], vec![5]]),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::combination_sum_ii(case.0, case.1), case.2);
+    }
+}

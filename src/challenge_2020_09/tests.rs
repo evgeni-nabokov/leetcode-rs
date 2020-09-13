@@ -119,3 +119,14 @@ fn max_product_test() {
         assert_eq!(Solution::max_product(case.0), case.1);
     }
 }
+
+#[test]
+fn combination_sum_iii_test() {
+    let test_cases = vec![
+        (3, 7, vec![vec![4, 2, 1]]),
+        (3, 9, vec![vec![6, 2, 1], vec![5, 3, 1], vec![4, 3, 2]]),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::combination_sum_iii(case.0, case.1), case.2);
+    }
+}

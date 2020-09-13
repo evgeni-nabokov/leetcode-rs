@@ -201,4 +201,39 @@ impl Solution {
         }
         res
     }
+
+    // 216. Combination Sum III.
+    // https://leetcode.com/problems/combination-sum-iii/
+    pub fn combination_sum_iii(k: i32, n: i32) -> Vec<Vec<i32>> {
+        if k < 1 || k > 9 { return vec![]; }
+
+        fn backtrack(k: i32, n: i32, start: i32) -> Vec<Vec<i32>> {
+            // Shortcut.
+            if k == 1 {
+                return if n < start || n > 9 { vec![] } else { vec![vec![n]] };
+            }
+
+            let mut res: Vec<Vec<i32>> = vec![vec![]; 0];
+            for i in start..=9 {
+                match i.cmp(&n) {
+                    Ordering::Equal if k == 1 => {
+                        res.push(vec![i]);
+                        break;
+                    },
+                    Ordering::Less if k > 1 && i < 9 => {
+                        let sub_res = backtrack(k - 1, n - i, i + 1);
+                        if sub_res.is_empty() { continue; }
+                        for mut v in sub_res {
+                            v.push(i);
+                            res.push(v);
+                        }
+                    },
+                    _ => break,
+                }
+            }
+            res
+        }
+
+        backtrack(k, n, 1)
+    }
 }

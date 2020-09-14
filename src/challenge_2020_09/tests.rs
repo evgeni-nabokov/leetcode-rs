@@ -130,3 +130,67 @@ fn combination_sum_iii_test() {
         assert_eq!(Solution::combination_sum_iii(case.0, case.1), case.2);
     }
 }
+
+#[test]
+fn insert_test() {
+    let test_cases = vec![
+        (
+            vec![vec![1, 3], vec![6, 9]],
+            vec![2, 5],
+            vec![vec![1, 5], vec![6, 9]]
+        ),
+        (
+            vec![vec![1, 3], vec![6, 9]],
+            vec![1, 9],
+            vec![vec![1, 9]]
+        ),
+        (
+            vec![vec![1, 3], vec![6, 9]],
+            vec![0, 10],
+            vec![vec![0, 10]]
+        ),
+        (
+            vec![vec![1, 3], vec![6, 9]],
+            vec![4, 5],
+            vec![vec![1, 3], vec![4, 5], vec![6, 9]],
+        ),
+        (
+            vec![vec![1, 3], vec![6, 9]],
+            vec![9, 11],
+            vec![vec![1, 3], vec![6, 11]],
+        ),
+        (
+            vec![vec![1, 3], vec![6, 9]],
+            vec![10, 11],
+            vec![vec![1, 3], vec![6, 9], vec![10, 11]],
+        ),
+        (
+            vec![vec![1, 3], vec![6, 9]],
+            vec![0, 0],
+            vec![vec![0, 0], vec![1, 3], vec![6, 9]],
+        ),
+        (
+            vec![vec![1, 3], vec![6, 9]],
+            vec![10, 10],
+            vec![vec![1, 3], vec![6, 9], vec![10, 10]],
+        ),
+        (
+            vec![vec![1, 3], vec![6, 9]],
+            vec![1, 1],
+            vec![vec![1, 3], vec![6, 9]],
+        ),
+        (
+            vec![vec![1, 3], vec![6, 9]],
+            vec![9, 9],
+            vec![vec![1, 3], vec![6, 9]],
+        ),
+        (
+            vec![vec![1, 2], vec![3, 5], vec![6, 7], vec![8, 10], vec![12, 16]],
+            vec![4, 8],
+            vec![vec![1, 2], vec![3, 10], vec![12, 16]]
+        ),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::insert(case.0, case.1), case.2);
+    }
+}

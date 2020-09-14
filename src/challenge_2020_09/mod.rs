@@ -236,4 +236,43 @@ impl Solution {
 
         backtrack(k, n, 1)
     }
+
+    // 57. Insert Interval.
+    // https://leetcode.com/problems/insert-interval/
+    pub fn insert(intervals: Vec<Vec<i32>>, new_interval: Vec<i32>) -> Vec<Vec<i32>> {
+        fn search_containing_interval(intervals: &Vec<Vec<i32>>, p: i32) -> Result<usize, usize> {
+            match intervals.binary_search_by_key(&p, |x| x[0]) {
+                Ok(x) => Ok(x),
+                Err(x) if x > 0 && intervals[x - 1][1] >= p => Ok(x - 1),
+                Err(x) => Err(x)
+            }
+        }
+
+        let mut res: Vec<Vec<i32>> = Vec::with_capacity(intervals.len());
+        let start = search_containing_interval(&intervals, new_interval[0]);
+        let end = search_containing_interval(&intervals, new_interval[1]);
+        match (start, end) {
+            (Ok(s), Ok(e)) => {
+                res.append(intervals[..s].to_vec().as_mut());
+                res.push(vec![intervals[s][0], intervals[e][1]]);
+                res.append(intervals[e + 1..].to_vec().as_mut());
+            },
+            (Err(s), Err(e)) => {
+                res.append(intervals[..s].to_vec().as_mut());
+                res.push(new_interval);
+                res.append(intervals[e..].to_vec().as_mut());
+            },
+            (Ok(s), Err(e)) => {
+                res.append(intervals[..s].to_vec().as_mut());
+                res.push(vec![intervals[s][0], new_interval[1]]);
+                res.append(intervals[e..].to_vec().as_mut());
+            },
+            (Err(s), Ok(e)) => {
+                res.append(intervals[..s].to_vec().as_mut());
+                res.push(vec![new_interval[0], intervals[e][1]]);
+                res.append(intervals[e + 1..].to_vec().as_mut());
+            },
+        }
+        res
+    }
 }

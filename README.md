@@ -1,4 +1,4 @@
-### List of solved problems (160)
+### List of solved problems (161)
 1. **1** Two Sum https://leetcode.com/problems/two-sum/ *Easy*
 1. **7** Reverse Integer https://leetcode.com/problems/reverse-integer/ *Easy*
 1. **15** 3Sum https://leetcode.com/problems/3sum/ *Medium*
@@ -11,6 +11,7 @@
 1. **50** Pow(x, n) https://leetcode.com/problems/powx-n/ *Medium*
 1. **53** Maximum Subarray https://leetcode.com/problems/maximum-subarray/ *Easy*
 1. **55** Jump Game https://leetcode.com/problems/jump-game/ *Medium*
+1. **56** Merge Intervals https://leetcode.com/problems/merge-intervals/ *Medium*
 1. **57** Insert Interval https://leetcode.com/problems/insert-interval/ *Hard*
 1. **60** Permutation Sequence https://leetcode.com/problems/permutation-sequence/ *Medium*
 1. **62** Unique Paths https://leetcode.com/problems/unique-paths/ *Medium*

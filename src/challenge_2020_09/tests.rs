@@ -194,3 +194,17 @@ fn insert_test() {
         assert_eq!(Solution::insert(case.0, case.1), case.2);
     }
 }
+
+#[test]
+fn rob_test() {
+    let test_cases = vec![
+        (vec![], 0),
+        (vec![1], 1),
+        (vec![1, 2, 3, 1], 4),
+        (vec![2, 7, 9, 3, 1], 12),
+        (vec![2, 1, 1, 2], 4),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::rob(case.0), case.1);
+    }
+}

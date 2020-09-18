@@ -289,4 +289,46 @@ impl Solution {
 
         nums.pop().unwrap()
     }
+
+    // 1041. Robot Bounded In Circle.
+    // https://leetcode.com/problems/robot-bounded-in-circle/
+    pub fn is_robot_bounded(instructions: String) -> bool {
+        #[derive(PartialEq, Eq, Clone, Debug)]
+        struct Point { x: i32, y: i32 };
+
+        #[derive(PartialEq, Eq, Clone, Debug)]
+        enum Direction { North, West, South, East }
+
+        let init_point = Point { x: 0, y: 0 };
+        let init_dir = Direction::North;
+
+        let mut curr_point = Point { x: 0, y: 0 };
+        let mut curr_dir = Direction::North;
+
+        let commands: Vec<char> = instructions.chars().collect();
+            for c in &commands {
+                match c {
+                    'L' => curr_dir = match curr_dir {
+                        Direction::North => Direction::West,
+                        Direction::West => Direction::South,
+                        Direction::South => Direction::East,
+                        Direction::East => Direction::North,
+                    },
+                    'R' => curr_dir = match curr_dir {
+                        Direction::North => Direction::East,
+                        Direction::East => Direction::South,
+                        Direction::South => Direction::West,
+                        Direction::West => Direction::North,
+                    },
+                    'G' => match curr_dir {
+                        Direction::North => curr_point.y += 1,
+                        Direction::East => curr_point.x += 1,
+                        Direction::South => curr_point.y -= 1,
+                        Direction::West => curr_point.x -= 1,
+                    },
+                    _ => (),
+                }
+        }
+        curr_dir != init_dir || curr_point == init_point
+    }
 }

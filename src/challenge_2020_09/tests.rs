@@ -208,3 +208,16 @@ fn rob_test() {
         assert_eq!(Solution::rob(case.0), case.1);
     }
 }
+
+#[test]
+fn is_robot_bounded_test() {
+    let test_cases = vec![
+        ("GGLLGG", true),
+        ("GG", false),
+        ("GL", true),
+        ("GLRLLGLL", true)
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::is_robot_bounded(case.0.to_string()), case.1);
+    }
+}

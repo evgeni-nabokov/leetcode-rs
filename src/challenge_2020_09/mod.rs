@@ -331,4 +331,17 @@ impl Solution {
         }
         curr_dir != init_dir || curr_point == init_point
     }
+
+    // 121. Best Time to Buy and Sell Stock.
+    // https://leetcode.com/problems/best-time-to-buy-and-sell-stock/
+    pub fn max_profit(prices: Vec<i32>) -> i32 {
+        if prices.len() < 2 { return 0; }
+        let mut min_price = prices[0];
+        let mut max_profit = 0;
+        for i in 1..prices.len() {
+            min_price = min(min_price, prices[i]);
+            max_profit = max(max_profit, prices[i] - min_price);
+        }
+        max_profit
+    }
 }

@@ -221,3 +221,17 @@ fn is_robot_bounded_test() {
         assert_eq!(Solution::is_robot_bounded(case.0.to_string()), case.1);
     }
 }
+
+#[test]
+fn max_profit_test() {
+    let test_cases = vec![
+        (vec![], 0),
+        (vec![1], 0),
+        (vec![1, 2], 1),
+        (vec![7, 1, 5, 3, 6, 4], 5),
+        (vec![7, 6, 4, 3, 1], 0),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::max_profit(case.0), case.1);
+    }
+}

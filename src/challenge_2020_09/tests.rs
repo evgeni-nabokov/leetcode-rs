@@ -236,16 +236,26 @@ fn max_profit_test() {
     }
 }
 
-#[test]
-fn sequential_digits_test() {
-    let test_cases = vec![
+fn get_sequential_digits_test_cases() -> Vec<(i32, i32 , Vec<i32>)> {
+    vec![
         (100, 300, vec![123, 234]),
         (100, 234, vec![123, 234]),
         (23456789, 123456789, vec![23456789, 123456789]),
         (23456788, 123456790, vec![23456789, 123456789]),
         (1000, 13000, vec![1234, 2345, 3456, 4567, 5678, 6789, 12345]),
-    ];
-    for case in test_cases {
+    ]
+}
+
+#[test]
+fn sequential_digits_test() {
+    for case in get_sequential_digits_test_cases() {
         assert_eq!(Solution::sequential_digits(case.0, case.1), case.2);
+    }
+}
+
+#[test]
+fn sequential_digits_v2_test() {
+    for case in get_sequential_digits_test_cases() {
+        assert_eq!(Solution::sequential_digits_v2(case.0, case.1), case.2);
     }
 }

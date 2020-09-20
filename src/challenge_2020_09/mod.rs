@@ -31,6 +31,20 @@ lazy_static! {
     };
 }
 
+const POWERS_OF_10: [u32; 9] = [1, 10, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000];
+const DIGITS: [u32; 9] = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+fn get_num_len(num: u32) -> usize {
+    match POWERS_OF_10.binary_search(&num) {
+        Ok(i) => i + 1,
+        Err(i) => i,
+    }
+}
+
+fn concat_digits(digits: &[u32]) -> i32 {
+    digits.iter().fold(0, |p, &d| p * 10 + d as i32)
+}
+
 struct Solution;
 
 impl Solution {
@@ -381,6 +395,20 @@ impl Solution {
         let mut res: Vec<i32> = Vec::new();
         for i in start..end {
             res.push(SEQ_DIG_NUMBERS[i]);
+        }
+        res
+    }
+
+    // Sliding window solution.
+    pub fn sequential_digits_v2(low: i32, high: i32) -> Vec<i32> {
+        let mut res: Vec<i32> = Vec::new();
+        for l in get_num_len(low as u32)..=get_num_len(high as u32) {
+            for i in 0..=9 - l {
+                let num = concat_digits(&DIGITS[i..i + l]);
+                if num >= low && num <= high {
+                    res.push(num);
+                }
+            }
         }
         res
     }

@@ -235,3 +235,17 @@ fn max_profit_test() {
         assert_eq!(Solution::max_profit(case.0), case.1);
     }
 }
+
+#[test]
+fn sequential_digits_test() {
+    let test_cases = vec![
+        (100, 300, vec![123, 234]),
+        (100, 234, vec![123, 234]),
+        (23456789, 123456789, vec![23456789, 123456789]),
+        (23456788, 123456790, vec![23456789, 123456789]),
+        (1000, 13000, vec![1234, 2345, 3456, 4567, 5678, 6789, 12345]),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::sequential_digits(case.0, case.1), case.2);
+    }
+}

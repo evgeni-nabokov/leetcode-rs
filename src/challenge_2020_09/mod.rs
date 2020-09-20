@@ -8,7 +8,28 @@ use std::rc::Rc;
 use std::cell::RefCell;
 use std::cmp::{Ordering, min, max};
 
+use lazy_static::lazy_static;
+
 use crate::common::tree_node::TreeNode;
+
+lazy_static! {
+    static ref SEQ_DIG_NUMBERS: Vec<i32> = {
+        let mut res: Vec<i32> = Vec::new();
+        let mut digits: Vec<u8> = Vec::with_capacity(9);
+        for i in 2..=9 {
+            for j in 1..=(10 - i) {
+                let mut d = j;
+                for _ in 1..=i {
+                    digits.push(d);
+                    d += 1;
+                }
+                res.push(digits.iter().fold(0, |p, &x| p * 10 + x as i32));
+                digits.clear();
+            }
+        }
+        res
+    };
+}
 
 struct Solution;
 
@@ -343,5 +364,24 @@ impl Solution {
             max_profit = max(max_profit, prices[i] - min_price);
         }
         max_profit
+    }
+
+    // 1291. Sequential Digits.
+    // https://leetcode.com/problems/sequential-digits/
+    pub fn sequential_digits(low: i32, high: i32) -> Vec<i32> {
+        let start = match SEQ_DIG_NUMBERS.binary_search(&low) {
+            Ok(i) => i,
+            Err(i) => i
+        };
+        let end = match SEQ_DIG_NUMBERS.binary_search(&high) {
+            Ok(i) => i + 1,
+            Err(i) => i
+        };
+
+        let mut res: Vec<i32> = Vec::new();
+        for i in start..end {
+            res.push(SEQ_DIG_NUMBERS[i]);
+        }
+        res
     }
 }

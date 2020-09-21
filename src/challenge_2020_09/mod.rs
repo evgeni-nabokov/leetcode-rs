@@ -412,4 +412,47 @@ impl Solution {
         }
         res
     }
+
+    // 980. Unique Paths III
+    // https://leetcode.com/problems/unique-paths-iii/
+    pub fn unique_paths_iii(mut grid: Vec<Vec<i32>>) -> i32 {
+        let mut empty_total = 0;
+        let mut start: (i32, i32) = (0, 0);
+        for r in 0..grid.len() {
+            for c in 0..grid[r].len() {
+                match grid[r][c] {
+                    0 => empty_total += 1,
+                    1 => start = (r as i32, c as i32),
+                    _ => (),
+                }
+            }
+        }
+
+        fn dfs(grid: &mut Vec<Vec<i32>>, row: i32, col: i32, mut empty_curr: i32, empty_total: i32) -> i32 {
+            if row < 0 || row as usize >= grid.len() || col < 0 || col as usize >= grid[row as usize].len() {
+                return 0;
+            }
+
+            match grid[row as usize][col as usize] {
+                2 if empty_curr == empty_total => 1,
+                -1 | 2 => 0,
+                val => {
+                    let old_val = val;
+                    if val == 0 {
+                        empty_curr += 1;
+                    }
+                    grid[row as usize][col as usize] = -1;
+                    let res = [(row + 1, col), (row, col + 1), (row - 1, col), (row, col - 1)]
+                        .iter().fold(0, |s, (r, c)| {
+                        //println!("s={}", s);
+                        s + dfs(grid, *r, *c, empty_curr, empty_total)
+                    });
+                    grid[row as usize][col as usize] = old_val;
+                    res
+                }
+            }
+        }
+
+        dfs(&mut grid, start.0, start.1, 0, empty_total)
+    }
 }

@@ -259,3 +259,55 @@ fn sequential_digits_v2_test() {
         assert_eq!(Solution::sequential_digits_v2(case.0, case.1), case.2);
     }
 }
+
+#[test]
+fn unique_paths_iii_test() {
+    let test_cases = vec![
+        (
+            vec![
+                vec![1,2],
+            ],
+            1,
+        ),
+        (
+            vec![
+                vec![1,0],
+                vec![0,2],
+            ],
+            0,
+        ),
+        (
+            vec![
+                vec![1,-1],
+                vec![-1,2],
+            ],
+            0,
+        ),
+        (
+            vec![
+                vec![1,-1],
+                vec![0,2],
+            ],
+            1,
+        ),
+        (
+            vec![
+                vec![1, 0, 0],
+                vec![0, 0, 0],
+                vec![0, 0, 2],
+            ],
+            2,
+        ),
+        (
+            vec![
+                vec![1,0,0,0],
+                vec![0,0,0,0],
+                vec![0,0,2,-1]
+            ],
+            2,
+        ),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::unique_paths_iii(case.0), case.1);
+    }
+}

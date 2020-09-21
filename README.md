@@ -1,4 +1,4 @@
-### List of solved problems (165)
+### List of solved problems (166)
 1. **1** Two Sum https://leetcode.com/problems/two-sum/ *Easy*
 1. **7** Reverse Integer https://leetcode.com/problems/reverse-integer/ *Easy*
 1. **15** 3Sum https://leetcode.com/problems/3sum/ *Medium*
@@ -139,6 +139,7 @@
 1. **957** Prison Cells After N Days https://leetcode.com/problems/prison-cells-after-n-days/ *Medium*
 1. **973** K Closest Points to Origin https://leetcode.com/problems/k-closest-points-to-origin/ *Medium*
 1. **977** Squares of a Sorted Array https://leetcode.com/problems/squares-of-a-sorted-array/ *Easy*
+1. **980** Unique Paths III https://leetcode.com/problems/unique-paths-iii/ *Hard*
 1. **986** Interval List Intersections https://leetcode.com/problems/interval-list-intersections/ *Medium*
 1. **987** Vertical Order Traversal of a Binary Tree https://leetcode.com/problems/vertical-order-traversal-of-a-binary-tree/ *Medium*
 1. **993** Cousins in Binary Tree https://leetcode.com/problems/cousins-in-binary-tree/ *Easy*

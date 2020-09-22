@@ -3,7 +3,7 @@ mod moving_average;
 #[cfg(test)]
 mod tests;
 
-use std::collections::{BTreeSet, HashSet};
+use std::collections::{BTreeSet, HashSet, BTreeMap};
 use std::rc::Rc;
 use std::cell::RefCell;
 use std::cmp::{Ordering, min, max};
@@ -329,7 +329,8 @@ impl Solution {
     // https://leetcode.com/problems/robot-bounded-in-circle/
     pub fn is_robot_bounded(instructions: String) -> bool {
         #[derive(PartialEq, Eq, Clone, Debug)]
-        struct Point { x: i32, y: i32 };
+        struct Point { x: i32, y: i32 }
+        ;
 
         #[derive(PartialEq, Eq, Clone, Debug)]
         enum Direction { North, West, South, East }
@@ -341,28 +342,28 @@ impl Solution {
         let mut curr_dir = Direction::North;
 
         let commands: Vec<char> = instructions.chars().collect();
-            for c in &commands {
-                match c {
-                    'L' => curr_dir = match curr_dir {
-                        Direction::North => Direction::West,
-                        Direction::West => Direction::South,
-                        Direction::South => Direction::East,
-                        Direction::East => Direction::North,
-                    },
-                    'R' => curr_dir = match curr_dir {
-                        Direction::North => Direction::East,
-                        Direction::East => Direction::South,
-                        Direction::South => Direction::West,
-                        Direction::West => Direction::North,
-                    },
-                    'G' => match curr_dir {
-                        Direction::North => curr_point.y += 1,
-                        Direction::East => curr_point.x += 1,
-                        Direction::South => curr_point.y -= 1,
-                        Direction::West => curr_point.x -= 1,
-                    },
-                    _ => (),
-                }
+        for c in &commands {
+            match c {
+                'L' => curr_dir = match curr_dir {
+                    Direction::North => Direction::West,
+                    Direction::West => Direction::South,
+                    Direction::South => Direction::East,
+                    Direction::East => Direction::North,
+                },
+                'R' => curr_dir = match curr_dir {
+                    Direction::North => Direction::East,
+                    Direction::East => Direction::South,
+                    Direction::South => Direction::West,
+                    Direction::West => Direction::North,
+                },
+                'G' => match curr_dir {
+                    Direction::North => curr_point.y += 1,
+                    Direction::East => curr_point.x += 1,
+                    Direction::South => curr_point.y -= 1,
+                    Direction::West => curr_point.x -= 1,
+                },
+                _ => (),
+            }
         }
         curr_dir != init_dir || curr_point == init_point
     }
@@ -454,5 +455,57 @@ impl Solution {
         }
 
         dfs(&mut grid, start.0, start.1, 0, empty_total)
+    }
+
+    // 1094. Car Pooling.
+    // https://leetcode.com/problems/car-pooling/
+    // Priority queue solution.
+    pub fn car_pooling(mut trips: Vec<Vec<i32>>, capacity: i32) -> bool {
+        trips.sort_unstable_by(|a, b| match a[1].cmp(&b[1]) {
+            Ordering::Equal => match a[2].cmp(&b[2]) {
+                Ordering::Equal => a[0].cmp(&b[0]),
+                x => x,
+            },
+            x => x,
+        });
+
+        let mut free_seats = capacity;
+        let mut queue: BTreeMap<i32, i32> = BTreeMap::new();
+        for trip in trips {
+            while !queue.is_empty() {
+                let location = queue.iter().next().unwrap().0.clone();
+                if location > trip[1] {
+                    break;
+                }
+                let num_passengers = queue.iter().next().unwrap().1.clone();
+                free_seats += num_passengers;
+                queue.remove(&location);
+            }
+
+            if trip[0] > free_seats {
+                return false;
+            }
+
+            *queue.entry(trip[2]).or_insert(0) += trip[0];
+            free_seats -= trip[0];
+        }
+        true
+    }
+
+    // Timestamp solution.
+    pub fn car_pooling_v2(trips: Vec<Vec<i32>>, mut capacity: i32) -> bool {
+        let mut timestamp: Vec<(i32, i32)> = Vec::with_capacity(trips.len() * 2);
+        for trip in trips {
+            timestamp.push((trip[1], trip[0]));
+            timestamp.push((trip[2], -trip[0]));
+        }
+        timestamp.sort_unstable();
+        for (_, passenger_change) in timestamp {
+            capacity -= passenger_change;
+            if capacity < 0 {
+                return false;
+            }
+        }
+        true
     }
 }

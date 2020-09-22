@@ -311,3 +311,28 @@ fn unique_paths_iii_test() {
         assert_eq!(Solution::unique_paths_iii(case.0), case.1);
     }
 }
+
+fn get_car_pooling_test_cases() -> Vec<(Vec<Vec<i32>>, i32, bool)> {
+    vec![
+        (vec![vec![2, 1, 5], vec![3, 3, 7]], 4, false),
+        (vec![vec![2, 1, 5], vec![3, 3, 7]], 5, true),
+        (vec![vec![2, 1, 5], vec![3, 5, 7]], 3, true),
+        (vec![vec![3, 2, 7], vec![3, 7, 9], vec![8, 3, 9]], 11, true),
+        (vec![vec![4, 5, 6], vec![6, 4, 7], vec![4, 3, 5], vec![2, 3, 5]], 13, true),
+        (vec![vec![9, 3, 4], vec![9, 1, 7], vec![4, 2, 4], vec![7, 4, 5]], 23, true)
+    ]
+}
+
+#[test]
+fn car_pooling_test() {
+    for case in get_car_pooling_test_cases() {
+        assert_eq!(Solution::car_pooling(case.0, case.1), case.2);
+    }
+}
+
+#[test]
+fn car_pooling_v2_test() {
+    for case in get_car_pooling_test_cases() {
+        assert_eq!(Solution::car_pooling_v2(case.0, case.1), case.2);
+    }
+}

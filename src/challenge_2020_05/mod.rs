@@ -169,6 +169,19 @@ impl Solution {
         solve(&nums)
     }
 
+    // Boyer-Moore voting solution.
+    pub fn majority_element_v4(nums: Vec<i32>) -> i32 {
+        let mut candidate = nums[0];
+        let mut count = 1;
+        for n in nums.into_iter().skip(1) {
+            if count == 0 {
+                candidate = n;
+            }
+            count += if candidate == n { 1 } else { -1 };
+        }
+        candidate
+    }
+
     // 993. Cousins in Binary Tree.
     // https://leetcode.com/problems/cousins-in-binary-tree/
     pub fn is_cousins(root: Option<Rc<RefCell<TreeNode>>>, x: i32, y: i32) -> bool {

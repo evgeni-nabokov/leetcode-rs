@@ -97,6 +97,13 @@ fn majority_element_v3_test() {
 }
 
 #[test]
+fn majority_element_v4_test() {
+    for case in get_majority_element_test_cases() {
+        assert_eq!(Solution::majority_element_v4(case.0), case.1);
+    }
+}
+
+#[test]
 fn is_cousins_test() {
     let test_cases = vec![
         (

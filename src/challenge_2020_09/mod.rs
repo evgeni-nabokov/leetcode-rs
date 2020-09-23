@@ -508,4 +508,28 @@ impl Solution {
         }
         true
     }
+
+    // 229. Majority Element II.
+    // https://leetcode.com/problems/majority-element-ii/
+    // Sorting solution.
+    pub fn majority_element_ii(mut nums: Vec<i32>) -> Vec<i32> {
+        if nums.len() < 2 { return nums; }
+        nums.sort_unstable();
+        let threshold = nums.len() / 3 + 1;
+        let mut res: Vec<i32> = Vec::with_capacity(2);
+        let mut count = 1;
+        for i in 1..=nums.len() {
+            if count == threshold {
+                res.push(nums[i - 1]);
+                if res.len() == res.capacity() { break; }
+            }
+            if i == nums.len() { break; }
+            if nums[i] == nums[i - 1] {
+                count += 1;
+            } else {
+                count = 1;
+            }
+        }
+        res
+    }
 }

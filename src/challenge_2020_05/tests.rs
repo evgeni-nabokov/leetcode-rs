@@ -65,11 +65,26 @@ fn first_uniq_char_test() {
     assert_eq!(Solution::first_uniq_char("loveleetcode".to_string()), 2);
 }
 
+fn get_majority_element_test_cases() -> Vec<(Vec<i32>, i32)> {
+    vec![
+        (vec![1], 1),
+        (vec![3, 2, 3], 3),
+        (vec![2, 2, 1, 1, 1, 2, 2], 2),
+    ]
+}
+
 #[test]
 fn majority_element_test() {
-    assert_eq!(Solution::majority_element(vec![1]), 1);
-    assert_eq!(Solution::majority_element(vec![3,2,3]), 3);
-    assert_eq!(Solution::majority_element(vec![2,2,1,1,1,2,2]), 2);
+    for case in get_majority_element_test_cases() {
+        assert_eq!(Solution::majority_element(case.0), case.1);
+    }
+}
+
+#[test]
+fn majority_element_v2_test() {
+    for case in get_majority_element_test_cases() {
+        assert_eq!(Solution::majority_element_v2(case.0), case.1);
+    }
 }
 
 #[test]

@@ -117,6 +117,7 @@ impl Solution {
 
     // 169. Majority Element.
     // https://leetcode.com/problems/majority-element/
+    // HashMap solution.
     pub fn majority_element(nums: Vec<i32>) -> i32 {
         let half_len = nums.len() / 2;
         let mut counter_map: HashMap<i32, usize> = HashMap::with_capacity(half_len);
@@ -134,6 +135,12 @@ impl Solution {
             }
         }
         *counter_map.keys().next().unwrap()
+    }
+
+    // Sorting solution.
+    pub fn majority_element_v2(mut nums: Vec<i32>) -> i32 {
+        nums.sort_unstable();
+        nums[nums.len() / 2]
     }
 
     // 993. Cousins in Binary Tree.

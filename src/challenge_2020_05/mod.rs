@@ -143,6 +143,32 @@ impl Solution {
         nums[nums.len() / 2]
     }
 
+    // Divide and Conquer solution.
+    pub fn majority_element_v3(nums: Vec<i32>) -> i32 {
+        fn count(nums: &[i32], n: i32) -> i32 {
+            nums.iter().fold(0, |acc, x| acc + if *x == n { 1 } else { 0 })
+        }
+
+        fn solve(nums: &[i32]) -> i32 {
+            if nums.len() == 1 {
+                return nums[0]
+            }
+
+            let mid = nums.len() / 2 + nums.len() % 2;
+            let left =  solve(&nums[..mid]);
+            let right =  solve(&nums[mid..]);
+
+            if left == right
+                || count(&nums[..mid], left) > count(&nums[mid..], right) {
+                left
+            } else {
+                right
+            }
+        }
+
+        solve(&nums)
+    }
+
     // 993. Cousins in Binary Tree.
     // https://leetcode.com/problems/cousins-in-binary-tree/
     pub fn is_cousins(root: Option<Rc<RefCell<TreeNode>>>, x: i32, y: i32) -> bool {

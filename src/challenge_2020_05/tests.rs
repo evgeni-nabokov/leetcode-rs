@@ -69,6 +69,8 @@ fn get_majority_element_test_cases() -> Vec<(Vec<i32>, i32)> {
     vec![
         (vec![1], 1),
         (vec![3, 2, 3], 3),
+        (vec![3, 3, 4], 3),
+        (vec![4, 3, 3], 3),
         (vec![2, 2, 1, 1, 1, 2, 2], 2),
     ]
 }
@@ -84,6 +86,13 @@ fn majority_element_test() {
 fn majority_element_v2_test() {
     for case in get_majority_element_test_cases() {
         assert_eq!(Solution::majority_element_v2(case.0), case.1);
+    }
+}
+
+#[test]
+fn majority_element_v3_test() {
+    for case in get_majority_element_test_cases() {
+        assert_eq!(Solution::majority_element_v3(case.0), case.1);
     }
 }
 

@@ -532,4 +532,40 @@ impl Solution {
         }
         res
     }
+
+    // 134. Gas Station.
+    // https://leetcode.com/problems/gas-station/
+    // Straightforward solution.
+    pub fn can_complete_circuit(gas: Vec<i32>, cost: Vec<i32>) -> i32 {
+        let l = gas.len();
+        for i in 0..l {
+            if gas[i] - cost[i] < 0 { continue; }
+            // i - possible starting station.
+            let mut tank = 0;
+            for mut j in i..i + l {
+                if j >= l { j -= l; }
+                tank += gas[j] - cost[j];
+                if tank < 0 { break; }
+            }
+            if tank >= 0 { return i as i32; }
+        }
+        -1
+    }
+
+    // Greed solution.
+    pub fn can_complete_circuit_v2(gas: Vec<i32>, cost: Vec<i32>) -> i32 {
+        let mut total_tank = 0;
+        let mut curr_tank = 0;
+        let mut starting_station = 0;
+        for i in 0..gas.len() {
+            curr_tank += gas[i] - cost[i];
+            total_tank += gas[i] - cost[i];
+            if curr_tank < 0 {
+                starting_station = i + 1;
+                curr_tank = 0;
+            }
+
+        }
+        if total_tank >= 0 { starting_station as i32 } else { -1 }
+    }
 }

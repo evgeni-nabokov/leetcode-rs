@@ -352,3 +352,26 @@ fn majority_element_ii_test() {
         assert_eq!(Solution::majority_element_ii(case.0), case.1);
     }
 }
+
+fn get_can_complete_circuit_test_cases() -> Vec<(Vec<i32>, Vec<i32>, i32)>{
+    vec![
+        (vec![1, 2, 3, 4, 5], vec![3,4,5,1,2], 3),
+        (vec![2, 3, 4], vec![3, 4, 3], -1),
+        (vec![5, 1, 2, 3, 4], vec![4, 4, 1, 5, 1], 4),
+        (vec![3, 1, 1], vec![1, 2, 2], 0),
+    ]
+}
+
+#[test]
+fn can_complete_circuit_test() {
+    for case in get_can_complete_circuit_test_cases() {
+        assert_eq!(Solution::can_complete_circuit(case.0, case.1), case.2);
+    }
+}
+
+#[test]
+fn can_complete_circuit_v2_test() {
+    for case in get_can_complete_circuit_test_cases() {
+        assert_eq!(Solution::can_complete_circuit_v2(case.0, case.1), case.2);
+    }
+}

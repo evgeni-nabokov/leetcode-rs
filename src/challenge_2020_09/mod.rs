@@ -552,7 +552,7 @@ impl Solution {
         -1
     }
 
-    // Greed solution.
+    // Greedy solution.
     pub fn can_complete_circuit_v2(gas: Vec<i32>, cost: Vec<i32>) -> i32 {
         let mut total_tank = 0;
         let mut curr_tank = 0;
@@ -567,5 +567,57 @@ impl Solution {
 
         }
         if total_tank >= 0 { starting_station as i32 } else { -1 }
+    }
+
+    // 389. Find the Difference.
+    // https://leetcode.com/problems/find-the-difference/
+    // Sorting solution.
+    pub fn find_the_difference(s: String, t: String) -> char {
+        let mut s_chars: Vec<char> = s.chars().collect();
+        s_chars.sort_unstable();
+
+        let mut t_chars: Vec<char> = t.chars().collect();
+        t_chars.sort_unstable();
+
+        for i in 0..s_chars.len() {
+            if s_chars[i] != t_chars[i] {
+                 return t_chars[i];
+            }
+        }
+        *t_chars.last().unwrap()
+    }
+
+    // Array solution.
+    pub fn find_the_difference_v2(s: String, t: String) -> char {
+        let s_chars: Vec<char> = s.chars().collect();
+        let t_chars: Vec<char> = t.chars().collect();
+        let mut counter: Vec<i8> = vec![0; 26];
+
+        for i in 0..t_chars.len() {
+            if i != s_chars.len() {
+                counter[s_chars[i] as usize - 97] += 1;
+            }
+            counter[t_chars[i] as usize - 97] -= 1;
+        }
+        for i in 0..26 {
+            if counter[i] < 0 {
+                return (i as u8 + 97) as char
+            }
+        }
+        unreachable!();
+    }
+
+    // XOR solution
+    pub fn find_the_difference_v3(s: String, t: String) -> char {
+        let s_chars: Vec<char> = s.chars().collect();
+        let t_chars: Vec<char> = t.chars().collect();
+        let mut ch: u8 = 0;
+        for i in 0..t_chars.len() {
+            if i != s_chars.len() {
+                ch ^= s_chars[i] as u8 - 97;
+            }
+            ch ^= t_chars[i] as u8 - 97;
+        }
+        (ch + 97) as char
     }
 }

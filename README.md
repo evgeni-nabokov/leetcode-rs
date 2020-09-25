@@ -1,4 +1,4 @@
-### List of solved problems (169)
+### List of solved problems (170)
 1. **1** Two Sum https://leetcode.com/problems/two-sum/ *Easy*
 1. **7** Reverse Integer https://leetcode.com/problems/reverse-integer/ *Easy*
 1. **15** 3Sum https://leetcode.com/problems/3sum/ *Medium*
@@ -94,6 +94,7 @@
 1. **380** Insert Delete GetRandom O(1) https://leetcode.com/problems/insert-delete-getrandom-o1/ *Medium*
 1. **383** Ransom Note https://leetcode.com/problems/ransom-note/ *Easy*
 1. **387** First Unique Character in a String https://leetcode.com/problems/first-unique-character-in-a-string/ *Easy*
+1. **389** Find the Difference https://leetcode.com/problems/find-the-difference/ *Easy*
 1. **392** Is Subsequence https://leetcode.com/problems/is-subsequence/ *Easy*
 1. **402** Remove K Digits https://leetcode.com/problems/remove-k-digits/ *Medium*
 1. **404** Sum of Left Leaves https://leetcode.com/problems/sum-of-left-leaves/ *Easy*

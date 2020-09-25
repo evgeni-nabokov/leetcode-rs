@@ -375,3 +375,33 @@ fn can_complete_circuit_v2_test() {
         assert_eq!(Solution::can_complete_circuit_v2(case.0, case.1), case.2);
     }
 }
+
+fn get_the_difference_test_cases<'a>() -> Vec<(&'a str, &'a str, char)> {
+    vec![
+        ("", "a", 'a'),
+        ("a", "aa", 'a'),
+        ("aa", "aab", 'b'),
+        ("abcd", "abcde", 'e'),
+    ]
+}
+
+#[test]
+fn find_the_difference_test() {
+    for case in get_the_difference_test_cases() {
+        assert_eq!(Solution::find_the_difference(case.0.to_string(), case.1.to_string()), case.2);
+    }
+}
+
+#[test]
+fn find_the_difference_v2_test() {
+    for case in get_the_difference_test_cases() {
+        assert_eq!(Solution::find_the_difference_v2(case.0.to_string(), case.1.to_string()), case.2);
+    }
+}
+
+#[test]
+fn find_the_difference_v3_test() {
+    for case in get_the_difference_test_cases() {
+        assert_eq!(Solution::find_the_difference_v3(case.0.to_string(), case.1.to_string()), case.2);
+    }
+}

@@ -405,3 +405,35 @@ fn find_the_difference_v3_test() {
         assert_eq!(Solution::find_the_difference_v3(case.0.to_string(), case.1.to_string()), case.2);
     }
 }
+
+fn get_largest_number_test_cases<'a>() -> Vec<(Vec<i32>, &'a str)> {
+    vec![
+        (vec![0, 0], "0"),
+        (vec![1, 1], "11"),
+        (vec![8, 91], "918"),
+        (vec![10, 2], "210"),
+        (vec![3, 30], "330"),
+        (vec![30, 3], "330"),
+        (vec![121, 12], "12121"),
+        (vec![121, 12], "12121"),
+        (vec![3, 30, 32, 5, 9], "9533230"),
+        (vec![3, 30, 34, 5, 9], "9534330"),
+        (vec![128, 12], "12812"),
+        (vec![7543, 5328, 9834, 1940, 9387, 871, 5208, 7, 543], "9834938787177543543532852081940"),
+        (vec![7543, 7], "77543"),
+    ]
+}
+
+#[test]
+fn largest_number_test() {
+    for case in get_largest_number_test_cases() {
+        assert_eq!(Solution::largest_number(case.0), case.1.to_string());
+    }
+}
+
+#[test]
+fn largest_number_v2_test() {
+    for case in get_largest_number_test_cases() {
+        assert_eq!(Solution::largest_number_v2(case.0), case.1.to_string());
+    }
+}

@@ -620,4 +620,36 @@ impl Solution {
         }
         (ch + 97) as char
     }
+
+    // 179. Largest Number.
+    // https://leetcode.com/problems/largest-number/
+    // String comparison solution.
+    pub fn largest_number(nums: Vec<i32>) -> String {
+        let mut strs: Vec<String> = nums.into_iter().map(|x| x.to_string()).collect();
+        strs.sort_unstable_by(|a, b| {
+            let ab = format!("{}{}", a, b);
+            let ba = format!("{}{}", b, a);
+            ba.cmp(&ab)
+        });
+        let res: String = strs.into_iter().skip_while(|x| x == "0").collect();
+        if res.is_empty() { "0".to_string() } else { res }
+    }
+
+    // Byte arrays comparison solution.
+    pub fn largest_number_v2(nums: Vec<i32>) -> String {
+        let mut strs: Vec<String> = nums.into_iter().map(|x| x.to_string()).collect();
+        strs.sort_unstable_by(|a, b| {
+            let ab_iter = a.bytes().chain(b.bytes());
+            let ba_iter = b.bytes().chain(a.bytes());
+            for (i, j) in ab_iter.zip(ba_iter) {
+                match j.cmp(&i) {
+                    Ordering::Equal => continue,
+                    x => return x,
+                }
+            }
+            Ordering::Equal
+        });
+        let res: String = strs.into_iter().skip_while(|x| x == "0").collect();
+        if res.is_empty() { "0".to_string() } else { res }
+    }
 }

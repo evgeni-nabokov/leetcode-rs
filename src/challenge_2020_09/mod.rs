@@ -652,4 +652,15 @@ impl Solution {
         let res: String = strs.into_iter().skip_while(|x| x == "0").collect();
         if res.is_empty() { "0".to_string() } else { res }
     }
+
+    // 495. Teemo Attacking.
+    // https://leetcode.com/problems/teemo-attacking/
+    pub fn find_poisoned_duration(time_series: Vec<i32>, duration: i32) -> i32 {
+        if time_series.is_empty() || duration == 0 { return 0; }
+        let mut total_time = duration;
+        for i in 1..time_series.len() {
+            total_time += min(duration, time_series[i] - time_series[i - 1]);
+        }
+        total_time
+    }
 }

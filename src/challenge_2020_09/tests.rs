@@ -437,3 +437,18 @@ fn largest_number_v2_test() {
         assert_eq!(Solution::largest_number_v2(case.0), case.1.to_string());
     }
 }
+
+#[test]
+fn find_poisoned_duration_test() {
+    let test_cases = vec![
+        (vec![1], 2, 2),
+        (vec![], 2, 0),
+        (vec![1], 0, 0),
+        (vec![], 0, 0),
+        (vec![1, 4], 2, 4),
+        (vec![1, 2], 2, 3),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::find_poisoned_duration(case.0, case.1), case.2);
+    }
+}

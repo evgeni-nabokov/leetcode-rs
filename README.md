@@ -1,4 +1,4 @@
-### List of solved problems (171)
+### List of solved problems (172)
 1. **1** Two Sum https://leetcode.com/problems/two-sum/ *Easy*
 1. **7** Reverse Integer https://leetcode.com/problems/reverse-integer/ *Easy*
 1. **15** 3Sum https://leetcode.com/problems/3sum/ *Medium*
@@ -115,6 +115,7 @@
 1. **476** Number Complement https://leetcode.com/problems/number-complement/ *Easy*
 1. **485** Max Consecutive Ones https://leetcode.com/problems/max-consecutive-ones/ *Easy*
 1. **490** The Maze https://leetcode.com/problems/the-maze/ *Easy*
+1. **495** Teemo Attacking https://leetcode.com/problems/teemo-attacking/ *Medium*
 1. **518** Coin Change 2 https://leetcode.com/problems/coin-change-2/ *Medium*
 1. **520** Detect Capital https://leetcode.com/problems/detect-capital/ *Easy*
 1. **525** Contiguous Array https://leetcode.com/problems/contiguous-array/ *Medium*

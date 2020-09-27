@@ -533,6 +533,63 @@ impl Solution {
         res
     }
 
+    // Boyer-Moore majority vote solution.
+    pub fn majority_element_ii_v2(mut nums: Vec<i32>) -> Vec<i32> {
+        if nums.len() < 3 {
+            nums.dedup();
+            return nums;
+        }
+
+        let mut candidate_1 = nums[0];
+        let mut count_1 = 1;
+        let mut candidate_2 = nums[1];
+        let mut count_2 = 1;
+        let mut i = 2;
+        while candidate_1 == candidate_2 && i < nums.len() {
+            count_1 += 1;
+            candidate_2 = nums[i];
+            i += 1
+        }
+        for j in i..nums.len() {
+            let n = nums[j];
+            match (candidate_1 == n, candidate_2 == n) {
+                (true, _) => count_1 += 1,
+                (_, true) => count_2 += 1,
+                _ if count_1 == 0 => {
+                    candidate_1 = n;
+                    count_1 = 1;
+                },
+                _ if count_2 == 0 => {
+                    candidate_2 = n;
+                    count_2 = 1;
+                },
+                _ => {
+                    count_1 -= 1;
+                    count_2 -= 1;
+                }
+            }
+        }
+
+        // We got two candidates, but it is not guaranteed they both are majority elements.
+        // We have to count them.
+        count_1 = 0;
+        count_2 = 0;
+        let threshold = nums.len() / 3;
+        for n in nums {
+            if candidate_1 == n { count_1 += 1; }
+            else if candidate_2 == n { count_2 += 1; }
+            if count_1 > threshold && count_2 > threshold { break; }
+        }
+        let mut res: Vec<i32> = Vec::with_capacity(2);
+        if count_1 > threshold {
+            res.push(candidate_1);
+        }
+        if count_2 > threshold {
+            res.push(candidate_2);
+        }
+        res
+    }
+
     // 134. Gas Station.
     // https://leetcode.com/problems/gas-station/
     // Straightforward solution.

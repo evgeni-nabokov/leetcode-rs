@@ -3,7 +3,7 @@ mod moving_average;
 #[cfg(test)]
 mod tests;
 
-use std::collections::{BTreeSet, HashSet, BTreeMap};
+use std::collections::{BTreeSet, HashSet, BTreeMap, HashMap};
 use std::rc::Rc;
 use std::cell::RefCell;
 use std::cmp::{Ordering, min, max};
@@ -719,5 +719,63 @@ impl Solution {
             total_time += min(duration, time_series[i] - time_series[i - 1]);
         }
         total_time
+    }
+
+    // 399. Evaluate Division.
+    // https://leetcode.com/problems/evaluate-division/
+    pub fn calc_equation(equations: Vec<Vec<String>>, values: Vec<f64>, queries: Vec<Vec<String>>) -> Vec<f64> {
+        let mut adj_list: HashMap<&String, HashMap<&String, f64>> = HashMap::with_capacity(equations.len() * 2);
+        for (eq, val) in equations.iter().zip(values.iter()) {
+            let entry = adj_list.entry(&eq[0]).or_insert(HashMap::new());
+            if eq[0] == eq[1] { continue; }
+            entry.entry(&eq[1]).or_insert(*val);
+
+            if *val != 0.0 {
+                (*adj_list.entry(&eq[1]).or_insert(HashMap::new()))
+                    .entry(&eq[0]).or_insert(1.0 / *val);
+            }
+        }
+
+        fn dfs(adj_list: &HashMap<&String, HashMap<&String, f64>>,
+               visited_set: &mut HashSet<String>,
+               start_key: &String, end_key: &String,
+               prod: f64,
+        ) -> f64 {
+            if visited_set.contains(start_key) ||
+                !adj_list.contains_key(start_key) ||
+                !adj_list.contains_key(end_key) {
+                return -1.0;
+            }
+
+            if start_key == end_key { return prod; }
+            visited_set.insert(start_key.clone());
+            let res = match adj_list.get(start_key) {
+                Some(neighbors) => {
+                    match neighbors.get(end_key) {
+                        Some(val) => prod * val,
+                        None => {
+                            let mut r = -1.0;
+                            for key in neighbors.keys() {
+                                r = dfs(adj_list, visited_set, key, end_key, prod * neighbors.get(key).unwrap());
+                                if r != -1.0 {
+                                    break;
+                                }
+                            }
+                            r
+                        }
+                    }
+                },
+                _ => -1.0,
+            };
+            visited_set.remove(start_key);
+            res
+        }
+
+        let mut visited_set: HashSet<String> = HashSet::with_capacity(adj_list.len());
+        let mut res: Vec<f64> = Vec::with_capacity(queries.len());
+        for q in &queries {
+            res.push(dfs(&adj_list, &mut visited_set, &q[0], &q[1], 1.0));
+        }
+        res
     }
 }

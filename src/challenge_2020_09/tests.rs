@@ -459,3 +459,41 @@ fn find_poisoned_duration_test() {
         assert_eq!(Solution::find_poisoned_duration(case.0, case.1), case.2);
     }
 }
+
+#[test]
+fn calc_equation_test() {
+    let test_cases = vec![
+        (
+            vec![vec!["a", "b"]],
+            vec![0.5],
+            vec![vec!["a", "b"], vec!["b", "a"], vec!["a", "c"], vec!["x", "y"]],
+            vec![0.5, 2.0, -1.0, -1.0]
+        ),
+        (
+            vec![vec!["a", "b"], vec!["b", "c"]],
+            vec![2.0, 3.0],
+            vec![vec!["a", "c"], vec!["b", "a"], vec!["a", "e"], vec!["a", "a"], vec!["x", "x"]],
+            vec![6.0, 0.5, -1.0, 1.0, -1.0]
+        ),
+        (
+            vec![vec!["a", "b"], vec!["b", "c"], vec!["bc", "cd"]],
+            vec![1.5, 2.5, 5.0],
+            vec![vec!["a", "c"], vec!["c", "b"], vec!["bc", "cd"], vec!["cd", "bc"]],
+            vec![3.75, 0.4, 5.0, 0.2]
+        ),
+        (
+            vec![vec!["x1", "x2"], vec!["x2", "x3"], vec!["x3", "x4"], vec!["x4", "x5"]],
+            vec![3.0, 4.0, 5.0, 6.0],
+            vec![vec!["x1", "x5"], vec!["x5", "x2"], vec!["x2", "x4"], vec!["x2", "x2"], vec!["x2", "x9"], vec!["x9", "x9"]],
+            vec![360.0, 0.00833, 20.0, 1.0, -1.0, -1.0]
+        ),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::calc_equation(
+            case.0.iter().map(|x| x.into_iter().map(|y| y.to_string()).collect()).collect(),
+            case.1,
+            case.2.iter().map(|x| x.into_iter().map(|y| y.to_string()).collect()).collect())
+                       .into_iter().map(|x| (x * 100_000.0).round() / 100_000.0).collect::<Vec<f64>>(),
+            case.3);
+    }
+}

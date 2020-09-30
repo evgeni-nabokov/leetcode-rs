@@ -497,3 +497,27 @@ fn calc_equation_test() {
             case.3);
     }
 }
+
+#[test]
+fn word_break_test() {
+    let test_cases = vec![
+        ("leetcode", vec!["leet", "code"], true),
+        ("applepenapple", vec!["apple", "pen"], true),
+        ("catsandog", vec!["cats", "dog", "sand", "and", "cat"], false),
+        (
+            "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            vec!["a","aa","aaa","aaaa","aaaaa","aaaaaa","aaaaaaa","aaaaaaaa","aaaaaaaaa","aaaaaaaaaa"],
+            true,
+        ),
+        (
+            "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaab",
+            vec!["a","aa","aaa","aaaa","aaaaa","aaaaaa","aaaaaaa","aaaaaaaa","aaaaaaaaa","aaaaaaaaaa"],
+            false,
+        )
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::word_break(case.0.to_string(),
+                                        case.1.into_iter().map(|x| x.to_string()).collect()),
+                                        case.2);
+    }
+}

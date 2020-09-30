@@ -1,4 +1,4 @@
-### List of solved problems (173)
+### List of solved problems (174)
 1. **1** Two Sum https://leetcode.com/problems/two-sum/ *Easy*
 1. **7** Reverse Integer https://leetcode.com/problems/reverse-integer/ *Easy*
 1. **15** 3Sum https://leetcode.com/problems/3sum/ *Medium*
@@ -41,6 +41,7 @@
 1. **134** Gas Station https://leetcode.com/problems/gas-station/ *Medium*
 1. **136** Single Number https://leetcode.com/problems/single-number/ *Easy*
 1. **137** Single Number II https://leetcode.com/problems/single-number-ii/ *Medium*
+1. **139** Word Break https://leetcode.com/problems/word-break/solution/ *Medium*
 1. **140** Word Break II https://leetcode.com/problems/word-break-ii/ *Hard*
 1. **143** Reorder List https://leetcode.com/problems/reorder-list/ *Medium*
 1. **146** LRU Cache https://leetcode.com/problems/lru-cache/ *Medium*

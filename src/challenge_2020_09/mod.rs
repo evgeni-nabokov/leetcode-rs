@@ -7,6 +7,7 @@ use std::collections::{BTreeSet, HashSet, BTreeMap, HashMap};
 use std::rc::Rc;
 use std::cell::RefCell;
 use std::cmp::{Ordering, min, max};
+use std::iter::FromIterator;
 
 use lazy_static::lazy_static;
 
@@ -777,5 +778,32 @@ impl Solution {
             res.push(dfs(&adj_list, &mut visited_set, &q[0], &q[1], 1.0));
         }
         res
+    }
+
+    // 139. Word Break.
+    // https://leetcode.com/problems/word-break/solution/
+    // Backtracking with memoization solution.
+    pub fn word_break(s: String, word_dict: Vec<String>) -> bool {
+        fn backtrack(s: &str, word_set: &HashSet<&str>, memo: &mut Vec<Option<bool>>, start: usize) -> bool {
+            if start == s.len() { return true; }
+
+            if let Some(b) = memo[start] {
+                return b;
+            }
+
+            for end in start + 1..=s.len() {
+                if word_set.contains(&s[start..end]) && backtrack(s, word_set, memo, end) {
+                    memo[start] = Some(true);
+                    return true;
+                }
+            }
+
+            memo[start] = Some(false);
+            false
+        }
+
+        let mut memo: Vec<Option<bool>> = vec![None; s.len()];
+        let word_set: HashSet<&str> = HashSet::from_iter(word_dict.iter().map(|x| x.as_str()));
+        backtrack(&s[..], &word_set, &mut memo, 0)
     }
 }

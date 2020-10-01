@@ -806,4 +806,61 @@ impl Solution {
         let word_set: HashSet<&str> = HashSet::from_iter(word_dict.iter().map(|x| x.as_str()));
         backtrack(&s[..], &word_set, &mut memo, 0)
     }
+
+    // 41. First Missing Positive.
+    // https://leetcode.com/problems/first-missing-positive/
+    // Sorting solution.
+    pub fn first_missing_positive(mut nums: Vec<i32>) -> i32 {
+        nums.sort();
+        let start = match nums.binary_search(&1) {
+            Ok(x) => x,
+            Err(_) => return 1,
+        };
+        if start == nums.len() {
+            let last = nums.last().unwrap();
+            return if *last > 0 {
+                 *last + 1
+            } else {
+                1
+            }
+        }
+        let mut prev = nums[start];
+        for i in start + 1..nums.len() {
+            if nums[i] - prev > 1 {
+                return prev + 1;
+            }
+            prev = nums[i]
+        }
+        prev + 1
+    }
+
+    // Clean up + sign solution.
+    pub fn first_missing_positive_v2(mut nums: Vec<i32>) -> i32 {
+        let mut one = false;
+        let max_n = nums.len() as i32;
+        for i in 0..nums.len() {
+            if nums[i] == 1 {
+                one = true;
+            } else if nums[i] <= 0 || nums[i] > max_n {
+                nums[i] = 1;
+            }
+        }
+        if !one {
+            return 1;
+        } else if max_n == 1 {
+            return 2;
+        }
+        for i in 0..nums.len() {
+            let j = nums[i].abs() as usize - 1;
+            if nums[j] > 0 {
+                nums[j] = -nums[j];
+            }
+        }
+        for i in 0..nums.len() {
+            if nums[i] > 0 {
+                return i as i32 + 1;
+            }
+        }
+        max_n + 1
+    }
 }

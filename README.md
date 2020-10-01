@@ -1,4 +1,4 @@
-### List of solved problems (174)
+### List of solved problems (175)
 1. **1** Two Sum https://leetcode.com/problems/two-sum/ *Easy*
 1. **7** Reverse Integer https://leetcode.com/problems/reverse-integer/ *Easy*
 1. **15** 3Sum https://leetcode.com/problems/3sum/ *Medium*
@@ -7,6 +7,7 @@
 1. **35** Search Insert Position https://leetcode.com/problems/search-insert-position/ *Easy*
 1. **39** Combination Sum https://leetcode.com/problems/combination-sum/ *Medium*
 1. **40** Combination Sum II https://leetcode.com/problems/combination-sum-ii/ *Medium*
+1. **41** First Missing Positive https://leetcode.com/problems/first-missing-positive/ *Hard*
 1. **49** Group Anagrams https://leetcode.com/problems/group-anagrams/ *Medium*
 1. **50** Pow(x, n) https://leetcode.com/problems/powx-n/ *Medium*
 1. **53** Maximum Subarray https://leetcode.com/problems/maximum-subarray/ *Easy*

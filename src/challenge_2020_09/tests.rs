@@ -521,3 +521,31 @@ fn word_break_test() {
                                         case.2);
     }
 }
+
+fn get_first_missing_positive_test_cases() -> Vec<(Vec<i32>, i32)> {
+    vec![
+        (vec![2], 1),
+        (vec![1], 2),
+        (vec![1, 2, 0], 3),
+        (vec![3, 4, -1, 1], 2),
+        (vec![7, 8, 9, 11, 12], 1),
+        (vec![-1, -2, 0], 1),
+        (vec![-1, -2, 1], 2),
+        (vec![-1, -2, 1, 2, 5], 3),
+        (vec![-1, -2, 1, 2, 3], 4),
+    ]
+}
+
+#[test]
+fn first_missing_positive_test() {
+    for case in get_first_missing_positive_test_cases() {
+        assert_eq!(Solution::first_missing_positive(case.0), case.1);
+    }
+}
+
+#[test]
+fn first_missing_positive_v2_test() {
+    for case in get_first_missing_positive_test_cases() {
+        assert_eq!(Solution::first_missing_positive_v2(case.0), case.1);
+    }
+}

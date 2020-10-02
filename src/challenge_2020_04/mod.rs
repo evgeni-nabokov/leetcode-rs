@@ -1,6 +1,7 @@
 mod list_node;
 mod min_stack;
 mod lru_cache;
+mod first_unique;
 
 #[cfg(test)]
 mod tests;

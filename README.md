@@ -176,4 +176,5 @@
 1. **1424** Diagonal Traverse II https://leetcode.com/problems/diagonal-traverse-ii/ *Medium*
 1. **1426** Counting Elements https://leetcode.com/problems/counting-elements/ *Easy*
 1. **1427** Perform String Shifts https://leetcode.com/problems/perform-string-shifts/ *Easy*
+1. **1429** First Unique Number https://leetcode.com/problems/first-unique-number/ *Medium*
 1. **1430** Check If a String Is a Valid Sequence from Root to Leaves Path in a Binary Tree https://leetcode.com/problems/check-if-a-string-is-a-valid-sequence-from-root-to-leaves-path-in-a-binary-tree/ *Medium*

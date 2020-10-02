@@ -1,7 +1,8 @@
 use super::*;
 use super::min_stack::MinStack;
 use crate::common::tree_node::{TreeNode, BinaryTree};
-use crate::challenge_2020_04::lru_cache::LRUCache;
+use super::lru_cache::LRUCache;
+use super::first_unique::FirstUnique;
 
 #[test]
 fn single_number_test() {
@@ -593,4 +594,30 @@ fn is_valid_sequence_test() {
     for case in test_cases {
         assert_eq!(Solution::is_valid_sequence(TreeNode::from_level_order(&case.0), case.1), case.2);
     }
+}
+
+#[test]
+fn first_unique_test() {
+    let mut obj = FirstUnique::new(vec![2, 3, 5]);
+    assert_eq!(obj.show_first_unique(), 2);
+    obj.add(5);
+    assert_eq!(obj.show_first_unique(), 2);
+    obj.add(2);
+    assert_eq!(obj.show_first_unique(), 3);
+    obj.add(3);
+    assert_eq!(obj.show_first_unique(), -1);
+
+    obj = FirstUnique::new(vec![7, 7, 7, 7, 7, 7]);
+    assert_eq!(obj.show_first_unique(), -1);
+    obj.add(7);
+    obj.add(3);
+    obj.add(3);
+    obj.add(7);
+    obj.add(17);
+    assert_eq!(obj.show_first_unique(), 17);
+
+    obj = FirstUnique::new(vec![809]);
+    assert_eq!(obj.show_first_unique(), 809);
+    obj.add(809);
+    assert_eq!(obj.show_first_unique(), -1);
 }

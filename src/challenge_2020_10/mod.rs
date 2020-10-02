@@ -1,3 +1,5 @@
+mod recent_counter;
+
 use std::cmp::{max, min};
 
 #[cfg(test)]
@@ -6,7 +8,6 @@ mod tests;
 struct Solution;
 
 impl Solution {
-
     // 624. Maximum Distance in Arrays.
     // https://leetcode.com/problems/maximum-distance-in-arrays/
     // Single-scan solution.

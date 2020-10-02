@@ -1,4 +1,5 @@
 use super::*;
+use crate::challenge_2020_10::recent_counter::RecentCounter;
 
 #[test]
 fn max_distance_test() {
@@ -39,5 +40,20 @@ fn max_distance_test() {
     ];
     for case in test_cases {
         assert_eq!(Solution::max_distance(case.0), case.1);
+    }
+}
+
+#[test]
+fn recent_counter_test() {
+    let test_cases = vec![
+        (1, 1),
+        (100, 2),
+        (3001, 3),
+        (3002, 3),
+    ];
+
+    let mut obj = RecentCounter::new();
+    for case in test_cases {
+        assert_eq!(obj.ping(case.0), case.1);
     }
 }

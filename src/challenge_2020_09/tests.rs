@@ -1,5 +1,5 @@
 use super::*;
-use crate::challenge_2020_09::moving_average::MovingAverage;
+use super::moving_average::MovingAverage;
 
 #[test]
 fn largest_time_from_digits_test() {
@@ -495,6 +495,16 @@ fn calc_equation_test() {
             case.2.iter().map(|x| x.into_iter().map(|y| y.to_string()).collect()).collect())
                        .into_iter().map(|x| (x * 100_000.0).round() / 100_000.0).collect::<Vec<f64>>(),
             case.3);
+    }
+}
+
+#[test]
+fn num_subarray_product_less_than_k_test() {
+    let test_cases = vec![
+        (vec![10, 5, 2, 6], 100, 8),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::num_subarray_product_less_than_k(case.0, case.1), case.2);
     }
 }
 

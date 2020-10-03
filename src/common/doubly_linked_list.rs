@@ -154,6 +154,20 @@ where T: Copy + Debug
         }
     }
 
+    pub fn front(&self) -> Option<Rc<RefCell<DoublyLinkedListNode<T>>>> {
+        match &self.head {
+            Some(inner) => Some(inner.clone()),
+            _ => None,
+        }
+    }
+
+    pub fn back(&self) -> Option<Rc<RefCell<DoublyLinkedListNode<T>>>> {
+        match &self.tail {
+            Some(inner) => Some(inner.clone()),
+            _ => None,
+        }
+    }
+
     pub fn to_vec(&self) -> Vec<T>{
         let mut res: Vec<T> = Vec::with_capacity(self.length);
         let mut node = self.head.clone();

@@ -1,4 +1,4 @@
-### List of solved problems (179)
+### List of solved problems (180)
 1. **1** Two Sum https://leetcode.com/problems/two-sum/ *Easy*
 1. **7** Reverse Integer https://leetcode.com/problems/reverse-integer/ *Easy*
 1. **15** 3Sum https://leetcode.com/problems/3sum/ *Medium*
@@ -123,6 +123,7 @@
 1. **520** Detect Capital https://leetcode.com/problems/detect-capital/ *Easy*
 1. **525** Contiguous Array https://leetcode.com/problems/contiguous-array/ *Medium*
 1. **528** Random Pick with Weight https://leetcode.com/problems/random-pick-with-weight/ *Medium*
+1. **532** K-diff Pairs in an Array https://leetcode.com/problems/k-diff-pairs-in-an-array/ *Medium*
 1. **540** Single Element in a Sorted Array https://leetcode.com/problems/single-element-in-a-sorted-array/ *Medium*
 1. **560** Subarray Sum Equals K https://leetcode.com/problems/subarray-sum-equals-k/ *Medium*
 1. **567** Permutation in String https://leetcode.com/problems/permutation-in-string/ *Medium*

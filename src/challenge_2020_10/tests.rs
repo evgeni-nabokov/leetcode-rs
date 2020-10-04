@@ -73,3 +73,18 @@ fn find_pairs_test() {
         assert_eq!(Solution::find_pairs(case.0, case.1), case.2);
     }
 }
+
+#[test]
+fn remove_covered_intervals_test() {
+    let test_cases = vec![
+        (vec![vec![1, 4], vec![3, 6], vec![2, 8]], 2),
+        (vec![vec![1, 4], vec![2, 3]], 1),
+        (vec![vec![0, 10], vec![5, 12]], 2),
+        (vec![vec![3, 10], vec![4, 10], vec![5, 11]], 2),
+        (vec![vec![1, 2], vec![1, 4], vec![3, 4]], 1),
+    ];
+
+    for case in test_cases {
+        assert_eq!(Solution::remove_covered_intervals(case.0), case.1);
+    }
+}

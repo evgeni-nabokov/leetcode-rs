@@ -1,6 +1,6 @@
 mod recent_counter;
 
-use std::cmp::{max, min};
+use std::cmp::{max, min, Ordering};
 
 #[cfg(test)]
 mod tests;
@@ -46,5 +46,28 @@ impl Solution {
             }
         }
         count
+    }
+
+    // 1288. Remove Covered Intervals.
+    // https://leetcode.com/problems/remove-covered-intervals/
+    // Sorting solution.
+    pub fn remove_covered_intervals(mut intervals: Vec<Vec<i32>>) -> i32 {
+        intervals.sort_unstable_by(|a, b| match a[0].cmp(&b[0]) {
+            Ordering::Equal => b[1].cmp(&a[1]),
+            x => x
+        });
+        let mut res = 1;
+        let mut a = intervals[0][0];
+        let mut b = intervals[0][1];
+        for i in 1..intervals.len() {
+            let c = intervals[i][0];
+            let d = intervals[i][1];
+            if !(c >= a && d <= b) {
+                a = intervals[i][0];
+                b = intervals[i][1];
+                res += 1;
+            }
+        }
+        res
     }
 }

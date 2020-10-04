@@ -23,4 +23,28 @@ impl Solution {
         }
         res
     }
+
+    // 532. K-diff Pairs in an Array.
+    // https://leetcode.com/problems/k-diff-pairs-in-an-array/
+    // Sorting solution.
+    pub fn find_pairs(mut nums: Vec<i32>, k: i32) -> i32 {
+        nums.sort_unstable();
+        let mut count = 0;
+        let mut left = 0;
+        let mut right = 1;
+        while left < nums.len() && right < nums.len() {
+            if left == right || nums[right] - nums[left] < k {
+                right += 1;
+            } else if nums[right] - nums[left] > k {
+                left += 1;
+            } else {
+                count += 1;
+                left += 1;
+                while left < nums.len() && nums[left] == nums[left - 1] {
+                    left += 1;
+                }
+            }
+        }
+        count
+    }
 }

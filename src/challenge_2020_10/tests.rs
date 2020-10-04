@@ -57,3 +57,19 @@ fn recent_counter_test() {
         assert_eq!(obj.ping(case.0), case.1);
     }
 }
+
+#[test]
+fn find_pairs_test() {
+    let test_cases = vec![
+        (vec![1, 1, 1, 1, 1], 0, 1),
+        (vec![3, 1, 4, 1, 5], 2, 2),
+        (vec![1, 2, 3, 4, 5], 1, 4),
+        (vec![1, 3, 1, 5, 4], 0, 1),
+        (vec![1, 2, 4, 4, 3, 3, 0, 9, 2, 3], 3, 2),
+        (vec![-1, -2, -3], 1, 2),
+    ];
+
+    for case in test_cases {
+        assert_eq!(Solution::find_pairs(case.0, case.1), case.2);
+    }
+}

@@ -1,5 +1,7 @@
+use crate::common::tree_node::BinaryTree;
+
 use super::*;
-use crate::challenge_2020_10::recent_counter::RecentCounter;
+use super::recent_counter::RecentCounter;
 
 #[test]
 fn max_distance_test() {
@@ -86,5 +88,30 @@ fn remove_covered_intervals_test() {
 
     for case in test_cases {
         assert_eq!(Solution::remove_covered_intervals(case.0), case.1);
+    }
+}
+
+#[test]
+fn insert_into_bst_test() {
+    let test_cases = vec![
+        (
+            vec![Some(4), Some(2), Some(7), Some(1), Some(3)],
+            5,
+            vec![Some(4), Some(2), Some(7), Some(1), Some(3), Some(5), None],
+        ),
+        (
+            vec![Some(40), Some(20), Some(60), Some(10), Some(30), Some(50), Some(70)],
+            25,
+            vec![Some(40), Some(20), Some(60), Some(10), Some(30), Some(50), Some(70), None, None, Some(25), None, None, None, None, None],
+        ),
+        (
+            vec![Some(4), Some(2), Some(7), Some(1), Some(3), None, None, None, None, None, None],
+            5,
+            vec![Some(4), Some(2), Some(7), Some(1), Some(3), Some(5), None],
+        ),
+    ];
+
+    for case in test_cases {
+        assert_eq!(Solution::insert_into_bst(TreeNode::from_level_order(&case.0), case.1).get_level_order_values(), case.2);
     }
 }

@@ -1,9 +1,13 @@
 mod recent_counter;
 
-use std::cmp::{max, min, Ordering};
-
 #[cfg(test)]
 mod tests;
+
+use std::cmp::{max, min, Ordering};
+use std::cell::RefCell;
+use std::rc::Rc;
+
+use crate::common::tree_node::TreeNode;
 
 struct Solution;
 
@@ -69,5 +73,40 @@ impl Solution {
             }
         }
         res
+    }
+
+    // 701. Insert into a Binary Search Tree.
+    // https://leetcode.com/problems/insert-into-a-binary-search-tree/
+    pub fn insert_into_bst(mut root: Option<Rc<RefCell<TreeNode>>>, val: i32) -> Option<Rc<RefCell<TreeNode>>> {
+        fn new_node(val: i32) -> Option<Rc<RefCell<TreeNode>>> {
+            Some(Rc::new(RefCell::new(TreeNode {
+                val,
+                left: None,
+                right: None,
+            })))
+        }
+
+        if root.is_none() {
+            return new_node(val);
+        }
+
+        fn dfs(node: &mut Option<Rc<RefCell<TreeNode>>>, val: i32) {
+            if val > node.as_ref().unwrap().borrow().val {
+                if node.as_ref().unwrap().borrow().right.is_none() {
+                    node.as_mut().unwrap().borrow_mut().right = new_node(val);
+                } else {
+                    dfs(&mut node.as_mut().unwrap().borrow_mut().right, val);
+                }
+            } else {
+                if node.as_ref().unwrap().borrow().left.is_none() {
+                    node.as_mut().unwrap().borrow_mut().left = new_node(val);
+                } else {
+                    dfs(&mut node.as_mut().unwrap().borrow_mut().left, val);
+                }
+            }
+        }
+
+        dfs(&mut root, val);
+        root
     }
 }

@@ -1,4 +1,3 @@
-mod list_node;
 mod min_stack;
 mod lru_cache;
 mod first_unique;
@@ -14,7 +13,7 @@ use std::str::Chars;
 use std::collections::{HashSet, HashMap, BinaryHeap};
 
 use crate::common::tree_node::TreeNode;
-use list_node::ListNode;
+use crate::common::list_node::ListNode;
 
 #[inline(always)]
 pub fn apply_backspaces(iter: &mut Rev<Chars>) -> Option<char> {

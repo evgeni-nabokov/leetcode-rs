@@ -1,4 +1,5 @@
 use crate::common::tree_node::BinaryTree;
+use crate::common::linked_list::LinkedList;
 
 use super::*;
 use super::recent_counter::RecentCounter;
@@ -113,5 +114,21 @@ fn insert_into_bst_test() {
 
     for case in test_cases {
         assert_eq!(Solution::insert_into_bst(TreeNode::from_level_order(&case.0), case.1).get_level_order_values(), case.2);
+    }
+}
+
+#[test]
+fn rotate_right_test() {
+    let test_cases = vec![
+        (vec![], 4, vec![]),
+        (vec![0], 4, vec![0]),
+        (vec![0, 1, 2], 0, vec![0, 1, 2]),
+        (vec![0, 1, 2], 6, vec![0, 1, 2]),
+        (vec![1, 2, 3, 4, 5], 2, vec![4, 5, 1, 2, 3]),
+        (vec![0, 1, 2], 4, vec![2, 0, 1]),
+    ];
+
+    for case in test_cases {
+        assert_eq!(Solution::rotate_right(ListNode::from_slice(&case.0), case.1).to_vec(), case.2);
     }
 }

@@ -8,6 +8,8 @@ use std::cell::RefCell;
 use std::rc::Rc;
 
 use crate::common::tree_node::TreeNode;
+use crate::common::list_node::ListNode;
+use crate::common::linked_list::LinkedList;
 
 struct Solution;
 
@@ -108,5 +110,49 @@ impl Solution {
 
         dfs(&mut root, val);
         root
+    }
+
+    // 61. Rotate List.
+    // https://leetcode.com/problems/rotate-list/
+    pub fn rotate_right(head: Option<Box<ListNode>>, mut k: i32) -> Option<Box<ListNode>> {
+        if head.is_none() { return None; }
+
+        fn get_length(head: &Option<Box<ListNode>>) -> usize {
+            let mut res = 0;
+            let mut curr_node = head;
+            while curr_node.is_some() {
+                curr_node = &curr_node.as_ref().unwrap().next;
+                res += 1;
+            }
+            res
+        }
+
+        let len = get_length(&head);
+        if len == 1 { return head; }
+        k %= len as i32;
+        if k == 0 { return head; }
+
+        fn split(mut head: Option<Box<ListNode>>, len: usize) -> (Option<Box<ListNode>>, Option<Box<ListNode>>) {
+            let mut curr_node = &mut head;
+            for _ in 0..len {
+                let curr_node_inner = curr_node.as_mut().unwrap();
+                curr_node = &mut curr_node_inner.next;
+            }
+            let new_head = curr_node.take();
+            (head, new_head)
+        }
+
+        fn concat(mut head_1: Option<Box<ListNode>>, head_2: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
+            let mut curr_node = &mut head_1;
+            while curr_node.as_ref().unwrap().next.is_some() {
+                curr_node = &mut curr_node.as_mut().unwrap().next;
+            }
+
+            curr_node.as_mut().unwrap().next = head_2;
+            head_1
+        }
+
+        let (head_1, head_2) = split(head, len - k as usize);
+        concat(head_2, head_1)
     }
 }

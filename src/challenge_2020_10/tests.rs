@@ -132,3 +132,19 @@ fn rotate_right_test() {
         assert_eq!(Solution::rotate_right(ListNode::from_slice(&case.0), case.1).to_vec(), case.2);
     }
 }
+
+#[test]
+fn search_test() {
+    let test_cases = vec![
+        (vec![], 1, -1),
+        (vec![1], 1, 0),
+        (vec![-1], 1, -1),
+        (vec![5], -5, -1),
+        (vec![-1, 0, 3, 5, 9, 12], 9, 4),
+        (vec![-1, 0, 3, 5, 9, 12], 2, -1),
+    ];
+
+    for case in test_cases {
+        assert_eq!(Solution::search(case.0, case.1), case.2);
+    }
+}

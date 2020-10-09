@@ -1,4 +1,4 @@
-### List of solved problems (183)
+### List of solved problems (184)
 1. **1** Two Sum https://leetcode.com/problems/two-sum/ *Easy*
 1. **7** Reverse Integer https://leetcode.com/problems/reverse-integer/ *Easy*
 1. **15** 3Sum https://leetcode.com/problems/3sum/ *Medium*
@@ -134,6 +134,7 @@
 1. **678** Valid Parenthesis String https://leetcode.com/problems/valid-parenthesis-string/ *Medium*
 1. **700** Search in a Binary Search Tree https://leetcode.com/problems/search-in-a-binary-search-tree/ *Easy*
 1. **701** Insert into a Binary Search Tree https://leetcode.com/problems/insert-into-a-binary-search-tree/ *Medium*
+1. **704** Binary Search https://leetcode.com/problems/binary-search/solution/ *Easy*
 1. **705** Design HashSet https://leetcode.com/problems/design-hashset/ *Easy*
 1. **713** Subarray Product Less Than K https://leetcode.com/problems/subarray-product-less-than-k/ *Medium*
 1. **733** Flood Fill https://leetcode.com/problems/flood-fill/ *Easy*

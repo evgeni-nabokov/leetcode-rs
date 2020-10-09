@@ -9,7 +9,6 @@ use std::rc::Rc;
 
 use crate::common::tree_node::TreeNode;
 use crate::common::list_node::ListNode;
-use crate::common::linked_list::LinkedList;
 
 struct Solution;
 
@@ -154,5 +153,21 @@ impl Solution {
 
         let (head_1, head_2) = split(head, len - k as usize);
         concat(head_2, head_1)
+    }
+
+    // 704. Binary Search.
+    // https://leetcode.com/problems/binary-search/solution/
+    pub fn search(nums: Vec<i32>, target: i32) -> i32 {
+        let mut left: i32 = 0;
+        let mut right: i32 = nums.len() as i32 - 1;
+        while left <= right {
+            let mid = left + (right - left) / 2;
+            match nums[mid as usize].cmp(&target) {
+                Ordering::Equal => { return mid; },
+                Ordering::Greater => { right = mid - 1; }
+                Ordering::Less => { left = mid + 1; }
+            }
+        }
+        -1
     }
 }

@@ -1,4 +1,4 @@
-### List of solved problems (184)
+### List of solved problems (185)
 1. **1** Two Sum https://leetcode.com/problems/two-sum/ *Easy*
 1. **7** Reverse Integer https://leetcode.com/problems/reverse-integer/ *Easy*
 1. **15** 3Sum https://leetcode.com/problems/3sum/ *Medium*
@@ -51,6 +51,7 @@
 1. **152** Maximum Product Subarray https://leetcode.com/problems/maximum-product-subarray/ *Medium*
 1. **165** Compare Version Numbers https://leetcode.com/problems/compare-version-numbers/ *Medium*
 1. **169** Majority Element https://leetcode.com/problems/majority-element/ *Easy*
+1. **170** Two Sum III - Data structure design https://leetcode.com/problems/two-sum-iii-data-structure-design/ *Easy*
 1. **171** Excel Sheet Column Number https://leetcode.com/problems/excel-sheet-column-number/ *Easy*
 1. **174** Dungeon Game https://leetcode.com/problems/dungeon-game/ *Hard*
 1. **179** Largest Number https://leetcode.com/problems/largest-number/ *Medium*

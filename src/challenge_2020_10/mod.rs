@@ -1,4 +1,5 @@
 mod recent_counter;
+mod two_sum;
 
 #[cfg(test)]
 mod tests;

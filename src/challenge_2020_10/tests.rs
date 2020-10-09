@@ -3,6 +3,7 @@ use crate::common::linked_list::LinkedList;
 
 use super::*;
 use super::recent_counter::RecentCounter;
+use super::two_sum::TwoSum;
 
 #[test]
 fn max_distance_test() {
@@ -147,4 +148,16 @@ fn search_test() {
     for case in test_cases {
         assert_eq!(Solution::search(case.0, case.1), case.2);
     }
+}
+
+#[test]
+fn two_sum_test() {
+    let mut obj = TwoSum::new();
+    obj.add(0);
+    assert_eq!(obj.find(0), false);
+    obj.add(1);
+    obj.add(3);
+    obj.add(5);
+    assert_eq!(obj.find(4), true);
+    assert_eq!(obj.find(7), false);
 }

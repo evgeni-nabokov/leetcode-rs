@@ -171,4 +171,20 @@ impl Solution {
         }
         -1
     }
+
+    // 452. Minimum Number of Arrows to Burst Balloons.
+    // https://leetcode.com/problems/minimum-number-of-arrows-to-burst-balloons/
+    pub fn find_min_arrow_shots(mut points: Vec<Vec<i32>>) -> i32 {
+        if points.len() < 2 { return points.len() as i32; }
+        points.sort_unstable_by_key(|x| x[1]);
+        let mut res = 1;
+        let mut b = points[0][1];
+        for i in 1..points.len() {
+            if points[i][0] > b {
+                b = points[i][1];
+                res += 1;
+            }
+        }
+        res
+    }
 }

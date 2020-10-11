@@ -161,3 +161,20 @@ fn two_sum_test() {
     assert_eq!(obj.find(4), true);
     assert_eq!(obj.find(7), false);
 }
+
+#[test]
+fn find_min_arrow_shots_test() {
+    let test_cases = vec![
+        (vec![], 0),
+        (vec![vec![0, 1]], 1),
+        (vec![vec![1, 2], vec![4, 5], vec![1, 5]], 2),
+        (vec![vec![10, 16], vec![2, 8], vec![1, 6], vec![7, 12]], 2),
+        (vec![vec![1, 2], vec![3, 4], vec![5, 6], vec![7, 8]], 4),
+        (vec![vec![1, 2], vec![2, 3], vec![3, 4], vec![4, 5]], 2),
+        (vec![vec![9, 12], vec![1, 10], vec![4, 11], vec![8, 12], vec![3, 9], vec![6, 9], vec![6, 7]], 2)
+    ];
+
+    for case in test_cases {
+        assert_eq!(Solution::find_min_arrow_shots(case.0), case.1);
+    }
+}

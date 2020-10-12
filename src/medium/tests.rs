@@ -173,3 +173,16 @@ fn merge_test() {
         assert_eq!(Solution::merge(case.0), case.1);
     }
 }
+
+#[test]
+fn coin_change_test() {
+    let test_cases = vec![
+        (vec![1], 0, 0),
+        (vec![1], 1, 1),
+        (vec![1, 2, 5], 11, 3),
+        (vec![2], 3, -1),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::coin_change(case.0, case.1), case.2);
+    }
+}

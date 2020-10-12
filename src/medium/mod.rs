@@ -3,7 +3,7 @@ mod tests;
 
 use std::rc::Rc;
 use std::cell::RefCell;
-use std::cmp::Ordering;
+use std::cmp::{Ordering, min};
 
 use crate::common::tree_node::TreeNode;
 
@@ -103,6 +103,7 @@ impl Solution {
 
     // 39. Combination Sum.
     // https://leetcode.com/problems/combination-sum/
+    // Backtracking solution.
     pub fn combination_sum(mut candidates: Vec<i32>, target: i32) -> Vec<Vec<i32>> {
         candidates.sort_unstable();
 
@@ -129,7 +130,12 @@ impl Solution {
         backtrack(&candidates, target, 0)
     }
 
-    // 40. Combination Sum II.
+    // DP solution.
+    // pub fn combination_sum_v2(mut candidates: Vec<i32>, target: i32) -> Vec<Vec<i32>> {
+    //
+    // }
+
+        // 40. Combination Sum II.
     // https://leetcode.com/problems/combination-sum-ii/
     pub fn combination_sum_ii(mut candidates: Vec<i32>, target: i32) -> Vec<Vec<i32>> {
         candidates.sort_unstable();
@@ -182,5 +188,23 @@ impl Solution {
             }
         }
         res
+    }
+
+    // 322. Coin Change.
+    // https://leetcode.com/problems/coin-change/
+    pub fn coin_change(coins: Vec<i32>, amount: i32) -> i32 {
+        if amount == 0 { return 0; }
+        let mut dp: Vec<i32> = vec![i32::MAX; (amount + 1) as usize];
+        dp[0] = 0;
+        for a in 1..=amount {
+            for c in &coins {
+                if a - c >=0 {
+                    let p = dp[(a - c) as usize];
+                    dp[a as usize] = min(dp[a as usize], if p == i32::MAX { i32::MAX } else { p + 1 });
+                }
+            }
+        }
+        let res = dp[amount as usize];
+        if res == i32::MAX { -1 } else { res }
     }
 }

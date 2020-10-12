@@ -178,3 +178,16 @@ fn find_min_arrow_shots_test() {
         assert_eq!(Solution::find_min_arrow_shots(case.0), case.1);
     }
 }
+
+#[test]
+fn remove_duplicate_letters_test() {
+    let test_cases = vec![
+        ("bcabc", "abc"),
+        ("cbacdcbc", "acdb"),
+        ("abc", "abc"),
+    ];
+
+    for case in test_cases {
+        assert_eq!(Solution::remove_duplicate_letters(case.0.to_string()), case.1.to_string());
+    }
+}

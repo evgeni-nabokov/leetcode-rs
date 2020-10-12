@@ -187,4 +187,38 @@ impl Solution {
         }
         res
     }
+
+    // 316. Remove Duplicate Letters.
+    // https://leetcode.com/problems/remove-duplicate-letters/
+    pub fn remove_duplicate_letters(s: String) -> String {
+        fn solve(chars: Vec<char>) -> Vec<char> {
+            if chars.is_empty() { return chars; }
+            let mut cnt = [0usize; 26];
+            let mut pos = 0;
+            for  c in &chars {
+                cnt[*c as usize - 97] += 1;
+            }
+            for i in 0..chars.len() {
+                if chars[i] < chars[pos] {
+                    pos = i;
+                }
+                let ci = chars[i] as usize - 97;
+                cnt[ci] -= 1;
+                if cnt[ci] == 0 {
+                    break;
+                }
+            }
+            let left_most_char = chars[pos];
+            let mut res: Vec<char> = Vec::new();
+            res.push(chars[pos]);
+            res.extend(solve(chars
+                .into_iter()
+                .skip(pos + 1)
+                .filter(|x| *x != left_most_char)
+                .collect()));
+            res
+        }
+
+        solve(s.chars().collect()).into_iter().collect()
+    }
 }

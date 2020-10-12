@@ -1,4 +1,4 @@
-### List of solved problems (186)
+### List of solved problems (188)
 1. **1** Two Sum https://leetcode.com/problems/two-sum/ *Easy*
 1. **7** Reverse Integer https://leetcode.com/problems/reverse-integer/ *Easy*
 1. **15** 3Sum https://leetcode.com/problems/3sum/ *Medium*
@@ -86,6 +86,7 @@
 1. **287** Find the Duplicate Number https://leetcode.com/problems/find-the-duplicate-number/ *Medium*
 1. **290** Word Pattern https://leetcode.com/problems/word-pattern/ *Easy*
 1. **299** Bulls and Cows https://leetcode.com/problems/bulls-and-cows/ *Easy*
+1. **316** Remove Duplicate Letters https://leetcode.com/problems/remove-duplicate-letters/ *Medium*
 1. **322** Coin Change https://leetcode.com/problems/coin-change/ *Medium*
 1. **328** Odd Even Linked List https://leetcode.com/problems/odd-even-linked-list/ *Medium*
 1. **332** Reconstruct Itinerary https://leetcode.com/problems/reconstruct-itinerary/ *Medium*

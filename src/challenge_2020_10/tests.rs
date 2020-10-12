@@ -191,3 +191,21 @@ fn remove_duplicate_letters_test() {
         assert_eq!(Solution::remove_duplicate_letters(case.0.to_string()), case.1.to_string());
     }
 }
+
+#[test]
+fn buddy_strings_test() {
+    let test_cases = vec![
+        ("", "", false),
+        ("ab", "ba", true),
+        ("ab", "ab", false),
+        ("aa", "aa", true),
+        ("aab", "aab", true),
+        ("abac", "abad", false),
+        ("aaaaaaabc", "aaaaaaacb", true),
+        ("", "aa", false),
+    ];
+
+    for case in test_cases {
+        assert_eq!(Solution::buddy_strings(case.0.to_string(), case.1.to_string()), case.2);
+    }
+}

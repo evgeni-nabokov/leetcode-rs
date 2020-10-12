@@ -221,4 +221,30 @@ impl Solution {
 
         solve(s.chars().collect()).into_iter().collect()
     }
+
+    // 859. Buddy Strings.
+    // https://leetcode.com/problems/buddy-strings/
+    pub fn buddy_strings(a: String, b: String) -> bool {
+        if a.len() != b.len() || (a.is_empty() && b.is_empty()) { return false; }
+        let a_chars: Vec<char> = a.chars().collect();
+        let b_chars: Vec<char> = b.chars().collect();
+        let mut j = 0;
+        let mut diff_cnt = 0;
+        let mut char_cnt = [0usize; 26];
+        let mut has_dup = false;
+        for i in 0..a_chars.len() {
+            let c_idx = a_chars[i] as usize - 97;
+            char_cnt[c_idx] += 1;
+            has_dup = has_dup || char_cnt[c_idx] > 1;
+            if a_chars[i] != b_chars[i] {
+                diff_cnt += 1;
+                match diff_cnt {
+                    1 => j = i,
+                    2 if a_chars[i] == b_chars[j] && a_chars[j] == b_chars[i] => (),
+                    _ => return false
+                }
+            }
+        }
+        diff_cnt == 2 || (diff_cnt == 0 && has_dup)
+    }
 }

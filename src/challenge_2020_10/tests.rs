@@ -209,3 +209,20 @@ fn buddy_strings_test() {
         assert_eq!(Solution::buddy_strings(case.0.to_string(), case.1.to_string()), case.2);
     }
 }
+
+#[test]
+fn rob_ii_test() {
+    let test_cases = vec![
+        (vec![], 0),
+        (vec![0], 0),
+        (vec![1], 1),
+        (vec![1, 2], 2),
+        (vec![2, 3, 2], 3),
+        (vec![1, 2, 3, 1], 4),
+        (vec![1, 2, 1, 1], 3),
+        (vec![200, 3, 140, 20, 10], 340),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::rob_ii(case.0), case.1);
+    }
+}

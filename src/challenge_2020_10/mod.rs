@@ -247,4 +247,33 @@ impl Solution {
         }
         diff_cnt == 2 || (diff_cnt == 0 && has_dup)
     }
+
+    // 213. House Robber II.
+    // https://leetcode.com/problems/house-robber-ii/
+    // DP solution with O(N) time and O(1) space.
+    pub fn rob_ii(nums: Vec<i32>) -> i32 {
+        if nums.is_empty() { return 0; }
+        if nums.len() == 1 { return nums[0]; }
+        if nums.len() == 2 { return max(nums[0], nums[1]); }
+
+        let mut dp_1: Vec<i32> = vec![0; 2];
+        dp_1[0] = nums[0];
+        dp_1[1] = max(nums[0], nums[1]);
+
+        let mut dp_2: Vec<i32> = vec![0; 2];
+        dp_2[0] = nums[1];
+        dp_2[1] = max(nums[1], nums[2]);
+
+        for i in 3..nums.len() {
+            let mut tmp = max(dp_1[0] + nums[i - 1], dp_1[1]);
+            dp_1[0] = dp_1[1];
+            dp_1[1] = tmp;
+
+            tmp = max(dp_2[0] + nums[i], dp_2[1]);
+            dp_2[0] = dp_2[1];
+            dp_2[1] = tmp;
+        }
+
+        max(dp_1.pop().unwrap(), dp_2.pop().unwrap())
+    }
 }

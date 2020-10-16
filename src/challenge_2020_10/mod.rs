@@ -10,6 +10,7 @@ use std::rc::Rc;
 
 use crate::common::tree_node::TreeNode;
 use crate::common::list_node::ListNode;
+use std::mem::swap;
 
 struct Solution;
 
@@ -275,5 +276,36 @@ impl Solution {
         }
 
         max(dp_1.pop().unwrap(), dp_2.pop().unwrap())
+    }
+
+    // 189. Rotate Array.
+    // https://leetcode.com/problems/rotate-array/
+    // Copy solution with O(N) time and O(N) space.
+    pub fn rotate(nums: &mut Vec<i32>, k: i32) {
+        if nums.len() < 2 { return; }
+        let l = nums.len();
+        let k = k as usize % l;
+        if k == 0 { return; }
+        let mut new_nums: Vec<i32> = Vec::with_capacity(l);
+        new_nums.extend_from_slice(&nums[l - k..]);
+        new_nums.extend_from_slice(&nums[..l - k]);
+        swap(nums, &mut new_nums);
+    }
+
+    // Multiple rotation solution with (N + k) time and O(1) space.
+    pub fn rotate_v2(nums: &mut Vec<i32>, k: i32) {
+        if nums.len() < 2 { return; }
+        let l = nums.len();
+        let k = k as usize % l;
+        if k == 0 { return; }
+        for _ in 0..k {
+            let mut tmp = nums[l - 1];
+            for i in 0..l - 1 {
+                let new_tmp = nums[i];
+                nums[i] = tmp;
+                tmp = new_tmp;
+            }
+            nums[l - 1] = tmp;
+        }
     }
 }

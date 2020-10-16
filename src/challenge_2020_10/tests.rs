@@ -226,3 +226,32 @@ fn rob_ii_test() {
         assert_eq!(Solution::rob_ii(case.0), case.1);
     }
 }
+
+fn get_rotate_test_cases()-> Vec<(Vec<i32>, i32, Vec<i32>)> {
+    vec![
+        (vec![], 0, vec![]),
+        (vec![0], 0, vec![0]),
+        (vec![0], 10, vec![0]),
+        (vec![1, 2], 1, vec![2, 1]),
+        (vec![1, 2, 3, 4, 5], 1, vec![5, 1, 2, 3, 4]),
+        (vec![1, 2, 3, 4, 5], 3, vec![3, 4, 5, 1, 2]),
+        (vec![1, 2, 3, 4, 5], 5, vec![1, 2, 3, 4, 5]),
+        (vec![-1, -100, 3, 99], 2, vec![3, 99, -1, -100])
+    ]
+}
+
+#[test]
+fn rotate_test() {
+    for mut case in get_rotate_test_cases() {
+        Solution::rotate(&mut case.0, case.1);
+        assert_eq!(case.0, case.2);
+    }
+}
+
+#[test]
+fn rotate_v2_test() {
+    for mut case in get_rotate_test_cases() {
+        Solution::rotate_v2(&mut case.0, case.1);
+        assert_eq!(case.0, case.2);
+    }
+}

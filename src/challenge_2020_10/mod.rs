@@ -348,4 +348,18 @@ impl Solution {
         nums[..k].reverse();
         nums[k..].reverse();
     }
+
+    // 74. Search a 2D Matrix.
+    // https://leetcode.com/problems/search-a-2d-matrix/
+    pub fn search_matrix(matrix: Vec<Vec<i32>>, target: i32) -> bool {
+        if matrix.is_empty() || matrix[0].is_empty() { return false; }
+        match matrix.binary_search_by_key(&target, |x| x[0]) {
+            Err(row) if row == 0 => false,
+            Err(row) => match matrix[row - 1].binary_search(&target) {
+                Err(_) => false,
+                Ok(_) => true
+            }
+            Ok(_) => true
+        }
+    }
 }

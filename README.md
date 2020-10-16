@@ -1,4 +1,4 @@
-### List of solved problems (191)
+### List of solved problems (192)
 1. **1** Two Sum https://leetcode.com/problems/two-sum/ *Easy*
 1. **7** Reverse Integer https://leetcode.com/problems/reverse-integer/ *Easy*
 1. **15** 3Sum https://leetcode.com/problems/3sum/ *Medium*
@@ -22,6 +22,7 @@
 1. **67** Add Binary https://leetcode.com/problems/add-binary/ *Easy*
 1. **70** Climbing Stairs https://leetcode.com/problems/climbing-stairs/ *Easy*
 1. **72** Edit Distance https://leetcode.com/problems/edit-distance/ *Hard*
+1. **74** Search a 2D Matrix https://leetcode.com/problems/search-a-2d-matrix/ *Medium*
 1. **75** Sort Colors https://leetcode.com/problems/sort-colors/ *Medium*
 1. **78** Subsets https://leetcode.com/problems/subsets/ *Medium*
 1. **79** Word Search https://leetcode.com/problems/word-search/ *Medium*

@@ -271,3 +271,16 @@ fn rotate_v4_test() {
         assert_eq!(case.0, case.2);
     }
 }
+
+#[test]
+fn search_matrix_test() {
+    let test_cases = vec![
+        (vec![], 0, false),
+        (vec![vec![]], 0, false),
+        (vec![vec![1, 3, 5, 7], vec![10, 11, 16, 20], vec![23, 30, 34, 50]], 3, true),
+        (vec![vec![1, 3, 5, 7], vec![10, 11, 16, 20], vec![23, 30, 34, 50]], 13, false),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::search_matrix(case.0, case.1), case.2);
+    }
+}

@@ -255,3 +255,19 @@ fn rotate_v2_test() {
         assert_eq!(case.0, case.2);
     }
 }
+
+#[test]
+fn rotate_v3_test() {
+    for mut case in get_rotate_test_cases() {
+        Solution::rotate_v3(&mut case.0, case.1);
+        assert_eq!(case.0, case.2);
+    }
+}
+
+#[test]
+fn rotate_v4_test() {
+    for mut case in get_rotate_test_cases() {
+        Solution::rotate_v4(&mut case.0, case.1);
+        assert_eq!(case.0, case.2);
+    }
+}

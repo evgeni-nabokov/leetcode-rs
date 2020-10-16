@@ -196,7 +196,7 @@ impl Solution {
             if chars.is_empty() { return chars; }
             let mut cnt = [0usize; 26];
             let mut pos = 0;
-            for  c in &chars {
+            for c in &chars {
                 cnt[*c as usize - 97] += 1;
             }
             for i in 0..chars.len() {
@@ -223,7 +223,8 @@ impl Solution {
         solve(s.chars().collect()).into_iter().collect()
     }
 
-    // 859. Buddy Strings.
+    // 859. Buddy
+    // Strings.
     // https://leetcode.com/problems/buddy-strings/
     pub fn buddy_strings(a: String, b: String) -> bool {
         if a.len() != b.len() || (a.is_empty() && b.is_empty()) { return false; }
@@ -280,20 +281,8 @@ impl Solution {
 
     // 189. Rotate Array.
     // https://leetcode.com/problems/rotate-array/
-    // Copy solution with O(N) time and O(N) space.
+    // Brute force solution (rotation by 1) with (N + k) time and O(1) space.
     pub fn rotate(nums: &mut Vec<i32>, k: i32) {
-        if nums.len() < 2 { return; }
-        let l = nums.len();
-        let k = k as usize % l;
-        if k == 0 { return; }
-        let mut new_nums: Vec<i32> = Vec::with_capacity(l);
-        new_nums.extend_from_slice(&nums[l - k..]);
-        new_nums.extend_from_slice(&nums[..l - k]);
-        swap(nums, &mut new_nums);
-    }
-
-    // Multiple rotation solution with (N + k) time and O(1) space.
-    pub fn rotate_v2(nums: &mut Vec<i32>, k: i32) {
         if nums.len() < 2 { return; }
         let l = nums.len();
         let k = k as usize % l;
@@ -307,5 +296,56 @@ impl Solution {
             }
             nums[l - 1] = tmp;
         }
+    }
+
+    // Copy solution with O(N) time and O(N) space.
+    pub fn rotate_v2(nums: &mut Vec<i32>, k: i32) {
+        if nums.len() < 2 { return; }
+        let l = nums.len();
+        let k = k as usize % l;
+        if k == 0 { return; }
+        let mut new_nums: Vec<i32> = Vec::with_capacity(l);
+        new_nums.extend_from_slice(&nums[l - k..]);
+        new_nums.extend_from_slice(&nums[..l - k]);
+        swap(nums, &mut new_nums);
+    }
+
+
+    // Juggling solution with O(N) time and O(1) space.
+    pub fn rotate_v3(nums: &mut Vec<i32>, k: i32) {
+        if nums.len() < 2 { return; }
+        let l = nums.len();
+        let k = k as usize % l;
+        if k == 0 { return; }
+
+        fn get_gcd(a: usize, b: usize) -> usize {
+            if b == 0 { a } else { get_gcd(b, a % b) }
+        }
+
+        for i in 0..get_gcd(l, k) {
+            let mut j = i;
+            let mut tmp = nums[j];
+            loop {
+                let new_j = (j + k) % l;
+                let new_tmp = nums[new_j];
+                nums[new_j] = tmp;
+                tmp = new_tmp;
+                j = new_j;
+                // We came back to the start index.
+                if j == i { break; }
+            }
+        }
+    }
+
+    // Reverse solution with O(N) time and O(1) space.
+    pub fn rotate_v4(nums: &mut Vec<i32>, k: i32) {
+        if nums.len() < 2 { return; }
+        let l = nums.len();
+        let k = k as usize % l;
+        if k == 0 { return; }
+
+        nums.reverse();
+        nums[..k].reverse();
+        nums[k..].reverse();
     }
 }

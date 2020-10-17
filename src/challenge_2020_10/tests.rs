@@ -241,6 +241,18 @@ fn get_rotate_test_cases()-> Vec<(Vec<i32>, i32, Vec<i32>)> {
 }
 
 #[test]
+fn min_meeting_rooms_test() {
+    let test_cases = vec![
+        (vec![vec![0, 30], vec![5, 10], vec![15, 20]], 2),
+        (vec![vec![7, 10], vec![2, 4]], 1),
+        (vec![vec![1, 5], vec![8, 9], vec![8, 9]], 2),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::min_meeting_rooms(case.0), case.1);
+    }
+}
+
+#[test]
 fn rotate_test() {
     for mut case in get_rotate_test_cases() {
         Solution::rotate(&mut case.0, case.1);

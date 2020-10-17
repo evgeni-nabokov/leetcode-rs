@@ -4,13 +4,14 @@ mod two_sum;
 #[cfg(test)]
 mod tests;
 
+use std::collections::BTreeMap;
 use std::cmp::{max, min, Ordering};
+use std::mem::swap;
 use std::cell::RefCell;
 use std::rc::Rc;
 
 use crate::common::tree_node::TreeNode;
 use crate::common::list_node::ListNode;
-use std::mem::swap;
 
 struct Solution;
 
@@ -279,6 +280,36 @@ impl Solution {
         max(dp_1.pop().unwrap(), dp_2.pop().unwrap())
     }
 
+    // 253. Meeting Rooms II.
+    // https://leetcode.com/problems/meeting-rooms-ii/.
+    pub fn min_meeting_rooms(mut intervals: Vec<Vec<i32>>) -> i32 {
+        intervals.sort_unstable();
+        let mut allocated_rooms = 0;
+        let mut free_rooms = 0;
+        let mut end_times: BTreeMap<i32, usize> = BTreeMap::new();
+        for i in 0..intervals.len() {
+            let start = intervals[i][0];
+            let end = intervals[i][1];
+            while !end_times.is_empty() {
+                if let Some((end, count)) = end_times.iter().next().map(|(k, v)| (*k, *v)) {
+                    if end <= start {
+                        end_times.remove(&end);
+                        free_rooms += count;
+                    } else {
+                        break;
+                    }
+                }
+            }
+            if free_rooms == 0 {
+                allocated_rooms += 1;
+            } else {
+                free_rooms -= 1;
+            }
+            *end_times.entry(end).or_insert(0) += 1;
+        }
+        allocated_rooms
+    }
+
     // 189. Rotate Array.
     // https://leetcode.com/problems/rotate-array/
     // Brute force solution (rotation by 1) with (N + k) time and O(1) space.
@@ -309,7 +340,6 @@ impl Solution {
         new_nums.extend_from_slice(&nums[..l - k]);
         swap(nums, &mut new_nums);
     }
-
 
     // Juggling solution with O(N) time and O(1) space.
     pub fn rotate_v3(nums: &mut Vec<i32>, k: i32) {

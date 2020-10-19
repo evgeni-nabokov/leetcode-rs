@@ -1,4 +1,4 @@
-### List of solved problems (192)
+### List of solved problems (194)
 1. **1** Two Sum https://leetcode.com/problems/two-sum/ *Easy*
 1. **7** Reverse Integer https://leetcode.com/problems/reverse-integer/ *Easy*
 1. **15** 3Sum https://leetcode.com/problems/3sum/ *Medium*
@@ -174,6 +174,7 @@
 1. **1029** Two City Scheduling https://leetcode.com/problems/two-city-scheduling/ *Easy*
 1. **1035** Uncrossed Lines https://leetcode.com/problems/uncrossed-lines/ *Medium*
 1. **1041** Robot Bounded In Circle https://leetcode.com/problems/robot-bounded-in-circle/ *Medium*
+1. **1044** Longest Duplicate Substring https://leetcode.com/problems/longest-duplicate-substring/ *Hard*
 1. **1046** Last Stone Weight https://leetcode.com/problems/last-stone-weight/ *Easy*
 1. **1089** Duplicate Zeros https://leetcode.com/problems/duplicate-zeros/ *Easy*
 1. **1094** Car Pooling https://leetcode.com/problems/car-pooling/ *Medium*

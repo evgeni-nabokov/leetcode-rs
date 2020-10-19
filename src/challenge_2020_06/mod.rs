@@ -9,7 +9,8 @@ use std::rc::Rc;
 use std::cell::RefCell;
 use std::cmp::{Ordering, max, min};
 use std::char;
-use std::collections::{BinaryHeap, HashMap};
+use std::collections::{BinaryHeap, HashMap, HashSet};
+use std::iter::FromIterator;
 
 use crate::common::tree_node::TreeNode;
 
@@ -685,5 +686,40 @@ impl Solution {
             }
         }
         res
+    }
+
+    // 1044. Longest Duplicate Substring
+    // https://leetcode.com/problems/longest-duplicate-substring/
+    // List of suffixes solution.
+    // Explaining video:  https://www.coursera.org/lecture/cs-algorithms-theory-machines/longest-repeated-substring-hkJBt
+    // Not accepted - TLE.
+    pub fn longest_dup_substring(s: String) -> String {
+        if s.len() < 2 { return String::new(); }
+
+        fn get_lcp_len(s1: &[char], s2: &[char]) -> usize {
+            let n = min(s1.len(), s2.len());
+            for i in 0..n {
+                if s1[i] != s2[i] {
+                    return i;
+                }
+            }
+            n
+        }
+
+        let chars: Vec<char> = s.chars().collect();
+        let n = s.len();
+        let mut suffixes: Vec<&[char]> = Vec::with_capacity(n);
+        for i in 0..n {
+            suffixes.push(&chars[i..]);
+        }
+        suffixes.sort_unstable();
+        let mut lrs: &[char] = &vec![];
+        for i in 1..n {
+            let lcp_len = get_lcp_len(&suffixes[i - 1], &suffixes[i]);
+            if lcp_len > lrs.len() {
+                lrs = &suffixes[i][0..lcp_len];
+            }
+        }
+        String::from_iter(lrs)
     }
 }

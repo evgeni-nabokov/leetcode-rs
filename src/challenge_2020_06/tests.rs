@@ -621,3 +621,14 @@ fn find_words_ii_test() {
         assert_eq!(Solution::find_words(case.0, case.1), case.2);
     }
 }
+
+#[test]
+fn longest_dup_substring_test() {
+    let test_cases = vec![
+        ("banana", "ana"),
+        ("abcd", ""),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::longest_dup_substring(case.0.to_string()), case.1.to_string());
+    }
+}

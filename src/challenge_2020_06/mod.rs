@@ -406,7 +406,90 @@ impl Solution {
         l - left
     }
 
-    // ~N
+    // 1044. Longest Duplicate Substring
+    // https://leetcode.com/problems/longest-duplicate-substring/
+    // List of suffixes solution.
+    // Explaining video: https://www.coursera.org/lecture/cs-algorithms-theory-machines/longest-repeated-substring-hkJBt
+    // Not accepted - TLE.
+    pub fn longest_dup_substring(s: String) -> String {
+        if s.len() < 2 { return String::new(); }
+
+        fn get_lcp_len(s1: &[char], s2: &[char]) -> usize {
+            let n = min(s1.len(), s2.len());
+            for i in 0..n {
+                if s1[i] != s2[i] {
+                    return i;
+                }
+            }
+            n
+        }
+
+        let chars: Vec<char> = s.chars().collect();
+        let n = s.len();
+        let mut suffixes: Vec<&[char]> = Vec::with_capacity(n);
+        for i in 0..n {
+            suffixes.push(&chars[i..]);
+        }
+        suffixes.sort_unstable();
+        let mut lrs: &[char] = &vec![];
+        for i in 1..n {
+            let lcp_len = get_lcp_len(&suffixes[i - 1], &suffixes[i]);
+            if lcp_len > lrs.len() {
+                lrs = &suffixes[i][0..lcp_len];
+            }
+        }
+        String::from_iter(lrs)
+    }
+
+    // Binary Search + Rabin-Karp.
+    pub fn longest_dup_substring_v2(s: String) -> String {
+        if s.len() < 2 { return String::new(); }
+
+        fn search_dup_substring(codes: &[u64], len: usize, base: u64, modulus: u64) -> Option<usize> {
+            // Rolling hash.
+            let mut hash= 0u64;
+            // Const value to be used often: (base ^ len) % modulus.
+            let mut base_pow_len = 1u64;
+            // Compute the hash of first len codes and base_pow_len.
+            for i in 0..len {
+                hash = (hash * base + codes[i]) % modulus;
+                base_pow_len = (base_pow_len * base) % modulus;
+            }
+
+            let hash_num = codes.len() - len;
+            let mut seen: HashSet<u64> = HashSet::with_capacity(hash_num);
+            seen.insert(hash);
+            for start in 1..=hash_num {
+                // Compute rolling hash in O(1) time.
+                hash = (hash * base - codes[start - 1] * base_pow_len % modulus + modulus) % modulus;
+                hash = (hash + (codes[start + len - 1])) % modulus;
+                if seen.contains(&hash) { return Some(start); }
+                seen.insert(hash);
+            }
+            None
+        }
+
+        let codes: Vec<_> = s.chars().map(|x| x as u64 - 97).collect();
+        let mut left: i32 = 1;
+        let mut right: i32 = s.len() as i32;
+        let mut pointers: Option<(usize, usize)> = None;
+        while left <= right {
+            let mid = left + (right - left) / 2;
+            if let Some(start) = search_dup_substring(&codes, mid as usize, 26, 4_294_967_296) {
+                pointers = Some((start, start + mid as usize));
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+        if let Some((start, end)) = pointers {
+            s[start..end].to_string()
+        } else {
+            String::new()
+        }
+    }
+
+    // O(N) time and O(1) space.
     pub fn h_index_ii_v2(citations: Vec<i32>) -> i32 {
         for i in 0..citations.len() {
             let h = citations.len() - i;
@@ -686,40 +769,5 @@ impl Solution {
             }
         }
         res
-    }
-
-    // 1044. Longest Duplicate Substring
-    // https://leetcode.com/problems/longest-duplicate-substring/
-    // List of suffixes solution.
-    // Explaining video:  https://www.coursera.org/lecture/cs-algorithms-theory-machines/longest-repeated-substring-hkJBt
-    // Not accepted - TLE.
-    pub fn longest_dup_substring(s: String) -> String {
-        if s.len() < 2 { return String::new(); }
-
-        fn get_lcp_len(s1: &[char], s2: &[char]) -> usize {
-            let n = min(s1.len(), s2.len());
-            for i in 0..n {
-                if s1[i] != s2[i] {
-                    return i;
-                }
-            }
-            n
-        }
-
-        let chars: Vec<char> = s.chars().collect();
-        let n = s.len();
-        let mut suffixes: Vec<&[char]> = Vec::with_capacity(n);
-        for i in 0..n {
-            suffixes.push(&chars[i..]);
-        }
-        suffixes.sort_unstable();
-        let mut lrs: &[char] = &vec![];
-        for i in 1..n {
-            let lcp_len = get_lcp_len(&suffixes[i - 1], &suffixes[i]);
-            if lcp_len > lrs.len() {
-                lrs = &suffixes[i][0..lcp_len];
-            }
-        }
-        String::from_iter(lrs)
     }
 }

@@ -411,7 +411,7 @@ fn solve_test() {
     }
 }
 
-fn get_h_index_test_cases() -> Vec<(Vec<i32>, i32)>{
+fn get_h_index_ii_test_cases() -> Vec<(Vec<i32>, i32)>{
     vec![
         (vec![], 0),
         (vec![0], 0),
@@ -432,15 +432,37 @@ fn get_h_index_test_cases() -> Vec<(Vec<i32>, i32)>{
 
 #[test]
 fn h_index_ii_test() {
-    for case in get_h_index_test_cases() {
+    for case in get_h_index_ii_test_cases() {
         assert_eq!(Solution::h_index_ii(case.0), case.1);
     }
 }
 
 #[test]
 fn h_index_ii_v2_test() {
-    for case in get_h_index_test_cases() {
+    for case in get_h_index_ii_test_cases() {
         assert_eq!(Solution::h_index_ii_v2(case.0), case.1);
+    }
+}
+
+#[test]
+fn longest_dup_substring_test() {
+    let test_cases = vec![
+        ("banana", "ana"),
+        ("abcd", ""),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::longest_dup_substring(case.0.to_string()), case.1.to_string());
+    }
+}
+
+#[test]
+fn longest_dup_substring_v2_test() {
+    let test_cases = vec![
+        ("banana", "ana"),
+        ("abcd", ""),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::longest_dup_substring_v2(case.0.to_string()), case.1.to_string());
     }
 }
 
@@ -619,16 +641,5 @@ fn find_words_ii_test() {
     ];
     for case in test_cases {
         assert_eq!(Solution::find_words(case.0, case.1), case.2);
-    }
-}
-
-#[test]
-fn longest_dup_substring_test() {
-    let test_cases = vec![
-        ("banana", "ana"),
-        ("abcd", ""),
-    ];
-    for case in test_cases {
-        assert_eq!(Solution::longest_dup_substring(case.0.to_string()), case.1.to_string());
     }
 }

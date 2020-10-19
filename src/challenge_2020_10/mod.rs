@@ -4,7 +4,7 @@ mod two_sum;
 #[cfg(test)]
 mod tests;
 
-use std::collections::BTreeMap;
+use std::collections::{BTreeMap, HashSet};
 use std::cmp::{max, min, Ordering};
 use std::mem::swap;
 use std::cell::RefCell;
@@ -391,5 +391,45 @@ impl Solution {
             }
             Ok(_) => true
         }
+    }
+
+    // 187. Repeated DNA Sequences.
+    // https://leetcode.com/problems/repeated-dna-sequences/
+    // Rabin-Karp solution.
+    pub fn find_repeated_dna_sequences(s: String) -> Vec<String> {
+        let seq_len = 10;
+        if s.len() <= seq_len { return vec![]; }
+
+        let base = 4;
+        let modulus = 4_294_967_296;
+        // Rolling hash.
+        let mut hash= 0u64;
+        // Const value to be used often: (base ^ len) % modulus.
+        let mut base_pow_len = 1u64;
+        // Compute the hash of first len codes and base_pow_len.
+        let codes: Vec<_> = s.chars().map(|x| match x {
+            'A' => 0, 'C' => 1, 'G' => 2, 'T' => 3, _ => unreachable!()
+        }).collect();
+        for i in 0..seq_len {
+            hash = (hash * base + codes[i]) % modulus;
+            base_pow_len = (base_pow_len * base) % modulus;
+        }
+        let hash_num = codes.len() - seq_len;
+        let mut seen_hashes: HashSet<u64> = HashSet::with_capacity(hash_num);
+        let mut repeated_seqs: HashSet<&[u64]> = HashSet::new();
+        seen_hashes.insert(hash);
+        for start in 1..=hash_num {
+            // Compute rolling hash in O(1) time.
+            hash = (hash * base - codes[start - 1] * base_pow_len % modulus + modulus) % modulus;
+            hash = (hash + (codes[start + seq_len - 1])) % modulus;
+            if seen_hashes.contains(&hash) {
+                repeated_seqs.insert(&codes[start..start + seq_len]);
+            } else {
+                seen_hashes.insert(hash);
+            }
+        }
+        repeated_seqs.into_iter().map(|x| x.into_iter().map(|y| match y {
+            0 => 'A', 1 => 'C', 2 => 'G', 3 => 'T', _ => unreachable!()
+        }).collect()).collect()
     }
 }

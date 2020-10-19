@@ -296,3 +296,18 @@ fn search_matrix_test() {
         assert_eq!(Solution::search_matrix(case.0, case.1), case.2);
     }
 }
+
+#[test]
+fn find_repeated_dna_sequences_test() {
+    let test_cases = vec![
+        ("AAAAACCCCCAAAAACCCCCCAAAAAGGGTTT", vec!["AAAAACCCCC", "CCCCCAAAAA"]),
+        ("AAAAAAAAAAAAA", vec!["AAAAAAAAAA"]),
+    ];
+    for case in test_cases {
+        let mut actual = Solution::find_repeated_dna_sequences(case.0.to_string());
+        actual.sort_unstable();
+        let mut expected = case.1.into_iter().map(|x| x.to_string()).collect::<Vec<String>>();
+        expected.sort_unstable();
+        assert_eq!(actual, expected);
+    }
+}

@@ -432,4 +432,37 @@ impl Solution {
             0 => 'A', 1 => 'C', 2 => 'G', 3 => 'T', _ => unreachable!()
         }).collect()).collect()
     }
+
+    // 735. Asteroid Collision.
+    // https://leetcode.com/problems/asteroid-collision/
+    pub fn asteroid_collision(asteroids: Vec<i32>) -> Vec<i32> {
+        let mut res: Vec<i32> = Vec::with_capacity(asteroids.len());
+        for a in asteroids {
+            if a > 0 || res.is_empty() {
+                res.push(a);
+                continue;
+            }
+            while !res.is_empty() {
+                let last = res[res.len() - 1];
+                if last < 0 {
+                    res.push(a);
+                    break;
+                } else {
+                    match a.abs().cmp(&last) {
+                        Ordering::Equal => {
+                            res.pop();
+                            break;
+                        },
+                        Ordering::Greater => { res.pop(); },
+                        Ordering::Less => break,
+                    }
+                    if res.is_empty() {
+                        res.push(a);
+                        break;
+                    }
+                }
+            }
+        }
+        res
+    }
 }

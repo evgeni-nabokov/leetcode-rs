@@ -311,3 +311,17 @@ fn find_repeated_dna_sequences_test() {
         assert_eq!(actual, expected);
     }
 }
+
+#[test]
+fn asteroid_collision_test() {
+    let test_cases = vec![
+        (vec![5, 10, -5], vec![5, 10]),
+        (vec![8, -8], vec![]),
+        (vec![10, 2, -5], vec![10]),
+        (vec![-2, -1, 1, 2], vec![-2, -1, 1, 2]),
+        (vec![1,-2,-2,-2], vec![-2,-2,-2]),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::asteroid_collision(case.0), case.1);
+    }
+}

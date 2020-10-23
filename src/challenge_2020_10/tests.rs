@@ -325,3 +325,14 @@ fn asteroid_collision_test() {
         assert_eq!(Solution::asteroid_collision(case.0), case.1);
     }
 }
+
+#[test]
+fn min_depth_test() {
+    let test_cases = vec![
+        //(vec![Some(3), Some(9), Some(20), None, None, Some(15), Some(7)], 2),
+        (vec![Some(2), None, Some(3), None, Some(4), None, Some(5), None, Some(6)], 5),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::min_depth(TreeNode::from_level_order(&case.0)), case.1);
+    }
+}

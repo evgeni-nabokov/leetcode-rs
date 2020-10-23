@@ -465,4 +465,23 @@ impl Solution {
         }
         res
     }
+
+    // 111. Minimum Depth of Binary Tree.
+    // https://leetcode.com/problems/minimum-depth-of-binary-tree/
+    pub fn min_depth(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
+        fn dfs(node: &Option<Rc<RefCell<TreeNode>>>, mut count: i32) -> i32 {
+            if let Some(node_inner) = node {
+                count += 1;
+                match (node_inner.borrow().left.is_some(), node_inner.borrow().right.is_some()) {
+                    (true, true) => min(dfs(&node_inner.borrow().left, count), dfs(&node_inner.borrow().right, count)),
+                    (true, false) => dfs(&node_inner.borrow().left, count),
+                    (false, true) => dfs(&node_inner.borrow().right, count),
+                    (false ,false) => count
+                }
+            } else {
+                count
+            }
+        }
+        dfs(&root, 0)
+    }
 }

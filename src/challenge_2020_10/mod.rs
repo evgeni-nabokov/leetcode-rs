@@ -4,7 +4,7 @@ mod two_sum;
 #[cfg(test)]
 mod tests;
 
-use std::collections::{BTreeMap, HashSet};
+use std::collections::{BTreeMap, HashSet, HashMap};
 use std::cmp::{max, min, Ordering};
 use std::mem::swap;
 use std::cell::RefCell;
@@ -483,5 +483,60 @@ impl Solution {
             }
         }
         dfs(&root, 0)
+    }
+
+    // 1510. Stone Game IV.
+    // https://leetcode.com/problems/stone-game-iv/
+    // DFS solution.
+    pub fn winner_square_game(n: i32) -> bool {
+        fn dfs(n: i32, memo: &mut HashMap<i32, bool>) -> bool {
+            match memo.get(&n) {
+                Some(b) => return *b,
+                None => {
+                    let sr = (n as f64).sqrt() as i32;
+                    for i in 1..=sr {
+                        if !dfs(n - i * i, memo) {
+                            memo.insert(n, true);
+                            return true;
+                        }
+                    }
+                }
+            }
+            memo.insert(n, false);
+            false
+        }
+
+        let mut memo: HashMap<i32, bool> = HashMap::new();
+        memo.insert(0, false);
+        dfs(n, &mut memo)
+    }
+
+    // DP solution #1.
+    pub fn winner_square_game_v2(n: i32) -> bool {
+        let mut dp: Vec<bool> = vec![false; n as usize + 1];
+        for i in 0..=n as usize {
+            let sr = (i as f64).sqrt() as usize;
+            for k in 1..=sr {
+                if dp[i - k * k] == false {
+                    dp[i] = true;
+                    break;
+                }
+            }
+        }
+        dp[n as usize]
+    }
+
+    // DP solution #2.
+    pub fn winner_square_game_v3(n: i32) -> bool {
+        let mut dp: Vec<bool> = vec![false; n as usize + 1];
+        for i in 0..=n as usize {
+            if dp[i] { continue; }
+            let mut k = 1;
+            while i + k * k <= n as usize {
+                dp[i + k * k] = true;
+                k += 1;
+            }
+        }
+        dp[n as usize]
     }
 }

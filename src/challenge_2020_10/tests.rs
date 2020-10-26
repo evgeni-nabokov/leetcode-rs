@@ -326,13 +326,43 @@ fn asteroid_collision_test() {
     }
 }
 
+// #[test]
+// fn min_depth_test() {
+//     let test_cases = vec![
+//         (vec![Some(3), Some(9), Some(20), None, None, Some(15), Some(7)], 2),
+//         (vec![Some(2), None, Some(3), None, Some(4), None, Some(5), None, Some(6)], 5),
+//     ];
+//     for case in test_cases {
+//         assert_eq!(Solution::min_depth(TreeNode::from_level_order(&case.0)), case.1);
+//     }
+// }
+
+fn get_winner_square_game_test_cases() -> Vec<(i32, bool)>{
+    vec![
+        (1, true),
+        (2, false),
+        (4, true),
+        (7, false),
+    ]
+}
+
 #[test]
-fn min_depth_test() {
-    let test_cases = vec![
-        //(vec![Some(3), Some(9), Some(20), None, None, Some(15), Some(7)], 2),
-        (vec![Some(2), None, Some(3), None, Some(4), None, Some(5), None, Some(6)], 5),
-    ];
-    for case in test_cases {
-        assert_eq!(Solution::min_depth(TreeNode::from_level_order(&case.0)), case.1);
+fn winner_square_game_test() {
+    for case in get_winner_square_game_test_cases() {
+        assert_eq!(Solution::winner_square_game(case.0), case.1);
+    }
+}
+
+#[test]
+fn winner_square_game_v2_test() {
+    for case in get_winner_square_game_test_cases() {
+        assert_eq!(Solution::winner_square_game_v2(case.0), case.1);
+    }
+}
+
+#[test]
+fn winner_square_game_v3_test() {
+    for case in get_winner_square_game_test_cases() {
+        assert_eq!(Solution::winner_square_game_v3(case.0), case.1);
     }
 }

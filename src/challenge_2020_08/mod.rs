@@ -1,7 +1,7 @@
 use std::collections::{HashSet, HashMap, VecDeque};
 use std::rc::Rc;
 use std::cell::RefCell;
-use std::cmp::Ordering;
+use std::cmp::{Ordering, max, min};
 
 use crate::common::tree_node::TreeNode;
 use crate::common::list_node::ListNode;
@@ -313,6 +313,45 @@ impl Solution {
             }
         }
         counter
+    }
+
+    // 123. Best Time to Buy and Sell Stock III.
+    // https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iii/
+    // DP solution with O(N) time and O(N) space.
+    pub fn max_profit(prices: Vec<i32>) -> i32 {
+        let l = prices.len();
+        let mut left_min_price = prices[0];
+        let mut right_min_price = prices[l - 1];
+        let mut left_profits = vec![0; l];
+        // Pad the right DP array with an additional zero for convenience.
+        let mut right_profits = vec![0; l + 1];
+        for i in 1..l {
+            left_profits[i] = max(left_profits[i - 1], prices[i] - left_min_price);
+            left_min_price = min(left_min_price, prices[i]);
+            let j = l - i - 1;
+            right_profits[j] = max(right_profits[j + 1], right_min_price - prices[j]);
+            right_min_price = min(right_min_price, prices[j]);
+        }
+        let mut max_profit = 0;
+        for i in 0..l {
+            max_profit = max(max_profit, left_profits[i] + right_profits[i + 1]);
+        }
+        max_profit
+    }
+
+    // Solution with O(N) time and O(1) space.
+    pub fn max_profit_v2(prices: Vec<i32>) -> i32 {
+        let mut t1_cost = i32::MAX;
+        let mut t2_cost = i32::MAX;
+        let mut t1_profit = 0;
+        let mut t2_profit = 0;
+        for i in 0..prices.len() {
+            t1_cost = min(t1_cost, prices[i]);
+            t1_profit = max(t1_profit, prices[i] - t1_cost);
+            t2_cost = min(t2_cost, prices[i] - t1_profit);
+            t2_profit = max(t2_profit, prices[i] - t2_cost);
+        }
+        t2_profit
     }
 
     // 824. Goat Latin.

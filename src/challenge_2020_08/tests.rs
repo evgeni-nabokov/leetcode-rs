@@ -315,6 +315,29 @@ fn longest_palindrome_test() {
     }
 }
 
+fn get_max_profit_test() -> Vec<(Vec<i32>, i32)> {
+    vec![
+        (vec![1], 0),
+        (vec![3, 3, 5, 0, 0, 3, 1, 4], 6),
+        (vec![1, 2, 3, 4, 5], 4),
+        (vec![7, 6, 4, 3, 1], 0),
+    ]
+}
+
+#[test]
+fn max_profit_test() {
+    for case in get_max_profit_test() {
+        assert_eq!(Solution::max_profit(case.0), case.1);
+    }
+}
+
+#[test]
+fn max_profit_v2_test() {
+    for case in get_max_profit_test() {
+        assert_eq!(Solution::max_profit_v2(case.0), case.1);
+    }
+}
+
 #[test]
 fn to_goat_latin_test() {
     let test_cases = vec![

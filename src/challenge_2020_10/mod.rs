@@ -539,4 +539,21 @@ impl Solution {
         }
         dp[n as usize]
     }
+
+    // 228. Summary Ranges
+    // https://leetcode.com/problems/summary-ranges/
+    pub fn summary_ranges(mut nums: Vec<i32>) -> Vec<String> {
+        if nums.is_empty() { return vec![]; };
+        let mut res: Vec<String> = Vec::new();
+        let mut start = nums[0];
+        // Pad the right.
+        nums.push(i32::MAX);
+        for i in 1..nums.len() {
+            if nums[i - 1] != nums[i] - 1 {
+                res.push(if start == nums[i - 1] { format!("{}", start) } else { format!("{}->{}", start, nums[i - 1]) });
+                start = nums[i];
+            }
+        }
+        res
+    }
 }

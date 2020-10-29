@@ -366,3 +366,16 @@ fn winner_square_game_v3_test() {
         assert_eq!(Solution::winner_square_game_v3(case.0), case.1);
     }
 }
+
+#[test]
+fn summary_ranges_test() {
+    let test_cases = vec![
+        (vec![], vec![]),
+        (vec![0], vec!["0"]),
+        (vec![0, 1, 2, 4, 5, 7], vec!["0->2", "4->5", "7"]),
+        (vec![0, 2, 3, 4, 6, 8, 9], vec!["0", "2->4", "6", "8->9"]),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::summary_ranges(case.0), case.1);
+    }
+}

@@ -542,6 +542,7 @@ impl Solution {
 
     // 228. Summary Ranges
     // https://leetcode.com/problems/summary-ranges/
+    // Solution with O(N) time and O(1) space.
     pub fn summary_ranges(mut nums: Vec<i32>) -> Vec<String> {
         if nums.is_empty() { return vec![]; };
         let mut res: Vec<String> = Vec::new();
@@ -555,5 +556,40 @@ impl Solution {
             }
         }
         res
+    }
+
+    // 849. Maximize Distance to Closest Person.
+    // https://leetcode.com/problems/maximize-distance-to-closest-person/
+    // Solution with O(N) time and O(1) space.
+    pub fn max_dist_to_closest(seats: Vec<i32>) -> i32 {
+        let mut left_empty_seats = 0;
+        let mut right_empty_seats = 0;
+        let mut max_empty_seats = 0;
+        let mut curr_empty_seats = 0;
+        let mut l = 0;
+        while seats[l] == 0 {
+            left_empty_seats += 1;
+            l += 1;
+        }
+        if left_empty_seats >= seats.len() / 2 {
+            return left_empty_seats as i32
+        }
+        let mut r = seats.len() - 1;
+        while seats[r] == 0 {
+            right_empty_seats += 1;
+            r -= 1
+        }
+        if left_empty_seats + right_empty_seats >= seats.len() / 2 {
+            return max(left_empty_seats, right_empty_seats) as i32
+        }
+        for i in l + 1..=r {
+            if seats[i] == 1 {
+                max_empty_seats = max(max_empty_seats, curr_empty_seats);
+                curr_empty_seats = 0;
+            } else {
+                curr_empty_seats += 1;
+            }
+        }
+        max((max_empty_seats - 1) / 2 + 1, max(left_empty_seats, right_empty_seats)) as i32
     }
 }

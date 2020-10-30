@@ -379,3 +379,19 @@ fn summary_ranges_test() {
         assert_eq!(Solution::summary_ranges(case.0), case.1);
     }
 }
+
+#[test]
+fn max_dist_to_closest_test() {
+    let test_cases = vec![
+        (vec![1, 0, 1], 1),
+        (vec![0, 0, 0, 0, 1, 0, 0, 0, 0, 0], 5),
+        (vec![0, 0, 0, 1, 0, 0, 0], 3),
+        (vec![0, 0, 1, 0, 0, 0, 0], 4),
+        (vec![1, 0, 0, 0, 0, 0, 0], 6),
+        (vec![1, 0, 0, 0, 1, 0, 1], 2),
+        (vec![1, 0, 0, 1, 1, 0, 1], 1),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::max_dist_to_closest(case.0), case.1);
+    }
+}

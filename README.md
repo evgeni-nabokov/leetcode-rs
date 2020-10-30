@@ -1,4 +1,4 @@
-### List of solved problems (200)
+### List of solved problems (201)
 1. **1** Two Sum https://leetcode.com/problems/two-sum/ *Easy*
 1. **7** Reverse Integer https://leetcode.com/problems/reverse-integer/ *Easy*
 1. **15** 3Sum https://leetcode.com/problems/3sum/ *Medium*
@@ -156,6 +156,7 @@
 1. **797** All Paths From Source to Target https://leetcode.com/problems/all-paths-from-source-to-target/ *Medium*
 1. **824** Goat Latin https://leetcode.com/problems/goat-latin/ *Easy*
 1. **844** Backspace String Compare https://leetcode.com/problems/backspace-string-compare/ *Easy*
+1. **849** Maximize Distance to Closest Person https://leetcode.com/problems/maximize-distance-to-closest-person/ *Easy*
 1. **859** Buddy Strings https://leetcode.com/problems/buddy-strings/ *Easy*
 1. **876** Middle of the Linked List https://leetcode.com/problems/middle-of-the-linked-list/ *Easy*
 1. **886** Possible Bipartition https://leetcode.com/problems/possible-bipartition/ *Medium*

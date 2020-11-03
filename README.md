@@ -1,4 +1,4 @@
-### List of solved problems (203)
+### List of solved problems (204)
 1. **1** Two Sum https://leetcode.com/problems/two-sum/ *Easy*
 1. **7** Reverse Integer https://leetcode.com/problems/reverse-integer/ *Easy*
 1. **15** 3Sum https://leetcode.com/problems/3sum/ *Medium*
@@ -201,4 +201,5 @@
 1. **1427** Perform String Shifts https://leetcode.com/problems/perform-string-shifts/ *Easy*
 1. **1429** First Unique Number https://leetcode.com/problems/first-unique-number/ *Medium*
 1. **1430** Check If a String Is a Valid Sequence from Root to Leaves Path in a Binary Tree https://leetcode.com/problems/check-if-a-string-is-a-valid-sequence-from-root-to-leaves-path-in-a-binary-tree/ *Medium*
+1. **1446** Consecutive Characters https://leetcode.com/problems/consecutive-characters/ *Easy*
 1. **1510** Stone Game IV https://leetcode.com/problems/stone-game-iv/ *Hard*

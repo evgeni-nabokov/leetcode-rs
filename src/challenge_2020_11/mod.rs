@@ -1,6 +1,8 @@
 #[cfg(test)]
 mod tests;
 
+use std::cmp::max;
+
 use crate::common::list_node::ListNode;
 
 struct Solution;
@@ -25,5 +27,23 @@ impl Solution {
             node = node_inner.next;
         }
         bits.into_iter().fold(0, |acc, b| (acc << 1) | b)
+    }
+
+    // 1446. Consecutive Characters.
+    // https://leetcode.com/problems/consecutive-characters/
+    pub fn max_power(s: String) -> i32 {
+        if s.len() == 1 { return 1; }
+        let chars: Vec<char> = s.chars().collect();
+        let mut curr_pow = 1;
+        let mut max_pow = 0;
+        for i in 1..chars.len() {
+            if chars[i] == chars[i - 1] {
+                curr_pow += 1
+            } else {
+                max_pow = max(max_pow, curr_pow);
+                curr_pow = 1;
+            }
+        }
+        max(max_pow, curr_pow)
     }
 }

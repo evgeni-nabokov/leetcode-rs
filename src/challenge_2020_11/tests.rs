@@ -24,3 +24,18 @@ fn get_decimal_value_test() {
         assert_eq!(Solution::get_decimal_value(ListNode::from_slice(&case.0)), case.1);
     }
 }
+
+#[test]
+fn max_power_test() {
+    let test_cases = vec![
+        ("сс", 2),
+        ("leetcode", 2),
+        ("abbcccddddeeeeedcba", 5),
+        ("triplepillooooow", 5),
+        ("hooraaaaaaaaaaay", 11),
+        ("tourist", 1),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::max_power(case.0.to_string()), case.1);
+    }
+}

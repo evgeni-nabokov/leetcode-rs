@@ -1,9 +1,12 @@
 #[cfg(test)]
 mod tests;
 
-use std::cmp::max;
+use std::cmp::{max, min};
 
 use crate::common::list_node::ListNode;
+use crate::common::tree_node::TreeNode;
+use std::cell::RefCell;
+use std::rc::Rc;
 
 struct Solution;
 
@@ -45,5 +48,60 @@ impl Solution {
             }
         }
         max(max_pow, curr_pow)
+    }
+
+    // 310. Minimum Height Trees
+    // https://leetcode.com/problems/minimum-height-trees/
+    // Backtracking solution.
+    // Not accepted - TLE.
+    pub fn find_min_height_trees(n: i32, edges: Vec<Vec<i32>>) -> Vec<i32> {
+        fn backtrack(k: usize, adj_list: &Vec<Vec<usize>>, visited: &mut Vec<bool>, mut height: usize) -> usize {
+            if visited[k] { return height; }
+            height += 1;
+            visited[k] = true;
+            let mut res = 0;
+            for i in 0..adj_list[k].len() {
+                res = max(res, backtrack(adj_list[k][i], adj_list, visited, height));
+            }
+            res
+        }
+
+        let n = n as usize;
+        let mut adj_list: Vec<Vec<usize>> = vec![vec![]; n];
+        for i in 0..edges.len() {
+            adj_list[edges[i][0] as usize].push(edges[i][1] as usize);
+            adj_list[edges[i][1] as usize].push(edges[i][0] as usize);
+        }
+        let mut heights = vec![0; n];
+        let mut min_height = n;
+        for i in 0..n {
+            let mut visited: Vec<bool> = vec![false; n];
+            heights[i] = backtrack(i, &adj_list, &mut visited, 0);
+            min_height = min(min_height, heights[i]);
+        }
+        let mut res: Vec<i32> = Vec::new();
+        for i in 0..n {
+            if heights[i] == min_height {
+                res.push(i as i32);
+            }
+        }
+        res
+    }
+
+    // 563. Binary Tree Tilt.
+    // https://leetcode.com/problems/binary-tree-tilt/
+    // DFS solution.
+    pub fn find_tilt(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
+        fn dfs(node: &Option<Rc<RefCell<TreeNode>>>) -> (i32, i32) {
+            if let Some(node_inner) = node {
+                let (left_sum, left_tilt) = dfs(&node_inner.borrow().left);
+                let (right_sum, right_tilt) = dfs(&node_inner.borrow().right);
+                (left_sum + right_sum + node_inner.borrow().val, left_tilt + right_tilt + (left_sum - right_sum).abs())
+            } else {
+                (0, 0)
+            }
+        }
+        let (_, tilt) = dfs(&root);
+        tilt
     }
 }

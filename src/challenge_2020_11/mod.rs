@@ -104,4 +104,37 @@ impl Solution {
         let (_, tilt) = dfs(&root);
         tilt
     }
+
+    // 1099. Two Sum Less Than K.
+    // https://leetcode.com/problems/two-sum-less-than-k/
+    pub fn two_sum_less_than_k(mut nums: Vec<i32>, k: i32) -> i32 {
+        nums.sort_unstable();
+        let mut res = -1;
+        let mut i = 0;
+        while nums[i] <= k {
+            match nums[(i + 1)..].binary_search(&(k - nums[i] - 1)) {
+                Ok(j) => return nums[i] + nums[i + 1 + j],
+                Err(j) if j > 0 => res = max(res, nums[i] + nums[i + j]),
+                _ => break,
+            }
+            i += 1;
+        }
+        res
+    }
+
+    pub fn two_sum_less_than_k_v2(mut nums: Vec<i32>, k: i32) -> i32 {
+        nums.sort_unstable();
+        let mut res = -1;
+        let mut left = 0;
+        let mut right = nums.len() - 1;
+        while left < right {
+            if nums[left] + nums[right] < k {
+                res = max(res, nums[left] + nums[right]);
+                left += 1;
+            } else {
+                right -= 1;
+            }
+        }
+        res
+    }
 }

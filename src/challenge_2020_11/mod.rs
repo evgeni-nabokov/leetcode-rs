@@ -137,4 +137,16 @@ impl Solution {
         }
         res
     }
+
+    // 832. Flipping an Image.
+    // https://leetcode.com/problems/flipping-an-image/
+    pub fn flip_and_invert_image(mut matrix: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
+        for r in 0..matrix.len() {
+            matrix[r].reverse();
+            for c in 0..matrix[r].len() {
+                matrix[r][c] = if matrix[r][c] == 0 { 1 } else { 0 };
+            }
+        }
+        matrix
+    }
 }

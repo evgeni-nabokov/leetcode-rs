@@ -89,3 +89,20 @@ fn two_sum_less_than_k_v2_test() {
         assert_eq!(Solution::two_sum_less_than_k_v2(case.0, case.1), case.2);
     }
 }
+
+#[test]
+fn flip_and_invert_image_test() {
+    let test_cases = vec![
+        (
+            vec![vec![1, 1, 0], vec![1, 0, 1], vec![0, 0, 0]],
+            vec![vec![1, 0, 0], vec![0, 1, 0], vec![1, 1, 1]]
+        ),
+        (
+            vec![vec![1, 1, 0, 0], vec![1, 0, 0, 1], vec![0, 1, 1, 1], vec![1, 0, 1, 0]],
+            vec![vec![1, 1, 0, 0], vec![0, 1, 1, 0], vec![0, 0, 0, 1], vec![1, 0, 1, 0]]
+        ),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::flip_and_invert_image(case.0), case.1);
+    }
+}

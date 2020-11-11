@@ -1,4 +1,4 @@
-### List of solved problems (206)
+### List of solved problems (207)
 1. **1** Two Sum https://leetcode.com/problems/two-sum/ *Easy*
 1. **7** Reverse Integer https://leetcode.com/problems/reverse-integer/ *Easy*
 1. **15** 3Sum https://leetcode.com/problems/3sum/ *Medium*
@@ -157,6 +157,7 @@
 1. **787** Cheapest Flights Within K Stops https://leetcode.com/problems/cheapest-flights-within-k-stops/ *Medium*
 1. **797** All Paths From Source to Target https://leetcode.com/problems/all-paths-from-source-to-target/ *Medium*
 1. **824** Goat Latin https://leetcode.com/problems/goat-latin/ *Easy*
+1. **832** Flipping an Image https://leetcode.com/problems/flipping-an-image/ *Easy*
 1. **844** Backspace String Compare https://leetcode.com/problems/backspace-string-compare/ *Easy*
 1. **849** Maximize Distance to Closest Person https://leetcode.com/problems/maximize-distance-to-closest-person/ *Easy*
 1. **859** Buddy Strings https://leetcode.com/problems/buddy-strings/ *Easy*

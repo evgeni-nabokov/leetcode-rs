@@ -106,3 +106,16 @@ fn flip_and_invert_image_test() {
         assert_eq!(Solution::flip_and_invert_image(case.0), case.1);
     }
 }
+
+#[test]
+fn valid_square_test() {
+    let test_cases = vec![
+        (vec![0, 0], vec![1, 1], vec![1, 0], vec![0, 1], true),
+        (vec![0, 1], vec![1, 2], vec![2, 1], vec![1, 0], true),
+        (vec![1, 0], vec![-1, 0], vec![0, -1], vec![0, 1], true),
+        (vec![0, 0], vec![0, 0], vec![0, 0], vec![0, 0], false),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::valid_square(case.0, case.1, case.2, case.3), case.4);
+    }
+}

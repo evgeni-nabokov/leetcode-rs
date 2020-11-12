@@ -149,4 +149,49 @@ impl Solution {
         }
         matrix
     }
+
+    // 593. Valid Square.
+    // https://leetcode.com/problems/valid-square/
+    // Solution without square root and multiplication with O(1) time and O(1) space.
+    pub fn valid_square(p1: Vec<i32>, p2: Vec<i32>, p3: Vec<i32>, p4: Vec<i32>) -> bool {
+        if p1 == p2 && p2 == p3 && p3 == p4 { return false; }
+
+        fn remove(point: &Vec<f64>, points: &mut Vec<Vec<i32>>) -> bool {
+            let eps = 0.00001f64;
+            let mut index: Option<usize> = None;
+            for i in 0..points.len() {
+                if (points[i][0] as f64 - point[0]).abs() < eps
+                    && (points[i][1] as f64 - point[1]).abs() < eps {
+                    index = Some(i);
+                    break;
+                }
+            }
+            if let Some(i) = index {
+                points.remove(i);
+                true
+            } else {
+                false
+            }
+        }
+
+        // Center.
+        let c = vec![(p1[0] + p2[0] + p3[0] + p4[0]) as f64 / 4.0, (p1[1] + p2[1] + p3[1] + p4[1]) as f64 / 4.0];
+        // Vector from center to p1.
+        let v1 = vec![p1[0] as f64 - c[0], p1[1] as f64 - c[1]];
+        // Vector v1 rotated by 90 deg.
+        let v2 = vec![-v1[1], v1[0]];
+        let mut points = vec![p2, p3, p4];
+        for p in [
+            // center - v1
+            vec![c[0] - v1[0], c[1] - v1[1]],
+            // center + v2
+            vec![c[0] + v2[0], c[1] + v2[1]],
+            // center - v2
+            vec![c[0] - v2[0], c[1] - v2[1]]].iter() {
+            if !remove(p, &mut points) {
+                return false;
+            }
+        }
+        true
+    }
 }

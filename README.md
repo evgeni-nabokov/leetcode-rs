@@ -1,4 +1,4 @@
-### List of solved problems (207)
+### List of solved problems (208)
 1. **1** Two Sum https://leetcode.com/problems/two-sum/ *Easy*
 1. **7** Reverse Integer https://leetcode.com/problems/reverse-integer/ *Easy*
 1. **15** 3Sum https://leetcode.com/problems/3sum/ *Medium*
@@ -142,6 +142,7 @@
 1. **560** Subarray Sum Equals K https://leetcode.com/problems/subarray-sum-equals-k/ *Medium*
 1. **563** Binary Tree Tilt https://leetcode.com/problems/binary-tree-tilt/ *Easy*
 1. **567** Permutation in String https://leetcode.com/problems/permutation-in-string/ *Medium*
+1. **593** Valid Square https://leetcode.com/problems/valid-square/ *Medium*
 1. **621** Task Scheduler https://leetcode.com/problems/task-scheduler/ *Medium*
 1. **624** Maximum Distance in Arrays https://leetcode.com/problems/maximum-distance-in-arrays/ *Easy*
 1. **662** Maximum Width of Binary Tree https://leetcode.com/problems/maximum-width-of-binary-tree/ *Medium*

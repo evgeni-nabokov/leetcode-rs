@@ -675,4 +675,49 @@ impl Solution {
         }
         res
     }
+
+    // 450. Delete Node in a BST.
+    // https://leetcode.com/problems/delete-node-in-a-bst/
+    pub fn delete_node(mut root: Option<Rc<RefCell<TreeNode>>>, val: i32) -> Option<Rc<RefCell<TreeNode>>> {
+        fn find_min(node: &Option<Rc<RefCell<TreeNode>>>) -> i32 {
+            let mut curr = node.as_ref().unwrap().clone();
+            while curr.borrow().left.is_some() {
+                let tmp = curr.borrow().left.as_ref().unwrap().clone();
+                curr = tmp;
+            }
+            let res = curr.borrow().val;
+            res
+        }
+
+        fn remove(node: &mut Option<Rc<RefCell<TreeNode>>>, val: i32) {
+            if node.is_none() { return; }
+
+            let node_val = node.as_ref().unwrap().borrow().val;
+            match val.cmp(&node_val) {
+                Ordering::Less => remove(&mut node.as_mut().unwrap().borrow_mut().left, val),
+                Ordering::Greater => remove(&mut node.as_mut().unwrap().borrow_mut().right, val),
+                _ => {
+                    let has_left = node.as_ref().unwrap().borrow().left.is_some();
+                    let has_right = node.as_ref().unwrap().borrow().right.is_some();
+
+                    if !has_left && !has_right {
+                        node.take();
+                    } else if !has_right {
+                        let left_node = node.as_mut().unwrap().borrow_mut().left.take().unwrap();
+                        node.replace(left_node);
+                    } else if !has_left {
+                        let right_node = node.as_mut().unwrap().borrow_mut().right.take().unwrap();
+                        node.replace(right_node);
+                    } else {
+                        let successor_val = find_min(&node.as_ref().unwrap().borrow().right);
+                        node.as_mut().unwrap().borrow_mut().val = successor_val;
+                        remove(&mut node.as_mut().unwrap().borrow_mut().right, successor_val);
+                    }
+                },
+            }
+        }
+
+        remove(&mut root, val);
+        root
+    }
 }

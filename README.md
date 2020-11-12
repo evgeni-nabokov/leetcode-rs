@@ -1,4 +1,4 @@
-### List of solved problems (208)
+### List of solved problems (209)
 1. **1** Two Sum https://leetcode.com/problems/two-sum/ *Easy*
 1. **7** Reverse Integer https://leetcode.com/problems/reverse-integer/ *Easy*
 1. **15** 3Sum https://leetcode.com/problems/3sum/ *Medium*
@@ -123,6 +123,7 @@
 1. **438** Find All Anagrams in a String https://leetcode.com/problems/find-all-anagrams-in-a-string/ *Medium*
 1. **441** Arranging Coins https://leetcode.com/problems/arranging-coins/ *Easy*
 1. **442** Find All Duplicates in an Array https://leetcode.com/problems/find-all-duplicates-in-an-array/ *Medium*
+1. **450** Delete Node in a BST https://leetcode.com/problems/delete-node-in-a-bst/ *Medium*
 1. **451** Sort Characters By Frequency https://leetcode.com/problems/sort-characters-by-frequency/ *Medium*
 1. **452** Minimum Number of Arrows to Burst Balloons https://leetcode.com/problems/minimum-number-of-arrows-to-burst-balloons/ *Medium*
 1. **459** Repeated Substring Pattern // https://leetcode.com/problems/repeated-substring-pattern/ *Easy*

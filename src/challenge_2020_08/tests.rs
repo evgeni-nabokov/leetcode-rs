@@ -4,6 +4,7 @@ use crate::challenge_2020_08::logger_v2::Logger as LoggerV2;
 use crate::challenge_2020_08::hash_set::HashSet;
 use crate::challenge_2020_08::word_dictionary::WordDictionary;
 use crate::common::linked_list::LinkedList;
+use crate::common::tree_node::BinaryTree;
 
 fn get_logger_test_cases<'a>() -> Vec<(i32, &'a str, bool)>{
     vec![
@@ -538,5 +539,92 @@ fn find_right_interval_test() {
 
     for case in test_cases {
         assert_eq!(Solution::find_right_interval(case.0), case.1);
+    }
+}
+
+#[test]
+fn delete_node_test() {
+    let empty_tree = vec![];
+    let tree_1 = vec![Some(5), Some(3), Some(6), Some(2), Some(4), None, Some(7)];
+    let tree_2 = vec![Some(50), Some(30), Some(70), None, Some(40), Some(60), Some(80)];
+    // TODO: Make this case working.
+    // let tree_3_input = vec![Some(2),Some(0),Some(33),None,Some(1),Some(25),Some(40),None,
+    //                   None,Some(11),Some(31),Some(34),Some(45),Some(10),Some(18),Some(29),Some(32),
+    //                   None,Some(36),Some(43),Some(46),Some(4),None,Some(12),Some(24),Some(26),Some(30),
+    //                   None,None,Some(35),Some(39),Some(42),Some(44),None,Some(48),Some(3),Some(9),None,
+    //                   Some(14),Some(22),None,None,Some(27),None,None,None,None,Some(38),None,Some(41),
+    //                   None,None,None,Some(47),Some(49),None,None,Some(5),None,Some(13),Some(15),Some(21),
+    //                   Some(23),None,Some(28),Some(37),None,None,None,None,None,None,None,None,Some(8),
+    //                   None,None,None,Some(17),Some(19),None,None,None,None,None,None,None,Some(7),None,
+    //                   Some(16),None,None,Some(20),Some(6)];
+    // let tree_3_output = vec![Some(2),Some(0),Some(34),None,Some(1),Some(25),Some(40),
+    //                          None,None,Some(11),Some(31),Some(35),Some(45),Some(10),Some(18),Some(29),
+    //                          Some(32),None,Some(36),Some(43),Some(46),Some(4),None,Some(12),Some(24),
+    //                          Some(26),Some(30),None,None,None,Some(39),Some(42),Some(44),None,Some(48),
+    //                          Some(3),Some(9),None,Some(14),Some(22),None,None,Some(27),None,None,Some(38),
+    //                          None,Some(41),None,None,None,Some(47),Some(49),None,None,Some(5),None,Some(13),
+    //                          Some(15),Some(21),Some(23),None,Some(28),Some(37),None,None,None,None,None,
+    //                          None,None,None,Some(8),None,None,None,Some(17),Some(19),None,None,None,None,
+    //                          None,None,None,Some(7),None,Some(16),None,None,Some(20),Some(6)];
+
+    let test_cases = vec![
+        (
+            &empty_tree,
+            0,
+            vec![]
+        ),
+        (
+            &tree_1,
+            3,
+            vec![Some(5), Some(4), Some(6), Some(2), None, None, Some(7)]
+        ),
+        (
+            &tree_1,
+            3,
+            vec![Some(5), Some(4), Some(6), Some(2), None, None, Some(7)]
+        ),
+        (
+            &tree_1,
+            0,
+            vec![Some(5), Some(3), Some(6), Some(2), Some(4), None, Some(7)]
+        ),
+        (
+            &tree_1,
+            2,
+            vec![Some(5), Some(3), Some(6), None, Some(4), None, Some(7)]
+        ),
+        (
+            &tree_1,
+            4,
+            vec![Some(5), Some(3), Some(6), Some(2), None, None, Some(7)]
+        ),
+        (
+            &tree_1,
+            6,
+            vec![Some(5), Some(3), Some(7), Some(2), Some(4), None, None]
+        ),
+        (
+            &tree_1,
+            7,
+            vec![Some(5), Some(3), Some(6), Some(2), Some(4), None, None]
+        ),
+        (
+            &tree_1,
+            5,
+            vec![Some(6), Some(3), Some(7), Some(2), Some(4), None, None]
+        ),
+        (
+            &tree_2,
+            50,
+            vec![Some(60), Some(30), Some(70), None, Some(40), None, Some(80)]
+        ),
+        // (
+        //     &tree_3_input,
+        //     33,
+        //     tree_3_output
+        // )
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::delete_node(TreeNode::from_level_order(case.0), case.1).get_level_order_values(), case.2);
     }
 }

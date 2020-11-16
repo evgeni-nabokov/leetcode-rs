@@ -1,4 +1,4 @@
-### List of solved problems (210)
+### List of solved problems (211)
 1. **1** Two Sum https://leetcode.com/problems/two-sum/ *Easy*
 1. **7** Reverse Integer https://leetcode.com/problems/reverse-integer/ *Easy*
 1. **15** 3Sum https://leetcode.com/problems/3sum/ *Medium*
@@ -194,6 +194,7 @@
 1. **1108** Defanging an IP Address https://leetcode.com/problems/defanging-an-ip-address/ *Easy*
 1. **1143** Longest Common Subsequence https://leetcode.com/problems/longest-common-subsequence/ *Medium*
 1. **1232** Check If It Is a Straight Line https://leetcode.com/problems/check-if-it-is-a-straight-line/ *Easy*
+1. **1272** Remove Interval https://leetcode.com/problems/remove-interval/ *Medium*
 1. **1277** Count Square Submatrices with All Ones https://leetcode.com/problems/count-square-submatrices-with-all-ones/ *Medium*
 1. **1288** Remove Covered Intervals https://leetcode.com/problems/remove-covered-intervals/ *Medium*
 1. **1291** Sequential Digits https://leetcode.com/problems/sequential-digits/ *Medium*

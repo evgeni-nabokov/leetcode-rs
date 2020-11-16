@@ -140,3 +140,32 @@ fn range_sum_bst_v2_test() {
         assert_eq!(Solution::range_sum_bst_v2(TreeNode::from_level_order(&case.0), case.1, case.2), case.3);
     }
 }
+
+fn get_remove_interval_test_cases() -> Vec<(Vec<Vec<i32>>, Vec<i32>, Vec<Vec<i32>>)> {
+    vec![
+        (vec![vec![0, 5]], vec![5, 6], vec![vec![0, 5]]),
+        (vec![vec![0, 5]], vec![-1, 0], vec![vec![0, 5]]),
+        (vec![vec![0, 2], vec![3, 4], vec![5, 7]], vec![1, 6], vec![vec![0, 1], vec![6, 7]]),
+        (
+            vec![vec![-5, -4], vec![-3, -2], vec![1, 2], vec![3, 5], vec![8, 9]],
+            vec![-1, 4],
+            vec![vec![-5, -4], vec![-3, -2], vec![4, 5], vec![8, 9]]
+        ),
+        (vec![vec![0, 100]], vec![0, 50], vec![vec![50, 100]]),
+        (vec![vec![0, 100]], vec![50, 100], vec![vec![0, 50]]),
+    ]
+}
+
+#[test]
+fn remove_interval_test() {
+    for case in get_remove_interval_test_cases() {
+        assert_eq!(Solution::remove_interval(case.0, case.1), case.2);
+    }
+}
+
+#[test]
+fn remove_interval_v2_test() {
+    for case in get_remove_interval_test_cases() {
+        assert_eq!(Solution::remove_interval_v2(case.0, case.1), case.2);
+    }
+}

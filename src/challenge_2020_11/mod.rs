@@ -195,6 +195,44 @@ impl Solution {
         true
     }
 
+    // 1272. Remove Interval.
+    // https://leetcode.com/problems/remove-interval/
+    pub fn remove_interval(intervals: Vec<Vec<i32>>, to_be_removed: Vec<i32>) -> Vec<Vec<i32>> {
+        let mut res: Vec<Vec<i32>> = Vec::with_capacity(intervals.len());
+        for curr_int in intervals {
+            // if curr_int ends before to_be_removed or starts after.
+            if curr_int[1] <= to_be_removed[0] || curr_int[0] >= to_be_removed[1] {
+                res.push(curr_int);
+            // if to_be_removed is inside curr_int
+            } else if curr_int[0] < to_be_removed[0] && curr_int[1] > to_be_removed[1] {
+                res.push(vec![curr_int[0], to_be_removed[0]]);
+                res.push(vec![to_be_removed[1], curr_int[1]]);
+            // "left" overlap.
+            } else if curr_int[0] < to_be_removed[0] && curr_int[1] > to_be_removed[0] {
+                res.push(vec![curr_int[0], to_be_removed[0]]);
+            // "right" overlap.
+            } else if curr_int[0] >= to_be_removed[0] && curr_int[1] > to_be_removed[1] {
+                res.push(vec![to_be_removed[1], curr_int[1]]);
+            }
+        }
+        res
+    }
+
+    pub fn remove_interval_v2(intervals: Vec<Vec<i32>>, to_be_removed: Vec<i32>) -> Vec<Vec<i32>> {
+        let mut res: Vec<Vec<i32>> = Vec::with_capacity(intervals.len());
+        for curr_int in intervals {
+            let mut tmp = min(curr_int[1], to_be_removed[0]);
+            if tmp > curr_int[0] {
+                res.push(vec![curr_int[0], tmp]);
+            }
+            tmp = max(curr_int[0], to_be_removed[1]);
+            if tmp < curr_int[1] {
+                res.push(vec![tmp, curr_int[1]]);
+            }
+        }
+        res
+    }
+
     // 938. Range Sum of BST
     // https://leetcode.com/problems/range-sum-of-bst/
     // Recursive DFS solution.

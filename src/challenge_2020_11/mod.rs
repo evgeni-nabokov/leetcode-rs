@@ -194,4 +194,51 @@ impl Solution {
         }
         true
     }
+
+    // 938. Range Sum of BST
+    // https://leetcode.com/problems/range-sum-of-bst/
+    // Recursive DFS solution.
+    pub fn range_sum_bst(root: Option<Rc<RefCell<TreeNode>>>, low: i32, high: i32) -> i32 {
+        fn dfs(node: &Option<Rc<RefCell<TreeNode>>>, low: i32, high: i32) -> i32 {
+            if let Some(node_inner) = node {
+                let val = node_inner.borrow().val;
+                let mut res = 0;
+                if val >= low && val <= high {
+                    res = val;
+                }
+                if val < high {
+                    res += dfs(&node_inner.borrow().right, low, high);
+                }
+                if val > low {
+                    res += dfs(&node_inner.borrow().left, low, high);
+                }
+                res
+            } else {
+                0
+            }
+        }
+        dfs(&root, low, high)
+    }
+
+    // Iterative BFS solution.
+    pub fn range_sum_bst_v2(root: Option<Rc<RefCell<TreeNode>>>, low: i32, high: i32) -> i32 {
+        let mut stack: Vec<Rc<RefCell<TreeNode>>> = Vec::new();
+        let mut res = 0;
+        stack.push(root.as_ref().unwrap().clone());
+        while !stack.is_empty() {
+            let node = stack.pop().unwrap();
+            let val = node.borrow().val;
+            if val >= low && val <= high {
+                res += val;
+            }
+            if val < high && node.borrow().right.is_some() {
+                stack.push(node.borrow().right.as_ref().unwrap().clone());
+
+            }
+            if val > low  && node.borrow().left.is_some() {
+                stack.push(node.borrow().left.as_ref().unwrap().clone());
+            }
+        }
+        res
+    }
 }

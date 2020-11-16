@@ -1,4 +1,4 @@
-### List of solved problems (209)
+### List of solved problems (210)
 1. **1** Two Sum https://leetcode.com/problems/two-sum/ *Easy*
 1. **7** Reverse Integer https://leetcode.com/problems/reverse-integer/ *Easy*
 1. **15** 3Sum https://leetcode.com/problems/3sum/ *Medium*
@@ -170,6 +170,7 @@
 1. **905** Sort Array By Parity https://leetcode.com/problems/sort-array-by-parity/ *Easy*
 1. **918** Maximum Sum Circular Subarray https://leetcode.com/problems/maximum-sum-circular-subarray/ *Medium*
 1. **933** Number of Recent Calls https://leetcode.com/problems/number-of-recent-calls/ *Easy*
+1. **938** Range Sum of BST https://leetcode.com/problems/range-sum-of-bst/ *Easy*
 1. **949** Largest Time for Given Digits https://leetcode.com/problems/largest-time-for-given-digits/ *Easy*
 1. **957** Prison Cells After N Days https://leetcode.com/problems/prison-cells-after-n-days/ *Medium*
 1. **973** K Closest Points to Origin https://leetcode.com/problems/k-closest-points-to-origin/ *Medium*

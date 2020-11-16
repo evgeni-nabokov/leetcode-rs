@@ -64,7 +64,7 @@ fn find_tilt_test() {
     }
 }
 
-fn get_two_sum_less_than_k_test_cases() -> Vec<(Vec<i32>, i32, i32)>{
+fn get_two_sum_less_than_k_test_cases() -> Vec<(Vec<i32>, i32, i32)> {
     vec![
         (vec![0, 0, 1], 1, 0),
         (vec![0, 1, 1], 1, -1),
@@ -117,5 +117,26 @@ fn valid_square_test() {
     ];
     for case in test_cases {
         assert_eq!(Solution::valid_square(case.0, case.1, case.2, case.3), case.4);
+    }
+}
+
+fn get_range_sum_bst_test_cases() -> Vec<(Vec<Option<i32>>, i32, i32, i32)> {
+    vec![
+        (vec![Some(10), Some(5), Some(15), Some(3), Some(7), None, Some(18)], 7, 15, 32),
+        (vec![Some(10), Some(5), Some(15), Some(3), Some(7), Some(13), Some(18), Some(1), None, Some(6)], 6, 10, 23),
+    ]
+}
+
+#[test]
+fn range_sum_bst_test() {
+    for case in get_range_sum_bst_test_cases() {
+        assert_eq!(Solution::range_sum_bst(TreeNode::from_level_order(&case.0), case.1, case.2), case.3);
+    }
+}
+
+#[test]
+fn range_sum_bst_v2_test() {
+    for case in get_range_sum_bst_test_cases() {
+        assert_eq!(Solution::range_sum_bst_v2(TreeNode::from_level_order(&case.0), case.1, case.2), case.3);
     }
 }

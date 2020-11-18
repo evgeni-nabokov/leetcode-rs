@@ -154,27 +154,6 @@ fn combination_sum_ii_test() {
 }
 
 #[test]
-fn merge_test() {
-    let test_cases = vec![
-        (
-            vec![vec![1, 3], vec![2, 6], vec![8, 10], vec![15, 18]],
-            vec![vec![1, 6], vec![8, 10], vec![15, 18]],
-        ),
-        (
-            vec![vec![1, 4], vec![4, 5]],
-            vec![vec![1, 5]],
-        ),
-        (
-            vec![vec![1, 4], vec![0, 4]],
-            vec![vec![0, 4]],
-        ),
-    ];
-    for case in test_cases {
-        assert_eq!(Solution::merge(case.0), case.1);
-    }
-}
-
-#[test]
 fn coin_change_test() {
     let test_cases = vec![
         (vec![1], 0, 0),

@@ -279,4 +279,26 @@ impl Solution {
         }
         res
     }
+
+    // 56. Merge Intervals.
+    // https://leetcode.com/problems/merge-intervals/
+    pub fn merge(mut intervals: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
+        intervals.sort_unstable_by_key(|x| x[0]);
+        let mut res: Vec<Vec<i32>> = Vec::with_capacity(intervals.len());
+        for curr in intervals {
+            if res.is_empty() {
+                res.push(curr);
+            } else {
+                let last = res.len() - 1;
+                if res[last][1] < curr[0] {
+                    res.push(curr);
+                    continue;
+                }
+                if res[last][1] < curr[1] {
+                    res[last][1] = curr[1];
+                }
+            }
+        }
+        res
+    }
 }

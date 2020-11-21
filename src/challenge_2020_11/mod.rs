@@ -301,4 +301,48 @@ impl Solution {
         }
         res
     }
+
+    // 81. Search in Rotated Sorted Array II
+    // https://leetcode.com/problems/search-in-rotated-sorted-array-ii/
+    pub fn search(nums: Vec<i32>, target: i32) -> bool {
+        fn solve(nums: &[i32], target: i32) -> bool {
+            if nums.is_empty() { return false; }
+            let mut left = 0;
+            let mut right = nums.len() - 1;
+            while left <= right {
+                let mid = left + (right - left) / 2;
+                if target == nums[mid] { return true; }
+                if nums[left] < nums[mid] {
+                    //
+                    // Regular part is to the left of the middle.
+                    //
+
+                    if target < nums[mid] && target >= nums[left] {
+                        // Goes to the regular part.
+                        right = mid - 1;
+                    } else {
+                        // Goes to the irregular part.
+                        left = mid + 1
+                    }
+                } else if nums[mid] < nums[right] {
+                    //
+                    // Regular part is to the right of the middle.
+                    //
+
+                    if target > nums[mid] && target <= nums[right] {
+                        // Goes to the regular part.
+                        left = mid + 1;
+                    } else {
+                        // Goes to the irregular part.
+                        if mid == 0 { return false; }
+                        right = mid - 1
+                    }
+                } else {
+                    return solve(&nums[left..mid], target) || solve(&nums[mid + 1..=right], target);
+                }
+            }
+            false
+        }
+        solve(&nums, target)
+    }
 }

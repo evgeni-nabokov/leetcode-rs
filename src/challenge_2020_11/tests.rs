@@ -190,3 +190,17 @@ fn merge_test() {
         assert_eq!(Solution::merge(case.0), case.1);
     }
 }
+
+#[test]
+fn search_test() {
+    let test_cases = vec![
+        (vec![2, 5, 6, 0, 0, 1, 2], 0, true),
+        (vec![2, 5, 6, 0, 0, 1, 2], 3, false),
+        (vec![1, 3, 1, 1, 1], 3, true),
+        (vec![1, 3], 0, false),
+        (vec![3, 1], 0, false),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::search(case.0, case.1), case.2);
+    }
+}

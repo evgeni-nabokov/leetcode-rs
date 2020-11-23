@@ -204,3 +204,13 @@ fn search_test() {
         assert_eq!(Solution::search(case.0, case.1), case.2);
     }
 }
+
+#[test]
+fn unique_morse_representations_test() {
+    let test_cases = vec![
+        (vec!["gin", "zen", "gig", "msg"], 2),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::unique_morse_representations(case.0.into_iter().map(|x| x.to_string()).collect()), case.1);
+    }
+}

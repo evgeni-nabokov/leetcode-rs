@@ -2,11 +2,16 @@
 mod tests;
 
 use std::cmp::{max, min};
+use std::collections::HashSet;
+use std::iter::FromIterator;
+use std::cell::RefCell;
+use std::rc::Rc;
 
 use crate::common::list_node::ListNode;
 use crate::common::tree_node::TreeNode;
-use std::cell::RefCell;
-use std::rc::Rc;
+
+const MORSE_MAP: [&str; 26] = [".-","-...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",
+    ".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--.."];
 
 struct Solution;
 
@@ -344,5 +349,15 @@ impl Solution {
             false
         }
         solve(&nums, target)
+    }
+
+    // 804. Unique Morse Code Words.
+    // https://leetcode.com/problems/unique-morse-code-words/
+    pub fn unique_morse_representations(words: Vec<String>) -> i32 {
+        let mut set: HashSet<String> = HashSet::with_capacity(words.len());
+        for w in words {
+            set.insert(String::from_iter(w.chars().map(|x| MORSE_MAP[x as usize - 97])));
+        }
+        set.len() as i32
     }
 }

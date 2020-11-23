@@ -1,4 +1,4 @@
-### List of solved problems (212)
+### List of solved problems (213)
 1. **1** Two Sum https://leetcode.com/problems/two-sum/ *Easy*
 1. **7** Reverse Integer https://leetcode.com/problems/reverse-integer/ *Easy*
 1. **15** 3Sum https://leetcode.com/problems/3sum/ *Medium*
@@ -159,6 +159,7 @@
 1. **771** Jewels and Stones https://leetcode.com/problems/jewels-and-stones/ *Easy*
 1. **787** Cheapest Flights Within K Stops https://leetcode.com/problems/cheapest-flights-within-k-stops/ *Medium*
 1. **797** All Paths From Source to Target https://leetcode.com/problems/all-paths-from-source-to-target/ *Medium*
+1. **804** Unique Morse Code Words https://leetcode.com/problems/unique-morse-code-words/ *Easy*
 1. **824** Goat Latin https://leetcode.com/problems/goat-latin/ *Easy*
 1. **832** Flipping an Image https://leetcode.com/problems/flipping-an-image/ *Easy*
 1. **844** Backspace String Compare https://leetcode.com/problems/backspace-string-compare/ *Easy*

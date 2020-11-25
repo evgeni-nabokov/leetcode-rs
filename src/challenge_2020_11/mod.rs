@@ -360,4 +360,44 @@ impl Solution {
         }
         set.len() as i32
     }
+
+    // 227. Basic Calculator II.
+    // https://leetcode.com/problems/basic-calculator-ii/
+    pub fn calculate(s: String) -> i32 {
+        let mut res = 0i32;
+        let mut prev_num = 1i32; // First operand of multiplication or division.
+        let mut curr_num = 0i32; // Second operand of multiplication or division.
+        let mut sign = 1i32; // Sign of the second member of addition.
+        let mut mul = true; // Flag: true if current operation is multiplication, false otherwise.
+        for bbb in s.as_bytes().iter()
+            // A sentinel to perform last operation when loop ends.
+            .chain([b'#'].iter()) {
+            // Skip white space.
+            if bbb.is_ascii_whitespace() { continue; }
+
+            match (*bbb as char).is_digit(10) {
+                true => curr_num = curr_num * 10 + (bbb - b'0') as i32,
+                false => {
+                    // Perform multiplication or division. It depends on the mul flag.
+                    prev_num = if mul { prev_num * curr_num } else { prev_num / curr_num };
+                    curr_num = 0;
+                    match bbb {
+                        b'*' => mul = true,
+                        b'/' => mul = false,
+                        _ => {
+                            res += sign * prev_num;
+                            prev_num = 1;
+                            mul = true;
+                            match bbb {
+                                b'+' => sign = 1,
+                                b'-' => sign = -1,
+                                _ => break,
+                            }
+                        }
+                    }
+                },
+            }
+        }
+        res
+    }
 }

@@ -1,4 +1,4 @@
-### List of solved problems (213)
+### List of solved problems (214)
 1. **1** Two Sum https://leetcode.com/problems/two-sum/ *Easy*
 1. **7** Reverse Integer https://leetcode.com/problems/reverse-integer/ *Easy*
 1. **15** 3Sum https://leetcode.com/problems/3sum/ *Medium*
@@ -78,6 +78,7 @@
 1. **221** Maximal Square https://leetcode.com/problems/maximal-square/ *Medium*
 1. **222** Count Complete Tree Nodes https://leetcode.com/problems/count-complete-tree-nodes/ *Medium* 
 1. **226** Invert Binary Tree https://leetcode.com/problems/invert-binary-tree/ *Easy*
+1. **227** Basic Calculator II https://leetcode.com/problems/basic-calculator-ii/ *Medium*
 1. **228** Summary Ranges https://leetcode.com/problems/summary-ranges/ *Easy*
 1. **229** Majority Element II https://leetcode.com/problems/majority-element-ii/ *Medium*
 1. **230** Kth Smallest Element in a BST https://leetcode.com/problems/kth-smallest-element-in-a-bst/ *Medium*

@@ -214,3 +214,15 @@ fn unique_morse_representations_test() {
         assert_eq!(Solution::unique_morse_representations(case.0.into_iter().map(|x| x.to_string()).collect()), case.1);
     }
 }
+
+#[test]
+fn calculate_test() {
+    let test_cases = vec![
+        ("3+2*2", 7),
+        ("3 / 2", 1),
+        (" 3+5 / 2 ", 5),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::calculate(case.0.to_string()), case.1);
+    }
+}

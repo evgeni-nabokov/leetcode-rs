@@ -236,10 +236,10 @@ fn min_stack_test() {
     obj.push(-2);
     obj.push(0);
     obj.push(-3);
-    assert_eq!(obj.get_min(), Some(-3));
+    assert_eq!(obj.get_min(), -3);
     obj.pop();
-    assert_eq!(obj.top(), Some(0));
-    assert_eq!(obj.get_min(), Some(-2));
+    assert_eq!(obj.top(), 0);
+    assert_eq!(obj.get_min(), -2);
 }
 
 #[test]

@@ -1,12 +1,14 @@
 use std::cmp::min;
 
 pub struct MinStack {
-    container: Vec<(i32, i32)>,
+    container: Vec<(i32, i32)>
 }
 
 impl MinStack {
     pub fn new() -> Self {
-        MinStack { container: Vec::with_capacity(64) }
+        MinStack {
+            container: Vec::with_capacity(64),
+        }
     }
 
     pub fn push(&mut self, x: i32) {
@@ -17,19 +19,11 @@ impl MinStack {
         self.container.pop();
     }
 
-    pub fn top(&mut self) -> Option<i32> {
-        if self.container.is_empty() {
-            None
-        } else {
-            Some(self.container.last().unwrap().0)
-        }
+    pub fn top(&self) -> i32 {
+        self.container.last().unwrap().0
     }
 
-    pub fn get_min(&self) -> Option<i32> {
-        if self.container.is_empty() {
-            None
-        } else {
-            Some(self.container.last().unwrap().1)
-        }
+    pub fn get_min(&self) -> i32 {
+        self.container.last().unwrap().1
     }
 }

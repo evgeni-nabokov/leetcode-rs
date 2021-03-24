@@ -253,6 +253,15 @@ impl Solution {
         }
     }
 
+    // Time complexity: O(N).
+    // Space complexity: O(C).
+    pub fn reverse_words_ii_v2(s: &mut Vec<char>) {
+        s.reverse();
+        for word in s.split_mut(|&x| x == ' ') {
+            word.reverse();
+        }
+    }
+
     // pub fn longest_palindrome(s: String) -> String {
     //     let chars: Vec<char> = s.chars().collect();
     //     let l = chars.len();

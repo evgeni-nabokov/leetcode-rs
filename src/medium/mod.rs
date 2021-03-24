@@ -185,4 +185,82 @@ impl Solution {
         let res = dp[amount as usize];
         if res == i32::MAX { -1 } else { res }
     }
+
+    // 8. String to Integer (atoi).
+    // https://leetcode.com/problems/string-to-integer-atoi/
+    // Time complexity: O(N).
+    // Space complexity: O(N).
+    pub fn my_atoi(s: String) -> i32 {
+        let chars: Vec<char> = s.chars()
+            .skip_while(|x| x.is_ascii_whitespace())
+            .collect();
+        if chars.is_empty() {
+            return 0;
+        }
+        let mut sign = 1;
+        let mut skip = 0;
+        if chars[0] == '-' {
+            sign *= -1;
+            skip += 1;
+        } else if chars[0] == '+' {
+            skip += 1;
+        }
+
+        let digits: Vec<i32> = chars.into_iter()
+            .skip(skip)
+            .skip_while(|&x| x == '0')
+            .take_while(|x| x.is_digit(10))
+            .map(|x| match x {
+                '0' => 0, '1' => 1, '2' => 2, '3' => 3, '4' => 4, '5' => 5, '6' => 6, '7' => 7, '8' => 8, '9' => 9, _=> unreachable!()
+            })
+            .collect();
+
+        fn get_min_max(sign: i32) -> i32 {
+            if sign > 0 {
+                i32::MAX
+            } else {
+                i32::MIN
+            }
+        }
+
+        let mut res: i32 = 0;
+        for d in digits.into_iter() {
+            if let Some(a) = res.checked_mul(10) {
+                if let Some(b) = a.checked_add(d) {
+                    res = b;
+                } else {
+                    return get_min_max(sign);
+                }
+            } else {
+                return get_min_max(sign);
+            }
+        }
+        sign * res
+    }
+
+    // pub fn longest_palindrome(s: String) -> String {
+    //     let chars: Vec<char> = s.chars().collect();
+    //     let l = chars.len();
+    //     let mut max_pal_str: &[char] = &chars[0..1];
+    //     for pal_len in 2..l / 2 {
+    //         println!("pal_len={}", pal_len);
+    //         for i in 0..(l - pal_len) {
+    //             let mut start = i;
+    //             let mut end = i + pal_len;
+    //             println!("start={}, end={}", start, end);
+    //             while start < end {
+    //                 if chars[start] != chars[end] {
+    //                     break;
+    //                 }
+    //                 start += 1;
+    //                 end -= 1;
+    //             }
+    //             if start >= end {
+    //                 max_pal_str = &chars[i..(i + pal_len)];
+    //                 break;
+    //             }
+    //         }
+    //     }
+    //     max_pal_str.iter().collect()
+    // }
 }

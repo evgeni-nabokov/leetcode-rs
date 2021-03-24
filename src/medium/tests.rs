@@ -165,3 +165,26 @@ fn coin_change_test() {
         assert_eq!(Solution::coin_change(case.0, case.1), case.2);
     }
 }
+
+#[test]
+fn my_atoi_test() {
+    let test_cases = vec![
+        ("42", 42),
+        ("   -42", -42),
+        ("4193 with words", 4193),
+        ("words and 987", 0),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::my_atoi(case.0.to_string()), case.1);
+    }
+}
+
+// #[test]
+// fn longest_palindrome_test() {
+//     let test_cases = vec![
+//         ("babad", "bab"),
+//     ];
+//     for case in test_cases {
+//         assert_eq!(Solution::longest_palindrome(case.0.to_string()), case.1.to_string());
+//     }
+// }

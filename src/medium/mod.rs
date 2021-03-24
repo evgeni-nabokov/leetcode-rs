@@ -238,6 +238,21 @@ impl Solution {
         sign * res
     }
 
+    // 186. Reverse Words in a String II.
+    // https://leetcode.com/problems/reverse-words-in-a-string-ii/
+    // Time complexity: O(N).
+    // Space complexity: O(C).
+    pub fn reverse_words_ii(s: &mut Vec<char>) {
+        s.reverse();
+        let mut start = 0;
+        for end in 1..=s.len() {
+            if end == s.len() || s[end] == ' ' {
+                s[start..end].reverse();
+                start = end + 1;
+            }
+        }
+    }
+
     // pub fn longest_palindrome(s: String) -> String {
     //     let chars: Vec<char> = s.chars().collect();
     //     let l = chars.len();

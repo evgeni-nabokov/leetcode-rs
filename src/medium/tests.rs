@@ -179,6 +179,23 @@ fn my_atoi_test() {
     }
 }
 
+#[test]
+fn reverse_words_ii_test() {
+    let test_cases = vec![
+        (
+            vec!['a'],
+            vec!['a'],
+        ),
+        (
+            vec!['t', 'h', 'e', ' ', 's', 'k', 'y', ' ', 'i', 's', ' ', 'b', 'l', 'u', 'e'],
+            vec!['b', 'l', 'u', 'e', ' ', 'i', 's', ' ', 's', 'k', 'y', ' ', 't', 'h', 'e'],
+        ),
+    ];
+    for mut case in test_cases {
+        Solution::reverse_words_ii(&mut case.0);
+        assert_eq!(case.0, case.1);
+    }
+}
 // #[test]
 // fn longest_palindrome_test() {
 //     let test_cases = vec![

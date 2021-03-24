@@ -1,4 +1,4 @@
-### List of solved problems (218)
+### List of solved problems (219)
 1. **1** Two Sum https://leetcode.com/problems/two-sum/ *Easy*
 1. **7** Reverse Integer https://leetcode.com/problems/reverse-integer/ *Easy*
 1. **8** String to Integer (atoi) https://leetcode.com/problems/string-to-integer-atoi/ *Medium*
@@ -7,6 +7,7 @@
 1. **21** Merge Two Sorted Lists https://leetcode.com/problems/merge-two-sorted-lists/ *Easy*
 1. **33** Search in Rotated Sorted Array https://leetcode.com/problems/search-in-rotated-sorted-array/ *Medium*
 1. **35** Search Insert Position https://leetcode.com/problems/search-insert-position/ *Easy*
+1. **36** Valid Sudoku https://leetcode.com/problems/valid-sudoku/ *Medium*
 1. **39** Combination Sum https://leetcode.com/problems/combination-sum/ *Medium*
 1. **40** Combination Sum II https://leetcode.com/problems/combination-sum-ii/ *Medium*
 1. **41** First Missing Positive https://leetcode.com/problems/first-missing-positive/ *Hard*

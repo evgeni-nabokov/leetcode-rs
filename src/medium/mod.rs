@@ -309,6 +309,66 @@ impl Solution {
         dfs(&root, None).0
     }
 
+    // 36. Valid Sudoku.
+    // https://leetcode.com/problems/valid-sudoku/
+    // Time complexity: O(1).
+    // Space complexity: O(1).
+    pub fn is_valid_sudoku(board: Vec<Vec<char>>) -> bool {
+        let mut digits = vec![false; 10];
+
+        fn get_digit(c: char) -> usize {
+            match c {
+                '.' => 0, '1' => 1, '2' => 2, '3' => 3, '4' => 4, '5' => 5, '6' => 6, '7' => 7, '8' => 8, '9' => 9, _=> unreachable!()
+            }
+        }
+
+        fn reset_digits(digits: &mut Vec<bool>) {
+            for i in 1..digits.len() {
+                digits[i] = false;
+            }
+        }
+
+        for row in 0..9 {
+            for col in 0..9 {
+                let d = get_digit(board[row][col]);
+                if d > 0 && digits[d] {
+                    return false;
+                }
+                digits[d] = true;
+            }
+            reset_digits(&mut digits);
+        }
+
+        for col in 0..9 {
+            for row in 0..9 {
+                let d = get_digit(board[row][col]);
+                if d > 0 && digits[d] {
+                    return false;
+                }
+                digits[d] = true;
+            }
+            reset_digits(&mut digits);
+        }
+
+        for block in 0..9 {
+            let base_row = (block / 3) * 3;
+            let base_col = (block % 3) * 3;
+
+            for row in 0..3 {
+                for col in 0..3 {
+                    let d = get_digit(board[base_row + row][base_col + col]);
+                    if d > 0 && digits[d] {
+                        return false;
+                    }
+                    digits[d] = true;
+                }
+            }
+            reset_digits(&mut digits);
+        }
+
+        true
+    }
+
     // pub fn longest_palindrome(s: String) -> String {
     //     let chars: Vec<char> = s.chars().collect();
     //     let l = chars.len();

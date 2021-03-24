@@ -1,8 +1,9 @@
-### List of solved problems (216)
+### List of solved problems (217)
 1. **1** Two Sum https://leetcode.com/problems/two-sum/ *Easy*
 1. **7** Reverse Integer https://leetcode.com/problems/reverse-integer/ *Easy*
 1. **8** String to Integer (atoi) https://leetcode.com/problems/string-to-integer-atoi/ *Medium*
 1. **15** 3Sum https://leetcode.com/problems/3sum/ *Medium*
+1. **20** Valid Parentheses https://leetcode.com/problems/valid-parentheses/ *Easy*
 1. **21** Merge Two Sorted Lists https://leetcode.com/problems/merge-two-sorted-lists/ *Easy*
 1. **33** Search in Rotated Sorted Array https://leetcode.com/problems/search-in-rotated-sorted-array/ *Medium*
 1. **35** Search Insert Position https://leetcode.com/problems/search-insert-position/ *Easy*

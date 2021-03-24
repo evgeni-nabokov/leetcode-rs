@@ -135,4 +135,26 @@ impl Solution {
         }
         l3.next.take()
     }
+
+    // 20. Valid Parentheses.
+    // https://leetcode.com/problems/valid-parentheses/
+    // Time complexity: O(N).
+    // Space complexity: O(N).
+    pub fn is_valid(s: String) -> bool {
+        let mut stack: Vec<char> = Vec::with_capacity(s.len());
+        for c in s.chars() {
+            if c == '(' || c == '[' || c == '{' {
+                stack.push(c)
+            } else {
+                if stack.is_empty() {
+                    return false;
+                }
+                let o = stack.pop().unwrap();
+                if o == '(' && c != ')' || o == '[' && c != ']' || o == '{' && c != '}' {
+                    return false;
+                }
+            }
+        }
+        stack.is_empty()
+    }
 }

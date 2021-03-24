@@ -79,3 +79,17 @@ fn merge_two_lists_test() {
         assert_eq!(Solution::merge_two_lists(ListNode::from_slice(&case.0), ListNode::from_slice(&case.1)).to_vec(), case.2);
     }
 }
+
+#[test]
+fn is_valid() {
+    let test_cases = vec![
+        ("()", true),
+        ("()[]{}", true),
+        ("(]", false),
+        ("([)]", false),
+        ("{[]}", true),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::is_valid(case.0.to_string()), case.1);
+    }
+}

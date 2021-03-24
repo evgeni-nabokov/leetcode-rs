@@ -208,6 +208,45 @@ fn reverse_words_ii_v2_test() {
     }
 }
 
+fn get_is_valid_bst_test_cases() -> Vec<(Vec<Option<i32>>, bool)> {
+    vec![
+        (
+            vec![Some(2), Some(1), Some(3)],
+            true,
+        ),
+        (
+            vec![Some(5), Some(1), Some(4), None, None, Some(3), Some(6)],
+            false,
+        ),
+        (
+            vec![Some(5), Some(4), Some(6), None, None, Some(3), Some(7)],
+            false,
+        ),
+        (
+            vec![Some(1), Some(1)],
+            false,
+        ),
+        (
+            vec![Some(2147483647)],
+            true,
+        ),
+    ]
+}
+
+#[test]
+fn is_valid_bst_test() {
+    for case in get_is_valid_bst_test_cases() {
+        assert_eq!(Solution::is_valid_bst(TreeNode::from_level_order(&case.0)), case.1);
+    }
+}
+
+#[test]
+fn is_valid_bst_v2_test() {
+    for case in get_is_valid_bst_test_cases() {
+        assert_eq!(Solution::is_valid_bst_v2(TreeNode::from_level_order(&case.0)), case.1);
+    }
+}
+
 // #[test]
 // fn longest_palindrome_test() {
 //     let test_cases = vec![

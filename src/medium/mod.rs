@@ -262,6 +262,53 @@ impl Solution {
         }
     }
 
+    // 98. Validate Binary Search Tree.
+    // https://leetcode.com/problems/validate-binary-search-tree/
+    // Preorder traversal.
+    // Time complexity: O(N).
+    // Space complexity: O(N).
+    pub fn is_valid_bst(root: Option<Rc<RefCell<TreeNode>>>) -> bool {
+        fn dfs(node: &Option<Rc<RefCell<TreeNode>>>, lower: Option<i32>, upper: Option<i32>) -> bool {
+            if let Some(node_inner) = node {
+                let val = node_inner.borrow().val;
+                if (lower.is_some() && val <= lower.unwrap()) || upper.is_some() && (val >= upper.unwrap()) {
+                     false
+                } else {
+                    dfs(&node_inner.borrow().left, lower, Some(val)) && dfs(&node_inner.borrow().right, Some(val), upper)
+                }
+            } else {
+                true
+            }
+        }
+
+        dfs(&root, None, None)
+    }
+
+    // Inorder traversal.
+    // Time complexity: O(N).
+    // Space complexity: O(N).
+    pub fn is_valid_bst_v2(root: Option<Rc<RefCell<TreeNode>>>) -> bool {
+        fn dfs(node: &Option<Rc<RefCell<TreeNode>>>, prev: Option<i32>) -> (bool, Option<i32>) {
+            if let Some(node_inner) = node {
+                let (is_valid, prev) = dfs(&node_inner.borrow().left, prev);
+                if is_valid {
+                    let val = node_inner.borrow().val;
+                    if prev.is_some() && val <= prev.unwrap() {
+                        (false, prev)
+                    } else {
+                        dfs(&node_inner.borrow().right, Some(val))
+                    }
+                } else {
+                    (false, prev)
+                }
+            } else {
+                (true, prev)
+            }
+        }
+
+        dfs(&root, None).0
+    }
+
     // pub fn longest_palindrome(s: String) -> String {
     //     let chars: Vec<char> = s.chars().collect();
     //     let l = chars.len();

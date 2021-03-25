@@ -298,3 +298,15 @@ fn longest_palindrome_test() {
         assert_eq!(Solution::longest_palindrome(case.0.to_string()), case.1.to_string());
     }
 }
+
+#[test]
+fn max_area_test() {
+    let test_cases = vec![
+        (5, 4, vec![1, 2, 4], vec![1, 3], 4),
+        (5, 4, vec![3], vec![3], 9),
+        (100000, 100000, vec![1], vec![1], 999799938),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::max_area(case.0, case.1, case.2, case.3), case.4);
+    }
+}

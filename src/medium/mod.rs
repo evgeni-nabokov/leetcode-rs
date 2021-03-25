@@ -241,7 +241,7 @@ impl Solution {
     // 186. Reverse Words in a String II.
     // https://leetcode.com/problems/reverse-words-in-a-string-ii/
     // Time complexity: O(N).
-    // Space complexity: O(C).
+    // Space complexity: O(1).
     pub fn reverse_words_ii(s: &mut Vec<char>) {
         s.reverse();
         let mut start = 0;
@@ -254,7 +254,7 @@ impl Solution {
     }
 
     // Time complexity: O(N).
-    // Space complexity: O(C).
+    // Space complexity: O(1).
     pub fn reverse_words_ii_v2(s: &mut Vec<char>) {
         s.reverse();
         for word in s.split_mut(|&x| x == ' ') {
@@ -399,5 +399,28 @@ impl Solution {
         }
 
         chars[start..=end].iter().collect()
+    }
+
+    // 1465. Maximum Area of a Piece of Cake After Horizontal and Vertical Cuts
+    // https://leetcode.com/problems/maximum-area-of-a-piece-of-cake-after-horizontal-and-vertical-cuts/
+    // Time complexity: O(N), where N - max(horizontal_cuts, vertical_cuts).
+    // Space complexity: O(1).
+    pub fn max_area(h: i32, w: i32, mut horizontal_cuts: Vec<i32>, mut vertical_cuts: Vec<i32>) -> i32 {
+        horizontal_cuts.sort_unstable();
+        vertical_cuts.sort_unstable();
+
+        let mut cut_h = horizontal_cuts[0];
+        let mut cut_w = vertical_cuts[0];
+        for i in 1..horizontal_cuts.len() {
+            cut_h = max(cut_h, horizontal_cuts[i] - horizontal_cuts[i - 1]);
+        }
+        for i in 1..vertical_cuts.len() {
+            cut_w = max(cut_w, vertical_cuts[i] - vertical_cuts[i - 1]);
+        }
+        cut_h = max(cut_h, h - horizontal_cuts.last().unwrap());
+        cut_w = max(cut_w, w - vertical_cuts.last().unwrap());
+
+        let m = 1000_000_007;
+        (cut_h.rem_euclid(m) as u64 * cut_w.rem_euclid(m) as u64).rem_euclid(m as u64) as i32
     }
 }

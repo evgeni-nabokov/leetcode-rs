@@ -321,3 +321,26 @@ fn partition_labels_test() {
         assert_eq!(Solution::partition_labels(case.0.to_string()), case.1);
     }
 }
+
+#[test]
+fn all_paths_source_target_test() {
+    let test_cases = vec![
+        (vec![vec![1,2], vec![3], vec![3], vec![]], vec![vec![0, 1, 3], vec![0, 2, 3]]),
+        (
+            vec![vec![4, 3, 1], vec![3, 2, 4], vec![3], vec![4], vec![]],
+            vec![vec![0, 4], vec![0, 3, 4], vec![0, 1, 3, 4], vec![0, 1, 2, 3, 4], vec![0, 1, 4]],
+        ),
+        (vec![vec![1], vec![]], vec![vec![0, 1]]),
+        (
+            vec![vec![1, 2, 3], vec![2], vec![3], vec![]],
+            vec![vec![0, 1, 2, 3], vec![0, 2, 3], vec![0, 3]],
+        ),
+        (
+            vec![vec![1, 3], vec![2], vec![3], vec![]],
+            vec![vec![0, 1, 2, 3], vec![0, 3]],
+        )
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::all_paths_source_target(case.0), case.1);
+    }
+}

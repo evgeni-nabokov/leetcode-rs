@@ -452,4 +452,27 @@ impl Solution {
 
         res
     }
+
+    // 797. All Paths From Source to Target.
+    // https://leetcode.com/problems/all-paths-from-source-to-target/
+    // Time complexity: O(2^N * N).
+    // Space complexity: O(2^N * N).
+    fn all_paths_source_target(graph: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
+        fn bt(v: usize, graph: &Vec<Vec<i32>>, path: &mut Vec<i32>, res: &mut Vec<Vec<i32>>) {
+            if v == graph.len() - 1 {
+                res.push(path.to_vec());
+                return;
+            }
+            for i in 0..graph[v].len() {
+                path.push(graph[v][i]);
+                bt(graph[v][i] as usize, graph, path, res);
+                path.pop();
+            }
+        }
+
+        let mut res: Vec<Vec<i32>> = Vec::new();
+        let mut path: Vec<i32> = vec![0];
+        bt(0, &graph, &mut path, &mut res);
+        res
+    }
 }

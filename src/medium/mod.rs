@@ -401,7 +401,7 @@ impl Solution {
         chars[start..=end].iter().collect()
     }
 
-    // 1465. Maximum Area of a Piece of Cake After Horizontal and Vertical Cuts
+    // 1465. Maximum Area of a Piece of Cake After Horizontal and Vertical Cuts.
     // https://leetcode.com/problems/maximum-area-of-a-piece-of-cake-after-horizontal-and-vertical-cuts/
     // Time complexity: O(N), where N - max(horizontal_cuts, vertical_cuts).
     // Space complexity: O(1).
@@ -422,5 +422,34 @@ impl Solution {
 
         let m = 1000_000_007;
         (cut_h.rem_euclid(m) as u64 * cut_w.rem_euclid(m) as u64).rem_euclid(m as u64) as i32
+    }
+
+    // 763. Partition Labels.
+    // https://leetcode.com/problems/partition-labels/
+    // Time complexity: O(N).
+    // Space complexity: O(1).
+    pub fn partition_labels(s: String) -> Vec<i32> {
+        let chars: Vec<char> = s.chars().collect();
+
+        let mut last: Vec<usize> = vec![0; 26];
+        for i in 0..chars.len() {
+            let char_idx = chars[i] as usize - 97;
+            last[char_idx] = max(last[char_idx], i);
+        }
+
+        let mut res: Vec<i32> = Vec::with_capacity(s.len());
+        let mut start = 0;
+        let mut end = 0;
+        for i in 0..chars.len() {
+            let char_idx = chars[i] as usize - 97;
+            end = max(end, last[char_idx]);
+            if i == end {
+                let len = end - start + 1;
+                res.push(len as i32);
+                start = i + 1;
+            }
+        }
+
+        res
     }
 }

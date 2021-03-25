@@ -310,3 +310,14 @@ fn max_area_test() {
         assert_eq!(Solution::max_area(case.0, case.1, case.2, case.3), case.4);
     }
 }
+
+#[test]
+fn partition_labels_test() {
+    let test_cases = vec![
+        ("abcabcde", [6,1,1]),
+        ("ababcbacadefegdehijhklij", [9,7,8]),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::partition_labels(case.0.to_string()), case.1);
+    }
+}

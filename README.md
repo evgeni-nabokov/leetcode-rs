@@ -1,4 +1,4 @@
-### List of solved problems (221)
+### List of solved problems (222)
 1. **1** Two Sum https://leetcode.com/problems/two-sum/ *Easy*
 1. **5** Longest Palindromic Substring https://leetcode.com/problems/longest-palindromic-substring/ *Medium*
 1. **7** Reverse Integer https://leetcode.com/problems/reverse-integer/ *Easy*
@@ -163,6 +163,7 @@
 1. **713** Subarray Product Less Than K https://leetcode.com/problems/subarray-product-less-than-k/ *Medium*
 1. **733** Flood Fill https://leetcode.com/problems/flood-fill/ *Easy*
 1. **735** Asteroid Collision https://leetcode.com/problems/asteroid-collision/ *Medium*
+1. **763** Partition Labels https://leetcode.com/problems/partition-labels/ *Medium*
 1. **771** Jewels and Stones https://leetcode.com/problems/jewels-and-stones/ *Easy*
 1. **787** Cheapest Flights Within K Stops https://leetcode.com/problems/cheapest-flights-within-k-stops/ *Medium*
 1. **797** All Paths From Source to Target https://leetcode.com/problems/all-paths-from-source-to-target/ *Medium*

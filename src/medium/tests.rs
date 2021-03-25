@@ -284,12 +284,17 @@ fn is_valid_sudoku_test() {
     }
 }
 
-// #[test]
-// fn longest_palindrome_test() {
-//     let test_cases = vec![
-//         ("babad", "bab"),
-//     ];
-//     for case in test_cases {
-//         assert_eq!(Solution::longest_palindrome(case.0.to_string()), case.1.to_string());
-//     }
-// }
+#[test]
+fn longest_palindrome_test() {
+    let test_cases = vec![
+        ("a", "a"),
+        ("bb", "bb"),
+        ("bab", "bab"),
+        ("babad", "aba"),
+        ("cbbd", "bb"),
+        ("ac", "a"),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::longest_palindrome(case.0.to_string()), case.1.to_string());
+    }
+}

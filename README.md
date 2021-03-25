@@ -1,5 +1,6 @@
-### List of solved problems (219)
+### List of solved problems (220)
 1. **1** Two Sum https://leetcode.com/problems/two-sum/ *Easy*
+1. **5** Longest Palindromic Substring https://leetcode.com/problems/longest-palindromic-substring/ *Medium*
 1. **7** Reverse Integer https://leetcode.com/problems/reverse-integer/ *Easy*
 1. **8** String to Integer (atoi) https://leetcode.com/problems/string-to-integer-atoi/ *Medium*
 1. **15** 3Sum https://leetcode.com/problems/3sum/ *Medium*

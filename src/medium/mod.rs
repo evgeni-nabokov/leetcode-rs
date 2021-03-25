@@ -3,7 +3,7 @@ mod tests;
 
 use std::rc::Rc;
 use std::cell::RefCell;
-use std::cmp::{Ordering, min};
+use std::cmp::{Ordering, min, max};
 
 use crate::common::tree_node::TreeNode;
 
@@ -369,29 +369,35 @@ impl Solution {
         true
     }
 
-    // pub fn longest_palindrome(s: String) -> String {
-    //     let chars: Vec<char> = s.chars().collect();
-    //     let l = chars.len();
-    //     let mut max_pal_str: &[char] = &chars[0..1];
-    //     for pal_len in 2..l / 2 {
-    //         println!("pal_len={}", pal_len);
-    //         for i in 0..(l - pal_len) {
-    //             let mut start = i;
-    //             let mut end = i + pal_len;
-    //             println!("start={}, end={}", start, end);
-    //             while start < end {
-    //                 if chars[start] != chars[end] {
-    //                     break;
-    //                 }
-    //                 start += 1;
-    //                 end -= 1;
-    //             }
-    //             if start >= end {
-    //                 max_pal_str = &chars[i..(i + pal_len)];
-    //                 break;
-    //             }
-    //         }
-    //     }
-    //     max_pal_str.iter().collect()
-    // }
+    // 5. Longest Palindromic Substring.
+    // https://leetcode.com/problems/longest-palindromic-substring/
+    // Time complexity: O(N^2).
+    // Space complexity: O(1).
+    pub fn longest_palindrome(s: String) -> String {
+        if s.len() < 2 { return s; }
+
+        fn expand_around_center(chars: &Vec<char>, mut left: i32, mut right: i32) -> usize {
+            while left >= 0 && (right as usize) < chars.len() && chars[left as usize] == chars[right as usize] {
+                left -= 1;
+                right += 1;
+            }
+            (right - left - 1) as usize
+        }
+
+        let chars: Vec<char> = s.chars().collect();
+        let mut start = 0;
+        let mut end = 0;
+        for i in 0..chars.len() - 1 {
+            let len = max(
+                expand_around_center(&chars, i as i32, i as i32),
+                expand_around_center(&chars, i as i32, i as i32 + 1)
+            );
+            if len > end - start {
+                start = i - (len - 1) / 2;
+                end = i + len / 2;
+            }
+        }
+
+        chars[start..=end].iter().collect()
+    }
 }

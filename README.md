@@ -1,4 +1,4 @@
-### List of solved problems (222)
+### List of solved problems (223)
 1. **1** Two Sum https://leetcode.com/problems/two-sum/ *Easy*
 1. **5** Longest Palindromic Substring https://leetcode.com/problems/longest-palindromic-substring/ *Medium*
 1. **7** Reverse Integer https://leetcode.com/problems/reverse-integer/ *Easy*
@@ -89,6 +89,7 @@
 1. **229** Majority Element II https://leetcode.com/problems/majority-element-ii/ *Medium*
 1. **230** Kth Smallest Element in a BST https://leetcode.com/problems/kth-smallest-element-in-a-bst/ *Medium*
 1. **231** Power of Two https://leetcode.com/problems/power-of-two/ *Easy*
+1. **236** Lowest Common Ancestor of a Binary Tree https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/solution/ *Medium*
 1. **238** Product of Array Except Self https://leetcode.com/problems/product-of-array-except-self/ *Medium*
 1. **252** Meeting Rooms https://leetcode.com/problems/meeting-rooms/ *Easy*
 1. **253** Meeting Rooms II https://leetcode.com/problems/meeting-rooms-ii/ *Medium*

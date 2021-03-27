@@ -457,7 +457,7 @@ impl Solution {
     // https://leetcode.com/problems/all-paths-from-source-to-target/
     // Time complexity: O(2^N * N).
     // Space complexity: O(2^N * N).
-    fn all_paths_source_target(graph: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
+    pub fn all_paths_source_target(graph: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
         fn bt(v: usize, graph: &Vec<Vec<i32>>, path: &mut Vec<i32>, res: &mut Vec<Vec<i32>>) {
             if v == graph.len() - 1 {
                 res.push(path.to_vec());
@@ -474,5 +474,43 @@ impl Solution {
         let mut path: Vec<i32> = vec![0];
         bt(0, &graph, &mut path, &mut res);
         res
+    }
+
+    // 236. Lowest Common Ancestor of a Binary Tree.
+    // https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/
+    // Time complexity: O(N).
+    // Space complexity: O(N).
+    pub fn lowest_common_ancestor(
+        root: Option<Rc<RefCell<TreeNode>>>,
+        p: Option<Rc<RefCell<TreeNode>>>,
+        q: Option<Rc<RefCell<TreeNode>>>) -> Option<Rc<RefCell<TreeNode>>> {
+
+        fn solve(node: Option<Rc<RefCell<TreeNode>>>, p_val: i32, q_val: i32) -> Option<Rc<RefCell<TreeNode>>> {
+            if let Some(node_inner) = node {
+                let val = node_inner.borrow().val;
+                if val == p_val || val == q_val {
+                    Some(node_inner)
+                } else {
+                    let left = solve(node_inner.borrow_mut().left.take(), p_val, q_val);
+                    let right = solve(node_inner.borrow_mut().right.take(), p_val, q_val);
+                    if left.is_some() && right.is_some() {
+                        Some(node_inner)
+                    } else if left.is_some() {
+                        left
+                    } else if right.is_some() {
+                        right
+                    } else {
+                        None
+                    }
+                }
+            } else {
+                None
+            }
+        }
+
+        let p_val = p.as_ref().unwrap().borrow().val;
+        let q_val = q.as_ref().unwrap().borrow().val;
+
+        solve(root, p_val, q_val).take()
     }
 }

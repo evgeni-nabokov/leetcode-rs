@@ -344,3 +344,17 @@ fn all_paths_source_target_test() {
         assert_eq!(Solution::all_paths_source_target(case.0), case.1);
     }
 }
+
+#[test]
+fn lowest_common_ancestor_test() {
+    let test_cases = vec![
+        (vec![Some(3), Some(5), Some(1), Some(6), Some(2), Some(0), Some(8), None, None, Some(7), Some(4)], 5, 1, 3),
+        (vec![Some(3), Some(5), Some(1), Some(6), Some(2), Some(0), Some(8), None, None, Some(7), Some(4)], 5, 4, 5),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::lowest_common_ancestor(TreeNode::from_level_order(&case.0),
+                                                    TreeNode::new_with_children(case.1, None, None),
+                                                    TreeNode::new_with_children(case.2, None, None)).unwrap().borrow().val,
+                   case.3);
+    }
+}

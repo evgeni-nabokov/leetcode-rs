@@ -276,20 +276,18 @@ impl Solution {
 
     // 876. Middle of the Linked List.
     // https://leetcode.com/problems/middle-of-the-linked-list/
+    // Time complexity: O(N).
+    // Space complexity: O(1).
     pub fn middle_node(head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
-        if head.is_none() { return None; }
-        let mut cur = &head;
-        let mut res = &head;
-        let mut step = 1;
-        let factor = 2;
-        while let Some(node) = cur {
-            cur = &node.next;
-            if step % factor == 0 {
-                res = &res.as_ref().unwrap().next;
-            }
-            step += 1;
+        let mut slow = &head;
+        let mut fast = &head;
+
+        while fast.is_some() && fast.as_ref().unwrap().next.is_some() {
+            slow = &slow.as_ref().unwrap().next;
+            fast = &fast.as_ref().unwrap().next.as_ref().unwrap().next;
         }
-        res.clone()
+
+        slow.clone()
     }
 
     // 844. Backspace String Compare.

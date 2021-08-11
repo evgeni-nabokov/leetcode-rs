@@ -194,11 +194,28 @@ fn list_helpers_test() {
 
 #[test]
 fn middle_node_test() {
-    assert_eq!(Solution::middle_node(ListNode::from_slice(&[])).to_vec(), vec![]);
-    assert_eq!(Solution::middle_node(ListNode::from_slice(&[1])).to_vec(), vec![1]);
-    assert_eq!(Solution::middle_node(ListNode::from_slice(&[1, 2])).to_vec(), vec![2]);
-    assert_eq!(Solution::middle_node(ListNode::from_slice(&[1, 2, 3])).to_vec(), vec![2, 3]);
-    assert_eq!(Solution::middle_node(ListNode::from_slice(&[1, 2, 3, 4])).to_vec(), vec![3, 4]);
+    let test_cases = vec![
+        (
+            vec![],
+            vec![],
+        ),
+        (
+            vec![1],
+            vec![1],
+        ),
+        (
+            vec![1, 2, 3],
+            vec![2, 3],
+        ),
+        (
+            vec![1, 2, 3, 4],
+            vec![3, 4],
+        ),
+    ];
+
+    for case in test_cases {
+        assert_eq!(Solution::middle_node(ListNode::from_slice(&case.0)).to_vec(), case.1);
+    }
 }
 
 fn apply_backspaces_for_str(s: &str) -> String {

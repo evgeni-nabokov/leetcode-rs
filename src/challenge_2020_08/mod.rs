@@ -36,6 +36,8 @@ impl Solution {
 
     // 125. Valid Palindrome.
     // https://leetcode.com/problems/valid-palindrome/
+    // Time complexity: O(N).
+    // Space complexity: O(1).
     pub fn is_palindrome(s: String) -> bool {
         if s.len() < 2 { return true; }
         let mut left = 0;
@@ -467,7 +469,7 @@ impl Solution {
     // 3) it stops rolling further if the stop point lays on a visited cell.
     pub fn has_path(mut maze: Vec<Vec<i32>>, start: Vec<i32>, destination: Vec<i32>) -> bool {
         #[derive(PartialEq, Eq, Clone, Debug)]
-        enum Direction { X, Y };
+        enum Direction { X, Y }
 
         fn find_directions(maze: &Vec<Vec<i32>>, r: usize, c: usize, prev_direction: Option<Direction>) -> Vec<(Direction, i32)> {
             let mut res: Vec<(Direction, i32)> = Vec::with_capacity(4);

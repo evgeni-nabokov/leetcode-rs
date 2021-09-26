@@ -331,7 +331,6 @@ impl Solution {
     pub fn is_robot_bounded(instructions: String) -> bool {
         #[derive(PartialEq, Eq, Clone, Debug)]
         struct Point { x: i32, y: i32 }
-        ;
 
         #[derive(PartialEq, Eq, Clone, Debug)]
         enum Direction { North, West, South, East }

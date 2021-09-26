@@ -14,7 +14,7 @@ use std::iter::FromIterator;
 
 use crate::common::tree_node::TreeNode;
 
-struct Solution {}
+struct Solution;
 
 impl Solution {
     // 226. Invert Binary Tree.
@@ -441,7 +441,7 @@ impl Solution {
         String::from_iter(lrs)
     }
 
-    // Binary Search + Rabin-Karp.
+    // Binary Search + Rabin-Karp solution.
     pub fn longest_dup_substring_v2(s: String) -> String {
         if s.len() < 2 { return String::new(); }
 

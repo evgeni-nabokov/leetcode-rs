@@ -4,6 +4,10 @@ mod tests;
 struct Solution;
 
 impl Solution {
+    // Rotational Cipher.
+    // https://www.facebookrecruiting.com/portal/coding_practice_question/?problem_id=238827593802550
+    // Time complexity: O(N).
+    // Space complexity: O(N).
     fn rotational_cipher(input: String, rotation_factor: i32) -> String {
         if input.is_empty() || rotation_factor == 0 {
             return input;
@@ -35,5 +39,53 @@ impl Solution {
         }
 
         res_chars.into_iter().collect()
+    }
+
+
+    // Contiguous Subarrays.
+    // https://www.facebookrecruiting.com/portal/coding_practice_question/?problem_id=226517205173943
+    // Time complexity: O(N).
+    // Space complexity: O(N).
+    fn count_subarrays(arr: Vec<i32>) -> Vec<i32> {
+        let mut counter = vec![0i32; arr.len()];
+        let mut stack = Vec::new();
+
+        for i in 0..arr.len() {
+            while !stack.is_empty() && arr[i] > arr[*stack.last().unwrap()] {
+                // Dismounted is the index where this one started to travel with us.
+                let dismounted = stack.pop().unwrap();
+                // Count how many steps this one travelled.
+                counter[dismounted] = i as i32 - dismounted as i32;
+            }
+
+            stack.push(i);
+        }
+
+        while !stack.is_empty() {
+            // Dismounted is the index where this one started to travel with us.
+            let dismounted = stack.pop().unwrap();
+            // Count how many steps this one travelled.
+            counter[dismounted] = arr.len() as i32 - dismounted as i32;
+        }
+
+        for i in (0..arr.len()).rev() {
+            counter[i] -= 1;
+
+            while !stack.is_empty() && arr[i] > arr[*stack.last().unwrap()] {
+                let dismounted = stack.pop().unwrap();
+                counter[dismounted] += dismounted as i32 - i as i32;
+            }
+
+            stack.push(i);
+        }
+
+        while !stack.is_empty() {
+            // Dismounted is the index where this one started to travel with us.
+            let dismounted = stack.pop().unwrap();
+            // Count how many steps this one travelled.
+            counter[dismounted] += dismounted as i32 + 1;
+        }
+
+        counter
     }
 }

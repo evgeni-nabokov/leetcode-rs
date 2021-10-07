@@ -21,6 +21,7 @@ mod easy;
 mod medium;
 
 mod facebook;
+mod microsoft;
 
 fn main() {
 }

@@ -94,6 +94,19 @@ fn is_valid_test() {
     }
 }
 
+#[test]
+fn pivot_index_test() {
+    let test_cases = vec![
+        (vec![1, 7, 3, 6, 5, 6], 3),
+        (vec![1, 2, 3], -1),
+        (vec![2, 1, -1], 0),
+        (vec![1, -1, 2], 2),
+        (vec![1], 0),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::pivot_index(case.0), case.1);
+    }
+}
 
 #[test]
 fn find_middle_index_test() {

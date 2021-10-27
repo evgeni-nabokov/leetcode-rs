@@ -81,7 +81,7 @@ fn merge_two_lists_test() {
 }
 
 #[test]
-fn is_valid() {
+fn is_valid_test() {
     let test_cases = vec![
         ("()", true),
         ("()[]{}", true),
@@ -91,5 +91,20 @@ fn is_valid() {
     ];
     for case in test_cases {
         assert_eq!(Solution::is_valid(case.0.to_string()), case.1);
+    }
+}
+
+
+#[test]
+fn find_middle_index_test() {
+    let test_cases = vec![
+        (vec![2, 3, -1, 8, 4], 3),
+        (vec![1, -1, 4], 2),
+        (vec![4, 1, -1], 0),
+        (vec![2, 5], -1),
+        (vec![1], 0),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::find_middle_index(case.0), case.1);
     }
 }

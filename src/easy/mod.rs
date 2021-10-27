@@ -157,4 +157,22 @@ impl Solution {
         }
         stack.is_empty()
     }
+
+    // 1991. Find the Middle Index in Array.
+    // https://leetcode.com/problems/find-the-middle-index-in-array/submissions/
+    // Time complexity: O(N).
+    // Space complexity: O(1).
+    pub fn find_middle_index(nums: Vec<i32>) -> i32 {
+        let total_sum: i32 = nums.iter().sum();
+        let mut current_sum = 0;
+        for i in 0..nums.len() {
+            let left_sum = current_sum;
+            current_sum += nums[i];
+            let right_sum = total_sum - current_sum;
+            if left_sum == right_sum {
+                return i as i32;
+            }
+        }
+        -1
+    }
 }

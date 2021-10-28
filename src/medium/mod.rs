@@ -6,10 +6,61 @@ use std::cell::RefCell;
 use std::cmp::{Ordering, min, max};
 
 use crate::common::tree_node::TreeNode;
+use crate::common::list_node::ListNode;
 
-struct Solution {}
+struct Solution;
 
 impl Solution {
+    // 2. Add Two Numbers.
+    // https://leetcode.com/problems/add-two-numbers/
+    // Time complexity: O(N).
+    // Space complexity: O(1).
+    pub fn add_two_numbers(mut l1: Option<Box<ListNode>>, mut l2: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
+        // Calculates the length of a list.
+        fn get_len(mut list: &Option<Box<ListNode>>) -> usize {
+            let mut cnt = 0;
+            while let Some(list_inner) = list {
+                cnt += 1;
+                list = &list_inner.next;
+            }
+            cnt
+        }
+
+        // Calculate lengths of both lists.
+        let l1_len = get_len(&l1);
+        let l2_len = get_len(&l2);
+
+        // Make l1 pointing at the longest list.
+        if l2_len > l1_len {
+            std::mem::swap(&mut l1, &mut l2);
+        }
+
+        let mut curr = &mut l1;
+        let mut sum = 0;
+        // Calculate sum in-place - l1 will contain the result.
+        while let Some(l1_inner) = curr {
+            sum += l1_inner.val;
+            if let Some(l2_inner) = l2 {
+                sum += l2_inner.val;
+                l2 = l2_inner.next;
+            }
+            if sum < 10 {
+                l1_inner.val = sum;
+                sum = 0;
+            } else {
+                l1_inner.val = sum - 10;
+                sum = 1;
+            }
+            if l1_inner.next.is_none() && sum > 0 {
+                l1_inner.next = Some(Box::new(ListNode::new(sum)));
+                break;
+            }
+            curr = &mut l1_inner.next;
+        }
+
+        l1
+    }
+
     // 274. H-Index
     // https://leetcode.com/problems/h-index/
     pub fn h_index(mut citations: Vec<i32>) -> i32 {

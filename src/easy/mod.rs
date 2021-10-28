@@ -1,4 +1,5 @@
 use std::collections::HashMap;
+use std::mem::replace;
 use crate::common::list_node::ListNode;
 
 #[cfg(test)]
@@ -71,34 +72,34 @@ impl Solution {
     // 206. Reverse Linked List.
     // https://leetcode.com/problems/reverse-linked-list/
     // Iterative solution.
-    pub fn reverse_list(mut head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
-        let mut prev_node = None;
-        let mut current_node = head.take();
+    // Time complexity: O(N).
+    // Space complexity: O(1).
+    pub fn reverse_list(head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
+        let mut curr: Option<Box<ListNode>> = head;
+        let mut prev: Option<Box<ListNode>> = None;
 
-        while let Some(mut current_node_inner) = current_node.take() {
-            let next_node = current_node_inner.next.take();
-            current_node_inner.next = prev_node.take();
-            prev_node = Some(current_node_inner);
-            current_node = next_node;
+        while let Some(mut curr_inner) = curr {
+            let next = curr_inner.next;
+            curr_inner.next = prev;
+            prev = Some(curr_inner);
+            curr = next;
         }
 
-        prev_node.take()
+        prev
     }
 
     // Recursive solution.
+    // Time complexity: O(N).
+    // Space complexity: O(N).
     pub fn reverse_list_v2(head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
-        fn solve(mut prev_node: Option<Box<ListNode>>, mut current_node: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
-            if let Some(mut current_node_inner) = current_node.take() {
-                let next_node = current_node_inner.next.take();
-                current_node_inner.next = prev_node.take();
-                prev_node = Some(current_node_inner);
-                current_node = next_node;
-                solve(prev_node, current_node)
+        fn solve(curr: Option<Box<ListNode>>, prev: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
+            if let Some(mut curr_inner) = curr {
+                solve(replace(&mut curr_inner.next, prev), Some(curr_inner))
             } else {
-                prev_node
+                prev
             }
         }
-        solve(None, head)
+        solve(head, None)
     }
 
     // 21. Merge Two Sorted Lists.

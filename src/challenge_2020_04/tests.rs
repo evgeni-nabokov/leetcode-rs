@@ -411,6 +411,7 @@ fn search_test() {
     assert_eq!(Solution::search(vec![3, 1, 2], 3), 0);
     assert_eq!(Solution::search(vec![4, 5, 6, 7, 0, 1, 2], 0), 4);
     assert_eq!(Solution::search(vec![4, 5, 6, 7, 0, 1, 2], 3), -1);
+    assert_eq!(Solution::search(vec![4, 5, 6, 7, 8, 9, 10, 0, 1, 2], 10), 6);
 }
 
 fn get_bst_from_preorder_test_cases() -> Vec<(Vec<i32>, Vec<Option<i32>>)> {

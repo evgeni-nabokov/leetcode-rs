@@ -533,6 +533,8 @@ impl Solution {
 
     // 33. Search in Rotated Sorted Array.
     // https://leetcode.com/problems/search-in-rotated-sorted-array/
+    // Time complexity: O(LogN).
+    // Space complexity: O(1).
     pub fn search(nums: Vec<i32>, target: i32) -> i32 {
         if nums.is_empty() { return -1; }
         let mut left = 0;
@@ -541,21 +543,21 @@ impl Solution {
             let mid = left + (right - left) / 2;
             if target == nums[mid] { return mid as i32; }
             if nums[left] <= nums[mid] {
-                // Regular part is to the left of the middle.
+                // Left sorted portion.
                 if target < nums[mid] && target >= nums[left] {
-                    // Goes to the regular part.
+                    // Keep searching in the left sorted portion.
                     right = mid - 1;
                 } else {
-                    // Goes to the irregular part.
+                    // Go to the right rotated portion.
                     left = mid + 1
                 }
             } else {
-                // Regular part is to the right of the middle.
+                // Right sorted portion.
                 if target > nums[mid] && target <= nums[right] {
-                    // Goes to the regular part.
+                    // Keep searching in the right sorted portion.
                     left = mid + 1;
                 } else {
-                    // Goes to the irregular part.
+                    // Go to the left rotated portion.
                     right = mid - 1
                 }
             }

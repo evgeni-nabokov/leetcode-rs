@@ -1,4 +1,4 @@
-### List of solved problems (239)
+### List of solved problems (230)
 1. **1** Two Sum https://leetcode.com/problems/two-sum/ *Easy*
 2. **2** Add Two Numbers // https://leetcode.com/problems/add-two-numbers/ *Medium* 
 3. **5** Longest Palindromic Substring https://leetcode.com/problems/longest-palindromic-substring/ *Medium*
@@ -203,28 +203,29 @@
 202. **1041** Robot Bounded In Circle https://leetcode.com/problems/robot-bounded-in-circle/ *Medium*
 203. **1044** Longest Duplicate Substring https://leetcode.com/problems/longest-duplicate-substring/ *Hard*
 204. **1046** Last Stone Weight https://leetcode.com/problems/last-stone-weight/ *Easy*
-205. **1089** Duplicate Zeros https://leetcode.com/problems/duplicate-zeros/ *Easy*
-206. **1094** Car Pooling https://leetcode.com/problems/car-pooling/ *Medium*
-207. **1099** Two Sum Less Than K https://leetcode.com/problems/two-sum-less-than-k/ *Easy*
-208. **1108** Defanging an IP Address https://leetcode.com/problems/defanging-an-ip-address/ *Easy*
-209. **1143** Longest Common Subsequence https://leetcode.com/problems/longest-common-subsequence/ *Medium*
-210. **1198** Find Smallest Common Element in All Rows https://leetcode.com/problems/find-smallest-common-element-in-all-rows/ *Medium*
-211. **1232** Check If It Is a Straight Line https://leetcode.com/problems/check-if-it-is-a-straight-line/ *Easy*
-212. **1272** Remove Interval https://leetcode.com/problems/remove-interval/ *Medium*
-213. **1277** Count Square Submatrices with All Ones https://leetcode.com/problems/count-square-submatrices-with-all-ones/ *Medium*
-214. **1288** Remove Covered Intervals https://leetcode.com/problems/remove-covered-intervals/ *Medium*
-215. **1291** Sequential Digits https://leetcode.com/problems/sequential-digits/ *Medium*
-216. **1290** Convert Binary Number in a Linked List to Integer *Easy*
-217. **1295** Find Numbers with Even Number of Digits https://leetcode.com/problems/find-numbers-with-even-number-of-digits/ *Easy*
-218. **1325** Delete Leaves With a Given Value https://leetcode.com/problems/delete-leaves-with-a-given-value/ *Medium*
-219. **1342** Number of Steps to Reduce a Number to Zero https://leetcode.com/problems/number-of-steps-to-reduce-a-number-to-zero/ *Easy*
-220. **1344** Angle Between Hands of a Clock https://leetcode.com/problems/angle-between-hands-of-a-clock/ *Medium*
-221. **1424** Diagonal Traverse II https://leetcode.com/problems/diagonal-traverse-ii/ *Medium*
-222. **1426** Counting Elements https://leetcode.com/problems/counting-elements/ *Easy*
-223. **1427** Perform String Shifts https://leetcode.com/problems/perform-string-shifts/ *Easy*
-224. **1429** First Unique Number https://leetcode.com/problems/first-unique-number/ *Medium*
-225. **1430** Check If a String Is a Valid Sequence from Root to Leaves Path in a Binary Tree https://leetcode.com/problems/check-if-a-string-is-a-valid-sequence-from-root-to-leaves-path-in-a-binary-tree/ *Medium*
-226. **1446** Consecutive Characters https://leetcode.com/problems/consecutive-characters/ *Easy*
-227. **1465** Maximum Area of a Piece of Cake After Horizontal and Vertical Cuts https://leetcode.com/problems/maximum-area-of-a-piece-of-cake-after-horizontal-and-vertical-cuts/ *Medium*
-228. **1510** Stone Game IV https://leetcode.com/problems/stone-game-iv/ *Hard*
-229. **1991** Find the Middle Index in Array https://leetcode.com/problems/find-the-middle-index-in-array/submissions/ *Easy*
+205. **1047** Remove All Adjacent Duplicates In String https://leetcode.com/problems/remove-all-adjacent-duplicates-in-string/ *Easy*
+206. **1089** Duplicate Zeros https://leetcode.com/problems/duplicate-zeros/ *Easy*
+207. **1094** Car Pooling https://leetcode.com/problems/car-pooling/ *Medium*
+208. **1099** Two Sum Less Than K https://leetcode.com/problems/two-sum-less-than-k/ *Easy*
+209. **1108** Defanging an IP Address https://leetcode.com/problems/defanging-an-ip-address/ *Easy*
+210. **1143** Longest Common Subsequence https://leetcode.com/problems/longest-common-subsequence/ *Medium*
+211. **1198** Find Smallest Common Element in All Rows https://leetcode.com/problems/find-smallest-common-element-in-all-rows/ *Medium*
+212. **1232** Check If It Is a Straight Line https://leetcode.com/problems/check-if-it-is-a-straight-line/ *Easy*
+213. **1272** Remove Interval https://leetcode.com/problems/remove-interval/ *Medium*
+214. **1277** Count Square Submatrices with All Ones https://leetcode.com/problems/count-square-submatrices-with-all-ones/ *Medium*
+215. **1288** Remove Covered Intervals https://leetcode.com/problems/remove-covered-intervals/ *Medium*
+216. **1291** Sequential Digits https://leetcode.com/problems/sequential-digits/ *Medium*
+217. **1290** Convert Binary Number in a Linked List to Integer *Easy*
+218. **1295** Find Numbers with Even Number of Digits https://leetcode.com/problems/find-numbers-with-even-number-of-digits/ *Easy*
+219. **1325** Delete Leaves With a Given Value https://leetcode.com/problems/delete-leaves-with-a-given-value/ *Medium*
+220. **1342** Number of Steps to Reduce a Number to Zero https://leetcode.com/problems/number-of-steps-to-reduce-a-number-to-zero/ *Easy*
+221. **1344** Angle Between Hands of a Clock https://leetcode.com/problems/angle-between-hands-of-a-clock/ *Medium*
+222. **1424** Diagonal Traverse II https://leetcode.com/problems/diagonal-traverse-ii/ *Medium*
+223. **1426** Counting Elements https://leetcode.com/problems/counting-elements/ *Easy*
+224. **1427** Perform String Shifts https://leetcode.com/problems/perform-string-shifts/ *Easy*
+225. **1429** First Unique Number https://leetcode.com/problems/first-unique-number/ *Medium*
+226. **1430** Check If a String Is a Valid Sequence from Root to Leaves Path in a Binary Tree https://leetcode.com/problems/check-if-a-string-is-a-valid-sequence-from-root-to-leaves-path-in-a-binary-tree/ *Medium*
+227. **1446** Consecutive Characters https://leetcode.com/problems/consecutive-characters/ *Easy*
+228. **1465** Maximum Area of a Piece of Cake After Horizontal and Vertical Cuts https://leetcode.com/problems/maximum-area-of-a-piece-of-cake-after-horizontal-and-vertical-cuts/ *Medium*
+229. **1510** Stone Game IV https://leetcode.com/problems/stone-game-iv/ *Hard*
+230. **1991** Find the Middle Index in Array https://leetcode.com/problems/find-the-middle-index-in-array/submissions/ *Easy*

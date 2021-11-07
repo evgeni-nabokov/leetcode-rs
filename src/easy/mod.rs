@@ -224,4 +224,24 @@ impl Solution {
 
         solve(s.as_bytes(), 0)
     }
+
+    // 1047. Remove All Adjacent Duplicates In String.
+    // https://leetcode.com/problems/remove-all-adjacent-duplicates-in-string/
+    // Time complexity: O(N).
+    // Space complexity: O(N).
+    pub fn remove_duplicates(s: String) -> String {
+        let mut stack = Vec::with_capacity(s.len());
+        for b in s.as_bytes() {
+            if let Some(last) = stack.last() {
+                if *last == b {
+                    stack.pop();
+                } else {
+                    stack.push(b);
+                }
+            } else {
+                stack.push(b);
+            }
+        }
+        stack.into_iter().map(|b| *b as char).collect()
+    }
 }

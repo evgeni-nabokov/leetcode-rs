@@ -135,3 +135,14 @@ fn valid_palindrome_test() {
         assert_eq!(Solution::valid_palindrome(case.0.to_string()), case.1);
     }
 }
+
+#[test]
+fn remove_duplicates_test() {
+    let test_cases = vec![
+        ("abbaca", "ca"),
+        ("azxxzy", "ay"),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::remove_duplicates(case.0.to_string()), case.1.to_string());
+    }
+}

@@ -1,6 +1,3 @@
-278. First Bad Version - solved in Python, Rust is not available.
-https://leetcode.com/problems/first-bad-version/
-
 525. Contiguous Array - solved in April Challenge.
 https://leetcode.com/problems/contiguous-array/
 

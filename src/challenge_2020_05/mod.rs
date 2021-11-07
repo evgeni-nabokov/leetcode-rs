@@ -795,4 +795,23 @@ impl Solution {
         }
         table[rows - 1][cols - 1] as i32
     }
+
+    // 278. First Bad Version.
+    // https://leetcode.com/problems/first-bad-version/
+    // Time complexity: O(LogN).
+    // Space complexity: O(1).
+    pub fn first_bad_version(&self, n: i32) -> i32 {
+        let mut left = 1;
+        let mut right = n;
+        while left <= right {
+            let mid = left + (right - left) / 2;
+            if self.isBadVersion(mid) {
+                right = mid - 1;
+            } else {
+                left = mid + 1;
+            }
+        }
+
+        left
+    }
 }

@@ -814,4 +814,10 @@ impl Solution {
 
         left
     }
+
+    // A stub for first_bad_version().
+    #[allow(non_snake_case)]
+    fn isBadVersion(&self, _i : i32) -> bool {
+        true
+    }
 }

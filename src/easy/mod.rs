@@ -194,4 +194,34 @@ impl Solution {
         }
         -1
     }
+
+    // 680. Valid Palindrome II
+    // https://leetcode.com/problems/valid-palindrome-ii/
+    // Time complexity: O(N).
+    // Space complexity: O(1).
+    pub fn valid_palindrome(s: String) -> bool {
+        fn solve(sub_s: &[u8], errors: i32) -> bool {
+            if sub_s.len() < 2 {
+                return true;
+            }
+
+            let mut left = 0;
+            let mut right = sub_s.len() - 1;
+            while left <= right {
+                if sub_s[left] != sub_s[right] {
+                    if errors > 0 {
+                        return false;
+                    }
+
+                    return solve(&sub_s[left + 1..=right], errors + 1) || solve(&sub_s[left..right], errors + 1);
+                }
+                left += 1;
+                right -= 1;
+            }
+
+            true
+        }
+
+        solve(s.as_bytes(), 0)
+    }
 }

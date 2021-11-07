@@ -121,3 +121,17 @@ fn find_middle_index_test() {
         assert_eq!(Solution::find_middle_index(case.0), case.1);
     }
 }
+
+#[test]
+fn valid_palindrome_test() {
+    let test_cases = vec![
+        ("aba", true),
+        ("abca", true),
+        ("abc", false),
+        ("cuppucu", true),
+        ("cupuufxoohdfpgjdmysgvhmvffcnqxjjxqncffvmhvgsymdjgpfdhooxfuupucu", true),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::valid_palindrome(case.0.to_string()), case.1);
+    }
+}

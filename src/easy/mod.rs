@@ -244,4 +244,25 @@ impl Solution {
         }
         stack.into_iter().map(|b| *b as char).collect()
     }
+
+    // 1588. Sum of All Odd Length Subarrays.
+    // https://leetcode.com/problems/sum-of-all-odd-length-subarrays/
+    // Time complexity: O(N).
+    // Space complexity: O(N).
+    pub fn sum_odd_length_subarrays(arr: Vec<i32>) -> i32 {
+        let mut prefix_sum = Vec::with_capacity(arr.len() + 1);
+        prefix_sum.push(0);
+        for i in 0..arr.len() {
+            prefix_sum.push(prefix_sum[i] + arr[i])
+        }
+
+        let mut sum = 0;
+        for start in 0..arr.len() {
+            for end in (start..arr.len()).step_by(2) {
+                sum += prefix_sum[end + 1] - prefix_sum[start];
+            }
+        }
+
+        sum
+    }
 }

@@ -146,3 +146,15 @@ fn remove_duplicates_test() {
         assert_eq!(Solution::remove_duplicates(case.0.to_string()), case.1.to_string());
     }
 }
+
+#[test]
+fn sum_odd_length_subarrays_test() {
+    let test_cases = vec![
+        (vec![1, 4, 2, 5, 3], 58),
+        (vec![1, 2], 3),
+        (vec![10, 11, 12], 66),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::sum_odd_length_subarrays(case.0), case.1);
+    }
+}

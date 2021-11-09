@@ -245,6 +245,35 @@ impl Solution {
         stack.into_iter().map(|b| *b as char).collect()
     }
 
+    // 415. Add Strings.
+    // https://leetcode.com/problems/add-strings/
+    // Time complexity: O(N).
+    // Space complexity: O(N).
+    pub fn add_strings(num_1: String, num_2: String) -> String {
+        let mut digs_1 = num_1.bytes().rev().map(|c| c - '0' as u8).collect::<Vec<_>>();
+        let mut digs_2 = num_2.bytes().rev().map(|c| c - '0' as u8).collect::<Vec<_>>();
+        if digs_1.len() < digs_2.len() {
+            std::mem::swap(&mut digs_1, &mut digs_2);
+        }
+        let mut res = Vec::with_capacity(std::cmp::max(digs_1.len(), digs_2.len()) + 1);
+        let mut sum = 0;
+        for (d_1, d_2) in digs_1.into_iter().zip(digs_2.into_iter().chain(std::iter::repeat(0))) {
+            sum += d_1 + d_2;
+            if sum > 9 {
+                sum -= 10;
+                res.push(sum);
+                sum = 1;
+            } else {
+                res.push(sum);
+                sum = 0;
+            }
+        }
+        if sum > 0 {
+            res.push(sum);
+        }
+        res.into_iter().rev().map(|d| (d + '0' as u8) as char).collect()
+    }
+
     // 1588. Sum of All Odd Length Subarrays.
     // https://leetcode.com/problems/sum-of-all-odd-length-subarrays/
     // Time complexity: O(N).

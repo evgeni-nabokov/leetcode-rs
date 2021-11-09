@@ -148,6 +148,18 @@ fn remove_duplicates_test() {
 }
 
 #[test]
+fn add_strings_test() {
+    let test_cases = vec![
+        ("11", "123", "134"),
+        ("456", "77", "533"),
+        ("0", "0", "0"),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::add_strings(case.0.to_string(), case.1.to_string()), case.2.to_string());
+    }
+}
+
+#[test]
 fn sum_odd_length_subarrays_test() {
     let test_cases = vec![
         (vec![1, 4, 2, 5, 3], 58),

@@ -58,4 +58,38 @@ impl Solution {
 
         res
     }
+
+    // 2064. Minimized Maximum of Products Distributed to Any Store.
+    // https://leetcode.com/problems/minimized-maximum-of-products-distributed-to-any-store/
+    // Time complexity: O(M * LogX), M - number of products, X - max quantity of a product.
+    // Space complexity: O(1).
+    pub fn minimized_maximum(n: i32, quantities: Vec<i32>) -> i32 {
+        fn can_distribute(n: i32, quantities: &[i32], x: i32) -> bool {
+            // Calculating the total number of stores to distribute all the products
+            // with specific quantity for each store.
+            let mut stores = 0;
+            for &q in quantities {
+                stores += q / x + if q % x > 0 { 1 } else { 0 };
+                if stores > n {
+                    return false;
+                }
+            }
+            true
+        }
+
+        // Minimum of the possible answers (minimized maximum of quantity for a store).
+        let mut left = 1;
+        // Never need more than the largest quantity because at that point you can throw everything in 1 store per product type.
+        let mut right = *quantities.iter().max().unwrap();
+
+        while left < right {
+            let mid = left + (right - left) / 2;
+            if can_distribute(n, &quantities, mid) {
+                right = mid;
+            } else {
+                left = mid + 1;
+            }
+        }
+        left
+    }
 }

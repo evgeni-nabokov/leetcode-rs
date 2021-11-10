@@ -27,3 +27,16 @@ fn count_vowels_test() {
         assert_eq!(Solution::count_vowels(case.0.to_string()), case.1);
     }
 }
+
+#[test]
+fn minimized_maximum_test() {
+    let test_cases = vec![
+        (6, vec![11, 6], 3),
+        (7, vec![15, 10, 10], 5),
+        (1, vec![10_000], 10_000),
+        (2, vec![1], 1),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::minimized_maximum(case.0, case.1), case.2);
+    }
+}

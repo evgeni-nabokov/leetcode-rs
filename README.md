@@ -1,4 +1,4 @@
-### List of solved problems (234)
+### List of solved problems (235)
 1. **1** Two Sum https://leetcode.com/problems/two-sum/ *Easy*
 2. **2** Add Two Numbers // https://leetcode.com/problems/add-two-numbers/ *Medium* 
 3. **5** Longest Palindromic Substring https://leetcode.com/problems/longest-palindromic-substring/ *Medium*
@@ -233,3 +233,4 @@
 232. **1991** Find the Middle Index in Array https://leetcode.com/problems/find-the-middle-index-in-array/submissions/ *Easy*
 233. **2062** Count Vowel Substrings of a String https://leetcode.com/problems/count-vowel-substrings-of-a-string/ *Easy*
 234. **2063** Vowels of All Substrings https://leetcode.com/problems/vowels-of-all-substrings/ *Medium*
+235. **2064** Minimized Maximum of Products Distributed to Any Store https://leetcode.com/problems/minimized-maximum-of-products-distributed-to-any-store/ *Medium*

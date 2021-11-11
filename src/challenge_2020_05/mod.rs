@@ -1,5 +1,4 @@
 mod trie;
-mod trie_node;
 mod list_node;
 mod stock_spanner;
 

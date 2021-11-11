@@ -289,6 +289,8 @@ fn remove_kdigits_test() {
 #[test]
 fn trie_test() {
     let mut trie = Trie::new();
+    assert_eq!(trie.search("".to_string()), true);
+    assert_eq!(trie.starts_with("".to_string()), true);
     trie.insert("apple".to_string());
     assert_eq!(trie.search("apple".to_string()), true);
     assert_eq!(trie.search("app".to_string()), false);

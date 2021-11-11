@@ -20,6 +20,7 @@ mod contest_266;
 
 mod easy;
 mod medium;
+mod hard;
 
 mod facebook;
 mod microsoft;

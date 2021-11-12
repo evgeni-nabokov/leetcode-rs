@@ -564,4 +564,60 @@ impl Solution {
 
         solve(root, p_val, q_val).take()
     }
+
+    // 1209. Remove All Adjacent Duplicates in String II.
+    // https://leetcode.com/problems/remove-all-adjacent-duplicates-in-string-ii/
+    // Count stack method.
+    // Time complexity: O(N).
+    // Space complexity: O(N).
+    pub fn remove_duplicates(s: String, k: i32) -> String {
+        let mut stack = Vec::with_capacity(s.len());
+        let mut res_bytes = Vec::with_capacity(s.len());
+        for b in s.as_bytes() {
+            if let Some(last) = res_bytes.last() {
+                if b == last {
+                    let new_count = stack.pop().unwrap() + 1;
+                    if new_count == k {
+                        res_bytes.truncate(res_bytes.len() + 1 - k as usize);
+                    } else {
+                        res_bytes.push(*b);
+                        stack.push(new_count);
+                    }
+                } else {
+                    res_bytes.push(*b);
+                    stack.push(1);
+                }
+            } else {
+                res_bytes.push(*b);
+                stack.push(1);
+            }
+        }
+        String::from_utf8(res_bytes).unwrap()
+    }
+
+    // Two pointers method.
+    // Time complexity: O(N).
+    // Space complexity: O(N).
+    pub fn remove_duplicates_v2(s: String, k: i32) -> String {
+        let mut bytes = s.as_bytes().to_vec();
+        let mut count: Vec<i32> = vec![0; bytes.len()];
+        let mut fast = 0;
+        let mut slow  = 0;
+        while fast < bytes.len() {
+            bytes[slow] = bytes[fast];
+            count[slow] = if slow > 0 && bytes[slow - 1] == bytes[fast] {
+                count[slow - 1] + 1
+            } else {
+                1
+            };
+            slow += 1;
+            fast += 1;
+            // Check count after increment to avoid subtract with overflow.
+            if count[slow - 1] == k {
+                slow -= k as usize;
+            }
+        }
+        bytes.truncate(slow);
+        String::from_utf8(bytes).unwrap()
+    }
 }

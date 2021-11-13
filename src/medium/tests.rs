@@ -359,7 +359,7 @@ fn lowest_common_ancestor_test() {
     }
 }
 
-fn get_remove_duplicates_test_sases<'a>() -> Vec<(&'a str, i32, &'a str)> {
+fn get_remove_duplicates_test_cases<'a>() -> Vec<(&'a str, i32, &'a str)> {
     vec![
         ("aaaabcdeeef", 2, "bcdef"),
         ("abcd", 2, "abcd"),
@@ -370,14 +370,28 @@ fn get_remove_duplicates_test_sases<'a>() -> Vec<(&'a str, i32, &'a str)> {
 
 #[test]
 fn remove_duplicates_test() {
-    for case in get_remove_duplicates_test_sases() {
+    for case in get_remove_duplicates_test_cases() {
         assert_eq!(Solution::remove_duplicates(case.0.to_string(), case.1), case.2.to_string());
     }
 }
 
 #[test]
 fn remove_duplicates_v2_test() {
-    for case in get_remove_duplicates_test_sases() {
+    for case in get_remove_duplicates_test_cases() {
         assert_eq!(Solution::remove_duplicates_v2(case.0.to_string(), case.1), case.2.to_string());
+    }
+}
+
+fn get_find_kth_largest_test_cases() -> Vec<(Vec<i32>, i32, i32)> {
+    vec![
+        (vec![3, 2, 1, 5, 6, 4], 2, 5),
+        (vec![3, 2, 3, 1, 2, 4, 5, 5, 6], 4, 4),
+    ]
+}
+
+#[test]
+fn find_kth_largest_test() {
+    for case in get_find_kth_largest_test_cases() {
+        assert_eq!(Solution::find_kth_largest(case.0, case.1), case.2);
     }
 }

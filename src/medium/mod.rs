@@ -620,4 +620,46 @@ impl Solution {
         bytes.truncate(slow);
         String::from_utf8(bytes).unwrap()
     }
+
+    // 215. Kth Largest Element in an Array
+    // https://leetcode.com/problems/kth-largest-element-in-an-array/
+    // Partitioning method.
+    pub fn find_kth_largest(mut nums: Vec<i32>, k: i32) -> i32 {
+        fn partition(nums: &mut Vec<i32>, left: usize, right: usize) -> usize {
+            let pivot_num = nums[left];
+            let mut i = left + 1;
+            let mut j = right;
+            loop {
+                while nums[i] < pivot_num {
+                    if i == right { break; }
+                    i += 1;
+                }
+                while nums[j] > pivot_num {
+                    if j == left { break; }
+                    j -= 1;
+                }
+                if i >= j { break; }
+                nums.swap(i, j);
+                i += 1;
+                j -= 1;
+            }
+            nums.swap(left, j);
+            j
+        }
+
+        let find = nums.len() - k as usize;
+        let mut low = 0;
+        let mut high = nums.len() - 1;
+        while low < high {
+            let pivot = partition(&mut nums, low, high);
+            if pivot > find {
+                high = pivot - 1;
+            } else if pivot < find {
+                low = pivot + 1;
+            } else {
+                break;
+            }
+        }
+        nums[find]
+    }
 }

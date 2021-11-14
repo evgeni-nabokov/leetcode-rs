@@ -662,4 +662,26 @@ impl Solution {
         }
         nums[find]
     }
+
+    // 1448. Count Good Nodes in Binary Tree.
+    // https://leetcode.com/problems/count-good-nodes-in-binary-tree/
+    // Time complexity: O(N).
+    // Space complexity: O(N).
+    pub fn good_nodes(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
+        fn dfs(node: &Option<Rc<RefCell<TreeNode>>>, mut curr_max: i32) -> i32 {
+            if let Some(node_inner) = node {
+                let val = node_inner.borrow().val;
+                let mut count = 0;
+                if val >= curr_max {
+                    count += 1;
+                    curr_max = val;
+                }
+                count + dfs(&node_inner.borrow().left, curr_max) + dfs(&node_inner.borrow().right, curr_max)
+            } else {
+                0
+            }
+        }
+
+        dfs(&root, i32::MIN)
+    }
 }

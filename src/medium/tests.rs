@@ -395,3 +395,15 @@ fn find_kth_largest_test() {
         assert_eq!(Solution::find_kth_largest(case.0, case.1), case.2);
     }
 }
+
+#[test]
+fn good_nodes_test() {
+    let test_cases = vec![
+        (vec![Some(1)], 1),
+        (vec![Some(3), Some(1), Some(4), Some(3), None, Some(1), Some(5)], 4),
+        (vec![Some(3), Some(3), None, Some(4), Some(2)], 3),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::good_nodes(TreeNode::from_level_order(&case.0)), case.1);
+    }
+}

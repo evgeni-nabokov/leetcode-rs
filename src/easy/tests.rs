@@ -170,3 +170,15 @@ fn sum_odd_length_subarrays_test() {
         assert_eq!(Solution::sum_odd_length_subarrays(case.0), case.1);
     }
 }
+
+#[test]
+fn diameter_of_binary_tree_test() {
+    let test_cases = vec![
+        (vec![Some(1)], 0),
+        (vec![Some(1), Some(2)], 1),
+        (vec![Some(1), Some(2), Some(3), Some(4), Some(5)], 3),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::diameter_of_binary_tree(TreeNode::from_level_order(&case.0)), case.1);
+    }
+}

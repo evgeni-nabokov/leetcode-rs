@@ -1,11 +1,15 @@
 use std::collections::HashMap;
 use std::mem::replace;
+use std::rc::Rc;
+use std::cell::RefCell;
+
+use crate::common::tree_node::TreeNode;
 use crate::common::list_node::ListNode;
 
 #[cfg(test)]
 mod tests;
 
-struct Solution {}
+struct Solution;
 
 impl Solution {
     // 1. Two Sum.
@@ -233,16 +237,16 @@ impl Solution {
         let mut stack = Vec::with_capacity(s.len());
         for b in s.as_bytes() {
             if let Some(last) = stack.last() {
-                if *last == b {
+                if last == b {
                     stack.pop();
                 } else {
-                    stack.push(b);
+                    stack.push(*b);
                 }
             } else {
-                stack.push(b);
+                stack.push(*b);
             }
         }
-        stack.into_iter().map(|b| *b as char).collect()
+        String::from_utf8(stack).unwrap()
     }
 
     // 415. Add Strings.
@@ -293,5 +297,26 @@ impl Solution {
         }
 
         sum
+    }
+
+    // 543. Diameter of Binary Tree.
+    // https://leetcode.com/problems/diameter-of-binary-tree/
+    // Time complexity: O(N);
+    // Space complexity: O(N);
+    pub fn diameter_of_binary_tree(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
+        fn dfs(node: &Option<Rc<RefCell<TreeNode>>>, curr_max: &mut i32) -> i32 {
+            if let Some(node_inner) = node {
+                let left_path = dfs(&node_inner.borrow().left, curr_max);
+                let right_path = dfs(&node_inner.borrow().right, curr_max);
+                *curr_max = (left_path + right_path).max(*curr_max);
+                left_path.max(right_path) + 1
+            } else {
+                0
+            }
+        }
+
+        let mut curr_max = 0;
+        dfs(&root, &mut curr_max);
+        curr_max
     }
 }

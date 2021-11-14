@@ -1,6 +1,3 @@
-static BASE_INDEX: u8 = 97;
-static ALPHABET_SIZE: usize = 26;
-
 #[derive(Debug, Clone)]
 struct TrieNode {
     children: Vec<Option<TrieNode>>,
@@ -8,9 +5,11 @@ struct TrieNode {
 }
 
 impl TrieNode {
+    const ALPHABET_SIZE: usize = 26;
+
     pub fn new(terminal: bool) -> Self {
         Self {
-            children: vec![None; ALPHABET_SIZE],
+            children: vec![None; TrieNode::ALPHABET_SIZE],
             terminal,
         }
     }
@@ -21,6 +20,8 @@ pub struct Trie {
 }
 
 impl Trie {
+    const BASE_INDEX: u8 = 97;
+
     pub fn new() -> Self {
         Self {
             root: TrieNode::new(true),
@@ -75,6 +76,6 @@ impl Trie {
 
     #[inline]
     fn get_index(b: u8) -> usize {
-        (b - BASE_INDEX) as usize
+        (b - Trie::BASE_INDEX) as usize
     }
 }

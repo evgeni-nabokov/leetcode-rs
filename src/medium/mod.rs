@@ -1,5 +1,6 @@
 #[cfg(test)]
 mod tests;
+mod suggested_products;
 
 use std::rc::Rc;
 use std::cell::RefCell;

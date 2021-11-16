@@ -407,3 +407,40 @@ fn good_nodes_test() {
         assert_eq!(Solution::good_nodes(TreeNode::from_level_order(&case.0)), case.1);
     }
 }
+
+fn get_suggested_products_cases<'a>() -> Vec<(Vec<&'a str>, &'a str, Vec<Vec<&'a str>>)> {
+    vec![
+        (
+            vec!["mobile","mouse","moneypot","monitor","mousepad"],
+            "mouse",
+            vec![
+                vec!["mobile","moneypot","monitor"],
+                vec!["mobile","moneypot","monitor"],
+                vec!["mouse","mousepad"],
+                vec!["mouse","mousepad"],
+                vec!["mouse","mousepad"],
+            ]
+        ),
+        (
+            vec!["havana"],
+            "havana",
+            vec![
+                vec!["havana"],
+                vec!["havana"],
+                vec!["havana"],
+                vec!["havana"],
+                vec!["havana"],
+                vec!["havana"],
+            ]
+        ),
+    ]
+}
+
+#[test]
+fn suggested_products_test() {
+    for case in get_suggested_products_cases() {
+        assert_eq!(Solution::suggested_products(
+            case.0.into_iter().map(|x| x.to_string()).collect(), case.1.to_string()),
+            case.2.into_iter().map(|x| x.into_iter().map(|y| y.to_string()).collect()).collect::<Vec<Vec<String>>>());
+    }
+}

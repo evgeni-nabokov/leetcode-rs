@@ -418,7 +418,7 @@ fn get_bst_from_preorder_test_cases() -> Vec<(Vec<i32>, Vec<Option<i32>>)> {
     vec![
         (vec![], vec![]),
         (vec![1], vec![Some(1)]),
-        (vec![10, 5], vec![Some(10), Some(5), None]),
+        (vec![10, 5], vec![Some(10), Some(5)]),
         (vec![10, 20], vec![Some(10), None, Some(20)]),
         (vec![8, 5, 1, 7, 10, 12], vec![Some(8), Some(5), Some(10), Some(1), Some(7), None, Some(12)]),
     ]

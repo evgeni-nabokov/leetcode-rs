@@ -535,9 +535,9 @@ fn add_digits_test() {
 fn build_tree_test() {
     let test_cases = vec![
         (vec![], vec![], vec![]),
-        (vec![2, 1], vec![2, 1], vec![Some(1), Some(2), None]),
+        (vec![2, 1], vec![2, 1], vec![Some(1), Some(2)]),
         (vec![9, 3, 15, 20, 7], vec![9, 15, 7, 20, 3], vec![Some(3), Some(9), Some(20), None, None, Some(15), Some(7)]),
-        (vec![4, 2, 5, 1, 3], vec![4, 5, 2, 3, 1], vec![Some(1), Some(2), Some(3), Some(4), Some(5), None, None]),
+        (vec![4, 2, 5, 1, 3], vec![4, 5, 2, 3, 1], vec![Some(1), Some(2), Some(3), Some(4), Some(5)]),
     ];
     for case in test_cases {
         assert_eq!(Solution::build_tree(case.0, case.1).get_level_order_values(), case.2);

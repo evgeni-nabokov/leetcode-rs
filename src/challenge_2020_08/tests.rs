@@ -601,17 +601,17 @@ fn delete_node_test() {
         (
             &tree_1,
             6,
-            vec![Some(5), Some(3), Some(7), Some(2), Some(4), None, None]
+            vec![Some(5), Some(3), Some(7), Some(2), Some(4)]
         ),
         (
             &tree_1,
             7,
-            vec![Some(5), Some(3), Some(6), Some(2), Some(4), None, None]
+            vec![Some(5), Some(3), Some(6), Some(2), Some(4)]
         ),
         (
             &tree_1,
             5,
-            vec![Some(6), Some(3), Some(7), Some(2), Some(4), None, None]
+            vec![Some(6), Some(3), Some(7), Some(2), Some(4)]
         ),
         (
             &tree_2,

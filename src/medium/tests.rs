@@ -121,8 +121,8 @@ fn build_tree_test() {
 fn build_tree_ii_test() {
     let test_cases = vec![
         (vec![], vec![], vec![]),
-        (vec![1, 2], vec![2, 1], vec![Some(1), Some(2), None]),
-        (vec![5, 3, 2, 4, 6], vec![2, 3, 4, 5, 6], vec![Some(5), Some(3), Some(6), Some(2), Some(4), None, None]),
+        (vec![1, 2], vec![2, 1], vec![Some(1), Some(2)]),
+        (vec![5, 3, 2, 4, 6], vec![2, 3, 4, 5, 6], vec![Some(5), Some(3), Some(6), Some(2), Some(4)]),
         (vec![3, 9, 20, 15, 7], vec![9, 3, 15, 20, 7], vec![Some(3), Some(9), Some(20), None, None, Some(15), Some(7)])
     ];
     for case in test_cases {

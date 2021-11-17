@@ -99,17 +99,17 @@ fn insert_into_bst_test() {
         (
             vec![Some(4), Some(2), Some(7), Some(1), Some(3)],
             5,
-            vec![Some(4), Some(2), Some(7), Some(1), Some(3), Some(5), None],
+            vec![Some(4), Some(2), Some(7), Some(1), Some(3), Some(5)],
         ),
         (
             vec![Some(40), Some(20), Some(60), Some(10), Some(30), Some(50), Some(70)],
             25,
-            vec![Some(40), Some(20), Some(60), Some(10), Some(30), Some(50), Some(70), None, None, Some(25), None, None, None, None, None],
+            vec![Some(40), Some(20), Some(60), Some(10), Some(30), Some(50), Some(70), None, None, Some(25)],
         ),
         (
-            vec![Some(4), Some(2), Some(7), Some(1), Some(3), None, None, None, None, None, None],
+            vec![Some(4), Some(2), Some(7), Some(1), Some(3)],
             5,
-            vec![Some(4), Some(2), Some(7), Some(1), Some(3), Some(5), None],
+            vec![Some(4), Some(2), Some(7), Some(1), Some(3), Some(5)],
         ),
     ];
 

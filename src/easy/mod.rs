@@ -51,6 +51,24 @@ impl Solution {
         rx
     }
 
+    // 26. Remove Duplicates from Sorted Array.
+    //https://leetcode.com/problems/remove-duplicates-from-sorted-array/
+    // Time complexity: O(N).
+    // Space complexityL O(1).
+    pub fn remove_duplicates_from_sorted_array(nums: &mut Vec<i32>) -> i32 {
+        if nums.is_empty() {
+            return 0;
+        }
+        let mut k = 1;
+        for i in 1..nums.len() {
+            if nums[i] != nums[i - 1] {
+                nums[k] = nums[i];
+                k += 1;
+            }
+        }
+        k as i32
+    }
+
     // 1108. Defanging an IP Address.
     // https://leetcode.com/problems/defanging-an-ip-address/
     pub fn defang_ip_addr(address: String) -> String {

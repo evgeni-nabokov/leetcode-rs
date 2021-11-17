@@ -21,6 +21,22 @@ fn reverse_test() {
 }
 
 #[test]
+fn remove_duplicates_from_sorted_array_test() {
+    let test_cases = vec![
+        (vec![], vec![]),
+        (vec![1, 1, 2], vec![1, 2]),
+        (vec![0, 0, 1, 1, 1, 2, 2, 3, 3, 4], vec![0, 1, 2, 3, 4]),
+    ];
+    for mut case in test_cases {
+        let k = Solution::remove_duplicates_from_sorted_array(&mut case.0) as usize;
+        assert_eq!(k, case.1.len());
+        for i in 0..k {
+            assert_eq!(case.0[i], case.1[i]);
+        }
+    }
+}
+
+#[test]
 fn defang_ip_addr_test() {
     let test_cases = vec![
         ("1.1.1.1".to_string(), "1[.]1[.]1[.]1".to_string()),

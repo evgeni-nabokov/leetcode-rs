@@ -69,6 +69,27 @@ impl Solution {
         k as i32
     }
 
+    // 94. Binary Tree Inorder Traversal.
+    // https://leetcode.com/problems/binary-tree-inorder-traversal/
+    // Time complexity: O(N).
+    // Space complexity: O(1).
+    pub fn inorder_traversal(root: Option<Rc<RefCell<TreeNode>>>) -> Vec<i32> {
+        let mut res = Vec::new();
+
+        fn dfs(node: &Option<Rc<RefCell<TreeNode>>>, res: &mut Vec<i32>) {
+            if let Some(inner_node) = node {
+                let borrowed_node = inner_node.borrow();
+                dfs(&borrowed_node.left, res);
+                res.push(borrowed_node.val);
+                dfs(&borrowed_node.right, res);
+            }
+        }
+
+        dfs(&root, &mut res);
+
+        res
+    }
+
     // 1108. Defanging an IP Address.
     // https://leetcode.com/problems/defanging-an-ip-address/
     pub fn defang_ip_addr(address: String) -> String {

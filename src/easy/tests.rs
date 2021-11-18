@@ -1,5 +1,6 @@
 use super::*;
 use crate::common::linked_list::LinkedList;
+use crate::common::tree_node::BinaryTree;
 
 #[test]
 fn two_sum_test() {
@@ -35,6 +36,22 @@ fn remove_duplicates_from_sorted_array_test() {
         }
     }
 }
+
+// #[test]
+// fn inorder_traversal_test() {
+//     let test_cases = vec![
+//         (vec![], vec![]),
+//         (vec![Some(1)], vec![1]),
+//         (vec![Some(1), Some(2)], vec![2, 1]),
+//         (vec![Some(1), None, Some(2)], vec![1, 2]),
+//         (vec![Some(1), None, Some(2), Some(3)], vec![1, 3, 2]),
+//     ];
+//     for case in test_cases {
+//         let tree = TreeNode::from_level_order(&case.0);
+//         println!("{:?}", tree.get_level_order_values());
+//         assert_eq!(Solution::inorder_traversal(tree), case.1)
+//     }
+// }
 
 #[test]
 fn defang_ip_addr_test() {

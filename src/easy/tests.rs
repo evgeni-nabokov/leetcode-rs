@@ -22,6 +22,20 @@ fn reverse_test() {
 }
 
 #[test]
+fn roman_to_int_test() {
+    let test_cases = vec![
+        ("III", 3),
+        ("IV", 4),
+        ("IX", 9),
+        ("LVIII", 58),
+        ("MCMXCIV", 1994),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::roman_to_int(case.0.to_string()), case.1);
+    }
+}
+
+#[test]
 fn remove_duplicates_from_sorted_array_test() {
     let test_cases = vec![
         (vec![], vec![]),

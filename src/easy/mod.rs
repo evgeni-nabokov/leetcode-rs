@@ -51,6 +51,36 @@ impl Solution {
         rx
     }
 
+    // 13. Roman to Integer.
+    // https://leetcode.com/problems/roman-to-integer/
+    // Time complexity: O(N).
+    // Space complexity: O(1).
+    pub fn roman_to_int(s: String) -> i32 {
+        let mut sum = 0;
+        let mut prev_c = '#';
+        for b in s.as_bytes() {
+            let curr_c = *b as char;
+            sum += match (prev_c, curr_c) {
+                ('C', 'M') => 800,
+                ( _ , 'M') => 1000,
+                ('C', 'D') => 300,
+                ( _ , 'D') => 500,
+                ('X', 'C') => 80,
+                ( _ , 'C') => 100,
+                ('X', 'L') => 30,
+                ( _ , 'L') => 50,
+                ('I', 'X') => 8,
+                ( _ , 'X') => 10,
+                ('I', 'V') => 3,
+                ( _ , 'V') => 5,
+                ( _ , 'I') => 1,
+                _ => unreachable!(),
+            };
+            prev_c = curr_c;
+        }
+        sum
+    }
+
     // 26. Remove Duplicates from Sorted Array.
     //https://leetcode.com/problems/remove-duplicates-from-sorted-array/
     // Time complexity: O(N).

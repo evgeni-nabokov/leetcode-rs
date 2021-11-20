@@ -87,4 +87,56 @@ impl Solution {
 
         res
     }
+
+    // 273. Integer to English Words.
+    // https://leetcode.com/problems/integer-to-english-words/
+    // Time complexity : O(N), N - number of digits.
+    // Space complexity: O(N), N - number of digits.
+    pub fn number_to_words(mut num: i32) -> String {
+        if num == 0 {
+            return "Zero".to_string();
+        }
+
+        let numerals_1 = ["One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten",
+            "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen",
+            "Eighteen", "Nineteen"];
+        let numerals_2 = ["Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"];
+
+        let numerals_3 = ["Thousand", "Million", "Billion", "Trillion", "Quadrillion", "Quintillion", "Sextillion", "Septillion", "Octillion", "Nonillion"];
+
+        let mut res = Vec::new();
+        let mut chunk_idx = 0;
+        while num > 0 {
+            let mut chunk_numerals = Vec::with_capacity(4);
+            let chunk = num % 1000;
+            let hundreds = chunk / 100;
+            if hundreds > 0 {
+                chunk_numerals.push(numerals_1[hundreds as usize - 1].to_string());
+                chunk_numerals.push("Hundred".to_string());
+            }
+            let under_hundred = chunk % 100;
+            if under_hundred > 0 && under_hundred < 20 {
+                chunk_numerals.push(numerals_1[under_hundred as usize - 1].to_string());
+            } else {
+                let tens = under_hundred / 10;
+                if tens > 0 {
+                    chunk_numerals.push(numerals_2[tens as usize - 2].to_string());
+                }
+                let ones = under_hundred % 10;
+                if ones > 0 {
+                    chunk_numerals.push(numerals_1[ones as usize - 1].to_string());
+                }
+            }
+
+            if chunk_idx > 0 && !chunk_numerals.is_empty() {
+                chunk_numerals.push(numerals_3[chunk_idx - 1].to_string());
+            }
+
+            res.push(chunk_numerals);
+            chunk_idx += 1;
+            num /= 1000;
+        }
+
+        res.into_iter().rev().flat_map(|x| x).collect::<Vec<String>>().join(" ")
+    }
 }

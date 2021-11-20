@@ -21,3 +21,21 @@ fn lowest_common_ancestor_test() {
         assert_eq!(actual, expected);
     }
 }
+
+#[test]
+fn number_to_words_test() {
+    let test_cases = vec![
+        (0, "Zero"),
+        (1, "One"),
+        (20, "Twenty"),
+        (100, "One Hundred"),
+        (1000000, "One Million"),
+        (123, "One Hundred Twenty Three"),
+        (12345, "Twelve Thousand Three Hundred Forty Five"),
+        (1234567, "One Million Two Hundred Thirty Four Thousand Five Hundred Sixty Seven"),
+        (1234567891, "One Billion Two Hundred Thirty Four Million Five Hundred Sixty Seven Thousand Eight Hundred Ninety One"),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::number_to_words(case.0), case.1.to_string());
+    }
+}

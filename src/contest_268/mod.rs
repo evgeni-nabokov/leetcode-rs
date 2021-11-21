@@ -27,4 +27,24 @@ impl Solution {
 
         right.max(end - left) as i32
     }
+
+    // 2079. Watering Plants.
+    // https://leetcode.com/problems/watering-plants/
+    // Time complexity: O(N).
+    // Space complexity: O(1).
+    pub fn watering_plants(plants: Vec<i32>, capacity: i32) -> i32 {
+        let mut steps = 0i32;
+        let mut water_in_can = capacity;
+
+        for i in 0..plants.len() {
+            steps += 1;
+            if water_in_can < plants[i] {
+                steps += 2 * i as i32;
+                water_in_can = capacity;
+            }
+            water_in_can -= plants[i];
+        }
+
+        steps
+    }
 }

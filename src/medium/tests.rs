@@ -1,5 +1,6 @@
 use super::*;
 use crate::common::tree_node::BinaryTree;
+use super::bst_iterator::BSTIterator;
 
 #[test]
 fn h_index_test() {
@@ -108,8 +109,8 @@ fn level_order_test() {
 fn build_tree_test() {
     let test_cases = vec![
         (vec![], vec![], vec![]),
-        (vec![1, 2], vec![2, 1], vec![Some(1), Some(2), None]),
-        (vec![5, 3, 2, 4, 6], vec![2, 4, 3, 6, 5], vec![Some(5), Some(3), Some(6), Some(2), Some(4), None, None]),
+        (vec![1, 2], vec![2, 1], vec![Some(1), Some(2)]),
+        (vec![5, 3, 2, 4, 6], vec![2, 4, 3, 6, 5], vec![Some(5), Some(3), Some(6), Some(2), Some(4)]),
         (vec![1, 2, 4, 5, 3, 6, 7], vec![4, 5, 2, 6, 7, 3, 1], vec![Some(1), Some(2), Some(3), Some(4), Some(5), Some(6), Some(7)])
     ];
     for case in test_cases {
@@ -443,4 +444,15 @@ fn suggested_products_test() {
             case.0.into_iter().map(|x| x.to_string()).collect(), case.1.to_string()),
             case.2.into_iter().map(|x| x.into_iter().map(|y| y.to_string()).collect()).collect::<Vec<Vec<String>>>());
     }
+}
+
+#[test]
+fn bst_iterator_test() {
+    let tree = TreeNode::from_level_order(&vec![Some(1), Some(2), Some(3)]);
+    let mut obj = BSTIterator::new(tree);
+    assert_eq!(obj.has_next(), true);
+    assert_eq!(obj.next(), 2);
+    assert_eq!(obj.next(), 1);
+    assert_eq!(obj.next(), 3);
+    assert_eq!(obj.has_next(), false);
 }

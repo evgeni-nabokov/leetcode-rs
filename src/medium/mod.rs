@@ -1,6 +1,8 @@
 #[cfg(test)]
 mod tests;
 mod suggested_products;
+mod bst_iterator;
+
 
 use std::rc::Rc;
 use std::cell::RefCell;

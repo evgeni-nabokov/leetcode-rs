@@ -1,5 +1,6 @@
 #[cfg(test)]
 mod tests;
+mod range_freq_query;
 
 struct Solution;
 

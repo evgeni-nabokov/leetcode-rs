@@ -2,7 +2,6 @@ use std::rc::Rc;
 use std::cell::RefCell;
 use std::cmp::max;
 use std::collections::VecDeque;
-use std::mem::swap;
 
 // Definition for a binary tree node.
 #[derive(Debug, PartialEq, Eq)]
@@ -14,22 +13,36 @@ pub struct TreeNode {
 
 impl TreeNode {
     pub fn from_level_order(values: &[Option<i32>]) -> Option<Rc<RefCell<TreeNode>>> {
-        fn insert_level_order(values: &[Option<i32>], i: usize) -> Option<Rc<RefCell<TreeNode>>> {
-            if i >= values.len() {
-                None
-            } else {
-                match values[i] {
-                    Some(val) =>
-                        TreeNode::new_with_children(
-                            val,
-                            insert_level_order(values, 2 * i + 1),
-                            insert_level_order(values, 2 * i + 2)
-                        ),
-                    None => None
-                }
-            }
+        if values.is_empty() || values[0].is_none() {
+            return None;
         }
-        insert_level_order(values, 0)
+
+        let mut queue = VecDeque::new();
+        let root = TreeNode::new_with_children(values[0], None, None);
+        queue.push_back(root.clone());
+        let mut i = 1;
+        while !queue.is_empty() && i < values.len() {
+            let mut curr = queue.pop_front().unwrap();
+            let left = TreeNode::new_with_children(values[i], None, None);
+            if left.is_some() {
+                queue.push_back(left.clone());
+            }
+            curr.as_mut().unwrap().borrow_mut().left = left;
+            i += 1;
+
+            if i == values.len() {
+                break;
+            }
+
+            let right = TreeNode::new_with_children(values[i], None, None);
+            if right.is_some() {
+                queue.push_back(right.clone());
+            }
+            curr.as_mut().unwrap().borrow_mut().right = right;
+            i += 1;
+        }
+
+        root
     }
 
     #[inline]
@@ -41,13 +54,17 @@ impl TreeNode {
         }
     }
 
-    pub fn new_with_children(val: i32, left: Option<Rc<RefCell<TreeNode>>>, right: Option<Rc<RefCell<TreeNode>>>)
+    pub fn new_with_children(val: Option<i32>, left: Option<Rc<RefCell<TreeNode>>>, right: Option<Rc<RefCell<TreeNode>>>)
                   -> Option<Rc<RefCell<TreeNode>>> {
-        Some(Rc::new(RefCell::new(TreeNode {
-            val,
-            left,
-            right,
-        })))
+        if let Some(inner_val) = val {
+            Some(Rc::new(RefCell::new(TreeNode {
+                val: inner_val,
+                left,
+                right,
+            })))
+        } else {
+            None
+        }
     }
 
 }
@@ -155,27 +172,32 @@ impl BinaryTree for Option<Rc<RefCell<TreeNode>>> {
     }
 
     fn get_level_order_values(&self) -> Vec<Option<i32>> {
-        let mut res = Vec::<Option<i32>>::new();
+        let mut res = Vec::new();
         if self.is_none() { return res; }
-        let mut queue_1: VecDeque<Option<Rc<RefCell<TreeNode>>>> = VecDeque::new();
-        let mut queue_2: VecDeque<Option<Rc<RefCell<TreeNode>>>> = VecDeque::new();
-        queue_1.push_front(self.clone());
-        while !queue_1.is_empty() {
-            if queue_1.iter().all(|x| x.is_none()) { break; }
-            swap(&mut queue_1, &mut queue_2);
-            while !queue_2.is_empty() {
-                let node = queue_2.pop_back().unwrap();
-                if node.is_some() {
-                    res.push(Some(node.get_val()));
-                    let left = RefCell::borrow(node.as_ref().unwrap()).left.clone();
-                    let right = RefCell::borrow(node.as_ref().unwrap()).right.clone();
-                    queue_1.push_front(left);
-                    queue_1.push_front(right);
+        let mut queue = VecDeque::new();
+        queue.push_back(self.clone());
+        let mut tail_len = 0;
+        while !queue.is_empty() {
+            let len = queue.len();
+            for _ in 0..len {
+                if let Some(inner_node) = queue.pop_front().unwrap() {
+                    let borrowed_node = inner_node.borrow();
+                    res.push(Some(borrowed_node.val));
+                    queue.push_back(borrowed_node.left.clone());
+                    queue.push_back(borrowed_node.right.clone());
+                    tail_len = 0;
                 } else {
                     res.push(None);
+                    tail_len += 1;
                 }
             }
         }
+
+        if tail_len > 0 {
+            res.truncate(res.len() - tail_len);
+        }
+
         res
     }
+
 }

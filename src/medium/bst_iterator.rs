@@ -23,7 +23,7 @@ impl BSTIterator {
     }
 
     pub fn next(&mut self) -> i32 {
-        let mut node = self.stack.pop().unwrap();
+        let node = self.stack.pop().unwrap();
         let res = node.borrow().val;
         self.push_leftmost(node.borrow_mut().right.take());
         res

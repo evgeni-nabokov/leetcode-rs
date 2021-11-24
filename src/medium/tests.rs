@@ -354,8 +354,8 @@ fn lowest_common_ancestor_test() {
     ];
     for case in test_cases {
         assert_eq!(Solution::lowest_common_ancestor(TreeNode::from_level_order(&case.0),
-                                                    TreeNode::new_with_children(case.1, None, None),
-                                                    TreeNode::new_with_children(case.2, None, None)).unwrap().borrow().val,
+                                                    TreeNode::new_with_children(Some(case.1), None, None),
+                                                    TreeNode::new_with_children(Some(case.2), None, None)).unwrap().borrow().val,
                    case.3);
     }
 }

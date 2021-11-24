@@ -221,17 +221,17 @@ fn width_of_binary_tree_test() {
             4
         ),
         (
-            vec![Some(1), Some(3), None, Some(5), Some(3), None, None],
+            vec![Some(1), Some(3), None, Some(5), Some(3)],
             2
         ),
         (
-            vec![Some(1), Some(3), Some(2), Some(5), None, None, None],
+            vec![Some(1), Some(3), Some(2), Some(5)],
             2
         ),
         (
-            vec![Some(1), Some(3), Some(2), Some(5), None, None, Some(9), Some(6), None, None, None, None, None, None, Some(9)],
+            vec![Some(1), Some(3), Some(2), Some(5), None, None, Some(9), Some(6), None, None, Some(9)],
             8
-        ),
+        )
     ];
     for case in test_cases {
         assert_eq!(Solution::width_of_binary_tree(TreeNode::from_level_order(&case.0)), case.1);

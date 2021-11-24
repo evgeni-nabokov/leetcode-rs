@@ -3,10 +3,10 @@ mod tests;
 mod suggested_products;
 mod bst_iterator;
 
-
 use std::rc::Rc;
 use std::cell::RefCell;
 use std::cmp::{Ordering, min, max};
+use std::mem::swap;
 
 use crate::common::tree_node::TreeNode;
 use crate::common::list_node::ListNode;
@@ -686,5 +686,39 @@ impl Solution {
         }
 
         dfs(&root, i32::MIN)
+    }
+
+    // 99. Recover Binary Search Tree.
+    // https://leetcode.com/problems/recover-binary-search-tree/
+    // Time complexity: O(N).
+    // Space complexity: O(N).
+    pub fn recover_tree(root: &mut Option<Rc<RefCell<TreeNode>>>) {
+        let mut stack = Vec::new();
+        let mut curr = root.clone();
+        let mut prev: Option<Rc<RefCell<TreeNode>>> = None;
+        let mut x: Option<Rc<RefCell<TreeNode>>> = None;
+        let mut y: Option<Rc<RefCell<TreeNode>>> = None;
+        while !stack.is_empty() || curr.is_some() {
+            while curr.is_some() {
+                stack.push(curr.clone());
+                let left = curr.as_mut().unwrap().borrow_mut().left.clone();
+                curr = left;
+            }
+            curr = stack.pop().unwrap();
+            if prev.is_some() && curr.as_ref().unwrap().borrow().val < prev.as_ref().unwrap().borrow().val{
+                y = curr.clone();
+                if x.is_none() {
+                    x = prev.clone();
+                } else {
+                    break;
+                }
+            }
+
+            prev = curr.clone();
+            let right = curr.as_mut().unwrap().borrow_mut().right.clone();
+            curr = right;
+        }
+
+        swap(&mut x.as_mut().unwrap().borrow_mut().val, &mut y.as_mut().unwrap().borrow_mut().val);
     }
 }

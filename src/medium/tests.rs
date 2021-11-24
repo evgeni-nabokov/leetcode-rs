@@ -456,3 +456,22 @@ fn bst_iterator_test() {
     assert_eq!(obj.next(), 3);
     assert_eq!(obj.has_next(), false);
 }
+
+#[test]
+fn recover_tree_test() {
+    let test_cases = vec![
+        (
+            vec![Some(1), Some(3), None, None, Some(2)],
+            vec![Some(3), Some(1), None, None, Some(2)],
+        ),
+        (
+            vec![Some(3), Some(1), Some(4), None, None, Some(2)],
+            vec![Some(2), Some(1), Some(4), None, None, Some(3)],
+        ),
+    ];
+    for case in test_cases {
+        let mut tree = TreeNode::from_level_order(&case.0);
+        Solution::recover_tree(&mut tree);
+        assert_eq!(tree.get_level_order_values(), case.1);
+    }
+}

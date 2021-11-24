@@ -36,4 +36,9 @@ fn range_freq_query_test() {
     assert_eq!(obj_2.query(0, 2, 1), 3);
     assert_eq!(obj_2.query(3, 3, 2), 1);
     assert_eq!(obj_2.query(2, 2, 1), 1);
+
+    let obj_3 = RangeFreqQuery::new(vec![2, 2, 1, 2, 2]);
+    assert_eq!(obj_3.query(2, 4, 1), 1);
+    assert_eq!(obj_3.query(1, 3, 1), 1);
+    assert_eq!(obj_3.query(0, 2, 1), 1);
 }

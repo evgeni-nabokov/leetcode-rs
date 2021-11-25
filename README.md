@@ -57,7 +57,7 @@
 56. **134** Gas Station https://leetcode.com/problems/gas-station/ *Medium*
 57. **136** Single Number https://leetcode.com/problems/single-number/ *Easy*
 58. **137** Single Number II https://leetcode.com/problems/single-number-ii/ *Medium*
-59. **139** Word Break https://leetcode.com/problems/word-break/solution/ *Medium*
+59. **139** Word Break https://leetcode.com/problems/word-break/ *Medium*
 60. **140** Word Break II https://leetcode.com/problems/word-break-ii/ *Hard*
 61. **143** Reorder List https://leetcode.com/problems/reorder-list/ *Medium*
 62. **146** LRU Cache https://leetcode.com/problems/lru-cache/ *Medium*
@@ -96,7 +96,7 @@
 95. **229** Majority Element II https://leetcode.com/problems/majority-element-ii/ *Medium*
 96. **230** Kth Smallest Element in a BST https://leetcode.com/problems/kth-smallest-element-in-a-bst/ *Medium*
 97. **231** Power of Two https://leetcode.com/problems/power-of-two/ *Easy*
-98. **236** Lowest Common Ancestor of a Binary Tree https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/solution/ *Medium*
+98. **236** Lowest Common Ancestor of a Binary Tree https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree *Medium*
 99. **238** Product of Array Except Self https://leetcode.com/problems/product-of-array-except-self/ *Medium*
 100. **252** Meeting Rooms https://leetcode.com/problems/meeting-rooms/ *Easy*
 101. **253** Meeting Rooms II https://leetcode.com/problems/meeting-rooms-ii/ *Medium*
@@ -172,7 +172,7 @@
 171. **680** Valid Palindrome II https://leetcode.com/problems/valid-palindrome-ii/ *Easy*
 172. **700** Search in a Binary Search Tree https://leetcode.com/problems/search-in-a-binary-search-tree/ *Easy*
 173. **701** Insert into a Binary Search Tree https://leetcode.com/problems/insert-into-a-binary-search-tree/ *Medium*
-174. **704** Binary Search https://leetcode.com/problems/binary-search/solution/ *Easy*
+174. **704** Binary Search https://leetcode.com/problems/binary-search/ *Easy*
 175. **705** Design HashSet https://leetcode.com/problems/design-hashset/ *Easy*
 176. **713** Subarray Product Less Than K https://leetcode.com/problems/subarray-product-less-than-k/ *Medium*
 177. **724** Find Pivot Index https://leetcode.com/problems/find-pivot-index/ *Easy*

@@ -159,7 +159,7 @@ impl Solution {
     }
 
     // 704. Binary Search.
-    // https://leetcode.com/problems/binary-search/solution/
+    // https://leetcode.com/problems/binary-search/
     pub fn search(nums: Vec<i32>, target: i32) -> i32 {
         let mut left: i32 = 0;
         let mut right: i32 = nums.len() as i32 - 1;

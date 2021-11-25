@@ -445,7 +445,6 @@ impl Solution {
                     grid[row as usize][col as usize] = -1;
                     let res = [(row + 1, col), (row, col + 1), (row - 1, col), (row, col - 1)]
                         .iter().fold(0, |s, (r, c)| {
-                        //println!("s={}", s);
                         s + dfs(grid, *r, *c, empty_curr, empty_total)
                     });
                     grid[row as usize][col as usize] = old_val;
@@ -798,7 +797,7 @@ impl Solution {
     }
 
     // 139. Word Break.
-    // https://leetcode.com/problems/word-break/solution/
+    // https://leetcode.com/problems/word-break/
     // Backtracking with memoization solution.
     pub fn word_break(s: String, word_dict: Vec<String>) -> bool {
         fn backtrack(s: &str, word_set: &HashSet<&str>, memo: &mut Vec<Option<bool>>, start: usize) -> bool {

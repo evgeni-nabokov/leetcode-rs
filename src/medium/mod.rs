@@ -5,7 +5,8 @@ mod bst_iterator;
 
 use std::rc::Rc;
 use std::cell::RefCell;
-use std::cmp::{Ordering, min, max};
+use std::cmp::{Ordering, Reverse, min, max};
+use std::collections::BinaryHeap;
 use std::mem::swap;
 
 use crate::common::tree_node::TreeNode;
@@ -624,9 +625,11 @@ impl Solution {
         String::from_utf8(bytes).unwrap()
     }
 
-    // 215. Kth Largest Element in an Array
+    // 215. Kth Largest Element in an Array.
     // https://leetcode.com/problems/kth-largest-element-in-an-array/
-    // Partitioning method.
+    // Quickselect method.
+    // Time complexity: O(N).
+    // Space complexity: O(1).
     pub fn find_kth_largest(mut nums: Vec<i32>, k: i32) -> i32 {
         fn partition(nums: &mut Vec<i32>, left: usize, right: usize) -> usize {
             let pivot_num = nums[left];
@@ -664,6 +667,68 @@ impl Solution {
             }
         }
         nums[find]
+    }
+
+    // Max binary heap method.
+    // Time complexity: O(N + K * LogN).
+    // Space complexity: O(1).
+    pub fn find_kth_largest_v2(mut nums: Vec<i32>, k: i32) -> i32 {
+        fn heapify(nums: &mut [i32]) {
+            for i in (1..=nums.len() / 2).rev() {
+                move_down(nums, i);
+            }
+        }
+
+        fn move_down(nums: &mut [i32], mut i: usize) {
+            while 2 * i <= nums.len() {
+                let mut left = 2 * i;
+                let right = left + 1;
+                if left < nums.len() && less(nums, left, right) {
+                    left += 1;
+                }
+                if less(nums, left, i) {
+                    break;
+                }
+                nums.swap(left - 1, i - 1);
+                i = left;
+            }
+        }
+
+        fn less(nums: &[i32], a: usize, b: usize) -> bool {
+            nums[a - 1] < nums[b - 1]
+        }
+
+        heapify(&mut nums);
+
+        for _ in 0..(k - 1) {
+            nums[0] = nums.pop().unwrap();
+            move_down(&mut nums, 1);
+        }
+
+        nums[0]
+    }
+
+    // Min binary heap method.
+    // Time complexity: O(N * LogK).
+    // Space complexity: O(K).
+    pub fn find_kth_largest_v3(nums: Vec<i32>, k: i32) -> i32 {
+        let mut pq = BinaryHeap::with_capacity(k as usize + 1);
+        for i in 0..nums.len() {
+            pq.push(Reverse(nums[i]));
+            if pq.len() > k as usize {
+                pq.pop();
+            }
+        }
+
+        pq.pop().unwrap().0
+    }
+
+    // Sort method.
+    // Time complexity: O(N * LogN).
+    // Space complexity: O(1).
+    pub fn find_kth_largest_v4(mut nums: Vec<i32>, k: i32) -> i32 {
+        nums.sort_unstable();
+        nums[nums.len() - k as usize]
     }
 
     // 1448. Count Good Nodes in Binary Tree.

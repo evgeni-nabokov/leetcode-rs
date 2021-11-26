@@ -398,6 +398,27 @@ fn find_kth_largest_test() {
 }
 
 #[test]
+fn find_kth_largest_v2_test() {
+    for case in get_find_kth_largest_test_cases() {
+        assert_eq!(Solution::find_kth_largest_v2(case.0, case.1), case.2);
+    }
+}
+
+#[test]
+fn find_kth_largest_v3_test() {
+    for case in get_find_kth_largest_test_cases() {
+        assert_eq!(Solution::find_kth_largest_v3(case.0, case.1), case.2);
+    }
+}
+
+#[test]
+fn find_kth_largest_v4_test() {
+    for case in get_find_kth_largest_test_cases() {
+        assert_eq!(Solution::find_kth_largest_v4(case.0, case.1), case.2);
+    }
+}
+
+#[test]
 fn good_nodes_test() {
     let test_cases = vec![
         (vec![Some(1)], 1),

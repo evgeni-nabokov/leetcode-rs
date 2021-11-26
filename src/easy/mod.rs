@@ -2,6 +2,9 @@ use std::collections::HashMap;
 use std::mem::replace;
 use std::rc::Rc;
 use std::cell::RefCell;
+use std::cmp::Ordering;
+use std::collections::BinaryHeap;
+use std::iter::FromIterator;
 
 use crate::common::tree_node::TreeNode;
 use crate::common::list_node::ListNode;
@@ -387,5 +390,64 @@ impl Solution {
         let mut curr_max = 0;
         dfs(&root, &mut curr_max);
         curr_max
+    }
+
+    // 1710. Maximum Units on a Truck.
+    // https://leetcode.com/problems/maximum-units-on-a-truck/
+    // Sort method.
+    // Time complexity: O(LogN).
+    // Space complexity: O(1).
+    pub fn maximum_units(mut box_types: Vec<Vec<i32>>, truck_size: i32) -> i32 {
+        box_types.sort_unstable_by(|x, y| y[1].cmp(&x[1]));
+
+        let mut unit_count = 0;
+        let mut remaining_truck_size = truck_size;
+        for bt in box_types {
+            let box_count = remaining_truck_size.min(bt[0]);
+            unit_count += box_count * bt[1];
+            remaining_truck_size -= box_count;
+            if remaining_truck_size == 0 {
+                break;
+            }
+        }
+        unit_count
+    }
+
+    // Max binary heap method.
+    // Time complexity: O(LogN).
+    // Space complexity: O(N).
+    pub fn maximum_units_v2(box_types: Vec<Vec<i32>>, truck_size: i32) -> i32 {
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        struct BoxType {
+            box_count: i32,
+            unit_count: i32,
+        }
+
+        impl Ord for BoxType {
+            fn cmp(&self, other: &Self) -> Ordering {
+                other.unit_count.cmp(&self.unit_count)
+            }
+        }
+
+        impl PartialOrd for BoxType {
+            fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
+                Some(other.cmp(&self))
+            }
+        }
+
+        let mut pq = BinaryHeap::from_iter(
+            box_types.into_iter().map(|x| BoxType { box_count: x[0], unit_count: x[1] })
+        );
+
+        let mut unit_count = 0;
+        let mut remaining_truck_size = truck_size;
+        while !pq.is_empty() && remaining_truck_size > 0 {
+            let top = pq.pop().unwrap();
+            let box_count = remaining_truck_size.min(top.box_count);
+            remaining_truck_size -= box_count;
+            unit_count += box_count * top.unit_count;
+        }
+
+        unit_count
     }
 }

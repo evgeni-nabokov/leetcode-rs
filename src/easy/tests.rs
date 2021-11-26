@@ -227,3 +227,24 @@ fn diameter_of_binary_tree_test() {
         assert_eq!(Solution::diameter_of_binary_tree(TreeNode::from_level_order(&case.0)), case.1);
     }
 }
+
+fn get_maximum_units_test_cases() -> Vec<(Vec<Vec<i32>>, i32, i32)> {
+    vec![
+        (vec![vec![1, 3], vec![2, 2], vec![3, 1]], 4, 8),
+        (vec![vec![5, 10], vec![2, 5], vec![4, 7], vec![3, 9]], 10, 91),
+    ]
+}
+
+#[test]
+fn maximum_units_test() {
+    for case in get_maximum_units_test_cases() {
+        assert_eq!(Solution::maximum_units(case.0, case.1), case.2);
+    }
+}
+
+#[test]
+fn maximum_units_v2_test() {
+    for case in get_maximum_units_test_cases() {
+        assert_eq!(Solution::maximum_units_v2(case.0, case.1), case.2);
+    }
+}

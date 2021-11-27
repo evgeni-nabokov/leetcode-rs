@@ -248,3 +248,30 @@ fn maximum_units_v2_test() {
         assert_eq!(Solution::maximum_units_v2(case.0, case.1), case.2);
     }
 }
+
+fn get_min_cost_climbing_stairs_test_cases() -> Vec<(Vec<i32>, i32)> {
+    vec![
+        (
+            vec![10, 15, 20],
+            15
+        ),
+        (
+            vec![1, 100, 1, 1, 1, 100, 1, 1, 100, 1],
+            6
+        ),
+    ]
+}
+
+#[test]
+fn min_cost_climbing_stairs_test() {
+    for case in get_min_cost_climbing_stairs_test_cases() {
+        assert_eq!(Solution::min_cost_climbing_stairs(case.0), case.1);
+    }
+}
+
+#[test]
+fn min_cost_climbing_stairs_v2_test() {
+    for case in get_min_cost_climbing_stairs_test_cases() {
+        assert_eq!(Solution::min_cost_climbing_stairs_v2(case.0), case.1);
+    }
+}

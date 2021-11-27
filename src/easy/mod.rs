@@ -450,4 +450,41 @@ impl Solution {
 
         unit_count
     }
+
+    // 746. Min Cost Climbing Stairs
+    // https://leetcode.com/problems/min-cost-climbing-stairs/
+    // Top-down DP recursive method.
+    // Time complexity: O(N).
+    // Space complexity: O(N).
+    pub fn min_cost_climbing_stairs(cost: Vec<i32>) -> i32 {
+        fn solve(cost: &[i32], i: usize, memo: &mut Vec<i32>) -> i32 {
+            if i <= 1 {
+                return 0;
+            }
+            if memo[i] >= 0 {
+                return memo[i];
+            }
+            memo[i] = (cost[i - 1] + solve(&cost, i - 1, memo)).min(cost[i - 2] + solve(&cost, i - 2, memo));
+            memo[i]
+        }
+
+        let mut memo = vec![-1; cost.len() + 1];
+        solve(&cost, cost.len(), &mut memo);
+        memo[cost.len()]
+    }
+
+    // Top-down DP iterative method. Constant space.
+    // Time complexity: O(N).
+    // Space complexity: O(1).
+    pub fn min_cost_climbing_stairs_v2(cost: Vec<i32>) -> i32 {
+        let mut memo = vec![0, 0];
+
+        for i in 2..=cost.len() {
+            let tmp = memo[1];
+            memo[1] = (cost[i - 1] + memo[1]).min(cost[i - 2] + memo[0]);
+            memo[0] = tmp;
+        }
+
+        memo[1]
+    }
 }

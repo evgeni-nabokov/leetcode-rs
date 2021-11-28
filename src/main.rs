@@ -19,6 +19,7 @@ mod contest_188;
 mod contest_266;
 mod contest_267;
 mod contest_268;
+mod contest_269;
 
 mod easy;
 mod medium;

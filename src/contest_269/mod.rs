@@ -133,4 +133,48 @@ impl Solution {
         // Find the minimum of the three cases.
         (min_left_distance + min_right_distance).min(max_left_distance.min(max_right_distance)) as i32
     }
+
+    // 2092. Find All People With Secret.
+    // https://leetcode.com/problems/find-all-people-with-secret/
+    // Time complexity: O(N^2).
+    // Space complexity: O(N).
+    pub fn find_all_people(n: i32, mut meetings: Vec<Vec<i32>>, first_person: i32) -> Vec<i32> {
+        // Set of people knowing the secret.
+        let mut know_secret = vec![false; n as usize];
+
+        know_secret[0] = true;
+        know_secret[first_person as usize] = true;
+
+        // Sorting by time in ascending order.
+        meetings.sort_unstable_by_key(|x| x[2]);
+
+        let mut left = 0;
+        while left < meetings.len() {
+            // We have a group of meetings at the same time.
+            // Checking all the pairs of the meeting group.
+            // If someone knows the secret, share it to another and set the flag secret_shared.
+            // Do sharing rounds until no secret shared during the round.
+            let time = meetings[left][2];
+            let mut secret_shared = true;
+            let mut right = left;
+            while secret_shared {
+                secret_shared = false;
+                right = left;
+                while right < meetings.len() && meetings[right][2] == time {
+                    let x = meetings[right][0] as usize;
+                    let y = meetings[right][1] as usize;
+                    if know_secret[x] && !know_secret[y] || !know_secret[x] && know_secret[y] {
+                        // We found a person that knows the secret and can share it.
+                        secret_shared = true;
+                        know_secret[x] = true;
+                        know_secret[y] = true;
+                    }
+                    right += 1;
+                }
+            }
+            left = right;
+        }
+
+        know_secret.into_iter().enumerate().filter(|x| x.1).map(|x| x.0 as i32).collect()
+    }
 }

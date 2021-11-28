@@ -47,3 +47,16 @@ fn minimum_deletions_test() {
         assert_eq!(Solution::minimum_deletions(case.0), case.1);
     }
 }
+
+#[test]
+fn find_all_people_test() {
+    let test_cases = vec![
+        (6, vec![vec![1, 2, 5], vec![2, 3, 8], vec![1, 5, 10]], 1, vec![0, 1, 2, 3, 5]),
+        (4, vec![vec![3, 1, 3], vec![1, 2, 2], vec![0, 3, 3]], 3, vec![0, 1, 3]),
+        (5, vec![vec![3, 4, 2], vec![1, 2, 1], vec![2, 3, 1]], 1, vec![0, 1, 2, 3, 4]),
+        (6, vec![vec![0, 2, 1], vec![1, 3, 1], vec![4, 5, 1]], 1, vec![0, 1, 2, 3]),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::find_all_people(case.0, case.1, case.2), case.3);
+    }
+}

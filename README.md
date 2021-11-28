@@ -1,4 +1,4 @@
-### List of solved problems (256)
+### List of solved problems (257)
 1. **1** Two Sum https://leetcode.com/problems/two-sum/ *Easy*
 2. **2** Add Two Numbers // https://leetcode.com/problems/add-two-numbers/ *Medium* 
 3. **5** Longest Palindromic Substring https://leetcode.com/problems/longest-palindromic-substring/ *Medium*
@@ -255,6 +255,4 @@
 254. **2089** Find Target Indices After Sorting Array https://leetcode.com/problems/find-target-indices-after-sorting-array/ *Easy*
 255. **2090** K Radius Subarray Averages https://leetcode.com/problems/k-radius-subarray-averages/ *Medium*
 256. **2091** Removing Minimum and Maximum From Array https://leetcode.com/problems/removing-minimum-and-maximum-from-array/ *Medium*
-
-
-
+257. **2092** Find All People With Secret https://leetcode.com/problems/find-all-people-with-secret/ *Hard*

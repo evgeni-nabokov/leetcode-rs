@@ -34,3 +34,16 @@ fn get_averages_v2_test() {
         assert_eq!(Solution::get_averages_v2(case.0, case.1), case.2);
     }
 }
+
+
+#[test]
+fn minimum_deletions_test() {
+    let test_cases = vec![
+        (vec![2, 10, 7, 5, 4, 1, 8, 6], 5),
+        (vec![0, -4, 19, 1, 8, -2, -3, 5], 3),
+        (vec![101], 1),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::minimum_deletions(case.0), case.1);
+    }
+}

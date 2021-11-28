@@ -94,4 +94,43 @@ impl Solution {
 
         res
     }
+
+    // 2091. Removing Minimum and Maximum From Array.
+    // https://leetcode.com/problems/removing-minimum-and-maximum-from-array/
+    // Time complexity: O(N).
+    // Space complexity: O(1).
+    pub fn minimum_deletions(nums: Vec<i32>) -> i32 {
+        let mut min_n = nums[0];
+        let mut max_n = nums[0];
+        let mut min_i = 0;
+        let mut max_i = 0;
+
+        for i in 1..nums.len() {
+            if nums[i] > max_n {
+                max_n = nums[i];
+                max_i = i;
+            } else if nums[i] < min_n {
+                min_n = nums[i];
+                min_i = i
+            }
+        }
+
+        // Three cases:
+        // 1) both numbers are in the left half - deletions are only from the left side,
+        // 2) both numbers are in the right half - deletions are only from the right side,
+        // 3) the numbers are in different halves - deletions are from the both sides.
+
+        // Case 1 solution.
+        let max_left_distance = max_i.max(min_i) + 1;
+
+        // Case 2 solution.
+        let max_right_distance = nums.len() - max_i.min(min_i);
+
+        // Case 3 solution.
+        let min_left_distance = max_i.min(min_i) + 1;
+        let min_right_distance = nums.len() - max_i.max(min_i);
+
+        // Find the minimum of the three cases.
+        (min_left_distance + min_right_distance).min(max_left_distance.min(max_right_distance)) as i32
+    }
 }

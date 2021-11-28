@@ -63,4 +63,35 @@ impl Solution {
 
         res
     }
+
+    // Window sliding method.
+    // Time complexity: O(N).
+    // Space complexity: O(1).
+    pub fn get_averages_v2(nums: Vec<i32>, k: i32) -> Vec<i32> {
+        let uk = k as usize;
+        let mut res = vec![-1; nums.len()];
+
+        if uk == 0 {
+            return nums;
+        }
+
+        if 2 * uk >= nums.len()  {
+            return res;
+        }
+
+        let n = 2 * k as i64 + 1;
+        let mut sum = 0;
+        for i in 0..(2 * uk + 1) {
+            sum += nums[i] as i64;
+        }
+
+        res[uk] = (sum / n) as i32;
+
+        for i in (uk + 1)..nums.len() - uk {
+            sum += (nums[i + uk] - nums[i - uk - 1]) as i64;
+            res[i] = (sum / n) as i32;
+        }
+
+        res
+    }
 }

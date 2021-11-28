@@ -31,4 +31,36 @@ impl Solution {
 
         res
     }
+
+    // 2090. K Radius Subarray Averages.
+    // https://leetcode.com/problems/k-radius-subarray-averages/
+    // Prefix sum method.
+    // Time complexity: O(N).
+    // Space complexity: O(N).
+    pub fn get_averages(nums: Vec<i32>, k: i32) -> Vec<i32> {
+        let uk = k as usize;
+        let mut res = vec![-1; nums.len()];
+
+        if uk == 0 {
+            return nums;
+        }
+
+        if 2 * uk >= nums.len()  {
+            return res;
+        }
+
+        let mut prefix_sum = vec![0u64; nums.len() + 1];
+        for i in 0..nums.len() {
+            prefix_sum[i + 1] = prefix_sum[i] + nums[i] as u64;
+        }
+
+        let n = 2 * k as u64 + 1;
+        for i in uk..nums.len() - uk {
+            let left = i - uk;
+            let right = i + uk + 1;
+            res[i] = ((prefix_sum[right] - prefix_sum[left]) / n) as i32;
+        }
+
+        res
+    }
 }

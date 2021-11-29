@@ -387,13 +387,46 @@ fn get_number_grid_2() -> Vec<Vec<i32>> {
     ]
 }
 
+fn get_min_path_sum_test_cases() -> Vec<(Vec<Vec<i32>>, i32)>{
+    vec![
+        (
+            vec![
+                vec![1, 3, 1],
+                vec![1, 5, 1],
+                vec![4, 2, 1],
+            ],
+            7
+        ),
+        (
+            vec![
+                vec![0, 0, 0],
+                vec![0, 0, 0],
+                vec![0, 0, 0],
+            ],
+            0
+        ),
+        (
+            vec![
+                vec![1, 2, 3],
+                vec![4, 5, 6],
+            ],
+            12
+        ),
+    ]
+}
+
 #[test]
 fn min_path_sum_test() {
-    assert_eq!(Solution::min_path_sum(vec![]), 0);
-    assert_eq!(Solution::min_path_sum(vec![vec![]]), 0);
+    for case in get_min_path_sum_test_cases() {
+        assert_eq!(Solution::min_path_sum(case.0), case.1);
+    }
+}
 
-    assert_eq!(Solution::min_path_sum(get_number_grid_1()), 7);
-    assert_eq!(Solution::min_path_sum(get_number_grid_2()), 0);
+#[test]
+fn min_path_sum_v2_test() {
+    for case in get_min_path_sum_test_cases() {
+        assert_eq!(Solution::min_path_sum_v2(case.0), case.1);
+    }
 }
 
 #[test]

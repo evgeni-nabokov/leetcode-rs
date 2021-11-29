@@ -512,23 +512,47 @@ impl Solution {
 
     // 64. Minimum Path Sum.
     // https://leetcode.com/problems/minimum-path-sum/
-    pub fn min_path_sum(grid: Vec<Vec<i32>>) -> i32 {
-        if grid.is_empty() { return 0; }
+    // In-place method.
+    // Time complexity: O(M x N).
+    // Space complexity: O(1).
+    pub fn min_path_sum(mut grid: Vec<Vec<i32>>) -> i32 {
         let (h, w) = (grid.len(), grid[0].len());
-        if w == 0 { return 0; }
-        let mut sums = vec![vec![0; w]; h];
-        for y in 0..grid.len() {
-            for x in 0..grid[y].len() {
-                sums[y][x] = grid[y][x] +
-                    match (x, y) {
-                        (0, 0) => 0,
-                        (x, 0) => sums[y][x - 1],
-                        (0, y) => sums[y - 1][x],
-                        (x, y) => min(sums[y][x - 1], sums[y - 1][x])
-                    };
+        for r in 0..h {
+            for c in 0..w {
+                grid[r][c] += match (r, c) {
+                    (0, 0) => 0,
+                    (0, c) => grid[r][c - 1],
+                    (r, 0) => grid[r - 1][c],
+                    (r, c) => grid[r - 1][c].min(grid[r][c - 1]),
+                }
             }
         }
-        sums[h - 1usize][w - 1usize]
+
+        grid[h - 1][w - 1]
+    }
+
+    // Extra space method.
+    // Time complexity: O(M x N).
+    // Space complexity: O(M x N).
+    pub fn min_path_sum_v2(grid: Vec<Vec<i32>>) -> i32 {
+        let (h, w) = (grid.len(), grid[0].len());
+
+        let mut dp = vec![vec![grid[0][0]; w]; h];
+
+        for r in 1..h {
+            dp[r][0] += grid[r][0] + grid[r - 1][0];
+        }
+        for c in 1..w {
+            dp[0][c] += grid[0][c] + grid[0][c - 1];
+        }
+
+        for r in 1..h {
+            for c in 1..w {
+                dp[r][c] = grid[r][c] + dp[r - 1][c].min(dp[r][c - 1]);
+            }
+        }
+
+        dp[h - 1][w - 1]
     }
 
     // 33. Search in Rotated Sorted Array.

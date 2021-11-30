@@ -487,4 +487,23 @@ impl Solution {
 
         memo[1]
     }
+
+    // Bottom-up DP iterative method.
+    // Time complexity: O(N).
+    // Space complexity: O(1).
+    // pub fn min_cost_climbing_stairs_v3(cost: Vec<i32>) -> i32 {
+    //     let mut memo = vec![0, 0];
+    //
+    // }
+
+    // 268. Missing Number.
+    // https://leetcode.com/problems/missing-number/
+    // Time complexity: O(N).
+    // Space complexity: O(1).
+    pub fn missing_number(nums: Vec<i32>) -> i32 {
+        let actual_sum: i32 = nums.iter().sum();
+        let n = nums.len() as i32;
+        let expected_sum = n * (n + 1) / 2;
+        expected_sum - actual_sum
+    }
 }

@@ -276,15 +276,25 @@ fn min_cost_climbing_stairs_v2_test() {
     }
 }
 
-#[test]
-fn missing_number_test() {
-    let test_cases = vec![
+fn get_missing_number_test_cases() -> Vec<(Vec<i32>, i32)> {
+    vec![
         (vec![3, 0, 1], 2),
         (vec![0, 1], 2),
         (vec![9, 6, 4, 2, 3, 5, 7, 0, 1], 8),
         (vec![0], 1),
-    ];
-    for case in test_cases {
+    ]
+}
+
+#[test]
+fn missing_number_test() {
+    for case in get_missing_number_test_cases() {
         assert_eq!(Solution::missing_number(case.0), case.1);
+    }
+}
+
+#[test]
+fn missing_number_v2_test() {
+    for case in get_missing_number_test_cases() {
+        assert_eq!(Solution::missing_number_v2(case.0), case.1);
     }
 }

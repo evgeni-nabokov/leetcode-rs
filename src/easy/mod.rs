@@ -498,6 +498,7 @@ impl Solution {
 
     // 268. Missing Number.
     // https://leetcode.com/problems/missing-number/
+    // Two sums calculation method.
     // Time complexity: O(N).
     // Space complexity: O(1).
     pub fn missing_number(nums: Vec<i32>) -> i32 {
@@ -505,5 +506,16 @@ impl Solution {
         let n = nums.len() as i32;
         let expected_sum = n * (n + 1) / 2;
         expected_sum - actual_sum
+    }
+
+    // XOR method.
+    // Time complexity: O(N).
+    // Space complexity: O(1).
+    pub fn missing_number_v2(nums: Vec<i32>) -> i32 {
+        let mut res = nums.len() as i32;
+        for i in 0..nums.len() {
+            res ^= i as i32 ^ nums[i];
+        }
+        res
     }
 }

@@ -298,3 +298,17 @@ fn missing_number_v2_test() {
         assert_eq!(Solution::missing_number_v2(case.0), case.1);
     }
 }
+
+#[test]
+fn is_palindrome() {
+    let test_cases = vec![
+        (0, true),
+        (121, true),
+        (-121, false),
+        (10, false),
+        (-101, false),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::is_palindrome(case.0), case.1);
+    }
+}

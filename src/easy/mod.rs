@@ -518,4 +518,23 @@ impl Solution {
         }
         res
     }
+
+    // 9. Palindrome Number.
+    // https://leetcode.com/problems/palindrome-number/
+    // Time complexity: O(LogN).
+    // Space complexity: O(1).
+    pub fn is_palindrome(mut x: i32) -> bool {
+        if x < 0 || (x % 10 == 0 && x != 0) {
+            return false;
+        }
+
+        let mut reverted_x = 0;
+
+        while x > reverted_x {
+            reverted_x = 10 * reverted_x + x % 10;
+            x /= 10;
+        }
+
+        x == reverted_x || x == reverted_x / 10
+    }
 }

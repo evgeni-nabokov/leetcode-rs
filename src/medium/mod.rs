@@ -6,7 +6,7 @@ mod bst_iterator;
 use std::rc::Rc;
 use std::cell::RefCell;
 use std::cmp::{Ordering, Reverse, min, max};
-use std::collections::BinaryHeap;
+use std::collections::{HashMap, BinaryHeap};
 use std::mem::swap;
 
 use crate::common::tree_node::TreeNode;
@@ -785,5 +785,43 @@ impl Solution {
         }
 
         swap(&mut x.as_mut().unwrap().borrow_mut().val, &mut y.as_mut().unwrap().borrow_mut().val);
+    }
+
+    // 91. Decode Ways.
+    // https://leetcode.com/problems/decode-ways/
+    // DP recursive method.
+    // Time complexity: O(N).
+    // Space complexity: O(N).
+    pub fn num_decodings(s: String) -> i32 {
+        fn solve(i: usize, bytes: &[u8], memo: &mut HashMap<usize, i32>) -> i32 {
+            if i == bytes.len() {
+                return 1;
+            }
+
+            if bytes[i] == 48 {
+                return 0;
+            }
+
+            if i == bytes.len() - 1 {
+                return 1;
+            }
+
+            if let Some(c) = memo.get(&i) {
+                return *c;
+            }
+
+            let mut res = solve(i + 1, bytes, memo);
+
+            let n = (bytes[i] - 48) * 10 + bytes[i + 1] - 48;
+            if n <= 26 {
+                res += solve(i + 2, bytes, memo);
+            }
+
+            memo.insert(i, res);
+
+            res
+        }
+
+        solve(0, s.as_bytes(), &mut HashMap::new())
     }
 }

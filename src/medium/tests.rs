@@ -496,3 +496,20 @@ fn recover_tree_test() {
         assert_eq!(tree.get_level_order_values(), case.1);
     }
 }
+
+#[test]
+fn num_decodings_test() {
+    let test_cases = vec![
+        ("0", 0),
+        ("12", 2),
+        ("226", 3),
+        ("06", 0),
+        ("00", 0),
+        ("10", 1),
+        ("2101", 1),
+        ("2125", 5)
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::num_decodings(case.0.to_string()), case.1);
+    }
+}

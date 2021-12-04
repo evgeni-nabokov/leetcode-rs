@@ -7,23 +7,31 @@ use super::min_stack::MinStack;
 use super::lru_cache::LRUCache;
 use super::first_unique::FirstUnique;
 
+fn get_single_number_test_cases() -> Vec<(Vec<i32>, i32)> {
+    vec![
+        (vec![2,2,1], 1),
+        (vec![4, 1, 2, 1, 2], 4),
+    ]
+}
+
 #[test]
 fn single_number_test() {
-    assert_eq!(Solution::single_number(vec![2,2,1]), 1);
-    assert_eq!(Solution::single_number(vec![4,1,2,1,2]), 4);
+    for case in get_single_number_test_cases() {
+        assert_eq!(Solution::single_number(case.0), case.1);
+    }
 }
 
 #[test]
 fn single_number_v2_test() {
-    assert_eq!(Solution::single_number_v2(vec![2, 2, 1]), 1);
-    assert_eq!(Solution::single_number_v2(vec![4, 1, 2, 1, 2]), 4);
+    for case in get_single_number_test_cases() {
+        assert_eq!(Solution::single_number_v2(case.0), case.1);
+    }
 }
 
 #[test]
 fn happy_number_test() {
     assert_eq!(Solution::is_happy(19), true);
 }
-
 
 fn get_max_sub_array_test_cases() -> Vec<(Vec<i32>, i32)> {
     vec![
@@ -132,24 +140,29 @@ fn move_zeroes_v2_test() {
     assert_eq!(actual7, expected7);
 }
 
+fn get_max_profit_test_cases() -> Vec<(Vec<i32>, i32)> {
+    vec![
+        (vec![], 0),
+        (vec![1], 0),
+        (vec![1, 1, 1, 1, 1], 0),
+        (vec![7, 1, 5, 3, 6, 4], 7),
+        (vec![1, 2, 3, 4, 5], 4),
+        (vec![7, 6, 4, 3, 1], 0),
+    ]
+}
+
 #[test]
 fn max_profit_test() {
-    assert_eq!(Solution::max_profit(vec![]), 0);
-    assert_eq!(Solution::max_profit(vec![1]), 0);
-    assert_eq!(Solution::max_profit(vec![1, 1, 1, 1, 1]), 0);
-    assert_eq!(Solution::max_profit(vec![7, 1, 5, 3, 6, 4]), 7);
-    assert_eq!(Solution::max_profit(vec![1, 2, 3, 4, 5]), 4);
-    assert_eq!(Solution::max_profit(vec![7, 6, 4, 3, 1]), 0);
+    for case in get_max_profit_test_cases() {
+        assert_eq!(Solution::max_profit(case.0), case.1);
+    }
 }
 
 #[test]
 fn max_profit_v2_test() {
-    assert_eq!(Solution::max_profit_v2(vec![]), 0);
-    assert_eq!(Solution::max_profit_v2(vec![1]), 0);
-    assert_eq!(Solution::max_profit_v2(vec![1, 1, 1, 1, 1]), 0);
-    assert_eq!(Solution::max_profit_v2(vec![7, 1, 5, 3, 6, 4]), 7);
-    assert_eq!(Solution::max_profit_v2(vec![1, 2, 3, 4, 5]), 4);
-    assert_eq!(Solution::max_profit_v2(vec![7, 6, 4, 3, 1]), 0);
+    for case in get_max_profit_test_cases() {
+        assert_eq!(Solution::max_profit_v2(case.0), case.1);
+    }
 }
 
 #[test]

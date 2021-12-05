@@ -507,9 +507,20 @@ fn num_decodings_test() {
         ("00", 0),
         ("10", 1),
         ("2101", 1),
-        ("2125", 5)
+        ("2125", 5),
     ];
     for case in test_cases {
         assert_eq!(Solution::num_decodings(case.0.to_string()), case.1);
+    }
+}
+
+#[test]
+fn rob_test() {
+    let test_cases = vec![
+        (vec![Some(3), Some(2), Some(3), None, Some(3), None, Some(1)], 7),
+        (vec![Some(3), Some(4), Some(5), Some(1), Some(3), None, Some(1)], 9),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::rob(TreeNode::from_level_order(&case.0)), case.1);
     }
 }

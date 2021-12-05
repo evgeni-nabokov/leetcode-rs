@@ -824,4 +824,31 @@ impl Solution {
 
         solve(0, s.as_bytes(), &mut HashMap::new())
     }
+
+    // 337. House Robber III.
+    // https://leetcode.com/problems/house-robber-iii/
+    // Time complexity: O(N).
+    // Space complexity: O(N).
+    pub fn rob(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
+        fn dfs(node: &Option<Rc<RefCell<TreeNode>>>) -> (i32, i32) {
+            if let Some(inner_node) = node {
+                let (left_rob, left_not_rob) = dfs(&inner_node.borrow().left);
+                let (right_rob, right_not_rob) = dfs(&inner_node.borrow().right);
+
+                // If we rob this node, we cannot rob its children.
+                let rob = inner_node.borrow().val + left_not_rob + right_not_rob;
+
+                // Else we could choose to either rob its children or not.
+                let not_rob = left_rob.max(left_not_rob) + right_rob.max(right_not_rob);
+
+                (rob, not_rob)
+            } else {
+                (0, 0)
+            }
+        }
+
+        let (rob, not_rob) = dfs(&root);
+
+        rob.max(not_rob)
+    }
 }

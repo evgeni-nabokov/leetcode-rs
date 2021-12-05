@@ -1,4 +1,5 @@
 use super::*;
+use super::stream_checker::StreamChecker;
 
 #[test]
 fn lowest_common_ancestor_test() {
@@ -38,4 +39,61 @@ fn number_to_words_test() {
     for case in test_cases {
         assert_eq!(Solution::number_to_words(case.0), case.1.to_string());
     }
+}
+
+#[test]
+fn stream_checker_test() {
+    let mut obj = StreamChecker::new(["cd", "f", "kl"].into_iter().map(|x| x.to_string()).collect());
+    assert_eq!(obj.query('a'), false);
+    assert_eq!(obj.query('b'), false);
+    assert_eq!(obj.query('c'), false);
+    assert_eq!(obj.query('d'), true);
+    assert_eq!(obj.query('e'), false);
+    assert_eq!(obj.query('f'), true);
+    assert_eq!(obj.query('g'), false);
+    assert_eq!(obj.query('h'), false);
+    assert_eq!(obj.query('i'), false);
+    assert_eq!(obj.query('j'), false);
+    assert_eq!(obj.query('k'), false);
+    assert_eq!(obj.query('l'), true);
+
+    let mut obj = StreamChecker::new(["ab","ba","aaab", "abab","baa"].into_iter().map(|x| x.to_string()).collect());
+    assert_eq!(obj.query('a'), false);
+    assert_eq!(obj.query('a'), false);
+    assert_eq!(obj.query('a'), false);
+    assert_eq!(obj.query('a'), false);
+    assert_eq!(obj.query('a'), false);
+
+    assert_eq!(obj.query('b'), true);
+    assert_eq!(obj.query('a'), true);
+    assert_eq!(obj.query('b'), true);
+    assert_eq!(obj.query('a'), true);
+
+    assert_eq!(obj.query('b'), true);
+    assert_eq!(obj.query('b'), false);
+    assert_eq!(obj.query('b'), false);
+
+    assert_eq!(obj.query('a'), true);
+    assert_eq!(obj.query('b'), true);
+    assert_eq!(obj.query('a'), true);
+    assert_eq!(obj.query('b'), true);
+
+    assert_eq!(obj.query('b'), false);
+    assert_eq!(obj.query('b'), false);
+    assert_eq!(obj.query('b'), false);
+
+    assert_eq!(obj.query('a'), true);
+    assert_eq!(obj.query('b'), true);
+    assert_eq!(obj.query('a'), true);
+    assert_eq!(obj.query('b'), true);
+
+    assert_eq!(obj.query('a'), true);
+    assert_eq!(obj.query('a'), true);
+    assert_eq!(obj.query('a'), false);
+
+    assert_eq!(obj.query('b'), true);
+
+    assert_eq!(obj.query('a'), true);
+    assert_eq!(obj.query('a'), true);
+    assert_eq!(obj.query('a'), false);
 }

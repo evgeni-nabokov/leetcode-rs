@@ -1,5 +1,6 @@
 #[cfg(test)]
 mod tests;
+mod stream_checker;
 
 struct Solution;
 

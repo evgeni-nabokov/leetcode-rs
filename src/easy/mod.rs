@@ -537,4 +537,30 @@ impl Solution {
 
         x == reverted_x || x == reverted_x / 10
     }
+
+    // 1217. Minimum Cost to Move Chips to The Same Position.
+    // https://leetcode.com/problems/minimum-cost-to-move-chips-to-the-same-position/
+    // Time complexity: O(N).
+    // Space complexity: O(1).
+    pub fn min_cost_to_move_chips(position: Vec<i32>) -> i32 {
+        let mut even_count = 0;
+        let mut odd_count = 0;
+
+        for p in position {
+            if p % 2 == 0 {
+                even_count += 1;
+            } else {
+                odd_count += 1;
+            }
+        }
+
+        even_count.min(odd_count)
+    }
+
+    // Time complexity: O(N).
+    // Space complexity: O(1).
+    pub fn min_cost_to_move_chips_v2(position: Vec<i32>) -> i32 {
+        let odd_count = position.iter().fold(0, |odd_count, x| odd_count + *x % 2);
+        odd_count.min(position.len() as i32 - odd_count)
+    }
 }

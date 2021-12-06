@@ -312,3 +312,24 @@ fn is_palindrome() {
         assert_eq!(Solution::is_palindrome(case.0), case.1);
     }
 }
+
+fn get_min_cost_to_move_chips_test_cases() -> Vec<(Vec<i32>, i32)> {
+    vec![
+        (vec![1, 2, 3], 1),
+        (vec![2, 2, 2, 3, 3], 2),
+    ]
+}
+
+#[test]
+fn min_cost_to_move_chips_test() {
+    for case in get_min_cost_to_move_chips_test_cases() {
+        assert_eq!(Solution::min_cost_to_move_chips(case.0), case.1);
+    }
+}
+
+#[test]
+fn min_cost_to_move_chips_v2_test() {
+    for case in get_min_cost_to_move_chips_test_cases() {
+        assert_eq!(Solution::min_cost_to_move_chips_v2(case.0), case.1);
+    }
+}

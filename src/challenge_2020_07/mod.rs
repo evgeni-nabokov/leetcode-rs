@@ -564,18 +564,18 @@ impl Solution {
     // 79. Word Search.
     // https://leetcode.com/problems/word-search/
     pub fn exist(mut board: Vec<Vec<char>>, word: String) -> bool {
-        fn dfs(board: &mut Vec<Vec<char>>, word: &[char], i: usize, r: isize, c: isize) -> bool {
+        fn dfs(board: &mut Vec<Vec<char>>, word: &[u8], i: usize, r: isize, c: isize) -> bool {
             if i >= word.len() { return false; }
             if r < 0 || c < 0 || r as usize >= board.len() || c as usize >= board[0].len() { return false; }
 
             let ur = r as usize;
             let uc = c as usize;
             let ch = board[ur][uc];
-            if word[i] != ch { return false; }
+            if word[i] != ch as u8 { return false; }
             if i == word.len() - 1 { return true; }
 
             board[ur][uc] = '#';
-            for (x, y) in vec![(0, -1), (0, 1), (1, 0), (-1, 0)] {
+            for (x, y) in [(0, -1), (0, 1), (1, 0), (-1, 0)] {
                 if dfs(board, word, i + 1, r + y, c + x) {
                     return true;
                 }
@@ -584,9 +584,10 @@ impl Solution {
             false
         }
 
+        let bytes = word.as_bytes();
         for r in 0..board.len() as isize {
             for c in 0..board[0].len() as isize {
-                if dfs(&mut board, &word.chars().collect::<Vec<char>>(), 0, r, c) {
+                if dfs(&mut board, bytes, 0, r, c) {
                     return true;
                 }
             }

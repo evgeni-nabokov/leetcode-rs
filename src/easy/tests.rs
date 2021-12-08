@@ -333,3 +333,27 @@ fn min_cost_to_move_chips_v2_test() {
         assert_eq!(Solution::min_cost_to_move_chips_v2(case.0), case.1);
     }
 }
+
+#[test]
+fn reorder_log_files_test() {
+    let test_cases = vec![
+        (
+            vec!["dig1 8 1 5 1", "let1 art can", "dig2 3 6", "let2 own kit dig", "let3 art zero"],
+            vec!["let1 art can", "let3 art zero", "let2 own kit dig", "dig1 8 1 5 1", "dig2 3 6"],
+        ),
+        (
+            vec!["a1 9 2 3 1", "g1 act car", "zo4 4 7", "ab1 off key dog", "a8 act zoo"],
+            vec!["g1 act car", "a8 act zoo", "ab1 off key dog", "a1 9 2 3 1", "zo4 4 7"],
+        ),
+        (
+            vec!["dig1 8 1 5 1","let1 art zero can","dig2 3 6","let2 own kit dig","let3 art zero"],
+            vec!["let3 art zero","let1 art zero can","let2 own kit dig","dig1 8 1 5 1","dig2 3 6"],
+        )
+    ];
+
+    for case in test_cases {
+        assert_eq!(Solution::reorder_log_files(
+            case.0.into_iter().map(|x| x.to_string()).collect::<Vec<_>>()),
+                 case.1.into_iter().map(|x| x.to_string()).collect::<Vec<_>>());
+    }
+}

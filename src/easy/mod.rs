@@ -1,3 +1,6 @@
+#[cfg(test)]
+mod tests;
+
 use std::collections::HashMap;
 use std::mem::replace;
 use std::rc::Rc;
@@ -8,9 +11,6 @@ use std::iter::FromIterator;
 
 use crate::common::tree_node::TreeNode;
 use crate::common::list_node::ListNode;
-
-#[cfg(test)]
-mod tests;
 
 struct Solution;
 
@@ -562,5 +562,45 @@ impl Solution {
     pub fn min_cost_to_move_chips_v2(position: Vec<i32>) -> i32 {
         let odd_count = position.iter().fold(0, |odd_count, x| odd_count + *x % 2);
         odd_count.min(position.len() as i32 - odd_count)
+    }
+
+    // 937. Reorder Data in Log Files.
+    // https://leetcode.com/problems/reorder-data-in-log-files/
+    // Time complexity: O(N * LogN).
+    // Space complexity: O(N).
+    pub fn reorder_log_files(logs: Vec<String>) -> Vec<String> {
+        let mut split_logs = logs
+            .iter()
+            .map(|x| (x.split_ascii_whitespace().collect::<Vec<_>>(), x))
+            .collect::<Vec<(Vec<_>, _)>>();
+
+        split_logs.sort_by(|x, y| {
+            let x_first_char = x.0[1].as_bytes()[0];
+            let y_first_char = y.0[1].as_bytes()[0];
+
+            match (x_first_char.is_ascii_digit(), y_first_char.is_ascii_digit()) {
+                (true, true) => Ordering::Equal,
+                (true, false) => Ordering::Greater,
+                (false, true) => Ordering::Less,
+                (false, false) => {
+                    let l = x.0.len().min(y.0.len());
+                    for i in 1..l {
+                        let ord =  x.0[i].cmp(&y.0[i]);
+                        if ord != Ordering::Equal {
+                            return ord;
+                        }
+                    }
+
+                    let ord =  x.0.len().cmp(&y.0.len());
+                    if ord != Ordering::Equal {
+                        return ord;
+                    }
+
+                    x.0[0].cmp(&y.0[0])
+                },
+            }
+        });
+
+        split_logs.into_iter().map(|x| x.1.clone()).collect()
     }
 }

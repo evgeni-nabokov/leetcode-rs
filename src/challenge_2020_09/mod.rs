@@ -224,6 +224,8 @@ impl Solution {
 
     // 152. Maximum Product Subarray.
     // https://leetcode.com/problems/maximum-product-subarray/
+    // Time complexity: O(N).
+    // Space complexity: O(1).
     pub fn max_product(nums: Vec<i32>) -> i32 {
         if nums.len() == 1 { return nums[0]; }
         let mut max_prod: i32 = nums[0];

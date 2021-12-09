@@ -851,4 +851,45 @@ impl Solution {
 
         rob.max(not_rob)
     }
+
+    // 443. String Compression
+    // https://leetcode.com/problems/string-compression/
+    // Time complexity: O(N).
+    // Space complexity: O(1).
+    pub fn compress(chars: &mut Vec<char>) -> i32 {
+        if chars.len() <= 1 {
+            return chars.len() as _;
+        }
+
+        fn compress_group(chars: &mut Vec<char>, mut start: usize, mut size: u32, c: char) -> usize {
+            chars[start] = c;
+            start += 1;
+            let mut idx = 0;
+            if size > 1 {
+                while size > 0 {
+                    chars[start + idx] = std::char::from_digit(size % 10, 10).unwrap();
+                    size /= 10;
+                    idx += 1;
+                }
+                chars[start..start + idx].reverse();
+            }
+
+            start + idx as usize
+        }
+
+
+        let mut gr_start = 0;
+        let mut cnt = 1;
+
+        for i in 1..chars.len() {
+            if chars[i] == chars[i - 1] {
+                cnt += 1;
+            } else {
+                gr_start = compress_group(chars, gr_start, cnt, chars[i - 1]);
+                cnt = 1;
+            }
+        }
+
+        compress_group(chars, gr_start, cnt, *chars.last().unwrap()) as _
+    }
 }

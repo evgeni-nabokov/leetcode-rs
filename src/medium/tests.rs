@@ -689,3 +689,10 @@ fn num_tilings_test() {
         assert_eq!(Solution::num_tilings(case.0), case.1);
     }
 }
+
+#[test]
+fn num_tilings_v2_test() {
+    for case in get_num_tilings_test_cases() {
+        assert_eq!(Solution::num_tilings_v2(case.0), case.1);
+    }
+}

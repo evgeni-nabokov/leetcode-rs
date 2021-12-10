@@ -1067,4 +1067,49 @@ impl Solution {
 
         return curr_f as i32;
     }
+
+    // DP top-down method.
+    // Time complexity: O(N).
+    // Space complexity: O(N).
+    pub fn num_tilings_v2(n: i32) -> i32 {
+        let mut f_memo = HashMap::new();
+        let mut p_memo = HashMap::new();
+
+        fn f(n: i32, f_memo: &mut HashMap<i32, u64>, p_memo: &mut HashMap<i32, u64>) -> u64 {
+            match n {
+                1 => 1,
+                2 => 2,
+                _ => {
+                    if f_memo.contains_key(&n) {
+                        *f_memo.get(&n).unwrap()
+                    } else {
+                        let new_f = (f(n - 1, f_memo, p_memo)
+                            + f(n - 2, f_memo, p_memo)
+                            + 2 * p(n - 1, f_memo, p_memo))
+                            % 1000_000_007;
+                        f_memo.insert(n, new_f);
+                        new_f
+                    }
+                }
+            }
+        }
+
+        fn p(n: i32, f_memo: &mut HashMap<i32, u64>, p_memo: &mut HashMap<i32, u64>) -> u64 {
+            match n {
+                2 => 1,
+                _ => {
+                    if p_memo.contains_key(&n) {
+                        *p_memo.get(&n).unwrap()
+                    } else {
+                        let new_p =
+                            (f(n - 2, f_memo, p_memo) + p(n - 1, f_memo, p_memo)) % 1000_000_007;
+                        p_memo.insert(n, new_p);
+                        new_p
+                    }
+                }
+            }
+        }
+
+        f(n, &mut f_memo, &mut p_memo) as i32
+    }
 }

@@ -4,7 +4,7 @@ mod suggested_products;
 mod tests;
 
 use std::cell::RefCell;
-use std::cmp::{max, min, Ordering, Reverse};
+use std::cmp::{Ordering, Reverse};
 use std::collections::{BinaryHeap, HashMap};
 use std::mem::swap;
 use std::rc::Rc;
@@ -97,14 +97,13 @@ impl Solution {
         target: i32,
     ) -> Option<Rc<RefCell<TreeNode>>> {
         if let Some(some) = root {
-            let left = Solution::remove_leaf_nodes(RefCell::borrow_mut(&some).left.clone(), target);
-            let right =
-                Solution::remove_leaf_nodes(RefCell::borrow_mut(&some).right.clone(), target);
-            if left.is_none() && right.is_none() && RefCell::borrow(&some).val == target {
+            let left = Solution::remove_leaf_nodes(some.borrow_mut().left.clone(), target);
+            let right = Solution::remove_leaf_nodes(some.borrow_mut().right.clone(), target);
+            if left.is_none() && right.is_none() && some.borrow_mut().val == target {
                 None
             } else {
-                RefCell::borrow_mut(&some).left = left.clone();
-                RefCell::borrow_mut(&some).right = right.clone();
+                some.borrow_mut().left = left.clone();
+                some.borrow_mut().right = right.clone();
                 Some(some)
             }
         } else {
@@ -154,9 +153,9 @@ impl Solution {
             }
             val = preorder[1];
             let i = postorder.iter().position(|x| *x == val).unwrap();
-            RefCell::borrow_mut(node.as_ref().unwrap()).left =
+            node.as_ref().unwrap().borrow_mut().left =
                 build_bt(&preorder[1..=1 + i], &postorder[..=i]);
-            RefCell::borrow_mut(node.as_ref().unwrap()).right =
+            node.as_ref().unwrap().borrow_mut().right =
                 build_bt(&preorder[i + 2..], &postorder[i + 1..postorder.len() - 1]);
             node
         }
@@ -177,9 +176,8 @@ impl Solution {
                 return node;
             }
             let i = inorder.iter().position(|x| *x == val).unwrap();
-            RefCell::borrow_mut(node.as_ref().unwrap()).left =
-                build_bt(&preorder[1..i + 1], &inorder[..i]);
-            RefCell::borrow_mut(node.as_ref().unwrap()).right =
+            node.as_ref().unwrap().borrow_mut().left = build_bt(&preorder[1..i + 1], &inorder[..i]);
+            node.as_ref().unwrap().borrow_mut().right =
                 build_bt(&preorder[i + 1..], &inorder[i + 1..]);
             node
         }
@@ -269,7 +267,7 @@ impl Solution {
                 if a - c >= 0 {
                     let p = dp[(a - c) as usize];
                     dp[a as usize] =
-                        min(dp[a as usize], if p == i32::MAX { i32::MAX } else { p + 1 });
+                        dp[a as usize].min(if p == i32::MAX { i32::MAX } else { p + 1 });
                 }
             }
         }
@@ -499,7 +497,7 @@ impl Solution {
             return s;
         }
 
-        fn expand_around_center(chars: &Vec<char>, mut left: i32, mut right: i32) -> usize {
+        fn expand(chars: &Vec<char>, mut left: i32, mut right: i32) -> usize {
             while left >= 0
                 && (right as usize) < chars.len()
                 && chars[left as usize] == chars[right as usize]
@@ -514,10 +512,8 @@ impl Solution {
         let mut start = 0;
         let mut end = 0;
         for i in 0..chars.len() - 1 {
-            let len = max(
-                expand_around_center(&chars, i as i32, i as i32),
-                expand_around_center(&chars, i as i32, i as i32 + 1),
-            );
+            let len =
+                expand(&chars, i as i32, i as i32).max(expand(&chars, i as i32, i as i32 + 1));
             if len > end - start {
                 start = i - (len - 1) / 2;
                 end = i + len / 2;
@@ -543,13 +539,13 @@ impl Solution {
         let mut cut_h = horizontal_cuts[0];
         let mut cut_w = vertical_cuts[0];
         for i in 1..horizontal_cuts.len() {
-            cut_h = max(cut_h, horizontal_cuts[i] - horizontal_cuts[i - 1]);
+            cut_h = cut_h.max(horizontal_cuts[i] - horizontal_cuts[i - 1]);
         }
         for i in 1..vertical_cuts.len() {
-            cut_w = max(cut_w, vertical_cuts[i] - vertical_cuts[i - 1]);
+            cut_w = cut_w.max(vertical_cuts[i] - vertical_cuts[i - 1]);
         }
-        cut_h = max(cut_h, h - horizontal_cuts.last().unwrap());
-        cut_w = max(cut_w, w - vertical_cuts.last().unwrap());
+        cut_h = cut_h.max(h - horizontal_cuts.last().unwrap());
+        cut_w = cut_w.max(w - vertical_cuts.last().unwrap());
 
         let m = 1000_000_007;
         (cut_h.rem_euclid(m) as u64 * cut_w.rem_euclid(m) as u64).rem_euclid(m as u64) as i32
@@ -565,7 +561,7 @@ impl Solution {
         let mut last: Vec<usize> = vec![0; 26];
         for i in 0..chars.len() {
             let char_idx = chars[i] as usize - 97;
-            last[char_idx] = max(last[char_idx], i);
+            last[char_idx] = last[char_idx].max(i);
         }
 
         let mut res: Vec<i32> = Vec::with_capacity(s.len());
@@ -573,7 +569,7 @@ impl Solution {
         let mut end = 0;
         for i in 0..chars.len() {
             let char_idx = chars[i] as usize - 97;
-            end = max(end, last[char_idx]);
+            end = end.max(last[char_idx]);
             if i == end {
                 let len = end - start + 1;
                 res.push(len as i32);

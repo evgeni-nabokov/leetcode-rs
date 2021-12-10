@@ -531,12 +531,24 @@ fn compress_test() {
         (vec!['a','a','b','b','c','c','c'], vec!['a','2','b','2','c','3']),
         (vec!['a'], vec!['a']),
         (vec!['a','b','b','b','b','b','b','b','b','b','b','b','b'], vec!['a','b','1','2']),
-        (vec!['a','b','b','b','b','b','b','b','b','b','b','b','b', 'c'], vec!['a','b','1','2', 'c']),
+        (vec!['a','b','b','b','b','b','b','b','b','b','b','b','b','c'], vec!['a','b','1','2','c']),
         (vec!['a','a','a','b','b','a','a'], vec!['a','3','b','2','a','2']),
     ];
     for mut case in test_cases {
         let new_size = Solution::compress(&mut case.0) as usize;
         case.0.resize(new_size, '#');
         assert_eq!(case.0, case.1);
+    }
+}
+
+#[test]
+fn can_reach_test() {
+    let test_cases = vec![
+        (vec![4, 2, 3, 0, 3, 1, 2], 5, true),
+        (vec![4, 2, 3, 0, 3, 1, 2], 0, true),
+        (vec![3, 0, 2, 1, 2], 2, false),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::can_reach(case.0, case.1), case.2);
     }
 }

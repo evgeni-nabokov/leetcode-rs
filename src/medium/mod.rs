@@ -892,4 +892,24 @@ impl Solution {
 
         compress_group(chars, gr_start, cnt, *chars.last().unwrap()) as _
     }
+
+    // 1306. Jump Game III.
+    // https://leetcode.com/problems/jump-game-iii/
+    pub fn can_reach(mut arr: Vec<i32>, start: i32) -> bool {
+        fn dfs(arr: &mut [i32], i: i32) -> bool {
+            if i < 0 || i >= arr.len() as i32 || arr[i as usize] < 0 {
+                 return false;
+            }
+
+            let ui = i as usize;
+            if arr[ui] == 0 {
+                return true;
+            }
+
+            arr[ui] *= -1;
+            dfs(arr, i - arr[ui]) || dfs(arr, i + arr[ui])
+        }
+
+        dfs(&mut arr, start)
+    }
 }

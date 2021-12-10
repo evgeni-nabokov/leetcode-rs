@@ -190,7 +190,7 @@ impl Solution {
     //
     // }
 
-        // 40. Combination Sum II.
+    // 40. Combination Sum II.
     // https://leetcode.com/problems/combination-sum-ii/
     pub fn combination_sum_ii(mut candidates: Vec<i32>, target: i32) -> Vec<Vec<i32>> {
         candidates.sort_unstable();
@@ -231,7 +231,7 @@ impl Solution {
         dp[0] = 0;
         for a in 1..=amount {
             for c in &coins {
-                if a - c >=0 {
+                if a - c >= 0 {
                     let p = dp[(a - c) as usize];
                     dp[a as usize] = min(dp[a as usize], if p == i32::MAX { i32::MAX } else { p + 1 });
                 }
@@ -266,7 +266,17 @@ impl Solution {
             .skip_while(|&x| x == '0')
             .take_while(|x| x.is_digit(10))
             .map(|x| match x {
-                '0' => 0, '1' => 1, '2' => 2, '3' => 3, '4' => 4, '5' => 5, '6' => 6, '7' => 7, '8' => 8, '9' => 9, _=> unreachable!()
+                '0' => 0,
+                '1' => 1,
+                '2' => 2,
+                '3' => 3,
+                '4' => 4,
+                '5' => 5,
+                '6' => 6,
+                '7' => 7,
+                '8' => 8,
+                '9' => 9,
+                _ => unreachable!()
             })
             .collect();
 
@@ -327,7 +337,7 @@ impl Solution {
             if let Some(node_inner) = node {
                 let val = node_inner.borrow().val;
                 if (lower.is_some() && val <= lower.unwrap()) || upper.is_some() && (val >= upper.unwrap()) {
-                     false
+                    false
                 } else {
                     dfs(&node_inner.borrow().left, lower, Some(val)) && dfs(&node_inner.borrow().right, Some(val), upper)
                 }
@@ -373,7 +383,17 @@ impl Solution {
 
         fn get_digit(c: char) -> usize {
             match c {
-                '.' => 0, '1' => 1, '2' => 2, '3' => 3, '4' => 4, '5' => 5, '6' => 6, '7' => 7, '8' => 8, '9' => 9, _=> unreachable!()
+                '.' => 0,
+                '1' => 1,
+                '2' => 2,
+                '3' => 3,
+                '4' => 4,
+                '5' => 5,
+                '6' => 6,
+                '7' => 7,
+                '8' => 8,
+                '9' => 9,
+                _ => unreachable!()
             }
         }
 
@@ -539,7 +559,6 @@ impl Solution {
         root: Option<Rc<RefCell<TreeNode>>>,
         p: Option<Rc<RefCell<TreeNode>>>,
         q: Option<Rc<RefCell<TreeNode>>>) -> Option<Rc<RefCell<TreeNode>>> {
-
         fn solve(node: Option<Rc<RefCell<TreeNode>>>, p_val: i32, q_val: i32) -> Option<Rc<RefCell<TreeNode>>> {
             if let Some(node_inner) = node {
                 let val = node_inner.borrow().val;
@@ -606,7 +625,7 @@ impl Solution {
         let mut bytes = s.as_bytes().to_vec();
         let mut count: Vec<i32> = vec![0; bytes.len()];
         let mut fast = 0;
-        let mut slow  = 0;
+        let mut slow = 0;
         while fast < bytes.len() {
             bytes[slow] = bytes[fast];
             count[slow] = if slow > 0 && bytes[slow - 1] == bytes[fast] {
@@ -770,7 +789,7 @@ impl Solution {
                 curr = left;
             }
             curr = stack.pop().unwrap();
-            if prev.is_some() && curr.as_ref().unwrap().borrow().val < prev.as_ref().unwrap().borrow().val{
+            if prev.is_some() && curr.as_ref().unwrap().borrow().val < prev.as_ref().unwrap().borrow().val {
                 y = curr.clone();
                 if x.is_none() {
                     x = prev.clone();
@@ -877,7 +896,6 @@ impl Solution {
             start + idx as usize
         }
 
-
         let mut gr_start = 0;
         let mut cnt = 1;
 
@@ -895,10 +913,13 @@ impl Solution {
 
     // 1306. Jump Game III.
     // https://leetcode.com/problems/jump-game-iii/
+    // DFS method.
+    // Time complexity: O(N).
+    // Space complexity: O(N).
     pub fn can_reach(mut arr: Vec<i32>, start: i32) -> bool {
         fn dfs(arr: &mut [i32], i: i32) -> bool {
             if i < 0 || i >= arr.len() as i32 || arr[i as usize] < 0 {
-                 return false;
+                return false;
             }
 
             let ui = i as usize;

@@ -1,6 +1,6 @@
+use super::bst_iterator::BSTIterator;
 use super::*;
 use crate::common::tree_node::BinaryTree;
-use super::bst_iterator::BSTIterator;
 
 #[test]
 fn h_index_test() {
@@ -28,46 +28,30 @@ fn h_index_test() {
 #[test]
 fn remove_leaf_nodes_test() {
     let test_cases = vec![
-        (
-            vec![Some(1)],
-            1,
-            vec![]
-        ),
-        (
-            vec![Some(1), Some(1), None],
-            1,
-            vec![]
-        ),
-        (
-            vec![Some(1), Some(1), Some(1)],
-            1,
-            vec![]
-        ),
+        (vec![Some(1)], 1, vec![]),
+        (vec![Some(1), Some(1), None], 1, vec![]),
+        (vec![Some(1), Some(1), Some(1)], 1, vec![]),
         (
             vec![Some(1), Some(1), Some(2)],
             1,
-            vec![Some(1), None, Some(2)]
+            vec![Some(1), None, Some(2)],
         ),
         (
             vec![Some(1), Some(2), Some(3), Some(2), None, Some(2), Some(4)],
             2,
-            vec![Some(1), None, Some(3), None, Some(4)]
+            vec![Some(1), None, Some(3), None, Some(4)],
         ),
         (
             vec![Some(1), Some(3), Some(3), Some(3), Some(2)],
             3,
-            vec![Some(1), Some(3), None, None, Some(2)]
+            vec![Some(1), Some(3), None, None, Some(2)],
         ),
         (
             vec![Some(1), Some(2), None, Some(2), None, Some(2)],
             2,
-            vec![Some(1)]
+            vec![Some(1)],
         ),
-        (
-            vec![Some(1), Some(1), Some(1)],
-            1,
-            vec![]
-        ),
+        (vec![Some(1), Some(1), Some(1)], 1, vec![]),
         (
             vec![Some(1), Some(2), Some(3)],
             1,
@@ -76,7 +60,10 @@ fn remove_leaf_nodes_test() {
     ];
     for case in test_cases {
         let tree = TreeNode::from_level_order(&case.0);
-        assert_eq!(Solution::remove_leaf_nodes(tree, case.1).get_level_order_values(), case.2);
+        assert_eq!(
+            Solution::remove_leaf_nodes(tree, case.1).get_level_order_values(),
+            case.2
+        );
     }
 }
 
@@ -85,23 +72,18 @@ fn level_order_test() {
     let test_cases = vec![
         (
             vec![Some(3), Some(9), Some(20), None, None, Some(15), Some(7)],
-            vec![
-                vec![3],
-                vec![9, 20],
-                vec![15, 7],
-            ]
+            vec![vec![3], vec![9, 20], vec![15, 7]],
         ),
         (
             vec![Some(1), Some(2), Some(3), Some(4), None, None, Some(5)],
-            vec![
-                vec![1],
-                vec![2, 3],
-                vec![4, 5],
-            ]
+            vec![vec![1], vec![2, 3], vec![4, 5]],
         ),
     ];
     for case in test_cases {
-        assert_eq!(Solution::level_order(TreeNode::from_level_order(&case.0)), case.1);
+        assert_eq!(
+            Solution::level_order(TreeNode::from_level_order(&case.0)),
+            case.1
+        );
     }
 }
 
@@ -110,11 +92,30 @@ fn build_tree_test() {
     let test_cases = vec![
         (vec![], vec![], vec![]),
         (vec![1, 2], vec![2, 1], vec![Some(1), Some(2)]),
-        (vec![5, 3, 2, 4, 6], vec![2, 4, 3, 6, 5], vec![Some(5), Some(3), Some(6), Some(2), Some(4)]),
-        (vec![1, 2, 4, 5, 3, 6, 7], vec![4, 5, 2, 6, 7, 3, 1], vec![Some(1), Some(2), Some(3), Some(4), Some(5), Some(6), Some(7)])
+        (
+            vec![5, 3, 2, 4, 6],
+            vec![2, 4, 3, 6, 5],
+            vec![Some(5), Some(3), Some(6), Some(2), Some(4)],
+        ),
+        (
+            vec![1, 2, 4, 5, 3, 6, 7],
+            vec![4, 5, 2, 6, 7, 3, 1],
+            vec![
+                Some(1),
+                Some(2),
+                Some(3),
+                Some(4),
+                Some(5),
+                Some(6),
+                Some(7),
+            ],
+        ),
     ];
     for case in test_cases {
-        assert_eq!(Solution::build_tree(case.0, case.1).get_level_order_values(), case.2);
+        assert_eq!(
+            Solution::build_tree(case.0, case.1).get_level_order_values(),
+            case.2
+        );
     }
 }
 
@@ -123,11 +124,22 @@ fn build_tree_ii_test() {
     let test_cases = vec![
         (vec![], vec![], vec![]),
         (vec![1, 2], vec![2, 1], vec![Some(1), Some(2)]),
-        (vec![5, 3, 2, 4, 6], vec![2, 3, 4, 5, 6], vec![Some(5), Some(3), Some(6), Some(2), Some(4)]),
-        (vec![3, 9, 20, 15, 7], vec![9, 3, 15, 20, 7], vec![Some(3), Some(9), Some(20), None, None, Some(15), Some(7)])
+        (
+            vec![5, 3, 2, 4, 6],
+            vec![2, 3, 4, 5, 6],
+            vec![Some(5), Some(3), Some(6), Some(2), Some(4)],
+        ),
+        (
+            vec![3, 9, 20, 15, 7],
+            vec![9, 3, 15, 20, 7],
+            vec![Some(3), Some(9), Some(20), None, None, Some(15), Some(7)],
+        ),
     ];
     for case in test_cases {
-        assert_eq!(Solution::build_tree_ii(case.0, case.1).get_level_order_values(), case.2);
+        assert_eq!(
+            Solution::build_tree_ii(case.0, case.1).get_level_order_values(),
+            case.2
+        );
     }
 }
 
@@ -135,8 +147,16 @@ fn build_tree_ii_test() {
 fn combination_sum_test() {
     let test_cases = vec![
         (vec![2, 3, 6, 7], 7, vec![vec![3, 2, 2], vec![7]]),
-        (vec![2, 3, 5], 8, vec![vec![2, 2, 2, 2], vec![3, 3, 2], vec![5, 3]]),
-        (vec![8, 7, 4, 3], 11, vec![vec![4, 4, 3], vec![8, 3], vec![7, 4]]),
+        (
+            vec![2, 3, 5],
+            8,
+            vec![vec![2, 2, 2, 2], vec![3, 3, 2], vec![5, 3]],
+        ),
+        (
+            vec![8, 7, 4, 3],
+            11,
+            vec![vec![4, 4, 3], vec![8, 3], vec![7, 4]],
+        ),
     ];
     for case in test_cases {
         assert_eq!(Solution::combination_sum(case.0, case.1), case.2);
@@ -146,7 +166,11 @@ fn combination_sum_test() {
 #[test]
 fn combination_sum_ii_test() {
     let test_cases = vec![
-        (vec![10, 1, 2, 7, 6, 1, 5], 8, vec![vec![6, 1, 1], vec![5, 2, 1], vec![7, 1], vec![6, 2]]),
+        (
+            vec![10, 1, 2, 7, 6, 1, 5],
+            8,
+            vec![vec![6, 1, 1], vec![5, 2, 1], vec![7, 1], vec![6, 2]],
+        ),
         (vec![2, 5, 2, 1, 2], 5, vec![vec![2, 2, 1], vec![5]]),
     ];
     for case in test_cases {
@@ -182,13 +206,14 @@ fn my_atoi_test() {
 
 fn get_reverse_words_ii_test_cases() -> Vec<(Vec<char>, Vec<char>)> {
     vec![
+        (vec!['a'], vec!['a']),
         (
-            vec!['a'],
-            vec!['a'],
-        ),
-        (
-            vec!['t', 'h', 'e', ' ', 's', 'k', 'y', ' ', 'i', 's', ' ', 'b', 'l', 'u', 'e'],
-            vec!['b', 'l', 'u', 'e', ' ', 'i', 's', ' ', 's', 'k', 'y', ' ', 't', 'h', 'e'],
+            vec![
+                't', 'h', 'e', ' ', 's', 'k', 'y', ' ', 'i', 's', ' ', 'b', 'l', 'u', 'e',
+            ],
+            vec![
+                'b', 'l', 'u', 'e', ' ', 'i', 's', ' ', 's', 'k', 'y', ' ', 't', 'h', 'e',
+            ],
         ),
     ]
 }
@@ -211,10 +236,7 @@ fn reverse_words_ii_v2_test() {
 
 fn get_is_valid_bst_test_cases() -> Vec<(Vec<Option<i32>>, bool)> {
     vec![
-        (
-            vec![Some(2), Some(1), Some(3)],
-            true,
-        ),
+        (vec![Some(2), Some(1), Some(3)], true),
         (
             vec![Some(5), Some(1), Some(4), None, None, Some(3), Some(6)],
             false,
@@ -223,28 +245,28 @@ fn get_is_valid_bst_test_cases() -> Vec<(Vec<Option<i32>>, bool)> {
             vec![Some(5), Some(4), Some(6), None, None, Some(3), Some(7)],
             false,
         ),
-        (
-            vec![Some(1), Some(1)],
-            false,
-        ),
-        (
-            vec![Some(2147483647)],
-            true,
-        ),
+        (vec![Some(1), Some(1)], false),
+        (vec![Some(2147483647)], true),
     ]
 }
 
 #[test]
 fn is_valid_bst_test() {
     for case in get_is_valid_bst_test_cases() {
-        assert_eq!(Solution::is_valid_bst(TreeNode::from_level_order(&case.0)), case.1);
+        assert_eq!(
+            Solution::is_valid_bst(TreeNode::from_level_order(&case.0)),
+            case.1
+        );
     }
 }
 
 #[test]
 fn is_valid_bst_v2_test() {
     for case in get_is_valid_bst_test_cases() {
-        assert_eq!(Solution::is_valid_bst_v2(TreeNode::from_level_order(&case.0)), case.1);
+        assert_eq!(
+            Solution::is_valid_bst_v2(TreeNode::from_level_order(&case.0)),
+            case.1
+        );
     }
 }
 
@@ -253,31 +275,31 @@ fn is_valid_sudoku_test() {
     let test_cases = vec![
         (
             vec![
-                vec!['5','3','.','.','7','.','.','.','.'],
-                vec!['6','.','.','1','9','5','.','.','.'],
-                vec!['.','9','8','.','.','.','.','6','.'],
-                vec!['8','.','.','.','6','.','.','.','3'],
-                vec!['4','.','.','8','.','3','.','.','1'],
-                vec!['7','.','.','.','2','.','.','.','6'],
-                vec!['.','6','.','.','.','.','2','8','.'],
-                vec!['.','.','.','4','1','9','.','.','5'],
-                vec!['.','.','.','.','8','.','.','7','9'],
+                vec!['5', '3', '.', '.', '7', '.', '.', '.', '.'],
+                vec!['6', '.', '.', '1', '9', '5', '.', '.', '.'],
+                vec!['.', '9', '8', '.', '.', '.', '.', '6', '.'],
+                vec!['8', '.', '.', '.', '6', '.', '.', '.', '3'],
+                vec!['4', '.', '.', '8', '.', '3', '.', '.', '1'],
+                vec!['7', '.', '.', '.', '2', '.', '.', '.', '6'],
+                vec!['.', '6', '.', '.', '.', '.', '2', '8', '.'],
+                vec!['.', '.', '.', '4', '1', '9', '.', '.', '5'],
+                vec!['.', '.', '.', '.', '8', '.', '.', '7', '9'],
             ],
-            true
+            true,
         ),
         (
             vec![
-                vec!['8','3','.','.','7','.','.','.','.'],
-                vec!['6','.','.','1','9','5','.','.','.'],
-                vec!['.','9','8','.','.','.','.','6','.'],
-                vec!['8','.','.','.','6','.','.','.','3'],
-                vec!['4','.','.','8','.','3','.','.','1'],
-                vec!['7','.','.','.','2','.','.','.','6'],
-                vec!['.','6','.','.','.','.','2','8','.'],
-                vec!['.','.','.','4','1','9','.','.','5'],
-                vec!['.','.','.','.','8','.','.','7','9'],
+                vec!['8', '3', '.', '.', '7', '.', '.', '.', '.'],
+                vec!['6', '.', '.', '1', '9', '5', '.', '.', '.'],
+                vec!['.', '9', '8', '.', '.', '.', '.', '6', '.'],
+                vec!['8', '.', '.', '.', '6', '.', '.', '.', '3'],
+                vec!['4', '.', '.', '8', '.', '3', '.', '.', '1'],
+                vec!['7', '.', '.', '.', '2', '.', '.', '.', '6'],
+                vec!['.', '6', '.', '.', '.', '.', '2', '8', '.'],
+                vec!['.', '.', '.', '4', '1', '9', '.', '.', '5'],
+                vec!['.', '.', '.', '.', '8', '.', '.', '7', '9'],
             ],
-            false
+            false,
         ),
     ];
     for case in test_cases {
@@ -296,7 +318,10 @@ fn longest_palindrome_test() {
         ("ac", "a"),
     ];
     for case in test_cases {
-        assert_eq!(Solution::longest_palindrome(case.0.to_string()), case.1.to_string());
+        assert_eq!(
+            Solution::longest_palindrome(case.0.to_string()),
+            case.1.to_string()
+        );
     }
 }
 
@@ -315,8 +340,8 @@ fn max_area_test() {
 #[test]
 fn partition_labels_test() {
     let test_cases = vec![
-        ("abcabcde", [6,1,1]),
-        ("ababcbacadefegdehijhklij", [9,7,8]),
+        ("abcabcde", [6, 1, 1]),
+        ("ababcbacadefegdehijhklij", [9, 7, 8]),
     ];
     for case in test_cases {
         assert_eq!(Solution::partition_labels(case.0.to_string()), case.1);
@@ -326,10 +351,19 @@ fn partition_labels_test() {
 #[test]
 fn all_paths_source_target_test() {
     let test_cases = vec![
-        (vec![vec![1,2], vec![3], vec![3], vec![]], vec![vec![0, 1, 3], vec![0, 2, 3]]),
+        (
+            vec![vec![1, 2], vec![3], vec![3], vec![]],
+            vec![vec![0, 1, 3], vec![0, 2, 3]],
+        ),
         (
             vec![vec![4, 3, 1], vec![3, 2, 4], vec![3], vec![4], vec![]],
-            vec![vec![0, 4], vec![0, 3, 4], vec![0, 1, 3, 4], vec![0, 1, 2, 3, 4], vec![0, 1, 4]],
+            vec![
+                vec![0, 4],
+                vec![0, 3, 4],
+                vec![0, 1, 3, 4],
+                vec![0, 1, 2, 3, 4],
+                vec![0, 1, 4],
+            ],
         ),
         (vec![vec![1], vec![]], vec![vec![0, 1]]),
         (
@@ -339,7 +373,7 @@ fn all_paths_source_target_test() {
         (
             vec![vec![1, 3], vec![2], vec![3], vec![]],
             vec![vec![0, 1, 2, 3], vec![0, 3]],
-        )
+        ),
     ];
     for case in test_cases {
         assert_eq!(Solution::all_paths_source_target(case.0), case.1);
@@ -349,14 +383,55 @@ fn all_paths_source_target_test() {
 #[test]
 fn lowest_common_ancestor_test() {
     let test_cases = vec![
-        (vec![Some(3), Some(5), Some(1), Some(6), Some(2), Some(0), Some(8), None, None, Some(7), Some(4)], 5, 1, 3),
-        (vec![Some(3), Some(5), Some(1), Some(6), Some(2), Some(0), Some(8), None, None, Some(7), Some(4)], 5, 4, 5),
+        (
+            vec![
+                Some(3),
+                Some(5),
+                Some(1),
+                Some(6),
+                Some(2),
+                Some(0),
+                Some(8),
+                None,
+                None,
+                Some(7),
+                Some(4),
+            ],
+            5,
+            1,
+            3,
+        ),
+        (
+            vec![
+                Some(3),
+                Some(5),
+                Some(1),
+                Some(6),
+                Some(2),
+                Some(0),
+                Some(8),
+                None,
+                None,
+                Some(7),
+                Some(4),
+            ],
+            5,
+            4,
+            5,
+        ),
     ];
     for case in test_cases {
-        assert_eq!(Solution::lowest_common_ancestor(TreeNode::from_level_order(&case.0),
-                                                    TreeNode::new_with_children(Some(case.1), None, None),
-                                                    TreeNode::new_with_children(Some(case.2), None, None)).unwrap().borrow().val,
-                   case.3);
+        assert_eq!(
+            Solution::lowest_common_ancestor(
+                TreeNode::from_level_order(&case.0),
+                TreeNode::new_with_children(Some(case.1), None, None),
+                TreeNode::new_with_children(Some(case.2), None, None)
+            )
+            .unwrap()
+            .borrow()
+            .val,
+            case.3
+        );
     }
 }
 
@@ -372,14 +447,20 @@ fn get_remove_duplicates_test_cases<'a>() -> Vec<(&'a str, i32, &'a str)> {
 #[test]
 fn remove_duplicates_test() {
     for case in get_remove_duplicates_test_cases() {
-        assert_eq!(Solution::remove_duplicates(case.0.to_string(), case.1), case.2.to_string());
+        assert_eq!(
+            Solution::remove_duplicates(case.0.to_string(), case.1),
+            case.2.to_string()
+        );
     }
 }
 
 #[test]
 fn remove_duplicates_v2_test() {
     for case in get_remove_duplicates_test_cases() {
-        assert_eq!(Solution::remove_duplicates_v2(case.0.to_string(), case.1), case.2.to_string());
+        assert_eq!(
+            Solution::remove_duplicates_v2(case.0.to_string(), case.1),
+            case.2.to_string()
+        );
     }
 }
 
@@ -422,26 +503,32 @@ fn find_kth_largest_v4_test() {
 fn good_nodes_test() {
     let test_cases = vec![
         (vec![Some(1)], 1),
-        (vec![Some(3), Some(1), Some(4), Some(3), None, Some(1), Some(5)], 4),
+        (
+            vec![Some(3), Some(1), Some(4), Some(3), None, Some(1), Some(5)],
+            4,
+        ),
         (vec![Some(3), Some(3), None, Some(4), Some(2)], 3),
     ];
     for case in test_cases {
-        assert_eq!(Solution::good_nodes(TreeNode::from_level_order(&case.0)), case.1);
+        assert_eq!(
+            Solution::good_nodes(TreeNode::from_level_order(&case.0)),
+            case.1
+        );
     }
 }
 
 fn get_suggested_products_cases<'a>() -> Vec<(Vec<&'a str>, &'a str, Vec<Vec<&'a str>>)> {
     vec![
         (
-            vec!["mobile","mouse","moneypot","monitor","mousepad"],
+            vec!["mobile", "mouse", "moneypot", "monitor", "mousepad"],
             "mouse",
             vec![
-                vec!["mobile","moneypot","monitor"],
-                vec!["mobile","moneypot","monitor"],
-                vec!["mouse","mousepad"],
-                vec!["mouse","mousepad"],
-                vec!["mouse","mousepad"],
-            ]
+                vec!["mobile", "moneypot", "monitor"],
+                vec!["mobile", "moneypot", "monitor"],
+                vec!["mouse", "mousepad"],
+                vec!["mouse", "mousepad"],
+                vec!["mouse", "mousepad"],
+            ],
         ),
         (
             vec!["havana"],
@@ -453,7 +540,7 @@ fn get_suggested_products_cases<'a>() -> Vec<(Vec<&'a str>, &'a str, Vec<Vec<&'a
                 vec!["havana"],
                 vec!["havana"],
                 vec!["havana"],
-            ]
+            ],
         ),
     ]
 }
@@ -461,9 +548,16 @@ fn get_suggested_products_cases<'a>() -> Vec<(Vec<&'a str>, &'a str, Vec<Vec<&'a
 #[test]
 fn suggested_products_test() {
     for case in get_suggested_products_cases() {
-        assert_eq!(Solution::suggested_products(
-            case.0.into_iter().map(|x| x.to_string()).collect(), case.1.to_string()),
-            case.2.into_iter().map(|x| x.into_iter().map(|y| y.to_string()).collect()).collect::<Vec<Vec<String>>>());
+        assert_eq!(
+            Solution::suggested_products(
+                case.0.into_iter().map(|x| x.to_string()).collect(),
+                case.1.to_string()
+            ),
+            case.2
+                .into_iter()
+                .map(|x| x.into_iter().map(|y| y.to_string()).collect())
+                .collect::<Vec<Vec<String>>>()
+        );
     }
 }
 
@@ -517,8 +611,14 @@ fn num_decodings_test() {
 #[test]
 fn rob_test() {
     let test_cases = vec![
-        (vec![Some(3), Some(2), Some(3), None, Some(3), None, Some(1)], 7),
-        (vec![Some(3), Some(4), Some(5), Some(1), Some(3), None, Some(1)], 9),
+        (
+            vec![Some(3), Some(2), Some(3), None, Some(3), None, Some(1)],
+            7,
+        ),
+        (
+            vec![Some(3), Some(4), Some(5), Some(1), Some(3), None, Some(1)],
+            9,
+        ),
     ];
     for case in test_cases {
         assert_eq!(Solution::rob(TreeNode::from_level_order(&case.0)), case.1);
@@ -528,11 +628,27 @@ fn rob_test() {
 #[test]
 fn compress_test() {
     let test_cases = vec![
-        (vec!['a','a','b','b','c','c','c'], vec!['a','2','b','2','c','3']),
+        (
+            vec!['a', 'a', 'b', 'b', 'c', 'c', 'c'],
+            vec!['a', '2', 'b', '2', 'c', '3'],
+        ),
         (vec!['a'], vec!['a']),
-        (vec!['a','b','b','b','b','b','b','b','b','b','b','b','b'], vec!['a','b','1','2']),
-        (vec!['a','b','b','b','b','b','b','b','b','b','b','b','b','c'], vec!['a','b','1','2','c']),
-        (vec!['a','a','a','b','b','a','a'], vec!['a','3','b','2','a','2']),
+        (
+            vec![
+                'a', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b',
+            ],
+            vec!['a', 'b', '1', '2'],
+        ),
+        (
+            vec![
+                'a', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'c',
+            ],
+            vec!['a', 'b', '1', '2', 'c'],
+        ),
+        (
+            vec!['a', 'a', 'a', 'b', 'b', 'a', 'a'],
+            vec!['a', '3', 'b', '2', 'a', '2'],
+        ),
     ];
     for mut case in test_cases {
         let new_size = Solution::compress(&mut case.0) as usize;
@@ -564,12 +680,7 @@ fn can_reach_v2_test() {
 }
 
 fn get_num_tilings_test_cases() -> Vec<(i32, i32)> {
-    vec![
-        (3, 5),
-        (4, 11),
-        (5, 24),
-        (30, 312342182),
-    ]
+    vec![(3, 5), (4, 11), (5, 24), (30, 312342182)]
 }
 
 #[test]

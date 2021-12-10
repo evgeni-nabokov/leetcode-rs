@@ -1,16 +1,16 @@
+mod bst_iterator;
+mod suggested_products;
 #[cfg(test)]
 mod tests;
-mod suggested_products;
-mod bst_iterator;
 
-use std::rc::Rc;
 use std::cell::RefCell;
-use std::cmp::{Ordering, Reverse, min, max};
-use std::collections::{HashMap, BinaryHeap};
+use std::cmp::{max, min, Ordering, Reverse};
+use std::collections::{BinaryHeap, HashMap};
 use std::mem::swap;
+use std::rc::Rc;
 
-use crate::common::tree_node::TreeNode;
 use crate::common::list_node::ListNode;
+use crate::common::tree_node::TreeNode;
 
 struct Solution;
 
@@ -19,7 +19,10 @@ impl Solution {
     // https://leetcode.com/problems/add-two-numbers/
     // Time complexity: O(N).
     // Space complexity: O(1).
-    pub fn add_two_numbers(mut l1: Option<Box<ListNode>>, mut l2: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
+    pub fn add_two_numbers(
+        mut l1: Option<Box<ListNode>>,
+        mut l2: Option<Box<ListNode>>,
+    ) -> Option<Box<ListNode>> {
         // Calculates the length of a list.
         fn get_len(mut list: &Option<Box<ListNode>>) -> usize {
             let mut cnt = 0;
@@ -68,7 +71,9 @@ impl Solution {
     // 274. H-Index
     // https://leetcode.com/problems/h-index/
     pub fn h_index(mut citations: Vec<i32>) -> i32 {
-        if citations.is_empty() { return 0; }
+        if citations.is_empty() {
+            return 0;
+        }
         citations.sort_unstable();
         let l = citations.len() as i32;
         let mut left = 0;
@@ -87,10 +92,14 @@ impl Solution {
 
     // 1325. Delete Leaves With a Given Value.
     // https://leetcode.com/problems/delete-leaves-with-a-given-value/
-    pub fn remove_leaf_nodes(root: Option<Rc<RefCell<TreeNode>>>, target: i32) -> Option<Rc<RefCell<TreeNode>>> {
+    pub fn remove_leaf_nodes(
+        root: Option<Rc<RefCell<TreeNode>>>,
+        target: i32,
+    ) -> Option<Rc<RefCell<TreeNode>>> {
         if let Some(some) = root {
             let left = Solution::remove_leaf_nodes(RefCell::borrow_mut(&some).left.clone(), target);
-            let right = Solution::remove_leaf_nodes(RefCell::borrow_mut(&some).right.clone(), target);
+            let right =
+                Solution::remove_leaf_nodes(RefCell::borrow_mut(&some).right.clone(), target);
             if left.is_none() && right.is_none() && RefCell::borrow(&some).val == target {
                 None
             } else {
@@ -107,13 +116,23 @@ impl Solution {
     // https://leetcode.com/problems/binary-tree-level-order-traversal/
     pub fn level_order(root: Option<Rc<RefCell<TreeNode>>>) -> Vec<Vec<i32>> {
         fn dfs(node: Option<Rc<RefCell<TreeNode>>>, levels: &mut Vec<Vec<i32>>, level: usize) {
-            if node.is_none() { return; }
+            if node.is_none() {
+                return;
+            }
             if level == levels.len() {
                 levels.push(vec![]);
             }
             levels[level].push(RefCell::borrow(node.as_ref().unwrap()).val);
-            dfs(RefCell::borrow(node.as_ref().unwrap()).left.clone(), levels, level + 1);
-            dfs(RefCell::borrow(node.as_ref().unwrap()).right.clone(), levels, level + 1);
+            dfs(
+                RefCell::borrow(node.as_ref().unwrap()).left.clone(),
+                levels,
+                level + 1,
+            );
+            dfs(
+                RefCell::borrow(node.as_ref().unwrap()).right.clone(),
+                levels,
+                level + 1,
+            );
         }
 
         let mut levels: Vec<Vec<i32>> = Vec::new();
@@ -125,14 +144,20 @@ impl Solution {
     // https://leetcode.com/problems/construct-binary-tree-from-preorder-and-postorder-traversal/
     pub fn build_tree(preorder: Vec<i32>, postorder: Vec<i32>) -> Option<Rc<RefCell<TreeNode>>> {
         fn build_bt(preorder: &[i32], postorder: &[i32]) -> Option<Rc<RefCell<TreeNode>>> {
-            if preorder.is_empty() || postorder.is_empty() { return None; }
+            if preorder.is_empty() || postorder.is_empty() {
+                return None;
+            }
             let mut val = preorder[0];
             let node = Some(Rc::new(RefCell::new(TreeNode::new(val))));
-            if preorder.len() == 1 { return node; }
+            if preorder.len() == 1 {
+                return node;
+            }
             val = preorder[1];
             let i = postorder.iter().position(|x| *x == val).unwrap();
-            RefCell::borrow_mut(node.as_ref().unwrap()).left = build_bt(&preorder[1..=1 + i], &postorder[..=i]);
-            RefCell::borrow_mut(node.as_ref().unwrap()).right = build_bt(&preorder[i + 2..], &postorder[i + 1..postorder.len() - 1]);
+            RefCell::borrow_mut(node.as_ref().unwrap()).left =
+                build_bt(&preorder[1..=1 + i], &postorder[..=i]);
+            RefCell::borrow_mut(node.as_ref().unwrap()).right =
+                build_bt(&preorder[i + 2..], &postorder[i + 1..postorder.len() - 1]);
             node
         }
 
@@ -143,13 +168,19 @@ impl Solution {
     // https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/
     pub fn build_tree_ii(preorder: Vec<i32>, inorder: Vec<i32>) -> Option<Rc<RefCell<TreeNode>>> {
         fn build_bt(preorder: &[i32], inorder: &[i32]) -> Option<Rc<RefCell<TreeNode>>> {
-            if preorder.is_empty() || inorder.is_empty() { return None; }
+            if preorder.is_empty() || inorder.is_empty() {
+                return None;
+            }
             let val = preorder[0];
             let node = Some(Rc::new(RefCell::new(TreeNode::new(val))));
-            if preorder.len() == 1 { return node; }
+            if preorder.len() == 1 {
+                return node;
+            }
             let i = inorder.iter().position(|x| *x == val).unwrap();
-            RefCell::borrow_mut(node.as_ref().unwrap()).left = build_bt(&preorder[1..i + 1], &inorder[..i]);
-            RefCell::borrow_mut(node.as_ref().unwrap()).right = build_bt(&preorder[i + 1..], &inorder[i + 1..]);
+            RefCell::borrow_mut(node.as_ref().unwrap()).left =
+                build_bt(&preorder[1..i + 1], &inorder[..i]);
+            RefCell::borrow_mut(node.as_ref().unwrap()).right =
+                build_bt(&preorder[i + 1..], &inorder[i + 1..]);
             node
         }
 
@@ -169,13 +200,13 @@ impl Solution {
                     Ordering::Equal => {
                         res.push(vec![candidates[i]]);
                         break;
-                    },
+                    }
                     Ordering::Less => {
                         for mut v in backtrack(candidates, target - candidates[i], i) {
                             v.push(candidates[i]);
                             res.push(v);
                         }
-                    },
+                    }
                     _ => break,
                 }
             }
@@ -202,18 +233,20 @@ impl Solution {
                     Ordering::Equal => {
                         res.push(vec![candidates[i]]);
                         break;
-                    },
+                    }
                     Ordering::Less if i < candidates.len() - 1 => {
                         // Extra check to eliminate duplicate sets.
                         // We don't need to analyze sets with the same number at the same position,
                         // because we analyzed them at previous iteration.
-                        if i > start && candidates[i - 1] == candidates[i] { continue; }
+                        if i > start && candidates[i - 1] == candidates[i] {
+                            continue;
+                        }
 
                         for mut v in backtrack(candidates, target - candidates[i], i + 1) {
                             v.push(candidates[i]);
                             res.push(v);
                         }
-                    },
+                    }
                     _ => break,
                 }
             }
@@ -226,19 +259,26 @@ impl Solution {
     // 322. Coin Change.
     // https://leetcode.com/problems/coin-change/
     pub fn coin_change(coins: Vec<i32>, amount: i32) -> i32 {
-        if amount == 0 { return 0; }
+        if amount == 0 {
+            return 0;
+        }
         let mut dp: Vec<i32> = vec![i32::MAX; (amount + 1) as usize];
         dp[0] = 0;
         for a in 1..=amount {
             for c in &coins {
                 if a - c >= 0 {
                     let p = dp[(a - c) as usize];
-                    dp[a as usize] = min(dp[a as usize], if p == i32::MAX { i32::MAX } else { p + 1 });
+                    dp[a as usize] =
+                        min(dp[a as usize], if p == i32::MAX { i32::MAX } else { p + 1 });
                 }
             }
         }
         let res = dp[amount as usize];
-        if res == i32::MAX { -1 } else { res }
+        if res == i32::MAX {
+            -1
+        } else {
+            res
+        }
     }
 
     // 8. String to Integer (atoi).
@@ -246,9 +286,7 @@ impl Solution {
     // Time complexity: O(N).
     // Space complexity: O(N).
     pub fn my_atoi(s: String) -> i32 {
-        let chars: Vec<char> = s.chars()
-            .skip_while(|x| x.is_ascii_whitespace())
-            .collect();
+        let chars: Vec<char> = s.chars().skip_while(|x| x.is_ascii_whitespace()).collect();
         if chars.is_empty() {
             return 0;
         }
@@ -261,7 +299,8 @@ impl Solution {
             skip += 1;
         }
 
-        let digits: Vec<i32> = chars.into_iter()
+        let digits: Vec<i32> = chars
+            .into_iter()
             .skip(skip)
             .skip_while(|&x| x == '0')
             .take_while(|x| x.is_digit(10))
@@ -276,7 +315,7 @@ impl Solution {
                 '7' => 7,
                 '8' => 8,
                 '9' => 9,
-                _ => unreachable!()
+                _ => unreachable!(),
             })
             .collect();
 
@@ -333,13 +372,20 @@ impl Solution {
     // Time complexity: O(N).
     // Space complexity: O(N).
     pub fn is_valid_bst(root: Option<Rc<RefCell<TreeNode>>>) -> bool {
-        fn dfs(node: &Option<Rc<RefCell<TreeNode>>>, lower: Option<i32>, upper: Option<i32>) -> bool {
+        fn dfs(
+            node: &Option<Rc<RefCell<TreeNode>>>,
+            lower: Option<i32>,
+            upper: Option<i32>,
+        ) -> bool {
             if let Some(node_inner) = node {
                 let val = node_inner.borrow().val;
-                if (lower.is_some() && val <= lower.unwrap()) || upper.is_some() && (val >= upper.unwrap()) {
+                if (lower.is_some() && val <= lower.unwrap())
+                    || upper.is_some() && (val >= upper.unwrap())
+                {
                     false
                 } else {
-                    dfs(&node_inner.borrow().left, lower, Some(val)) && dfs(&node_inner.borrow().right, Some(val), upper)
+                    dfs(&node_inner.borrow().left, lower, Some(val))
+                        && dfs(&node_inner.borrow().right, Some(val), upper)
                 }
             } else {
                 true
@@ -393,7 +439,7 @@ impl Solution {
                 '7' => 7,
                 '8' => 8,
                 '9' => 9,
-                _ => unreachable!()
+                _ => unreachable!(),
             }
         }
 
@@ -449,10 +495,15 @@ impl Solution {
     // Time complexity: O(N^2).
     // Space complexity: O(1).
     pub fn longest_palindrome(s: String) -> String {
-        if s.len() < 2 { return s; }
+        if s.len() < 2 {
+            return s;
+        }
 
         fn expand_around_center(chars: &Vec<char>, mut left: i32, mut right: i32) -> usize {
-            while left >= 0 && (right as usize) < chars.len() && chars[left as usize] == chars[right as usize] {
+            while left >= 0
+                && (right as usize) < chars.len()
+                && chars[left as usize] == chars[right as usize]
+            {
                 left -= 1;
                 right += 1;
             }
@@ -465,7 +516,7 @@ impl Solution {
         for i in 0..chars.len() - 1 {
             let len = max(
                 expand_around_center(&chars, i as i32, i as i32),
-                expand_around_center(&chars, i as i32, i as i32 + 1)
+                expand_around_center(&chars, i as i32, i as i32 + 1),
             );
             if len > end - start {
                 start = i - (len - 1) / 2;
@@ -480,7 +531,12 @@ impl Solution {
     // https://leetcode.com/problems/maximum-area-of-a-piece-of-cake-after-horizontal-and-vertical-cuts/
     // Time complexity: O(N), where N - max(horizontal_cuts, vertical_cuts).
     // Space complexity: O(1).
-    pub fn max_area(h: i32, w: i32, mut horizontal_cuts: Vec<i32>, mut vertical_cuts: Vec<i32>) -> i32 {
+    pub fn max_area(
+        h: i32,
+        w: i32,
+        mut horizontal_cuts: Vec<i32>,
+        mut vertical_cuts: Vec<i32>,
+    ) -> i32 {
         horizontal_cuts.sort_unstable();
         vertical_cuts.sort_unstable();
 
@@ -558,8 +614,13 @@ impl Solution {
     pub fn lowest_common_ancestor(
         root: Option<Rc<RefCell<TreeNode>>>,
         p: Option<Rc<RefCell<TreeNode>>>,
-        q: Option<Rc<RefCell<TreeNode>>>) -> Option<Rc<RefCell<TreeNode>>> {
-        fn solve(node: Option<Rc<RefCell<TreeNode>>>, p_val: i32, q_val: i32) -> Option<Rc<RefCell<TreeNode>>> {
+        q: Option<Rc<RefCell<TreeNode>>>,
+    ) -> Option<Rc<RefCell<TreeNode>>> {
+        fn solve(
+            node: Option<Rc<RefCell<TreeNode>>>,
+            p_val: i32,
+            q_val: i32,
+        ) -> Option<Rc<RefCell<TreeNode>>> {
             if let Some(node_inner) = node {
                 let val = node_inner.borrow().val;
                 if val == p_val || val == q_val {
@@ -656,14 +717,20 @@ impl Solution {
             let mut j = right;
             loop {
                 while nums[i] < pivot_num {
-                    if i == right { break; }
+                    if i == right {
+                        break;
+                    }
                     i += 1;
                 }
                 while nums[j] > pivot_num {
-                    if j == left { break; }
+                    if j == left {
+                        break;
+                    }
                     j -= 1;
                 }
-                if i >= j { break; }
+                if i >= j {
+                    break;
+                }
                 nums.swap(i, j);
                 i += 1;
                 j -= 1;
@@ -763,7 +830,9 @@ impl Solution {
                     count += 1;
                     curr_max = val;
                 }
-                count + dfs(&node_inner.borrow().left, curr_max) + dfs(&node_inner.borrow().right, curr_max)
+                count
+                    + dfs(&node_inner.borrow().left, curr_max)
+                    + dfs(&node_inner.borrow().right, curr_max)
             } else {
                 0
             }
@@ -789,7 +858,9 @@ impl Solution {
                 curr = left;
             }
             curr = stack.pop().unwrap();
-            if prev.is_some() && curr.as_ref().unwrap().borrow().val < prev.as_ref().unwrap().borrow().val {
+            if prev.is_some()
+                && curr.as_ref().unwrap().borrow().val < prev.as_ref().unwrap().borrow().val
+            {
                 y = curr.clone();
                 if x.is_none() {
                     x = prev.clone();
@@ -803,7 +874,10 @@ impl Solution {
             curr = right;
         }
 
-        swap(&mut x.as_mut().unwrap().borrow_mut().val, &mut y.as_mut().unwrap().borrow_mut().val);
+        swap(
+            &mut x.as_mut().unwrap().borrow_mut().val,
+            &mut y.as_mut().unwrap().borrow_mut().val,
+        );
     }
 
     // 91. Decode Ways.
@@ -880,7 +954,12 @@ impl Solution {
             return chars.len() as _;
         }
 
-        fn compress_group(chars: &mut Vec<char>, mut start: usize, mut size: u32, c: char) -> usize {
+        fn compress_group(
+            chars: &mut Vec<char>,
+            mut start: usize,
+            mut size: u32,
+            c: char,
+        ) -> usize {
             chars[start] = c;
             start += 1;
             let mut idx = 0;
@@ -986,6 +1065,6 @@ impl Solution {
             prev_f = tmp;
         }
 
-        return curr_f as i32
+        return curr_f as i32;
     }
 }

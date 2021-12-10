@@ -562,3 +562,19 @@ fn can_reach_v2_test() {
         assert_eq!(Solution::can_reach_v2(case.0, case.1), case.2);
     }
 }
+
+fn get_num_tilings_test_cases() -> Vec<(i32, i32)> {
+    vec![
+        (3, 5),
+        (4, 11),
+        (5, 24),
+        (30, 312342182),
+    ]
+}
+
+#[test]
+fn num_tilings_test() {
+    for case in get_num_tilings_test_cases() {
+        assert_eq!(Solution::num_tilings(case.0), case.1);
+    }
+}

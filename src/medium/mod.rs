@@ -963,4 +963,29 @@ impl Solution {
 
         false
     }
+
+    // 790. Domino and Tromino Tiling.
+    // https://leetcode.com/problems/domino-and-tromino-tiling/
+    // DP bottom-up method.
+    // Time complexity: O(N).
+    // Space complexity: O(1).
+    pub fn num_tilings(n: i32) -> i32 {
+        if n <= 2 {
+            return n;
+        }
+
+        let modulo = 1000_000_007u64;
+        let mut curr_f = 2u64;
+        let mut prev_f = 1u64;
+        let mut curr_p = 1u64;
+
+        for _ in 3..=n {
+            let tmp = curr_f;
+            curr_f = (curr_f + prev_f + 2 * curr_p) % modulo;
+            curr_p = (curr_p + prev_f) % modulo;
+            prev_f = tmp;
+        }
+
+        return curr_f as i32
+    }
 }

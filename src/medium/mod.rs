@@ -933,4 +933,34 @@ impl Solution {
 
         dfs(&mut arr, start)
     }
+
+    // BFS method.
+    // Time complexity: O(N).
+    // Space complexity: O(N).
+    pub fn can_reach_v2(mut arr: Vec<i32>, start: i32) -> bool {
+        let mut queue = vec![start];
+        while !queue.is_empty() {
+            let i = queue.pop().unwrap();
+            let ui = i as usize;
+            if arr[ui] == 0 {
+                return true;
+            }
+
+            if arr[ui] < 0 {
+                continue;
+            }
+
+            if i - arr[ui] >= 0 {
+                queue.push(i - arr[ui]);
+            }
+
+            if i + arr[ui] < arr.len() as i32 {
+                queue.push(i + arr[ui]);
+            }
+
+            arr[ui] *= -1;
+        }
+
+        false
+    }
 }

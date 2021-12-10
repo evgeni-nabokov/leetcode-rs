@@ -541,14 +541,24 @@ fn compress_test() {
     }
 }
 
-#[test]
-fn can_reach_test() {
-    let test_cases = vec![
+fn get_can_reach_test_cases() -> Vec<(Vec<i32>, i32, bool)> {
+    vec![
         (vec![4, 2, 3, 0, 3, 1, 2], 5, true),
         (vec![4, 2, 3, 0, 3, 1, 2], 0, true),
         (vec![3, 0, 2, 1, 2], 2, false),
-    ];
-    for case in test_cases {
+    ]
+}
+
+#[test]
+fn can_reach_test() {
+    for case in get_can_reach_test_cases() {
         assert_eq!(Solution::can_reach(case.0, case.1), case.2);
+    }
+}
+
+#[test]
+fn can_reach_v2_test() {
+    for case in get_can_reach_test_cases() {
+        assert_eq!(Solution::can_reach_v2(case.0, case.1), case.2);
     }
 }

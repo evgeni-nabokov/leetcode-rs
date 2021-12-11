@@ -92,4 +92,82 @@ impl Solution {
         }
         left
     }
+
+    // 2065. Maximum Path Quality of a Graph.
+    // https://leetcode.com/problems/maximum-path-quality-of-a-graph/
+    // DFS + Backtracking method.
+    // Time complexity: ?
+    // Space complexity: O(V * E), V - number of vertices, E - number of edges.
+    pub fn maximal_path_quality(values: Vec<i32>, edges: Vec<Vec<i32>>, max_time: i32) -> i32 {
+        let n = values.len();
+        let mut adj_list = vec![vec![]; n];
+        for i in 0..edges.len() {
+            let u = edges[i][0] as usize;
+            let v = edges[i][1] as usize;
+            let t = edges[i][2];
+            adj_list[u].push((v, t));
+            adj_list[v].push((u, t));
+        }
+
+        // Current value of the path.
+        let mut curr_path_val = values[0];
+        // Max value of a valid path.
+        let mut max_path_val = values[0];
+        // Number of times we've visited a node in the path.
+        let mut freq = vec![0; n];
+        freq[0] = 1;
+
+        fn dfs(
+            adj_list: &[Vec<(usize, i32)>],
+            values: &[i32],
+            curr: usize,
+            time_left: i32,
+            freq: &mut [i32],
+            curr_path_val: &mut i32,
+            max_path_val: &mut i32,
+        ) {
+            if curr == 0 {
+                *max_path_val = *max_path_val.max(curr_path_val);
+            }
+
+            for &(next, cost) in &adj_list[curr] {
+                if cost > time_left {
+                    continue;
+                }
+
+                if freq[next] == 0 {
+                    *curr_path_val += values[next];
+                }
+                freq[next] += 1;
+
+                dfs(
+                    adj_list,
+                    values,
+                    next,
+                    time_left - cost,
+                    freq,
+                    curr_path_val,
+                    max_path_val,
+                );
+
+                // Backtrack DFS.
+                freq[next] -= 1;
+                if freq[next] == 0 {
+                    *curr_path_val -= values[next];
+                }
+            }
+        }
+
+        dfs(
+            &adj_list,
+            &values,
+            0,
+            max_time,
+            &mut freq,
+            &mut curr_path_val,
+            &mut max_path_val,
+        );
+
+        max_path_val
+    }
 }

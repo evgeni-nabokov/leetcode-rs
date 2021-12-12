@@ -1,4 +1,4 @@
-### List of solved problems (269)
+### List of solved problems (270)
 1. **1** Two Sum https://leetcode.com/problems/two-sum/ *Easy*
 2. **2** Add Two Numbers // https://leetcode.com/problems/add-two-numbers/ *Medium* 
 3. **5** Longest Palindromic Substring https://leetcode.com/problems/longest-palindromic-substring/ *Medium*
@@ -268,3 +268,4 @@
 267. **2091** Removing Minimum and Maximum From Array https://leetcode.com/problems/removing-minimum-and-maximum-from-array/ *Medium*
 268. **2092** Find All People With Secret https://leetcode.com/problems/find-all-people-with-secret/ *Hard*
 269. **2094** Finding 3-Digit Even Numbers https://leetcode.com/problems/finding-3-digit-even-numbers/ *Easy*
+270. **2103** Rings and Rods https://leetcode.com/problems/rings-and-rods/ *Easy*

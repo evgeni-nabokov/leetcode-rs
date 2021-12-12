@@ -7,3 +7,15 @@ fn max_total_fruits_test() {
         assert_eq!(Solution::count_points(case.0.to_string()), case.1)
     }
 }
+
+#[test]
+fn sub_array_ranges_test() {
+    let test_cases = vec![
+        (vec![1, 2, 3], 4),
+        (vec![1, 3, 3], 4),
+        (vec![4, -2, -3, 4, 1], 59),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::sub_array_ranges(case.0), case.1)
+    }
+}

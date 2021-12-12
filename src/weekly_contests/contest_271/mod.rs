@@ -26,4 +26,22 @@ impl Solution {
             .filter(|x| x.into_iter().all(|y| *y))
             .count() as i32
     }
+
+    // 2104. Sum of Subarray Ranges.
+    // https://leetcode.com/problems/sum-of-subarray-ranges/
+    // Time complexity: O(N^2).
+    // Space complexity: O(1).
+    pub fn sub_array_ranges(nums: Vec<i32>) -> i64 {
+        let mut res = 0;
+        for left in 0..nums.len() - 1 {
+            let mut min = nums[left];
+            let mut max = nums[left];
+            for right in left + 1..nums.len() {
+                min = min.min(nums[right]);
+                max = max.max(nums[right]);
+                res += (max - min) as i64;
+            }
+        }
+        res
+    }
 }

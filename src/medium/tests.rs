@@ -696,3 +696,18 @@ fn num_tilings_v2_test() {
         assert_eq!(Solution::num_tilings_v2(case.0), case.1);
     }
 }
+
+#[test]
+fn max_score_test() {
+    let test_cases = vec![
+        (vec![1, 2, 3, 4, 5, 6, 1], 3, 12),
+        (vec![2, 2, 2], 2, 4),
+        (vec![9, 7, 7, 9, 7, 7, 9], 7, 55),
+        (vec![1, 1000, 1], 1, 1),
+        (vec![1, 1000, 1], 3, 1002),
+        (vec![1, 79, 80, 1, 1, 1, 200, 1], 3, 202),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::max_score(case.0, case.1), case.2)
+    }
+}

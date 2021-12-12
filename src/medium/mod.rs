@@ -1108,4 +1108,23 @@ impl Solution {
 
         f(n, &mut f_memo, &mut p_memo) as i32
     }
+
+    // 1423. Maximum Points You Can Obtain from Cards.
+    // https://leetcode.com/problems/maximum-points-you-can-obtain-from-cards/
+    // Time complexity: O(N), where N is number of cards to draw.
+    // Space complexity: O(1).
+    pub fn max_score(card_points: Vec<i32>, k: i32) -> i32 {
+        let k = k as usize;
+        let mut sum: i32 = card_points.iter().take(k).sum();
+        if k == card_points.len() {
+            return sum;
+        }
+
+        let mut max_sum = sum;
+        for i in 0..k {
+            sum += card_points[card_points.len() - i - 1] - card_points[k - i - 1];
+            max_sum = max_sum.max(sum);
+        }
+        max_sum
+    }
 }

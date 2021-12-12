@@ -19,3 +19,16 @@ fn sub_array_ranges_test() {
         assert_eq!(Solution::sub_array_ranges(case.0), case.1)
     }
 }
+
+#[test]
+fn minimum_refill_test() {
+    let test_cases = vec![
+        (vec![2, 2, 3, 3], 5, 5, 1),
+        (vec![2, 2, 3, 3], 3, 4, 2),
+        (vec![5], 10, 8, 0),
+        (vec![2, 2, 5, 2, 2], 5, 5, 1),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::minimum_refill(case.0, case.1, case.2), case.3)
+    }
+}

@@ -44,4 +44,36 @@ impl Solution {
         }
         res
     }
+
+    // 2105. Watering Plants II.
+    // https://leetcode.com/problems/watering-plants-ii/
+    // Time complexity: O(N).
+    // Space complexity: O(1).
+    pub fn minimum_refill(plants: Vec<i32>, capacity_a: i32, capacity_b: i32) -> i32 {
+        let mut res = 0;
+        let mut water_in_can_a = capacity_a;
+        let mut water_in_can_b = capacity_b;
+        let mut left = 0;
+        let mut right = plants.len() - 1;
+        while left < right {
+            if water_in_can_a < plants[left] {
+                res += 1;
+                water_in_can_a = capacity_a;
+            }
+            water_in_can_a -= plants[left];
+            left += 1;
+            if water_in_can_b < plants[right] {
+                res += 1;
+                water_in_can_b = capacity_b;
+            }
+            water_in_can_b -= plants[right];
+            right -= 1;
+        }
+
+        if left == right && plants[left] > water_in_can_a.max(water_in_can_b) {
+            res += 1;
+        }
+
+        res
+    }
 }

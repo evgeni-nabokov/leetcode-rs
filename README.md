@@ -1,4 +1,4 @@
-### List of solved problems (271)
+### List of solved problems (272)
 1. **1** Two Sum https://leetcode.com/problems/two-sum/ *Easy*
 2. **2** Add Two Numbers // https://leetcode.com/problems/add-two-numbers/ *Medium* 
 3. **5** Longest Palindromic Substring https://leetcode.com/problems/longest-palindromic-substring/ *Medium*
@@ -270,3 +270,4 @@
 269. **2094** Finding 3-Digit Even Numbers https://leetcode.com/problems/finding-3-digit-even-numbers/ *Easy*
 270. **2103** Rings and Rods https://leetcode.com/problems/rings-and-rods/ *Easy*
 271. **2104** Sum of Subarray Ranges https://leetcode.com/problems/sum-of-subarray-ranges/ *Medium*
+272. **2105** Watering Plants II https://leetcode.com/problems/watering-plants-ii/ *Medium*

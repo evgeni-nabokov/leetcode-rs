@@ -43,21 +43,18 @@ impl Solution {
     // 1446. Consecutive Characters.
     // https://leetcode.com/problems/consecutive-characters/
     pub fn max_power(s: String) -> i32 {
-        if s.len() == 1 {
-            return 1;
-        }
-        let chars: Vec<char> = s.chars().collect();
+        let bytes = s.as_bytes();
         let mut curr_pow = 1;
-        let mut max_pow = 0;
-        for i in 1..chars.len() {
-            if chars[i] == chars[i - 1] {
-                curr_pow += 1
+        let mut max_pow = curr_pow;
+        for i in 1..bytes.len() {
+            if bytes[i] == bytes[i - 1] {
+                curr_pow += 1;
             } else {
-                max_pow = max(max_pow, curr_pow);
+                max_pow = max_pow.max(curr_pow);
                 curr_pow = 1;
             }
         }
-        max(max_pow, curr_pow)
+        max_pow.max(curr_pow)
     }
 
     // 310. Minimum Height Trees

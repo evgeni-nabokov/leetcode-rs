@@ -1,17 +1,19 @@
 #[cfg(test)]
 mod tests;
 
+use std::cell::RefCell;
 use std::cmp::{max, min};
 use std::collections::HashSet;
 use std::iter::FromIterator;
-use std::cell::RefCell;
 use std::rc::Rc;
 
 use crate::common::list_node::ListNode;
 use crate::common::tree_node::TreeNode;
 
-const MORSE_MAP: [&str; 26] = [".-","-...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",
-    ".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--.."];
+const MORSE_MAP: [&str; 26] = [
+    ".-", "-...", "-.-.", "-..", ".", "..-.", "--.", "....", "..", ".---", "-.-", ".-..", "--",
+    "-.", "---", ".--.", "--.-", ".-.", "...", "-", "..-", "...-", ".--", "-..-", "-.--", "--..",
+];
 
 struct Solution;
 
@@ -41,7 +43,9 @@ impl Solution {
     // 1446. Consecutive Characters.
     // https://leetcode.com/problems/consecutive-characters/
     pub fn max_power(s: String) -> i32 {
-        if s.len() == 1 { return 1; }
+        if s.len() == 1 {
+            return 1;
+        }
         let chars: Vec<char> = s.chars().collect();
         let mut curr_pow = 1;
         let mut max_pow = 0;
@@ -61,8 +65,15 @@ impl Solution {
     // Backtracking solution.
     // Not accepted - TLE.
     pub fn find_min_height_trees(n: i32, edges: Vec<Vec<i32>>) -> Vec<i32> {
-        fn backtrack(k: usize, adj_list: &Vec<Vec<usize>>, visited: &mut Vec<bool>, mut height: usize) -> usize {
-            if visited[k] { return height; }
+        fn backtrack(
+            k: usize,
+            adj_list: &Vec<Vec<usize>>,
+            visited: &mut Vec<bool>,
+            mut height: usize,
+        ) -> usize {
+            if visited[k] {
+                return height;
+            }
             height += 1;
             visited[k] = true;
             let mut res = 0;
@@ -102,7 +113,10 @@ impl Solution {
             if let Some(node_inner) = node {
                 let (left_sum, left_tilt) = dfs(&node_inner.borrow().left);
                 let (right_sum, right_tilt) = dfs(&node_inner.borrow().right);
-                (left_sum + right_sum + node_inner.borrow().val, left_tilt + right_tilt + (left_sum - right_sum).abs())
+                (
+                    left_sum + right_sum + node_inner.borrow().val,
+                    left_tilt + right_tilt + (left_sum - right_sum).abs(),
+                )
             } else {
                 (0, 0)
             }
@@ -160,14 +174,17 @@ impl Solution {
     // https://leetcode.com/problems/valid-square/
     // Solution without square root and multiplication with O(1) time and O(1) space.
     pub fn valid_square(p1: Vec<i32>, p2: Vec<i32>, p3: Vec<i32>, p4: Vec<i32>) -> bool {
-        if p1 == p2 && p2 == p3 && p3 == p4 { return false; }
+        if p1 == p2 && p2 == p3 && p3 == p4 {
+            return false;
+        }
 
         fn remove(point: &Vec<f64>, points: &mut Vec<Vec<i32>>) -> bool {
             let eps = 0.00001f64;
             let mut index: Option<usize> = None;
             for i in 0..points.len() {
                 if (points[i][0] as f64 - point[0]).abs() < eps
-                    && (points[i][1] as f64 - point[1]).abs() < eps {
+                    && (points[i][1] as f64 - point[1]).abs() < eps
+                {
                     index = Some(i);
                     break;
                 }
@@ -181,7 +198,10 @@ impl Solution {
         }
 
         // Center.
-        let c = vec![(p1[0] + p2[0] + p3[0] + p4[0]) as f64 / 4.0, (p1[1] + p2[1] + p3[1] + p4[1]) as f64 / 4.0];
+        let c = vec![
+            (p1[0] + p2[0] + p3[0] + p4[0]) as f64 / 4.0,
+            (p1[1] + p2[1] + p3[1] + p4[1]) as f64 / 4.0,
+        ];
         // Vector from center to p1.
         let v1 = vec![p1[0] as f64 - c[0], p1[1] as f64 - c[1]];
         // Vector v1 rotated by 90 deg.
@@ -193,7 +213,10 @@ impl Solution {
             // center + v2
             vec![c[0] + v2[0], c[1] + v2[1]],
             // center - v2
-            vec![c[0] - v2[0], c[1] - v2[1]]].iter() {
+            vec![c[0] - v2[0], c[1] - v2[1]],
+        ]
+        .iter()
+        {
             if !remove(p, &mut points) {
                 return false;
             }
@@ -277,9 +300,8 @@ impl Solution {
             }
             if val < high && node.borrow().right.is_some() {
                 stack.push(node.borrow().right.as_ref().unwrap().clone());
-
             }
-            if val > low  && node.borrow().left.is_some() {
+            if val > low && node.borrow().left.is_some() {
                 stack.push(node.borrow().left.as_ref().unwrap().clone());
             }
         }
@@ -312,12 +334,16 @@ impl Solution {
     // https://leetcode.com/problems/search-in-rotated-sorted-array-ii/
     pub fn search(nums: Vec<i32>, target: i32) -> bool {
         fn solve(nums: &[i32], target: i32) -> bool {
-            if nums.is_empty() { return false; }
+            if nums.is_empty() {
+                return false;
+            }
             let mut left = 0;
             let mut right = nums.len() - 1;
             while left <= right {
                 let mid = left + (right - left) / 2;
-                if target == nums[mid] { return true; }
+                if target == nums[mid] {
+                    return true;
+                }
                 if nums[left] < nums[mid] {
                     //
                     // Regular part is to the left of the middle.
@@ -340,11 +366,14 @@ impl Solution {
                         left = mid + 1;
                     } else {
                         // Goes to the irregular part.
-                        if mid == 0 { return false; }
+                        if mid == 0 {
+                            return false;
+                        }
                         right = mid - 1
                     }
                 } else {
-                    return solve(&nums[left..mid], target) || solve(&nums[mid + 1..=right], target);
+                    return solve(&nums[left..mid], target)
+                        || solve(&nums[mid + 1..=right], target);
                 }
             }
             false
@@ -357,7 +386,9 @@ impl Solution {
     pub fn unique_morse_representations(words: Vec<String>) -> i32 {
         let mut set: HashSet<String> = HashSet::with_capacity(words.len());
         for w in words {
-            set.insert(String::from_iter(w.chars().map(|x| MORSE_MAP[x as usize - 97])));
+            set.insert(String::from_iter(
+                w.chars().map(|x| MORSE_MAP[x as usize - 97]),
+            ));
         }
         set.len() as i32
     }
@@ -370,17 +401,26 @@ impl Solution {
         let mut curr_num = 0i32; // Second operand of multiplication or division.
         let mut sign = 1i32; // Sign of the second member of addition.
         let mut mul = true; // Flag: true if current operation is multiplication, false otherwise.
-        for bbb in s.as_bytes().iter()
+        for bbb in s
+            .as_bytes()
+            .iter()
             // A sentinel to perform last operation when loop ends.
-            .chain([b'#'].iter()) {
+            .chain([b'#'].iter())
+        {
             // Skip white space.
-            if bbb.is_ascii_whitespace() { continue; }
+            if bbb.is_ascii_whitespace() {
+                continue;
+            }
 
             match (*bbb as char).is_digit(10) {
                 true => curr_num = curr_num * 10 + (bbb - b'0') as i32,
                 false => {
                     // Perform multiplication or division. It depends on the mul flag.
-                    prev_num = if mul { prev_num * curr_num } else { prev_num / curr_num };
+                    prev_num = if mul {
+                        prev_num * curr_num
+                    } else {
+                        prev_num / curr_num
+                    };
                     curr_num = 0;
                     match bbb {
                         b'*' => mul = true,
@@ -396,7 +436,7 @@ impl Solution {
                             }
                         }
                     }
-                },
+                }
             }
         }
         res

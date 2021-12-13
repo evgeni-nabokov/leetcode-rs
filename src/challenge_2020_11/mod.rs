@@ -2,7 +2,6 @@
 mod tests;
 
 use std::cell::RefCell;
-use std::cmp::{max, min};
 use std::collections::HashSet;
 use std::iter::FromIterator;
 use std::rc::Rc;
@@ -75,7 +74,7 @@ impl Solution {
             visited[k] = true;
             let mut res = 0;
             for i in 0..adj_list[k].len() {
-                res = max(res, backtrack(adj_list[k][i], adj_list, visited, height));
+                res = res.max(backtrack(adj_list[k][i], adj_list, visited, height));
             }
             res
         }
@@ -91,7 +90,7 @@ impl Solution {
         for i in 0..n {
             let mut visited: Vec<bool> = vec![false; n];
             heights[i] = backtrack(i, &adj_list, &mut visited, 0);
-            min_height = min(min_height, heights[i]);
+            min_height = min_height.min(heights[i]);
         }
         let mut res: Vec<i32> = Vec::new();
         for i in 0..n {
@@ -131,7 +130,7 @@ impl Solution {
         while nums[i] <= k {
             match nums[(i + 1)..].binary_search(&(k - nums[i] - 1)) {
                 Ok(j) => return nums[i] + nums[i + 1 + j],
-                Err(j) if j > 0 => res = max(res, nums[i] + nums[i + j]),
+                Err(j) if j > 0 => res = res.max(nums[i] + nums[i + j]),
                 _ => break,
             }
             i += 1;
@@ -146,7 +145,7 @@ impl Solution {
         let mut right = nums.len() - 1;
         while left < right {
             if nums[left] + nums[right] < k {
-                res = max(res, nums[left] + nums[right]);
+                res = res.max(nums[left] + nums[right]);
                 left += 1;
             } else {
                 right -= 1;
@@ -247,11 +246,11 @@ impl Solution {
     pub fn remove_interval_v2(intervals: Vec<Vec<i32>>, to_be_removed: Vec<i32>) -> Vec<Vec<i32>> {
         let mut res: Vec<Vec<i32>> = Vec::with_capacity(intervals.len());
         for curr_int in intervals {
-            let mut tmp = min(curr_int[1], to_be_removed[0]);
+            let mut tmp = curr_int[1].min(to_be_removed[0]);
             if tmp > curr_int[0] {
                 res.push(vec![curr_int[0], tmp]);
             }
-            tmp = max(curr_int[0], to_be_removed[1]);
+            tmp = curr_int[0].max(to_be_removed[1]);
             if tmp < curr_int[1] {
                 res.push(vec![tmp, curr_int[1]]);
             }

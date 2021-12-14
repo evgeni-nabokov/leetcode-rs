@@ -1127,4 +1127,40 @@ impl Solution {
         }
         max_sum
     }
+
+    // 416. Partition Equal Subset Sum.
+    // https://leetcode.com/problems/partition-equal-subset-sum/
+    // Time complexity: O(N * M) ?
+    // Space complexity: O(N * M) ?
+    // Where N is number of the numbers, M - half of the sum of the numbers.
+    pub fn can_partition(nums: Vec<i32>) -> bool {
+        fn solve(nums: &[i32], i: usize, target_sum: i32, memo: &mut [Vec<Option<bool>>]) -> bool {
+            if i == nums.len() || target_sum < 0 {
+                return false;
+            }
+
+            if target_sum == 0 {
+                return true;
+            }
+
+            if let Some(res) = memo[i][target_sum as usize] {
+                return res;
+            }
+
+            let res = solve(nums, i + 1, target_sum, memo)
+                || solve(nums, i + 1, target_sum - nums[i], memo);
+
+            memo[i][target_sum as usize] = Some(res);
+            res
+        }
+
+        let sum: i32 = nums.iter().sum();
+        if sum % 2 != 0 {
+            return false;
+        }
+
+        let target_sum = sum / 2;
+        let mut memo = vec![vec![None; target_sum as usize + 1]; nums.len()];
+        solve(&nums, 0, target_sum, &mut memo)
+    }
 }

@@ -708,6 +708,14 @@ fn max_score_test() {
         (vec![1, 79, 80, 1, 1, 1, 200, 1], 3, 202),
     ];
     for case in test_cases {
-        assert_eq!(Solution::max_score(case.0, case.1), case.2)
+        assert_eq!(Solution::max_score(case.0, case.1), case.2);
+    }
+}
+
+#[test]
+fn can_partition_test() {
+    let test_cases = vec![(vec![1, 5, 11, 5], true), (vec![1, 2, 3, 5], false)];
+    for case in test_cases {
+        assert_eq!(Solution::can_partition(case.0), case.1);
     }
 }

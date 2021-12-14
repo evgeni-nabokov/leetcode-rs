@@ -878,7 +878,7 @@ impl Solution {
 
     // 91. Decode Ways.
     // https://leetcode.com/problems/decode-ways/
-    // DP recursive method.
+    // Recursive DP method.
     // Time complexity: O(N).
     // Space complexity: O(N).
     pub fn num_decodings(s: String) -> i32 {
@@ -1130,9 +1130,10 @@ impl Solution {
 
     // 416. Partition Equal Subset Sum.
     // https://leetcode.com/problems/partition-equal-subset-sum/
+    // Recursive DP method.
     // Time complexity: O(N * M) ?
     // Space complexity: O(N * M) ?
-    // Where N is number of the numbers, M - half of the sum of the numbers.
+    // Where N is the number of array elements, M - is the subSetSum (half of the sum of the numbers).
     pub fn can_partition(nums: Vec<i32>) -> bool {
         fn solve(nums: &[i32], i: usize, target_sum: i32, memo: &mut [Vec<Option<bool>>]) -> bool {
             if i == nums.len() || target_sum < 0 {

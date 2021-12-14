@@ -412,3 +412,18 @@ fn reorder_log_files_test() {
         );
     }
 }
+
+#[test]
+fn is_toeplitz_matrix_test() {
+    let test_cases = vec![
+        (
+            vec![vec![1, 2, 3, 4], vec![5, 1, 2, 3], vec![9, 5, 1, 2]],
+            true,
+        ),
+        (vec![vec![1, 2], vec![2, 2]], false),
+    ];
+
+    for case in test_cases {
+        assert_eq!(Solution::is_toeplitz_matrix(case.0), case.1);
+    }
+}

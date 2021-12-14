@@ -630,4 +630,20 @@ impl Solution {
 
         split_logs.into_iter().map(|x| x.1.clone()).collect()
     }
+
+    // 766. Toeplitz Matrix.
+    // https://leetcode.com/problems/toeplitz-matrix/
+    // Time complexity: O(M * N), where M, N - the dimensions of the matrix.
+    // Space complexity: O(1).
+    pub fn is_toeplitz_matrix(matrix: Vec<Vec<i32>>) -> bool {
+        for r in 0..matrix.len() - 1 {
+            for c in 0..matrix[0].len() - 1 {
+                if matrix[r][c] != matrix[r + 1][c + 1] {
+                    return false;
+                }
+            }
+        }
+
+        true
+    }
 }

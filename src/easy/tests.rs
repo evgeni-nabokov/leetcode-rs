@@ -9,12 +9,7 @@ fn two_sum_test() {
 
 #[test]
 fn reverse_test() {
-    let test_cases = vec![
-        (123, 321),
-        (-123, -321),
-        (120, 21),
-        (1534236469, 0),
-    ];
+    let test_cases = vec![(123, 321), (-123, -321), (120, 21), (1534236469, 0)];
     for case in test_cases {
         assert_eq!(Solution::reverse(case.0), case.1);
     }
@@ -78,10 +73,7 @@ fn defang_ip_addr_test() {
 
 #[test]
 fn number_of_steps_test() {
-    let test_cases = vec![
-        (14, 6),
-        (8, 4),
-    ];
+    let test_cases = vec![(14, 6), (8, 4)];
     for case in test_cases {
         assert_eq!(Solution::number_of_steps(case.0), case.1);
     }
@@ -98,14 +90,20 @@ fn get_reverse_list_test_cases() -> Vec<(Vec<i32>, Vec<i32>)> {
 #[test]
 fn reverse_list_test() {
     for case in get_reverse_list_test_cases() {
-        assert_eq!(Solution::reverse_list(ListNode::from_slice(&case.0)).to_vec(), case.1);
+        assert_eq!(
+            Solution::reverse_list(ListNode::from_slice(&case.0)).to_vec(),
+            case.1
+        );
     }
 }
 
 #[test]
 fn reverse_list_v2_test() {
     for case in get_reverse_list_test_cases() {
-        assert_eq!(Solution::reverse_list_v2(ListNode::from_slice(&case.0)).to_vec(), case.1);
+        assert_eq!(
+            Solution::reverse_list_v2(ListNode::from_slice(&case.0)).to_vec(),
+            case.1
+        );
     }
 }
 
@@ -116,12 +114,24 @@ fn merge_two_lists_test() {
         (vec![1, 3, 5], vec![], vec![1, 3, 5]),
         (vec![], vec![2, 4, 6], vec![2, 4, 6]),
         (vec![1, 3, 5], vec![2, 4, 6], vec![1, 2, 3, 4, 5, 6]),
-        (vec![1, 3, 5, 7, 9], vec![2, 4, 6], vec![1, 2, 3, 4, 5, 6, 7, 9]),
-        (vec![1, 3, 5], vec![2, 4, 6, 8, 10], vec![1, 2, 3, 4, 5, 6, 8, 10]),
-        (vec![1,2,4], vec![1,3,4], vec![1,1,2,3,4,4]),
+        (
+            vec![1, 3, 5, 7, 9],
+            vec![2, 4, 6],
+            vec![1, 2, 3, 4, 5, 6, 7, 9],
+        ),
+        (
+            vec![1, 3, 5],
+            vec![2, 4, 6, 8, 10],
+            vec![1, 2, 3, 4, 5, 6, 8, 10],
+        ),
+        (vec![1, 2, 4], vec![1, 3, 4], vec![1, 1, 2, 3, 4, 4]),
     ];
     for case in test_cases {
-        assert_eq!(Solution::merge_two_lists(ListNode::from_slice(&case.0), ListNode::from_slice(&case.1)).to_vec(), case.2);
+        assert_eq!(
+            Solution::merge_two_lists(ListNode::from_slice(&case.0), ListNode::from_slice(&case.1))
+                .to_vec(),
+            case.2
+        );
     }
 }
 
@@ -174,7 +184,10 @@ fn valid_palindrome_test() {
         ("abca", true),
         ("abc", false),
         ("cuppucu", true),
-        ("cupuufxoohdfpgjdmysgvhmvffcnqxjjxqncffvmhvgsymdjgpfdhooxfuupucu", true),
+        (
+            "cupuufxoohdfpgjdmysgvhmvffcnqxjjxqncffvmhvgsymdjgpfdhooxfuupucu",
+            true,
+        ),
     ];
     for case in test_cases {
         assert_eq!(Solution::valid_palindrome(case.0.to_string()), case.1);
@@ -183,24 +196,23 @@ fn valid_palindrome_test() {
 
 #[test]
 fn remove_duplicates_test() {
-    let test_cases = vec![
-        ("abbaca", "ca"),
-        ("azxxzy", "ay"),
-    ];
+    let test_cases = vec![("abbaca", "ca"), ("azxxzy", "ay")];
     for case in test_cases {
-        assert_eq!(Solution::remove_duplicates(case.0.to_string()), case.1.to_string());
+        assert_eq!(
+            Solution::remove_duplicates(case.0.to_string()),
+            case.1.to_string()
+        );
     }
 }
 
 #[test]
 fn add_strings_test() {
-    let test_cases = vec![
-        ("11", "123", "134"),
-        ("456", "77", "533"),
-        ("0", "0", "0"),
-    ];
+    let test_cases = vec![("11", "123", "134"), ("456", "77", "533"), ("0", "0", "0")];
     for case in test_cases {
-        assert_eq!(Solution::add_strings(case.0.to_string(), case.1.to_string()), case.2.to_string());
+        assert_eq!(
+            Solution::add_strings(case.0.to_string(), case.1.to_string()),
+            case.2.to_string()
+        );
     }
 }
 
@@ -224,14 +236,21 @@ fn diameter_of_binary_tree_test() {
         (vec![Some(1), Some(2), Some(3), Some(4), Some(5)], 3),
     ];
     for case in test_cases {
-        assert_eq!(Solution::diameter_of_binary_tree(TreeNode::from_level_order(&case.0)), case.1);
+        assert_eq!(
+            Solution::diameter_of_binary_tree(TreeNode::from_level_order(&case.0)),
+            case.1
+        );
     }
 }
 
 fn get_maximum_units_test_cases() -> Vec<(Vec<Vec<i32>>, i32, i32)> {
     vec![
         (vec![vec![1, 3], vec![2, 2], vec![3, 1]], 4, 8),
-        (vec![vec![5, 10], vec![2, 5], vec![4, 7], vec![3, 9]], 10, 91),
+        (
+            vec![vec![5, 10], vec![2, 5], vec![4, 7], vec![3, 9]],
+            10,
+            91,
+        ),
     ]
 }
 
@@ -251,14 +270,8 @@ fn maximum_units_v2_test() {
 
 fn get_min_cost_climbing_stairs_test_cases() -> Vec<(Vec<i32>, i32)> {
     vec![
-        (
-            vec![10, 15, 20],
-            15
-        ),
-        (
-            vec![1, 100, 1, 1, 1, 100, 1, 1, 100, 1],
-            6
-        ),
+        (vec![10, 15, 20], 15),
+        (vec![1, 100, 1, 1, 1, 100, 1, 1, 100, 1], 6),
     ]
 }
 
@@ -314,10 +327,7 @@ fn is_palindrome() {
 }
 
 fn get_min_cost_to_move_chips_test_cases() -> Vec<(Vec<i32>, i32)> {
-    vec![
-        (vec![1, 2, 3], 1),
-        (vec![2, 2, 2, 3, 3], 2),
-    ]
+    vec![(vec![1, 2, 3], 1), (vec![2, 2, 2, 3, 3], 2)]
 }
 
 #[test]
@@ -338,22 +348,67 @@ fn min_cost_to_move_chips_v2_test() {
 fn reorder_log_files_test() {
     let test_cases = vec![
         (
-            vec!["dig1 8 1 5 1", "let1 art can", "dig2 3 6", "let2 own kit dig", "let3 art zero"],
-            vec!["let1 art can", "let3 art zero", "let2 own kit dig", "dig1 8 1 5 1", "dig2 3 6"],
+            vec![
+                "dig1 8 1 5 1",
+                "let1 art can",
+                "dig2 3 6",
+                "let2 own kit dig",
+                "let3 art zero",
+            ],
+            vec![
+                "let1 art can",
+                "let3 art zero",
+                "let2 own kit dig",
+                "dig1 8 1 5 1",
+                "dig2 3 6",
+            ],
         ),
         (
-            vec!["a1 9 2 3 1", "g1 act car", "zo4 4 7", "ab1 off key dog", "a8 act zoo"],
-            vec!["g1 act car", "a8 act zoo", "ab1 off key dog", "a1 9 2 3 1", "zo4 4 7"],
+            vec![
+                "a1 9 2 3 1",
+                "g1 act car",
+                "zo4 4 7",
+                "ab1 off key dog",
+                "a8 act zoo",
+            ],
+            vec![
+                "g1 act car",
+                "a8 act zoo",
+                "ab1 off key dog",
+                "a1 9 2 3 1",
+                "zo4 4 7",
+            ],
         ),
         (
-            vec!["dig1 8 1 5 1","let1 art zero can","dig2 3 6","let2 own kit dig","let3 art zero"],
-            vec!["let3 art zero","let1 art zero can","let2 own kit dig","dig1 8 1 5 1","dig2 3 6"],
-        )
+            vec![
+                "dig1 8 1 5 1",
+                "let1 art zero can",
+                "dig2 3 6",
+                "let2 own kit dig",
+                "let3 art zero",
+            ],
+            vec![
+                "let3 art zero",
+                "let1 art zero can",
+                "let2 own kit dig",
+                "dig1 8 1 5 1",
+                "dig2 3 6",
+            ],
+        ),
     ];
 
     for case in test_cases {
-        assert_eq!(Solution::reorder_log_files(
-            case.0.into_iter().map(|x| x.to_string()).collect::<Vec<_>>()),
-                 case.1.into_iter().map(|x| x.to_string()).collect::<Vec<_>>());
+        assert_eq!(
+            Solution::reorder_log_files(
+                case.0
+                    .into_iter()
+                    .map(|x| x.to_string())
+                    .collect::<Vec<_>>()
+            ),
+            case.1
+                .into_iter()
+                .map(|x| x.to_string())
+                .collect::<Vec<_>>()
+        );
     }
 }

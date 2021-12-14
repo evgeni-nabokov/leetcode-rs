@@ -1,16 +1,16 @@
 #[cfg(test)]
 mod tests;
 
-use std::collections::HashMap;
-use std::mem::replace;
-use std::rc::Rc;
 use std::cell::RefCell;
 use std::cmp::Ordering;
 use std::collections::BinaryHeap;
+use std::collections::HashMap;
 use std::iter::FromIterator;
+use std::mem::replace;
+use std::rc::Rc;
 
-use crate::common::tree_node::TreeNode;
 use crate::common::list_node::ListNode;
+use crate::common::tree_node::TreeNode;
 
 struct Solution;
 
@@ -25,7 +25,7 @@ impl Solution {
         for i in 1..nums.len() {
             let a = target - nums[i];
             if let Some(b) = map.get(&a) {
-                return vec![*b as i32, i as i32]
+                return vec![*b as i32, i as i32];
             } else {
                 map.insert(nums[i], i);
             }
@@ -65,18 +65,18 @@ impl Solution {
             let curr_c = *b as char;
             sum += match (prev_c, curr_c) {
                 ('C', 'M') => 800,
-                ( _ , 'M') => 1000,
+                (_, 'M') => 1000,
                 ('C', 'D') => 300,
-                ( _ , 'D') => 500,
+                (_, 'D') => 500,
                 ('X', 'C') => 80,
-                ( _ , 'C') => 100,
+                (_, 'C') => 100,
                 ('X', 'L') => 30,
-                ( _ , 'L') => 50,
+                (_, 'L') => 50,
                 ('I', 'X') => 8,
-                ( _ , 'X') => 10,
+                (_, 'X') => 10,
                 ('I', 'V') => 3,
-                ( _ , 'V') => 5,
-                ( _ , 'I') => 1,
+                (_, 'V') => 5,
+                (_, 'I') => 1,
                 _ => unreachable!(),
             };
             prev_c = curr_c;
@@ -131,7 +131,7 @@ impl Solution {
 
     // 1342. Number of Steps to Reduce a Number to Zero (Easy).
     // https://leetcode.com/problems/number-of-steps-to-reduce-a-number-to-zero/
-    pub fn number_of_steps (num: i32) -> i32 {
+    pub fn number_of_steps(num: i32) -> i32 {
         let mut cnt = 0;
         let mut n = num;
         while n != 0 {
@@ -168,7 +168,10 @@ impl Solution {
     // Time complexity: O(N).
     // Space complexity: O(N).
     pub fn reverse_list_v2(head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
-        fn solve(curr: Option<Box<ListNode>>, prev: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
+        fn solve(
+            curr: Option<Box<ListNode>>,
+            prev: Option<Box<ListNode>>,
+        ) -> Option<Box<ListNode>> {
             if let Some(mut curr_inner) = curr {
                 solve(replace(&mut curr_inner.next, prev), Some(curr_inner))
             } else {
@@ -180,9 +183,16 @@ impl Solution {
 
     // 21. Merge Two Sorted Lists.
     // https://leetcode.com/problems/merge-two-sorted-lists/
-    pub fn merge_two_lists(mut l1: Option<Box<ListNode>>, mut l2: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
-        if l1.is_none() { return l2; }
-        if l2.is_none() { return l1; }
+    pub fn merge_two_lists(
+        mut l1: Option<Box<ListNode>>,
+        mut l2: Option<Box<ListNode>>,
+    ) -> Option<Box<ListNode>> {
+        if l1.is_none() {
+            return l2;
+        }
+        if l2.is_none() {
+            return l1;
+        }
 
         let mut l3: Box<ListNode> = Box::new(ListNode::new(0)); // Sentinel node.
         let mut prev_node: &mut Box<ListNode> = &mut l3;
@@ -289,7 +299,8 @@ impl Solution {
                         return false;
                     }
 
-                    return solve(&sub_s[left + 1..=right], errors + 1) || solve(&sub_s[left..right], errors + 1);
+                    return solve(&sub_s[left + 1..=right], errors + 1)
+                        || solve(&sub_s[left..right], errors + 1);
                 }
                 left += 1;
                 right -= 1;
@@ -326,14 +337,25 @@ impl Solution {
     // Time complexity: O(N).
     // Space complexity: O(N).
     pub fn add_strings(num_1: String, num_2: String) -> String {
-        let mut digs_1 = num_1.bytes().rev().map(|c| c - '0' as u8).collect::<Vec<_>>();
-        let mut digs_2 = num_2.bytes().rev().map(|c| c - '0' as u8).collect::<Vec<_>>();
+        let mut digs_1 = num_1
+            .bytes()
+            .rev()
+            .map(|c| c - '0' as u8)
+            .collect::<Vec<_>>();
+        let mut digs_2 = num_2
+            .bytes()
+            .rev()
+            .map(|c| c - '0' as u8)
+            .collect::<Vec<_>>();
         if digs_1.len() < digs_2.len() {
             std::mem::swap(&mut digs_1, &mut digs_2);
         }
         let mut res = Vec::with_capacity(std::cmp::max(digs_1.len(), digs_2.len()) + 1);
         let mut sum = 0;
-        for (d_1, d_2) in digs_1.into_iter().zip(digs_2.into_iter().chain(std::iter::repeat(0))) {
+        for (d_1, d_2) in digs_1
+            .into_iter()
+            .zip(digs_2.into_iter().chain(std::iter::repeat(0)))
+        {
             sum += d_1 + d_2;
             if sum > 9 {
                 sum -= 10;
@@ -347,7 +369,10 @@ impl Solution {
         if sum > 0 {
             res.push(sum);
         }
-        res.into_iter().rev().map(|d| (d + '0' as u8) as char).collect()
+        res.into_iter()
+            .rev()
+            .map(|d| (d + '0' as u8) as char)
+            .collect()
     }
 
     // 1588. Sum of All Odd Length Subarrays.
@@ -435,9 +460,10 @@ impl Solution {
             }
         }
 
-        let mut pq = BinaryHeap::from_iter(
-            box_types.into_iter().map(|x| BoxType { box_count: x[0], unit_count: x[1] })
-        );
+        let mut pq = BinaryHeap::from_iter(box_types.into_iter().map(|x| BoxType {
+            box_count: x[0],
+            unit_count: x[1],
+        }));
 
         let mut unit_count = 0;
         let mut remaining_truck_size = truck_size;
@@ -453,7 +479,7 @@ impl Solution {
 
     // 746. Min Cost Climbing Stairs
     // https://leetcode.com/problems/min-cost-climbing-stairs/
-    // Top-down DP recursive method.
+    // Recursive top-down DP method.
     // Time complexity: O(N).
     // Space complexity: O(N).
     pub fn min_cost_climbing_stairs(cost: Vec<i32>) -> i32 {
@@ -464,7 +490,8 @@ impl Solution {
             if memo[i] >= 0 {
                 return memo[i];
             }
-            memo[i] = (cost[i - 1] + solve(&cost, i - 1, memo)).min(cost[i - 2] + solve(&cost, i - 2, memo));
+            memo[i] = (cost[i - 1] + solve(&cost, i - 1, memo))
+                .min(cost[i - 2] + solve(&cost, i - 2, memo));
             memo[i]
         }
 
@@ -585,19 +612,19 @@ impl Solution {
                 (false, false) => {
                     let l = x.0.len().min(y.0.len());
                     for i in 1..l {
-                        let ord =  x.0[i].cmp(&y.0[i]);
+                        let ord = x.0[i].cmp(&y.0[i]);
                         if ord != Ordering::Equal {
                             return ord;
                         }
                     }
 
-                    let ord =  x.0.len().cmp(&y.0.len());
+                    let ord = x.0.len().cmp(&y.0.len());
                     if ord != Ordering::Equal {
                         return ord;
                     }
 
                     x.0[0].cmp(&y.0[0])
-                },
+                }
             }
         });
 

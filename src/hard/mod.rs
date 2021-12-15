@@ -1,6 +1,6 @@
+mod stream_checker;
 #[cfg(test)]
 mod tests;
-mod stream_checker;
 
 struct Solution;
 
@@ -98,12 +98,43 @@ impl Solution {
             return "Zero".to_string();
         }
 
-        let numerals_1 = ["One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten",
-            "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen",
-            "Eighteen", "Nineteen"];
-        let numerals_2 = ["Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"];
+        let numerals_1 = [
+            "One",
+            "Two",
+            "Three",
+            "Four",
+            "Five",
+            "Six",
+            "Seven",
+            "Eight",
+            "Nine",
+            "Ten",
+            "Eleven",
+            "Twelve",
+            "Thirteen",
+            "Fourteen",
+            "Fifteen",
+            "Sixteen",
+            "Seventeen",
+            "Eighteen",
+            "Nineteen",
+        ];
+        let numerals_2 = [
+            "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety",
+        ];
 
-        let numerals_3 = ["Thousand", "Million", "Billion", "Trillion", "Quadrillion", "Quintillion", "Sextillion", "Septillion", "Octillion", "Nonillion"];
+        let numerals_3 = [
+            "Thousand",
+            "Million",
+            "Billion",
+            "Trillion",
+            "Quadrillion",
+            "Quintillion",
+            "Sextillion",
+            "Septillion",
+            "Octillion",
+            "Nonillion",
+        ];
 
         let mut res = Vec::new();
         let mut chunk_idx = 0;
@@ -138,6 +169,10 @@ impl Solution {
             num /= 1000;
         }
 
-        res.into_iter().rev().flat_map(|x| x).collect::<Vec<String>>().join(" ")
+        res.into_iter()
+            .rev()
+            .flat_map(|x| x)
+            .collect::<Vec<String>>()
+            .join(" ")
     }
 }

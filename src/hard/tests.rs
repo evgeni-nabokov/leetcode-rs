@@ -1,23 +1,37 @@
-use super::*;
 use super::stream_checker::StreamChecker;
+use super::*;
 
 #[test]
 fn lowest_common_ancestor_test() {
     let test_cases = vec![
+        (vec!["cat", "dog", "catdog"], vec!["catdog"]),
         (
-            vec!["cat","dog","catdog"],
-            vec!["catdog"],
-        ),
-        (
-            vec!["cat", "cats", "catsdogcats", "dog", "dogcatsdog", "hippopotamuses", "rat", "ratcatdogcat"],
-            vec!["catsdogcats", "dogcatsdog","ratcatdogcat"],
+            vec![
+                "cat",
+                "cats",
+                "catsdogcats",
+                "dog",
+                "dogcatsdog",
+                "hippopotamuses",
+                "rat",
+                "ratcatdogcat",
+            ],
+            vec!["catsdogcats", "dogcatsdog", "ratcatdogcat"],
         ),
     ];
     for case in test_cases {
         let mut actual = Solution::find_all_concatenated_words_in_a_dict(
-            case.0.into_iter().map(|x| x.to_string()).collect::<Vec<String>>());
+            case.0
+                .into_iter()
+                .map(|x| x.to_string())
+                .collect::<Vec<String>>(),
+        );
         actual.sort_unstable();
-        let mut expected = case.1.into_iter().map(|x| x.to_string()).collect::<Vec<String>>();
+        let mut expected = case
+            .1
+            .into_iter()
+            .map(|x| x.to_string())
+            .collect::<Vec<String>>();
         expected.sort_unstable();
         assert_eq!(actual, expected);
     }
@@ -43,7 +57,12 @@ fn number_to_words_test() {
 
 #[test]
 fn stream_checker_test() {
-    let mut obj = StreamChecker::new(["cd", "f", "kl"].into_iter().map(|x| x.to_string()).collect());
+    let mut obj = StreamChecker::new(
+        ["cd", "f", "kl"]
+            .into_iter()
+            .map(|x| x.to_string())
+            .collect(),
+    );
     assert_eq!(obj.query('a'), false);
     assert_eq!(obj.query('b'), false);
     assert_eq!(obj.query('c'), false);
@@ -57,7 +76,12 @@ fn stream_checker_test() {
     assert_eq!(obj.query('k'), false);
     assert_eq!(obj.query('l'), true);
 
-    let mut obj = StreamChecker::new(["ab","ba","aaab", "abab","baa"].into_iter().map(|x| x.to_string()).collect());
+    let mut obj = StreamChecker::new(
+        ["ab", "ba", "aaab", "abab", "baa"]
+            .into_iter()
+            .map(|x| x.to_string())
+            .collect(),
+    );
     assert_eq!(obj.query('a'), false);
     assert_eq!(obj.query('a'), false);
     assert_eq!(obj.query('a'), false);

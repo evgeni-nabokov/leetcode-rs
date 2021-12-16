@@ -8,6 +8,7 @@ use std::cmp::{Ordering, Reverse};
 use std::collections::{BinaryHeap, HashMap};
 use std::mem::swap;
 use std::rc::Rc;
+use std::str;
 
 use crate::common::list_node::ListNode;
 use crate::common::tree_node::TreeNode;
@@ -1163,5 +1164,59 @@ impl Solution {
         let target_sum = sum / 2;
         let mut memo = vec![vec![None; target_sum as usize + 1]; nums.len()];
         solve(&nums, 0, target_sum, &mut memo)
+    }
+
+    // 93. Restore IP Addresses
+    // https://leetcode.com/problems/restore-ip-addresses/
+    // Backtracking method.
+    // Time complexity: O(1).
+    // Space complexity: O(1).
+    pub fn restore_ip_addresses(s: String) -> Vec<String> {
+        fn is_valid(bytes: &[u8]) -> bool {
+            if bytes.len() == 1 {
+                return true;
+            }
+
+            if bytes.is_empty() || bytes.len() > 3 || bytes[0] == b'0' {
+                return false;
+            }
+
+            bytes.iter().fold(0, |num, d| num * 10 + (d - b'0') as u16) <= 255
+        }
+
+        fn build_addr(groups: &[&[u8]]) -> String {
+            groups
+                .into_iter()
+                .map(|x| str::from_utf8(x).unwrap())
+                .collect::<Vec<_>>()
+                .join(".")
+        }
+
+        fn bt<'a>(bytes: &'a [u8], start: usize, groups: &mut Vec<&'a [u8]>, res: &mut Vec<String>) {
+            if groups.len() == 3 {
+                let group = &bytes[start..];
+                if is_valid(group) {
+                    groups.push(group);
+                    res.push(build_addr(groups));
+                    groups.pop();
+                }
+            }
+
+            let end = bytes.len().min(start + 3);
+            for i in start..end {
+                let group = &bytes[start..=i];
+                if is_valid(group) {
+                    groups.push(group);
+                    bt(bytes, i + 1, groups, res);
+                    groups.pop();
+                }
+            }
+        }
+
+        let mut res = vec![];
+        let mut groups = vec![];
+        bt(s.as_bytes(), 0, &mut groups, &mut res);
+
+        res
     }
 }

@@ -719,3 +719,32 @@ fn can_partition_test() {
         assert_eq!(Solution::can_partition(case.0), case.1);
     }
 }
+
+#[test]
+fn restore_ip_addresses_test() {
+    let test_cases = vec![
+        ("0000", vec!["0.0.0.0"]),
+        ("000125", vec!["0.0.0.125"]),
+        ("25525511135", vec!["255.255.11.135", "255.255.111.35"]),
+        (
+            "101023",
+            vec![
+                "1.0.10.23",
+                "1.0.102.3",
+                "10.1.0.23",
+                "10.10.2.3",
+                "101.0.2.3",
+            ],
+        ),
+    ];
+    for case in test_cases {
+        assert_eq!(
+            Solution::restore_ip_addresses(case.0.to_string()),
+            case.1
+                .into_iter()
+                .map(|x| x.to_string())
+                .collect::<Vec<_>>()
+        );
+    }
+}
+

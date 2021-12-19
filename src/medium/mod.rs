@@ -71,6 +71,8 @@ impl Solution {
 
     // 274. H-Index
     // https://leetcode.com/problems/h-index/
+    // Time complexity: O(N * LogN).
+    // Space complexity: O(1).
     pub fn h_index(mut citations: Vec<i32>) -> i32 {
         if citations.is_empty() {
             return 0;
@@ -1227,7 +1229,7 @@ impl Solution {
 
     // 300. Longest Increasing Subsequence.
     // https://leetcode.com/problems/longest-increasing-subsequence/
-    // Time complexity: O(N).
+    // Time complexity: O(N * LogN).
     // Space complexity: O(N).
     pub fn length_of_lis(nums: Vec<i32>) -> i32 {
         let mut sub = vec![nums[0]];

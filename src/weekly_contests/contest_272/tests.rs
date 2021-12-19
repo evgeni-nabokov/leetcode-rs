@@ -19,3 +19,22 @@ fn first_palindrome_test() {
         );
     }
 }
+
+#[test]
+fn add_spaces_test() {
+    let test_cases = vec![
+        (
+            "LeetcodeHelpsMeLearn",
+            vec![8, 13, 15],
+            "Leetcode Helps Me Learn",
+        ),
+        ("icodeinpython", vec![1, 5, 7, 9], "i code in py thon"),
+        ("spacing", vec![0, 1, 2, 3, 4, 5, 6], " s p a c i n g"),
+    ];
+    for case in test_cases {
+        assert_eq!(
+            Solution::add_spaces(case.0.to_string(), case.1),
+            case.2.to_string()
+        );
+    }
+}

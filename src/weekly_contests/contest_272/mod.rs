@@ -1,6 +1,8 @@
 #[cfg(test)]
 mod tests;
 
+use std::cmp::Ordering;
+
 struct Solution;
 
 impl Solution {
@@ -64,5 +66,44 @@ impl Solution {
         }
 
         res
+    }
+
+    // 2111. Minimum Operations to Make the Array K-Increasing.
+    // https://leetcode.com/problems/minimum-operations-to-make-the-array-k-increasing/
+    // Time complexity: O(N * LogN). ?
+    // Space complexity: O(N).
+    pub fn k_increasing(arr: Vec<i32>, k: i32) -> i32 {
+        let k = k as usize;
+
+        let mut res = 0;
+        let mut sub = vec![];
+        for i in 0..k {
+            sub.push(arr[i]);
+            let mut j = i + k;
+            let mut cnt = 1;
+            while j < arr.len() {
+                match arr[j].cmp(&sub[sub.len() - 1]) {
+                    Ordering::Greater | Ordering::Equal => sub.push(arr[j]),
+                    Ordering::Less => {
+                        let mut left = 0;
+                        loop {
+                            match sub[left..].binary_search(&arr[j]) {
+                                Err(x) => {
+                                    sub[left + x] = arr[j];
+                                    break;
+                                }
+                                Ok(x) => left = x + 1,
+                            }
+                        }
+                    }
+                }
+                j += k;
+                cnt += 1;
+            }
+            res += cnt - sub.len();
+            sub.clear();
+        }
+
+        res as _
     }
 }

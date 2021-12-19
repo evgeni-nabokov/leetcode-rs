@@ -46,3 +46,21 @@ fn get_descent_periods_test() {
         assert_eq!(Solution::get_descent_periods(case.0), case.1);
     }
 }
+
+#[test]
+fn k_increasing_test() {
+    let test_cases = vec![
+        (vec![5, 4, 3, 2, 1], 1, 4),
+        (vec![4, 1, 5, 2, 6, 2], 2, 0),
+        (vec![4, 1, 5, 2, 6, 2], 3, 2),
+        (vec![2, 2, 2, 2, 2, 1, 1, 4, 4, 3, 3, 3, 3, 3], 1, 4),
+        (
+            vec![12, 6, 12, 6, 14, 2, 13, 17, 3, 8, 11, 7, 4, 11, 18, 8, 8, 3],
+            1,
+            12,
+        ),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::k_increasing(case.0, case.1), case.2);
+    }
+}

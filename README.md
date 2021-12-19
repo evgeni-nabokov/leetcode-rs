@@ -1,4 +1,4 @@
-### List of solved problems (278)
+### List of solved problems (279)
 1. **1** Two Sum https://leetcode.com/problems/two-sum/ *Easy*
 2. **2** Add Two Numbers // https://leetcode.com/problems/add-two-numbers/ *Medium* 
 3. **5** Longest Palindromic Substring https://leetcode.com/problems/longest-palindromic-substring/ *Medium*
@@ -277,3 +277,4 @@
 276. **2105** Watering Plants II https://leetcode.com/problems/watering-plants-ii/ *Medium*
 277. **2108** Find First Palindromic String in the Array https://leetcode.com/problems/find-first-palindromic-string-in-the-array/ *Easy*
 278. **2109** Adding Spaces to a String https://leetcode.com/problems/adding-spaces-to-a-string/ *Easy*
+279. **2110** Number of Smooth Descent Periods of a Stock https://leetcode.com/problems/number-of-smooth-descent-periods-of-a-stock/ *Medium*

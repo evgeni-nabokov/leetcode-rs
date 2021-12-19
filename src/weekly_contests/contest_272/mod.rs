@@ -44,4 +44,25 @@ impl Solution {
 
         spaced_bytes.into_iter().map(|x| x as char).collect()
     }
+
+    // 2110. Number of Smooth Descent Periods of a Stock.
+    // https://leetcode.com/problems/number-of-smooth-descent-periods-of-a-stock/
+    // Time complexity: O(N).
+    // Space complexity: O(1).
+    pub fn get_descent_periods(prices: Vec<i32>) -> i64 {
+        let mut res = 1;
+        let mut sdp_len = 1;
+
+        for i in 1..prices.len() {
+            if prices[i - 1] - prices[i] == 1 {
+                res += sdp_len;
+                sdp_len += 1;
+            } else {
+                sdp_len = 1;
+            }
+            res += 1;
+        }
+
+        res
+    }
 }

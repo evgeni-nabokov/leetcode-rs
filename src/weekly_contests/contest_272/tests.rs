@@ -38,3 +38,11 @@ fn add_spaces_test() {
         );
     }
 }
+
+#[test]
+fn get_descent_periods_test() {
+    let test_cases = vec![(vec![3, 2, 1, 4], 7), (vec![8, 6, 7, 7], 4), (vec![1], 1)];
+    for case in test_cases {
+        assert_eq!(Solution::get_descent_periods(case.0), case.1);
+    }
+}

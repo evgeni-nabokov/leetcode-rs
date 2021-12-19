@@ -25,4 +25,23 @@ impl Solution {
 
         String::new()
     }
+
+    // 2109. Adding Spaces to a String.
+    // https://leetcode.com/problems/adding-spaces-to-a-string/
+    // Time complexity: O(N).
+    // Space complexity: O(N).
+    pub fn add_spaces(s: String, spaces: Vec<i32>) -> String {
+        let bytes = s.as_bytes();
+        let mut spaced_bytes = vec![];
+        let mut space_idx = 0;
+        for i in 0..bytes.len() {
+            if space_idx < spaces.len() && i == spaces[space_idx] as usize {
+                spaced_bytes.push(b' ');
+                space_idx += 1;
+            }
+            spaced_bytes.push(bytes[i]);
+        }
+
+        spaced_bytes.into_iter().map(|x| x as char).collect()
+    }
 }

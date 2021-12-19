@@ -1192,7 +1192,12 @@ impl Solution {
                 .join(".")
         }
 
-        fn bt<'a>(bytes: &'a [u8], start: usize, groups: &mut Vec<&'a [u8]>, res: &mut Vec<String>) {
+        fn bt<'a>(
+            bytes: &'a [u8],
+            start: usize,
+            groups: &mut Vec<&'a [u8]>,
+            res: &mut Vec<String>,
+        ) {
             if groups.len() == 3 {
                 let group = &bytes[start..];
                 if is_valid(group) {
@@ -1218,5 +1223,28 @@ impl Solution {
         bt(s.as_bytes(), 0, &mut groups, &mut res);
 
         res
+    }
+
+    // 300. Longest Increasing Subsequence.
+    // https://leetcode.com/problems/longest-increasing-subsequence/
+    // Time complexity: O(N).
+    // Space complexity: O(N).
+    pub fn length_of_lis(nums: Vec<i32>) -> i32 {
+        let mut sub = vec![nums[0]];
+
+        for i in 1..nums.len() {
+            match nums[i].cmp(&sub[sub.len() - 1]) {
+                Ordering::Greater => sub.push(nums[i]),
+                Ordering::Less => {
+                    match sub.binary_search(&nums[i]) {
+                        Err(j) => sub[j] = nums[i],
+                        _ => (),
+                    };
+                }
+                _ => (),
+            }
+        }
+
+        sub.len() as _
     }
 }

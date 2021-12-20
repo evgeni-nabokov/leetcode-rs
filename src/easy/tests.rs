@@ -427,3 +427,19 @@ fn is_toeplitz_matrix_test() {
         assert_eq!(Solution::is_toeplitz_matrix(case.0), case.1);
     }
 }
+
+#[test]
+fn minimum_abs_difference_test() {
+    let test_cases = vec![
+        (vec![4, 2, 1, 3], vec![vec![1, 2], vec![2, 3], vec![3, 4]]),
+        (vec![1, 3, 6, 10, 15], vec![vec![1, 3]]),
+        (
+            vec![3, 8, -10, 23, 19, -4, -14, 27],
+            vec![vec![-14, -10], vec![19, 23], vec![23, 27]],
+        ),
+    ];
+
+    for case in test_cases {
+        assert_eq!(Solution::minimum_abs_difference(case.0), case.1);
+    }
+}

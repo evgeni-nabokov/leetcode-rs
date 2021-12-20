@@ -646,4 +646,26 @@ impl Solution {
 
         true
     }
+
+    // 1200. Minimum Absolute Difference.
+    // https://leetcode.com/problems/minimum-absolute-difference/
+    // Time complexity: O(N * LogN).
+    // Space complexity: O(1).
+    pub fn minimum_abs_difference(mut arr: Vec<i32>) -> Vec<Vec<i32>> {
+        arr.sort_unstable();
+
+        let mut min_diff = i32::MAX;
+        for i in 1..arr.len() {
+            min_diff = min_diff.min(arr[i] - arr[i - 1]);
+        }
+
+        let mut res = vec![];
+        for i in 1..arr.len() {
+            if min_diff == arr[i] - arr[i - 1] {
+                res.push(vec![arr[i - 1], arr[i]]);
+            }
+        }
+
+        res
+    }
 }

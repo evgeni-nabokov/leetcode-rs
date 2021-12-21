@@ -5,7 +5,7 @@ mod tests;
 
 use std::cell::RefCell;
 use std::cmp::{Ordering, Reverse};
-use std::collections::{BinaryHeap, HashMap};
+use std::collections::{BinaryHeap, HashMap, VecDeque};
 use std::mem::swap;
 use std::rc::Rc;
 use std::str;
@@ -1248,5 +1248,34 @@ impl Solution {
         }
 
         sub.len() as _
+    }
+
+    // 199. Binary Tree Right Side View.
+    // https://leetcode.com/problems/binary-tree-right-side-view/
+    // Time complexity: O(N).
+    // Space complexity: O(D), where D is a tree diameter.
+    pub fn right_side_view(root: Option<Rc<RefCell<TreeNode>>>) -> Vec<i32> {
+        let mut res = Vec::new();
+        if root.is_none() {
+            return res;
+        }
+
+        let mut queue = VecDeque::new();
+        queue.push_back(root.unwrap());
+        while !queue.is_empty() {
+            res.push(queue.front().as_ref().unwrap().borrow().val);
+            let len = queue.len();
+            for _ in 0..len {
+                let curr = queue.pop_front().unwrap();
+                if curr.borrow().right.is_some() {
+                    queue.push_back(curr.borrow_mut().right.take().unwrap());
+                }
+                if curr.borrow().left.is_some() {
+                    queue.push_back(curr.borrow_mut().left.take().unwrap());
+                }
+            }
+        }
+
+        res
     }
 }

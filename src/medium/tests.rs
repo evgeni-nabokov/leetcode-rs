@@ -759,3 +759,20 @@ fn length_of_lis_test() {
         assert_eq!(Solution::length_of_lis(case.0), case.1);
     }
 }
+
+#[test]
+fn right_side_view_test() {
+    let test_cases = vec![
+        (
+            vec![Some(1), Some(2), Some(3), None, Some(5), None, Some(4)],
+            vec![1, 3, 4],
+        ),
+        (vec![Some(1), None, Some(3)], vec![1, 3]),
+    ];
+    for case in test_cases {
+        assert_eq!(
+            Solution::right_side_view(TreeNode::from_level_order(&case.0)),
+            case.1
+        );
+    }
+}

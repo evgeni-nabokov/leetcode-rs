@@ -760,18 +760,31 @@ fn length_of_lis_test() {
     }
 }
 
-#[test]
-fn right_side_view_test() {
-    let test_cases = vec![
+fn get_right_side_view_test_cases() -> Vec<(Vec<Option<i32>>, Vec<i32>)> {
+    vec![
         (
             vec![Some(1), Some(2), Some(3), None, Some(5), None, Some(4)],
             vec![1, 3, 4],
         ),
         (vec![Some(1), None, Some(3)], vec![1, 3]),
-    ];
-    for case in test_cases {
+    ]
+}
+
+#[test]
+fn right_side_view_test() {
+    for case in get_right_side_view_test_cases() {
         assert_eq!(
             Solution::right_side_view(TreeNode::from_level_order(&case.0)),
+            case.1
+        );
+    }
+}
+
+#[test]
+fn right_side_view_v2_test() {
+    for case in get_right_side_view_test_cases() {
+        assert_eq!(
+            Solution::right_side_view_v2(TreeNode::from_level_order(&case.0)),
             case.1
         );
     }

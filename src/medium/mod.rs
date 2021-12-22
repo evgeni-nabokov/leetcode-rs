@@ -1252,6 +1252,7 @@ impl Solution {
 
     // 199. Binary Tree Right Side View.
     // https://leetcode.com/problems/binary-tree-right-side-view/
+    // BFS (right to left) method.
     // Time complexity: O(N).
     // Space complexity: O(D), where D is a tree diameter.
     pub fn right_side_view(root: Option<Rc<RefCell<TreeNode>>>) -> Vec<i32> {
@@ -1276,6 +1277,28 @@ impl Solution {
             }
         }
 
+        res
+    }
+
+    // DFS (right to left) method.
+    // Time complexity: O(N).
+    // Space complexity: O(D), where D is a tree diameter.
+    pub fn right_side_view_v2(root: Option<Rc<RefCell<TreeNode>>>) -> Vec<i32> {
+        fn dfs(node: &Option<Rc<RefCell<TreeNode>>>, level: usize, res: &mut Vec<i32>) {
+            if node.is_none() {
+                return;
+            }
+
+            if res.len() == level {
+                res.push(node.as_ref().unwrap().borrow().val);
+            }
+
+            dfs(&node.as_ref().unwrap().borrow().right, level + 1, res);
+            dfs(&node.as_ref().unwrap().borrow().left, level + 1, res);
+        }
+
+        let mut res = Vec::new();
+        dfs(&root, 0, &mut res);
         res
     }
 }

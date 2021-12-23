@@ -1301,4 +1301,60 @@ impl Solution {
         dfs(&root, 0, &mut res);
         res
     }
+
+    // 1091. Shortest Path in Binary Matrix.
+    // https://leetcode.com/problems/shortest-path-in-binary-matrix/
+    // BFS method, input rewriting.
+    // Time complexity: O(N).
+    // Space complexity: O(1).
+    pub fn shortest_path_binary_matrix(mut grid: Vec<Vec<i32>>) -> i32 {
+        if grid[0][0] == 1 || grid[grid.len() - 1][grid[0].len() - 1] == 1 {
+            return -1;
+        }
+
+        let dirs: [(i32, i32); 8] = [
+            (-1, 0),
+            (-1, 1),
+            (0, 1),
+            (1, 1),
+            (1, 0),
+            (1, -1),
+            (0, -1),
+            (-1, -1),
+        ];
+
+        let mut queue: VecDeque<(i32, i32)> = VecDeque::new();
+        queue.push_back((0, 0));
+
+        let mut res = 0;
+        while !queue.is_empty() {
+            res += 1;
+            let l = queue.len();
+            for _ in 0..l {
+                let cell = queue.pop_front().unwrap();
+                if cell.0 < 0 || cell.1 < 0 {
+                    continue;
+                }
+
+                let r = cell.0 as usize;
+                let c = cell.1 as usize;
+
+                if r == grid.len() || c == grid[0].len() || grid[r][c] != 0 {
+                    continue;
+                }
+
+                if r == grid.len() - 1 && c == grid[0].len() - 1 {
+                    return res;
+                }
+
+                grid[r][c] = 2;
+
+                for d in &dirs {
+                    queue.push_back((cell.0 + d.0, cell.1 + d.1));
+                }
+            }
+        }
+
+        -1
+    }
 }

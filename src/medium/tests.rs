@@ -789,3 +789,18 @@ fn right_side_view_v2_test() {
         );
     }
 }
+
+fn get_shortest_path_binary_matrix_test_cases() -> Vec<(Vec<Vec<i32>>, i32)> {
+    vec![
+        (vec![vec![0, 1], vec![1, 0]], 2),
+        (vec![vec![0, 0, 0], vec![1, 1, 0], vec![1, 1, 0]], 4),
+        (vec![vec![1, 0, 0], vec![1, 1, 0], vec![1, 1, 0]], -1),
+    ]
+}
+
+#[test]
+fn shortest_path_binary_matrix_test() {
+    for case in get_shortest_path_binary_matrix_test_cases() {
+        assert_eq!(Solution::shortest_path_binary_matrix(case.0), case.1);
+    }
+}

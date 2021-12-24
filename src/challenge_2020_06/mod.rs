@@ -5,12 +5,12 @@ mod randomized_set_v2;
 #[cfg(test)]
 mod tests;
 
-use std::rc::Rc;
 use std::cell::RefCell;
-use std::cmp::{Ordering, max, min};
 use std::char;
+use std::cmp::Ordering;
 use std::collections::{BinaryHeap, HashMap, HashSet};
 use std::iter::FromIterator;
+use std::rc::Rc;
 
 use crate::common::tree_node::TreeNode;
 
@@ -33,7 +33,10 @@ impl Solution {
                 Solution::invert_tree(RefCell::borrow_mut(&some).right.clone());
             } else if left.is_some() && right.is_some() {
                 let node = RefCell::borrow(&some);
-                node.left.as_ref().unwrap().swap(node.right.as_ref().unwrap());
+                node.left
+                    .as_ref()
+                    .unwrap()
+                    .swap(node.right.as_ref().unwrap());
                 Solution::invert_tree(node.left.clone());
                 Solution::invert_tree(node.right.clone());
             }
@@ -48,13 +51,16 @@ impl Solution {
     pub fn two_city_sched_cost(mut costs: Vec<Vec<i32>>) -> i32 {
         costs.sort_unstable_by_key(|a| a[0] - a[1]);
         let n = costs.len() / 2;
-        costs.iter().take(n).map(|x| x[0]).sum::<i32>() + costs.iter().skip(n).map(|x| x[1]).sum::<i32>()
+        costs.iter().take(n).map(|x| x[0]).sum::<i32>()
+            + costs.iter().skip(n).map(|x| x[1]).sum::<i32>()
     }
 
     // 344. Reverse String.
     // https://leetcode.com/problems/reverse-string/
     pub fn reverse_string(s: &mut Vec<char>) {
-        if s.is_empty() { return; }
+        if s.is_empty() {
+            return;
+        }
         let mut left = 0;
         let mut right = s.len() - 1;
         while left < right {
@@ -104,8 +110,12 @@ impl Solution {
     // 518. Coin Change 2.
     // https://leetcode.com/problems/coin-change-2/
     pub fn change(amount: i32, coins: Vec<i32>) -> i32 {
-        if amount == 0 { return 1; }
-        if coins.is_empty() { return 0; }
+        if amount == 0 {
+            return 1;
+        }
+        if coins.is_empty() {
+            return 0;
+        }
         let mut table = vec![vec![0; amount as usize]; coins.len()];
         for row in 0..coins.len() {
             for col in 0..amount as usize {
@@ -114,7 +124,7 @@ impl Solution {
                 table[row][col] = match amt - cn {
                     0 => 1,
                     d if d > 0 => table[row][d as usize - 1],
-                    _ => 0
+                    _ => 0,
                 } + if row == 0 { 0 } else { table[row - 1][col] };
             }
         }
@@ -124,7 +134,9 @@ impl Solution {
     // 231. Power of Two.
     // https://leetcode.com/problems/power-of-two/
     pub fn is_power_of_two(mut n: i32) -> bool {
-        if n <= 0 { return false; }
+        if n <= 0 {
+            return false;
+        }
         loop {
             if n == 1 {
                 return true;
@@ -147,8 +159,12 @@ impl Solution {
     // 392. Is Subsequence.
     // https://leetcode.com/problems/is-subsequence/
     pub fn is_subsequence(s: String, t: String) -> bool {
-        if !s.is_empty() && t.is_empty() { return false; }
-        if s.is_empty() { return true; }
+        if !s.is_empty() && t.is_empty() {
+            return false;
+        }
+        if s.is_empty() {
+            return true;
+        }
         let mut i = 0;
         let s_chars: Vec<char> = s.chars().collect();
         for c in t.chars() {
@@ -174,7 +190,9 @@ impl Solution {
     // 75. Sort Colors.
     // https://leetcode.com/problems/sort-colors/.
     pub fn sort_colors(nums: &mut Vec<i32>) {
-        if nums.len() < 2 { return; }
+        if nums.len() < 2 {
+            return;
+        }
         let mut left = 0;
         let mut right = nums.len() - 1;
         let mut i = 0;
@@ -185,14 +203,14 @@ impl Solution {
                     nums.swap(i, left);
                     left += 1;
                     i += 1;
-                },
+                }
                 2 => {
                     nums.swap(i, right);
                     if right == 0 {
                         break;
                     }
                     right -= 1;
-                },
+                }
                 _ => i += 1,
             }
         }
@@ -201,7 +219,9 @@ impl Solution {
     // 368. Largest Divisible Subset.
     // https://leetcode.com/problems/largest-divisible-subset/
     pub fn largest_divisible_subset(mut nums: Vec<i32>) -> Vec<i32> {
-        if nums.len() < 2 { return nums; }
+        if nums.len() < 2 {
+            return nums;
+        }
         let mut div_count: Vec<usize> = vec![1; nums.len()];
         let mut prev: Vec<isize> = vec![-1; nums.len()];
         nums.sort_unstable();
@@ -218,7 +238,7 @@ impl Solution {
             }
         }
         let mut res: Vec<i32> = Vec::new();
-        let mut i  = max_idx as isize;
+        let mut i = max_idx as isize;
         while i >= 0 {
             res.push(nums[i as usize]);
             i = prev[i as usize];
@@ -264,14 +284,16 @@ impl Solution {
             cost: 0,
             stops: k as usize + 1,
         });
-        while let Some(State { node, cost, stops}) = heap.pop() {
+        while let Some(State { node, cost, stops }) = heap.pop() {
             if node == dst as usize {
                 return cost as i32;
             }
             visited[node] = stops as i32;
             if stops > 0 {
                 for i in 0..adj_mx[node].len() {
-                    if adj_mx[node][i] <= 0 || visited[i] >= stops as i32 - 1 { continue; }
+                    if adj_mx[node][i] <= 0 || visited[i] >= stops as i32 - 1 {
+                        continue;
+                    }
                     let edge_cost = adj_mx[node][i];
                     let next = State {
                         node: i,
@@ -287,9 +309,12 @@ impl Solution {
 
     // 700. Search in a Binary Search Tree.
     // https://leetcode.com/problems/search-in-a-binary-search-tree/
-    pub fn search_bst(root: Option<Rc<RefCell<TreeNode>>>, val: i32) -> Option<Rc<RefCell<TreeNode>>> {
+    pub fn search_bst(
+        root: Option<Rc<RefCell<TreeNode>>>,
+        val: i32,
+    ) -> Option<Rc<RefCell<TreeNode>>> {
         if let Some(some) = root {
-            match RefCell::borrow(&some).val.cmp(&val)  {
+            match RefCell::borrow(&some).val.cmp(&val) {
                 Ordering::Greater => Solution::search_bst(RefCell::borrow(&some).left.clone(), val),
                 Ordering::Less => Solution::search_bst(RefCell::borrow(&some).right.clone(), val),
                 Ordering::Equal => Some(some.clone()),
@@ -349,14 +374,23 @@ impl Solution {
     // 130. Surrounded Regions.
     // https://leetcode.com/problems/surrounded-regions/
     pub fn solve(board: &mut Vec<Vec<char>>) {
-        if board.len() < 3 || board[0].len() < 3 { return; };
+        if board.len() < 3 || board[0].len() < 3 {
+            return;
+        };
 
         let mut reachable_from_edges: Vec<Vec<_>> = vec![vec![false; board[0].len()]; board.len()];
         fn visit(board: &mut Vec<Vec<char>>, visited: &mut Vec<Vec<bool>>, row: isize, col: isize) {
             let r = row as usize;
             let c = col as usize;
-            if row < 0 || r >= board.len() || col < 0 || c >= board[r].len()
-                || visited[r][c] || board[r][c] != 'O' { return; }
+            if row < 0
+                || r >= board.len()
+                || col < 0
+                || c >= board[r].len()
+                || visited[r][c]
+                || board[r][c] != 'O'
+            {
+                return;
+            }
             visited[r][c] = true;
             visit(board, visited, row + 1, col);
             visit(board, visited, row - 1, col);
@@ -367,13 +401,23 @@ impl Solution {
         // Visiting cells on the left & right edges.
         for row in 0..board.len() {
             visit(board, &mut reachable_from_edges, row as isize, 0);
-            visit(board, &mut reachable_from_edges, row as isize, board[row].len() as isize - 1);
+            visit(
+                board,
+                &mut reachable_from_edges,
+                row as isize,
+                board[row].len() as isize - 1,
+            );
         }
 
         // Visiting cells on the top & bottom edges.
         for col in 1..board[0].len() - 1 {
             visit(board, &mut reachable_from_edges, 0, col as isize);
-            visit(board, &mut reachable_from_edges, board.len() as isize - 1, col as isize);
+            visit(
+                board,
+                &mut reachable_from_edges,
+                board.len() as isize - 1,
+                col as isize,
+            );
         }
 
         // Flipping O-chars which are not reachable from the edges.
@@ -384,15 +428,17 @@ impl Solution {
                 }
             }
         }
-   }
+    }
 
     // 275. H-Index II.
     // https://leetcode.com/problems/h-index-ii/
     // ~Log N
     pub fn h_index_ii(citations: Vec<i32>) -> i32 {
-        if citations.is_empty() { return 0; }
+        if citations.is_empty() {
+            return 0;
+        }
         let l = citations.len() as i32;
-        let mut left= 0;
+        let mut left = 0;
         let mut right = l - 1;
         while left <= right {
             let mid = left + (right - left) / 2;
@@ -412,10 +458,12 @@ impl Solution {
     // Explaining video: https://www.coursera.org/lecture/cs-algorithms-theory-machines/longest-repeated-substring-hkJBt
     // Not accepted - TLE.
     pub fn longest_dup_substring(s: String) -> String {
-        if s.len() < 2 { return String::new(); }
+        if s.len() < 2 {
+            return String::new();
+        }
 
         fn get_lcp_len(s1: &[char], s2: &[char]) -> usize {
-            let n = min(s1.len(), s2.len());
+            let n = s1.len().min(s2.len());
             for i in 0..n {
                 if s1[i] != s2[i] {
                     return i;
@@ -443,11 +491,18 @@ impl Solution {
 
     // Binary Search + Rabin-Karp solution.
     pub fn longest_dup_substring_v2(s: String) -> String {
-        if s.len() < 2 { return String::new(); }
+        if s.len() < 2 {
+            return String::new();
+        }
 
-        fn search_dup_substring(codes: &[u64], len: usize, base: u64, modulus: u64) -> Option<usize> {
+        fn search_dup_substring(
+            codes: &[u64],
+            len: usize,
+            base: u64,
+            modulus: u64,
+        ) -> Option<usize> {
             // Rolling hash.
-            let mut hash= 0u64;
+            let mut hash = 0u64;
             // Const value to be used often: (base ^ len) % modulus.
             let mut base_pow_len = 1u64;
             // Compute the hash of first len codes and base_pow_len.
@@ -461,9 +516,12 @@ impl Solution {
             seen.insert(hash);
             for start in 1..=hash_num {
                 // Compute rolling hash in O(1) time.
-                hash = (hash * base - codes[start - 1] * base_pow_len % modulus + modulus) % modulus;
+                hash =
+                    (hash * base - codes[start - 1] * base_pow_len % modulus + modulus) % modulus;
                 hash = (hash + (codes[start + len - 1])) % modulus;
-                if seen.contains(&hash) { return Some(start); }
+                if seen.contains(&hash) {
+                    return Some(start);
+                }
                 seen.insert(hash);
             }
             None
@@ -503,33 +561,49 @@ impl Solution {
     // 60. Permutation Sequence.
     // https://leetcode.com/problems/permutation-sequence/
     pub fn get_permutation(n: i32, k: i32) -> String {
-        if n == 1 { return "1".to_string(); }
+        if n == 1 {
+            return "1".to_string();
+        }
         let mut res: Vec<usize> = Vec::with_capacity(n as usize);
         let block_sizes: [usize; 8] = [1, 2, 6, 24, 120, 720, 5040, 40320];
         let mut digits: Vec<usize> = (1..=n as usize).collect();
         let mut curr_k = k as usize;
         for i in (0..n as usize - 1).rev() {
             let block_size = block_sizes[i];
-            let digit_index = curr_k / block_size - if curr_k > 0 && curr_k % block_size == 0 { 1 } else { 0 };
+            let digit_index = curr_k / block_size
+                - if curr_k > 0 && curr_k % block_size == 0 {
+                    1
+                } else {
+                    0
+                };
             curr_k -= block_size * digit_index;
             res.push(digits.remove(digit_index));
         }
         res.push(digits.pop().unwrap());
-        res.iter().map(|x| char::from_digit(*x as u32, 10).unwrap()).collect()
+        res.iter()
+            .map(|x| char::from_digit(*x as u32, 10).unwrap())
+            .collect()
     }
 
     // 174. Dungeon Game.
     // https://leetcode.com/problems/dungeon-game/
     pub fn calculate_minimum_hp(mut dungeon: Vec<Vec<i32>>) -> i32 {
-        if dungeon.is_empty() || dungeon[0].is_empty() { return 1; }
+        if dungeon.is_empty() || dungeon[0].is_empty() {
+            return 1;
+        }
         let last_r = dungeon.len() - 1;
         let last_c = dungeon[0].len() - 1;
         for row in (0..=last_r).rev() {
             for col in (0..=last_c).rev() {
-                dungeon[row][col] += if col == last_c && row == last_r { 0 }
-                else if col == last_c { dungeon[row + 1][col] }
-                else if row == last_r { dungeon[row][col + 1] }
-                else { max(dungeon[row][col + 1], dungeon[row + 1][col]) };
+                dungeon[row][col] += if col == last_c && row == last_r {
+                    0
+                } else if col == last_c {
+                    dungeon[row + 1][col]
+                } else if row == last_r {
+                    dungeon[row][col + 1]
+                } else {
+                    dungeon[row][col + 1].max(dungeon[row + 1][col])
+                };
                 if dungeon[row][col] > 0 {
                     dungeon[row][col] = 0;
                 }
@@ -544,11 +618,22 @@ impl Solution {
         nums.sort_unstable();
         let mut i = 0;
         loop {
-            if i == nums.len() - 1 { return nums[i]; }
-            if nums[i] == nums[i + 1] && nums[i + 1] == nums[i + 2] { i += 3; continue; }
-            if nums[i] == nums[i + 1] { return nums[i + 2]; }
-            if nums[i] == nums[i + 2] { return nums[i + 1]; }
-            if nums[i + 1] == nums[i + 2] { return nums[i]; }
+            if i == nums.len() - 1 {
+                return nums[i];
+            }
+            if nums[i] == nums[i + 1] && nums[i + 1] == nums[i + 2] {
+                i += 3;
+                continue;
+            }
+            if nums[i] == nums[i + 1] {
+                return nums[i + 2];
+            }
+            if nums[i] == nums[i + 2] {
+                return nums[i + 1];
+            }
+            if nums[i + 1] == nums[i + 2] {
+                return nums[i];
+            }
             break;
         }
         0
@@ -576,7 +661,7 @@ impl Solution {
                 2i32.pow(left_height + 1) - 1
             } else {
                 1 + Solution::count_nodes(RefCell::borrow(&some).left.clone())
-                  + Solution::count_nodes(RefCell::borrow(&some).right.clone())
+                    + Solution::count_nodes(RefCell::borrow(&some).right.clone())
             }
         } else {
             0
@@ -589,7 +674,7 @@ impl Solution {
         // To understand the algorithm, learn what the Catalan numbers are.
         let mut c_k: u64 = 1;
         for k in 0..n as u64 {
-            c_k = c_k * 2 *(2 * k + 1) / (k + 2);
+            c_k = c_k * 2 * (2 * k + 1) / (k + 2);
         }
         c_k as i32
     }
@@ -597,7 +682,9 @@ impl Solution {
     // 287. Find the Duplicate Number.
     // https://leetcode.com/problems/find-the-duplicate-number/.
     pub fn find_duplicate(nums: Vec<i32>) -> i32 {
-        if nums.is_empty() { return 0; }
+        if nums.is_empty() {
+            return 0;
+        }
         let mut slow = nums[nums[0] as usize] as usize;
         let mut fast = nums[slow] as usize;
         while slow != fast {
@@ -640,7 +727,9 @@ impl Solution {
     // 279. Perfect Squares.
     // https://leetcode.com/problems/perfect-squares/
     pub fn num_squares(n: i32) -> i32 {
-        if n <= 3 { return n; }
+        if n <= 3 {
+            return n;
+        }
         let mut dp: Vec<usize> = Vec::with_capacity(n as usize + 1);
         dp.push(0);
         dp.push(1);
@@ -651,8 +740,10 @@ impl Solution {
             let mut j = 1;
             loop {
                 let pn = j * j;
-                if pn > i { break; }
-                dp[i] = min(dp[i], 1 + dp[i - pn]);
+                if pn > i {
+                    break;
+                }
+                dp[i] = dp[i].min(1 + dp[i - pn]);
                 j += 1;
             }
         }
@@ -662,7 +753,9 @@ impl Solution {
     // 332. Reconstruct Itinerary.
     // https://leetcode.com/problems/reconstruct-itinerary/
     pub fn find_itinerary(tickets: Vec<Vec<String>>) -> Vec<String> {
-        if tickets.is_empty() { return vec![]; }
+        if tickets.is_empty() {
+            return vec![];
+        }
         let len = tickets.len() + 1;
         let mut adj_map: HashMap<String, Vec<String>> = HashMap::with_capacity(len);
         for tk in tickets {
@@ -707,7 +800,7 @@ impl Solution {
         #[derive(Clone, Debug, Default)]
         pub struct TrieNode {
             children: HashMap<char, TrieNode>,
-            terminal: bool
+            terminal: bool,
         }
 
         impl TrieNode {
@@ -728,9 +821,18 @@ impl Solution {
             }
         }
 
-        fn dfs(board: &mut Vec<Vec<char>>, mut num_words: usize,
-               node: &mut TrieNode, r: isize, c: isize, path: &mut Vec<char>, res: &mut Vec<String>) {
-            if num_words == 0 { return; }
+        fn dfs(
+            board: &mut Vec<Vec<char>>,
+            mut num_words: usize,
+            node: &mut TrieNode,
+            r: isize,
+            c: isize,
+            path: &mut Vec<char>,
+            res: &mut Vec<String>,
+        ) {
+            if num_words == 0 {
+                return;
+            }
 
             if node.terminal {
                 res.push(path.iter().collect::<String>());
@@ -738,17 +840,29 @@ impl Solution {
                 num_words -= 1;
             }
 
-            if r < 0 || c < 0 || r as usize >= board.len() || c as usize >= board[0].len() { return; }
+            if r < 0 || c < 0 || r as usize >= board.len() || c as usize >= board[0].len() {
+                return;
+            }
 
             let ur = r as usize;
             let uc = c as usize;
             let ch = board[ur][uc];
-            if !node.children.contains_key(&ch) { return; }
+            if !node.children.contains_key(&ch) {
+                return;
+            }
 
             board[ur][uc] = '#';
             path.push(ch);
             for (x, y) in vec![(0, -1), (0, 1), (1, 0), (-1, 0)] {
-                dfs(board, num_words, node.children.get_mut(&ch).unwrap(), r + y, c + x, path, res);
+                dfs(
+                    board,
+                    num_words,
+                    node.children.get_mut(&ch).unwrap(),
+                    r + y,
+                    c + x,
+                    path,
+                    res,
+                );
             }
             path.pop();
             board[ur][uc] = ch;
@@ -763,9 +877,17 @@ impl Solution {
         }
 
         let mut res: Vec<String> = Vec::with_capacity(num_words);
-        for r in 0..board.len() as isize{
+        for r in 0..board.len() as isize {
             for c in 0..board[0].len() as isize {
-                dfs(&mut board, num_words, &mut trie, r, c, &mut Vec::<char>::new(), &mut res);
+                dfs(
+                    &mut board,
+                    num_words,
+                    &mut trie,
+                    r,
+                    c,
+                    &mut Vec::<char>::new(),
+                    &mut res,
+                );
             }
         }
         res

@@ -1,4 +1,5 @@
 mod bst_iterator;
+mod snapshot_array;
 mod suggested_products;
 #[cfg(test)]
 mod tests;

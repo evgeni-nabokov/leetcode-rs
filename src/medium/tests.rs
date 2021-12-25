@@ -1,4 +1,5 @@
 use super::bst_iterator::BSTIterator;
+use super::snapshot_array::SnapshotArray;
 use super::*;
 use crate::common::tree_node::BinaryTree;
 
@@ -803,4 +804,20 @@ fn shortest_path_binary_matrix_test() {
     for case in get_shortest_path_binary_matrix_test_cases() {
         assert_eq!(Solution::shortest_path_binary_matrix(case.0), case.1);
     }
+}
+
+#[test]
+fn snapshot_array_test() {
+    let mut obj = SnapshotArray::new(3);
+    obj.set(0, 5);
+
+    assert_eq!(obj.snap(), 0);
+
+    obj.set(0, 6);
+
+    assert_eq!(obj.get(0, 0), 5);
+    assert_eq!(obj.get(1, 0), 0);
+
+    obj.set(1, 1);
+    assert_eq!(obj.get(1, 0), 0);
 }

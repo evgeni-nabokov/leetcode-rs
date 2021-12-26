@@ -1,4 +1,4 @@
-### List of solved problems (285)
+### List of solved problems (286)
 1. **1** Two Sum https://leetcode.com/problems/two-sum/ *Easy*
 2. **2** Add Two Numbers // https://leetcode.com/problems/add-two-numbers/ *Medium* 
 3. **5** Longest Palindromic Substring https://leetcode.com/problems/longest-palindromic-substring/ *Medium*
@@ -284,3 +284,4 @@
 283. **2109** Adding Spaces to a String https://leetcode.com/problems/adding-spaces-to-a-string/ *Easy*
 284. **2110** Number of Smooth Descent Periods of a Stock https://leetcode.com/problems/number-of-smooth-descent-periods-of-a-stock/ *Medium*
 285. **2111** Minimum Operations to Make the Array K-Increasing https://leetcode.com/problems/minimum-operations-to-make-the-array-k-increasing/ *Hard*
+286. **2119** A Number After a Double Reversal https://leetcode.com/problems/a-number-after-a-double-reversal/ *Easy*

@@ -668,4 +668,41 @@ impl Solution {
 
         res
     }
+
+    // 257. Binary Tree Paths.
+    // https://leetcode.com/problems/binary-tree-paths/
+    // DFS method.
+    // Time complexity: O(N).
+    // Space complexity: O(N).
+    pub fn binary_tree_paths(root: Option<Rc<RefCell<TreeNode>>>) -> Vec<String> {
+        fn dfs(node: &TreeNode, path: &mut Vec<i32>, res: &mut Vec<Vec<i32>>) {
+            path.push(node.val);
+
+            match (&node.left, &node.right) {
+                (None, None) => res.push(path.clone()),
+                (Some(left), Some(right)) => {
+                    dfs(&*left.borrow(), &mut path.clone(), res);
+                    dfs(&*right.borrow(), path, res);
+                }
+                (Some(left), None) => dfs(&*left.borrow(), path, res),
+                (None, Some(right)) => dfs(&*right.borrow(), path, res),
+            }
+        }
+
+        if root.is_none() {
+            return vec![];
+        }
+
+        let mut res = vec![];
+        dfs(&root.as_ref().unwrap().borrow(), &mut vec![], &mut res);
+
+        res.into_iter()
+            .map(|v| {
+                v.into_iter()
+                    .map(|x| x.to_string())
+                    .collect::<Vec<_>>()
+                    .join("->")
+            })
+            .collect()
+    }
 }

@@ -443,3 +443,24 @@ fn minimum_abs_difference_test() {
         assert_eq!(Solution::minimum_abs_difference(case.0), case.1);
     }
 }
+
+#[test]
+fn binary_tree_paths_test() {
+    let test_cases = vec![
+        (
+            vec![Some(1), Some(2), Some(3), None, Some(5)],
+            vec!["1->2->5", "1->3"],
+        ),
+        (vec![Some(1)], vec!["1"]),
+    ];
+
+    for case in test_cases {
+        assert_eq!(
+            Solution::binary_tree_paths(TreeNode::from_level_order(&case.0)),
+            case.1
+                .into_iter()
+                .map(|x| x.to_string())
+                .collect::<Vec<_>>()
+        );
+    }
+}

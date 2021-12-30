@@ -821,3 +821,11 @@ fn snapshot_array_test() {
     obj.set(1, 1);
     assert_eq!(obj.get(1, 0), 0);
 }
+
+#[test]
+fn smallest_repunit_div_by_k() {
+    let test_cases = vec![(1, 1), (2, -1), (3, 3), (11, 2)];
+    for case in test_cases {
+        assert_eq!(Solution::smallest_repunit_div_by_k(case.0), case.1);
+    }
+}

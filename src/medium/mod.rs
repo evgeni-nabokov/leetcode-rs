@@ -1358,4 +1358,20 @@ impl Solution {
 
         -1
     }
+
+    // 1015. Smallest Integer Divisible by K.
+    // https://leetcode.com/problems/smallest-integer-divisible-by-k/
+    // Time complexity: O(K).
+    // Space complexity: O(1).
+    pub fn smallest_repunit_div_by_k(k: i32) -> i32 {
+        let mut rem = 0;
+        for n_len in 1..=k {
+            rem = (rem * 10 + 1) % k;
+            if rem == 0 {
+                return n_len;
+            }
+        }
+
+        -1
+    }
 }

@@ -1,4 +1,4 @@
-### List of solved problems (287)
+### List of solved problems (288)
 1. **1** Two Sum https://leetcode.com/problems/two-sum/ *Easy*
 2. **2** Add Two Numbers // https://leetcode.com/problems/add-two-numbers/ *Medium* 
 3. **5** Longest Palindromic Substring https://leetcode.com/problems/longest-palindromic-substring/ *Medium*
@@ -220,69 +220,70 @@
 219. **994** Rotting Oranges https://leetcode.com/problems/rotting-oranges/ *Medium*
 220. **997** Find the Town Judge https://leetcode.com/problems/find-the-town-judge/ *Easy*
 221. **1008** Construct Binary Search Tree from Preorder Traversal https://leetcode.com/problems/construct-binary-search-tree-from-preorder-traversal/ *Medium*
-222. **1022** Sum of Root To Leaf Binary Numbers https://leetcode.com/problems/sum-of-root-to-leaf-binary-numbers/ *Easy*
-223. **1029** Two City Scheduling https://leetcode.com/problems/two-city-scheduling/ *Easy*
-224. **1032** Stream of Characters https://leetcode.com/problems/stream-of-characters/ *Hard*
-225. **1035** Uncrossed Lines https://leetcode.com/problems/uncrossed-lines/ *Medium*
-226. **1041** Robot Bounded In Circle https://leetcode.com/problems/robot-bounded-in-circle/ *Medium*
-227. **1044** Longest Duplicate Substring https://leetcode.com/problems/longest-duplicate-substring/ *Hard*
-228. **1046** Last Stone Weight https://leetcode.com/problems/last-stone-weight/ *Easy*
-229. **1047** Remove All Adjacent Duplicates In String https://leetcode.com/problems/remove-all-adjacent-duplicates-in-string/ *Easy*
-230. **1089** Duplicate Zeros https://leetcode.com/problems/duplicate-zeros/ *Easy*
-231. **1091** Shortest Path in Binary Matrix https://leetcode.com/problems/shortest-path-in-binary-matrix/ *Medium*
-232. **1094** Car Pooling https://leetcode.com/problems/car-pooling/ *Medium*
-233. **1099** Two Sum Less Than K https://leetcode.com/problems/two-sum-less-than-k/ *Easy*
-234. **1108** Defanging an IP Address https://leetcode.com/problems/defanging-an-ip-address/ *Easy*
-235. **1143** Longest Common Subsequence https://leetcode.com/problems/longest-common-subsequence/ *Medium*
-236. **1146** Snapshot Array https://leetcode.com/problems/snapshot-array/ *Medium*
-237. **1198** Find Smallest Common Element in All Rows https://leetcode.com/problems/find-smallest-common-element-in-all-rows/ *Medium*
-238. **1200** Minimum Absolute Difference https://leetcode.com/problems/minimum-absolute-difference/ *Easy*
-239. **1209** Remove All Adjacent Duplicates in String II https://leetcode.com/problems/remove-all-adjacent-duplicates-in-string-ii/ *Medium*
-240. **1217** Minimum Cost to Move Chips to The Same Position https://leetcode.com/problems/minimum-cost-to-move-chips-to-the-same-position/ *Easy*
-241. **1232** Check If It Is a Straight Line https://leetcode.com/problems/check-if-it-is-a-straight-line/ *Easy*
-242. **1268** Search Suggestions System https://leetcode.com/problems/search-suggestions-system/ *Medium*
-243. **1272** Remove Interval https://leetcode.com/problems/remove-interval/ *Medium*
-244. **1277** Count Square Submatrices with All Ones https://leetcode.com/problems/count-square-submatrices-with-all-ones/ *Medium*
-245. **1288** Remove Covered Intervals https://leetcode.com/problems/remove-covered-intervals/ *Medium*
-246. **1291** Sequential Digits https://leetcode.com/problems/sequential-digits/ *Medium*
-247. **1290** Convert Binary Number in a Linked List to Integer *Easy*
-248. **1295** Find Numbers with Even Number of Digits https://leetcode.com/problems/find-numbers-with-even-number-of-digits/ *Easy*
-249. **1306** Jump Game III https://leetcode.com/problems/jump-game-iii/ *Medium*
-250. **1325** Delete Leaves With a Given Value https://leetcode.com/problems/delete-leaves-with-a-given-value/ *Medium*
-251. **1342** Number of Steps to Reduce a Number to Zero https://leetcode.com/problems/number-of-steps-to-reduce-a-number-to-zero/ *Easy*
-252. **1344** Angle Between Hands of a Clock https://leetcode.com/problems/angle-between-hands-of-a-clock/ *Medium*
-253. **1423** Maximum Points You Can Obtain from Cards https://leetcode.com/problems/maximum-points-you-can-obtain-from-cards/ *Medium*
-254. **1424** Diagonal Traverse II https://leetcode.com/problems/diagonal-traverse-ii/ *Medium*
-255. **1426** Counting Elements https://leetcode.com/problems/counting-elements/ *Easy*
-256. **1427** Perform String Shifts https://leetcode.com/problems/perform-string-shifts/ *Easy*
-257. **1429** First Unique Number https://leetcode.com/problems/first-unique-number/ *Medium*
-258. **1430** Check If a String Is a Valid Sequence from Root to Leaves Path in a Binary Tree https://leetcode.com/problems/check-if-a-string-is-a-valid-sequence-from-root-to-leaves-path-in-a-binary-tree/ *Medium*
-259. **1446** Consecutive Characters https://leetcode.com/problems/consecutive-characters/ *Easy*
-260. **1448** Count Good Nodes in Binary Tree https://leetcode.com/problems/count-good-nodes-in-binary-tree/ *Medium*
-261. **1465** Maximum Area of a Piece of Cake After Horizontal and Vertical Cuts https://leetcode.com/problems/maximum-area-of-a-piece-of-cake-after-horizontal-and-vertical-cuts/ *Medium*
-262. **1510** Stone Game IV https://leetcode.com/problems/stone-game-iv/ *Hard*
-263. **1588** Sum of All Odd Length Subarrays https://leetcode.com/problems/sum-of-all-odd-length-subarrays/ *Easy*
-264. **1710** Maximum Units on a Truck https://leetcode.com/problems/maximum-units-on-a-truck/ *Easy*
-265. **1991** Find the Middle Index in Array https://leetcode.com/problems/find-the-middle-index-in-array/submissions/ *Easy*
-266. **2062** Count Vowel Substrings of a String https://leetcode.com/problems/count-vowel-substrings-of-a-string/ *Easy*
-267. **2063** Vowels of All Substrings https://leetcode.com/problems/vowels-of-all-substrings/ *Medium*
-268. **2064** Minimized Maximum of Products Distributed to Any Store https://leetcode.com/problems/minimized-maximum-of-products-distributed-to-any-store/ *Medium*
-269. **2065** Maximum Path Quality of a Graph https://leetcode.com/problems/maximum-path-quality-of-a-graph/ *Hard*
-270. **2073** Time Needed to Buy Tickets https://leetcode.com/problems/time-needed-to-buy-tickets/ *Easy*
-271. **2078** Two Furthest Houses With Different Colors https://leetcode.com/problems/two-furthest-houses-with-different-colors/ *Easy*
-272. **2079** Watering Plants https://leetcode.com/problems/watering-plants/ *Easy*
-273. **2080** Range Frequency Queries https://leetcode.com/problems/range-frequency-queries/ *Medium*
-274. **2089** Find Target Indices After Sorting Array https://leetcode.com/problems/find-target-indices-after-sorting-array/ *Easy*
-275. **2090** K Radius Subarray Averages https://leetcode.com/problems/k-radius-subarray-averages/ *Medium*
-276. **2091** Removing Minimum and Maximum From Array https://leetcode.com/problems/removing-minimum-and-maximum-from-array/ *Medium*
-277. **2092** Find All People With Secret https://leetcode.com/problems/find-all-people-with-secret/ *Hard*
-278. **2094** Finding 3-Digit Even Numbers https://leetcode.com/problems/finding-3-digit-even-numbers/ *Easy*
-279. **2103** Rings and Rods https://leetcode.com/problems/rings-and-rods/ *Easy*
-280. **2104** Sum of Subarray Ranges https://leetcode.com/problems/sum-of-subarray-ranges/ *Medium*
-281. **2105** Watering Plants II https://leetcode.com/problems/watering-plants-ii/ *Medium*
-282. **2108** Find First Palindromic String in the Array https://leetcode.com/problems/find-first-palindromic-string-in-the-array/ *Easy*
-283. **2109** Adding Spaces to a String https://leetcode.com/problems/adding-spaces-to-a-string/ *Easy*
-284. **2110** Number of Smooth Descent Periods of a Stock https://leetcode.com/problems/number-of-smooth-descent-periods-of-a-stock/ *Medium*
-285. **2111** Minimum Operations to Make the Array K-Increasing https://leetcode.com/problems/minimum-operations-to-make-the-array-k-increasing/ *Hard*
-286. **2119** A Number After a Double Reversal https://leetcode.com/problems/a-number-after-a-double-reversal/ *Easy*
-287. **2121** Intervals Between Identical Elements https://leetcode.com/problems/intervals-between-identical-elements/ *Medium*
+222. **1015** Smallest Integer Divisible by K https://leetcode.com/problems/smallest-integer-divisible-by-k/ *Medium*
+223. **1022** Sum of Root To Leaf Binary Numbers https://leetcode.com/problems/sum-of-root-to-leaf-binary-numbers/ *Easy*
+224. **1029** Two City Scheduling https://leetcode.com/problems/two-city-scheduling/ *Easy*
+225. **1032** Stream of Characters https://leetcode.com/problems/stream-of-characters/ *Hard*
+226. **1035** Uncrossed Lines https://leetcode.com/problems/uncrossed-lines/ *Medium*
+227. **1041** Robot Bounded In Circle https://leetcode.com/problems/robot-bounded-in-circle/ *Medium*
+228. **1044** Longest Duplicate Substring https://leetcode.com/problems/longest-duplicate-substring/ *Hard*
+229. **1046** Last Stone Weight https://leetcode.com/problems/last-stone-weight/ *Easy*
+230. **1047** Remove All Adjacent Duplicates In String https://leetcode.com/problems/remove-all-adjacent-duplicates-in-string/ *Easy*
+231. **1089** Duplicate Zeros https://leetcode.com/problems/duplicate-zeros/ *Easy*
+232. **1091** Shortest Path in Binary Matrix https://leetcode.com/problems/shortest-path-in-binary-matrix/ *Medium*
+233. **1094** Car Pooling https://leetcode.com/problems/car-pooling/ *Medium*
+234. **1099** Two Sum Less Than K https://leetcode.com/problems/two-sum-less-than-k/ *Easy*
+235. **1108** Defanging an IP Address https://leetcode.com/problems/defanging-an-ip-address/ *Easy*
+236. **1143** Longest Common Subsequence https://leetcode.com/problems/longest-common-subsequence/ *Medium*
+237. **1146** Snapshot Array https://leetcode.com/problems/snapshot-array/ *Medium*
+238. **1198** Find Smallest Common Element in All Rows https://leetcode.com/problems/find-smallest-common-element-in-all-rows/ *Medium*
+239. **1200** Minimum Absolute Difference https://leetcode.com/problems/minimum-absolute-difference/ *Easy*
+240. **1209** Remove All Adjacent Duplicates in String II https://leetcode.com/problems/remove-all-adjacent-duplicates-in-string-ii/ *Medium*
+241. **1217** Minimum Cost to Move Chips to The Same Position https://leetcode.com/problems/minimum-cost-to-move-chips-to-the-same-position/ *Easy*
+242. **1232** Check If It Is a Straight Line https://leetcode.com/problems/check-if-it-is-a-straight-line/ *Easy*
+243. **1268** Search Suggestions System https://leetcode.com/problems/search-suggestions-system/ *Medium*
+244. **1272** Remove Interval https://leetcode.com/problems/remove-interval/ *Medium*
+245. **1277** Count Square Submatrices with All Ones https://leetcode.com/problems/count-square-submatrices-with-all-ones/ *Medium*
+246. **1288** Remove Covered Intervals https://leetcode.com/problems/remove-covered-intervals/ *Medium*
+247. **1291** Sequential Digits https://leetcode.com/problems/sequential-digits/ *Medium*
+248. **1290** Convert Binary Number in a Linked List to Integer *Easy*
+249. **1295** Find Numbers with Even Number of Digits https://leetcode.com/problems/find-numbers-with-even-number-of-digits/ *Easy*
+250. **1306** Jump Game III https://leetcode.com/problems/jump-game-iii/ *Medium*
+251. **1325** Delete Leaves With a Given Value https://leetcode.com/problems/delete-leaves-with-a-given-value/ *Medium*
+252. **1342** Number of Steps to Reduce a Number to Zero https://leetcode.com/problems/number-of-steps-to-reduce-a-number-to-zero/ *Easy*
+253. **1344** Angle Between Hands of a Clock https://leetcode.com/problems/angle-between-hands-of-a-clock/ *Medium*
+254. **1423** Maximum Points You Can Obtain from Cards https://leetcode.com/problems/maximum-points-you-can-obtain-from-cards/ *Medium*
+255. **1424** Diagonal Traverse II https://leetcode.com/problems/diagonal-traverse-ii/ *Medium*
+256. **1426** Counting Elements https://leetcode.com/problems/counting-elements/ *Easy*
+257. **1427** Perform String Shifts https://leetcode.com/problems/perform-string-shifts/ *Easy*
+258. **1429** First Unique Number https://leetcode.com/problems/first-unique-number/ *Medium*
+259. **1430** Check If a String Is a Valid Sequence from Root to Leaves Path in a Binary Tree https://leetcode.com/problems/check-if-a-string-is-a-valid-sequence-from-root-to-leaves-path-in-a-binary-tree/ *Medium*
+260. **1446** Consecutive Characters https://leetcode.com/problems/consecutive-characters/ *Easy*
+261. **1448** Count Good Nodes in Binary Tree https://leetcode.com/problems/count-good-nodes-in-binary-tree/ *Medium*
+262. **1465** Maximum Area of a Piece of Cake After Horizontal and Vertical Cuts https://leetcode.com/problems/maximum-area-of-a-piece-of-cake-after-horizontal-and-vertical-cuts/ *Medium*
+263. **1510** Stone Game IV https://leetcode.com/problems/stone-game-iv/ *Hard*
+264. **1588** Sum of All Odd Length Subarrays https://leetcode.com/problems/sum-of-all-odd-length-subarrays/ *Easy*
+265. **1710** Maximum Units on a Truck https://leetcode.com/problems/maximum-units-on-a-truck/ *Easy*
+266. **1991** Find the Middle Index in Array https://leetcode.com/problems/find-the-middle-index-in-array/submissions/ *Easy*
+267. **2062** Count Vowel Substrings of a String https://leetcode.com/problems/count-vowel-substrings-of-a-string/ *Easy*
+268. **2063** Vowels of All Substrings https://leetcode.com/problems/vowels-of-all-substrings/ *Medium*
+269. **2064** Minimized Maximum of Products Distributed to Any Store https://leetcode.com/problems/minimized-maximum-of-products-distributed-to-any-store/ *Medium*
+270. **2065** Maximum Path Quality of a Graph https://leetcode.com/problems/maximum-path-quality-of-a-graph/ *Hard*
+271. **2073** Time Needed to Buy Tickets https://leetcode.com/problems/time-needed-to-buy-tickets/ *Easy*
+272. **2078** Two Furthest Houses With Different Colors https://leetcode.com/problems/two-furthest-houses-with-different-colors/ *Easy*
+273. **2079** Watering Plants https://leetcode.com/problems/watering-plants/ *Easy*
+274. **2080** Range Frequency Queries https://leetcode.com/problems/range-frequency-queries/ *Medium*
+275. **2089** Find Target Indices After Sorting Array https://leetcode.com/problems/find-target-indices-after-sorting-array/ *Easy*
+276. **2090** K Radius Subarray Averages https://leetcode.com/problems/k-radius-subarray-averages/ *Medium*
+277. **2091** Removing Minimum and Maximum From Array https://leetcode.com/problems/removing-minimum-and-maximum-from-array/ *Medium*
+278. **2092** Find All People With Secret https://leetcode.com/problems/find-all-people-with-secret/ *Hard*
+279. **2094** Finding 3-Digit Even Numbers https://leetcode.com/problems/finding-3-digit-even-numbers/ *Easy*
+280. **2103** Rings and Rods https://leetcode.com/problems/rings-and-rods/ *Easy*
+281. **2104** Sum of Subarray Ranges https://leetcode.com/problems/sum-of-subarray-ranges/ *Medium*
+282. **2105** Watering Plants II https://leetcode.com/problems/watering-plants-ii/ *Medium*
+283. **2108** Find First Palindromic String in the Array https://leetcode.com/problems/find-first-palindromic-string-in-the-array/ *Easy*
+284. **2109** Adding Spaces to a String https://leetcode.com/problems/adding-spaces-to-a-string/ *Easy*
+285. **2110** Number of Smooth Descent Periods of a Stock https://leetcode.com/problems/number-of-smooth-descent-periods-of-a-stock/ *Medium*
+286. **2111** Minimum Operations to Make the Array K-Increasing https://leetcode.com/problems/minimum-operations-to-make-the-array-k-increasing/ *Hard*
+287. **2119** A Number After a Double Reversal https://leetcode.com/problems/a-number-after-a-double-reversal/ *Easy*
+288. **2121** Intervals Between Identical Elements https://leetcode.com/problems/intervals-between-identical-elements/ *Medium*

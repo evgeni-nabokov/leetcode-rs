@@ -1374,4 +1374,26 @@ impl Solution {
 
         -1
     }
+
+    // 1026. Maximum Difference Between Node and Ancestor.
+    // https://leetcode.com/problems/maximum-difference-between-node-and-ancestor/
+    pub fn max_ancestor_diff(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
+        fn dfs(node: &Option<Rc<RefCell<TreeNode>>>, mut min: i32, mut max: i32) -> i32 {
+            if let Some(inner_node) = node {
+                let val = inner_node.borrow().val;
+                min = min.min(val);
+                max = max.max(val);
+
+                let left = dfs(&inner_node.borrow().left, min, max);
+                let right = dfs(&inner_node.borrow().right, min, max);
+
+                left.max(right)
+            } else {
+                max - min
+            }
+        }
+
+        let val = root.as_ref().unwrap().borrow().val;
+        dfs(&root, val, val)
+    }
 }

@@ -829,3 +829,33 @@ fn smallest_repunit_div_by_k() {
         assert_eq!(Solution::smallest_repunit_div_by_k(case.0), case.1);
     }
 }
+
+#[test]
+fn max_ancestor_diff_test() {
+    let test_cases = vec![
+        (
+            vec![
+                Some(8),
+                Some(3),
+                Some(10),
+                Some(1),
+                Some(6),
+                None,
+                Some(14),
+                None,
+                None,
+                Some(4),
+                Some(7),
+                Some(13),
+            ],
+            7,
+        ),
+        (vec![Some(1), None, Some(2), None, Some(0), Some(3)], 3),
+    ];
+    for case in test_cases {
+        assert_eq!(
+            Solution::max_ancestor_diff(TreeNode::from_level_order(&case.0)),
+            case.1
+        );
+    }
+}

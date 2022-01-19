@@ -253,7 +253,7 @@ impl Solution {
 
     // 39. Combination Sum.
     // https://leetcode.com/problems/combination-sum/
-    // Backtracking solution.
+    // Backtracking method.
     pub fn combination_sum(mut candidates: Vec<i32>, target: i32) -> Vec<Vec<i32>> {
         candidates.sort_unstable();
 
@@ -279,11 +279,6 @@ impl Solution {
 
         backtrack(&candidates, target, 0)
     }
-
-    // DP solution.
-    // pub fn combination_sum_v2(mut candidates: Vec<i32>, target: i32) -> Vec<Vec<i32>> {
-    //
-    // }
 
     // 40. Combination Sum II.
     // https://leetcode.com/problems/combination-sum-ii/

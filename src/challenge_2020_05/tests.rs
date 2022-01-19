@@ -1,6 +1,6 @@
 use super::stock_spanner::{StockSpanner, StockSpannerV2};
 use super::trie::Trie;
-use super::Solution;
+use super::*;
 use crate::common::tree_node::TreeNode;
 
 #[test]

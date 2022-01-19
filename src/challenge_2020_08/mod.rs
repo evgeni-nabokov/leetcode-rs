@@ -1,14 +1,14 @@
-use std::collections::{HashSet, HashMap, VecDeque};
-use std::rc::Rc;
 use std::cell::RefCell;
-use std::cmp::{Ordering, max, min};
+use std::cmp::Ordering;
+use std::collections::{HashMap, HashSet, VecDeque};
+use std::rc::Rc;
 
-use crate::common::tree_node::TreeNode;
 use crate::common::list_node::ListNode;
+use crate::common::tree_node::TreeNode;
 
+mod hash_set;
 mod logger_v1;
 mod logger_v2;
-mod hash_set;
 mod trie_node;
 mod word_dictionary;
 
@@ -25,9 +25,15 @@ impl Solution {
         let mut is_lower_allowed = true;
         for (i, c) in word.chars().enumerate() {
             match (c.is_ascii_uppercase(), is_upper_allowed, is_lower_allowed) {
-                (false, _, true) => { is_upper_allowed = false; },
-                (true, false, _) | (false, _, false) => { return false; },
-                (true, _, _ ) if i == 1 => { is_lower_allowed = false; }
+                (false, _, true) => {
+                    is_upper_allowed = false;
+                }
+                (true, false, _) | (false, _, false) => {
+                    return false;
+                }
+                (true, _, _) if i == 1 => {
+                    is_lower_allowed = false;
+                }
                 _ => (),
             }
         }
@@ -36,10 +42,13 @@ impl Solution {
 
     // 125. Valid Palindrome.
     // https://leetcode.com/problems/valid-palindrome/
+    // Iterative method.
     // Time complexity: O(N).
     // Space complexity: O(1).
     pub fn is_palindrome(s: String) -> bool {
-        if s.len() < 2 { return true; }
+        if s.len() < 2 {
+            return true;
+        }
         let mut left = 0;
         let mut right = s.len() - 1;
         let chars: Vec<_> = s.chars().collect();
@@ -64,8 +73,12 @@ impl Solution {
     // 342. Power of Four.
     // https://leetcode.com/problems/power-of-four/
     pub fn is_power_of_four(mut num: i32) -> bool {
-        if num == 1 { return true; }
-        if num < 4 || num & (num - 1) != 0 { return false; }
+        if num == 1 {
+            return true;
+        }
+        if num < 4 || num & (num - 1) != 0 {
+            return false;
+        }
         let mut count = 0;
         while num > 1 {
             num >>= 1;
@@ -117,9 +130,16 @@ impl Solution {
     // 987. Vertical Order Traversal of a Binary Tree.
     // https://leetcode.com/problems/vertical-order-traversal-of-a-binary-tree/
     pub fn vertical_traversal(root: Option<Rc<RefCell<TreeNode>>>) -> Vec<Vec<i32>> {
-        fn dfs(node: &Option<Rc<RefCell<TreeNode>>>, x: i32, y: i32, map: &mut HashMap<i32, Vec<(i32, i32)>>) {
+        fn dfs(
+            node: &Option<Rc<RefCell<TreeNode>>>,
+            x: i32,
+            y: i32,
+            map: &mut HashMap<i32, Vec<(i32, i32)>>,
+        ) {
             if let Some(some) = node {
-                map.entry(x).or_insert(Vec::new()).push((y, RefCell::borrow(&some).val));
+                map.entry(x)
+                    .or_insert(Vec::new())
+                    .push((y, RefCell::borrow(&some).val));
                 dfs(&RefCell::borrow(&some).left, x - 1, y - 1, map);
                 dfs(&RefCell::borrow(&some).right, x + 1, y - 1, map);
             }
@@ -129,22 +149,24 @@ impl Solution {
         dfs(&root, 0, 0, &mut map);
         let mut vec: Vec<_> = map.into_iter().map(|(x, a)| (x, a)).collect();
         vec.sort_unstable_by_key(|a| a.0);
-        vec
-            .into_iter()
+        vec.into_iter()
             .map(|(_, mut yv)| {
-                yv.sort_unstable_by(|(y1, v1), (y2, v2)|
-                    match y2.cmp(y1) {
-                        Ordering::Equal => v1.cmp(v2),
-                        a => a,
-                    }
-                );
+                yv.sort_unstable_by(|(y1, v1), (y2, v2)| match y2.cmp(y1) {
+                    Ordering::Equal => v1.cmp(v2),
+                    a => a,
+                });
                 yv.into_iter().map(|(_, v)| v).collect()
             })
             .collect()
     }
 
     pub fn vertical_traversal_v2(root: Option<Rc<RefCell<TreeNode>>>) -> Vec<Vec<i32>> {
-        fn dfs(node: &Option<Rc<RefCell<TreeNode>>>, x: i32, y: i32, list: &mut Vec<(i32, i32, i32)>) {
+        fn dfs(
+            node: &Option<Rc<RefCell<TreeNode>>>,
+            x: i32,
+            y: i32,
+            list: &mut Vec<(i32, i32, i32)>,
+        ) {
             if let Some(some) = node {
                 list.push((x, y, RefCell::borrow(&some).val));
                 dfs(&RefCell::borrow(&some).left, x - 1, y - 1, list);
@@ -154,15 +176,13 @@ impl Solution {
 
         let mut list = Vec::new();
         dfs(&root, 0, 0, &mut list);
-        list.sort_unstable_by(|(x1, y1, v1), (x2, y2, v2)|
-              match x1.cmp(x2) {
-                  Ordering::Equal => match y2.cmp(y1) {
-                      Ordering::Equal => v1.cmp(v2),
-                      a => a,
-                  },
-                  b => b,
-              }
-        );
+        list.sort_unstable_by(|(x1, y1, v1), (x2, y2, v2)| match x1.cmp(x2) {
+            Ordering::Equal => match y2.cmp(y1) {
+                Ordering::Equal => v1.cmp(v2),
+                a => a,
+            },
+            b => b,
+        });
         let mut slice_start = 0;
         let mut res: Vec<Vec<i32>> = Vec::new();
         for i in 1..=list.len() {
@@ -227,7 +247,12 @@ impl Solution {
     // 437. Path Sum III.
     // https://leetcode.com/problems/path-sum-iii/
     pub fn path_sum(root: Option<Rc<RefCell<TreeNode>>>, k: i32) -> i32 {
-        fn dfs(node: Option<Rc<RefCell<TreeNode>>>, k: i32, mut sum: i32, sums: &mut HashMap<i32, i32>) -> i32 {
+        fn dfs(
+            node: Option<Rc<RefCell<TreeNode>>>,
+            k: i32,
+            mut sum: i32,
+            sums: &mut HashMap<i32, i32>,
+        ) -> i32 {
             if let Some(some) = node {
                 let n = RefCell::borrow(&some);
                 sum += n.val;
@@ -250,7 +275,9 @@ impl Solution {
     // 994. Rotting Oranges.
     // https://leetcode.com/problems/rotting-oranges/
     pub fn oranges_rotting(mut grid: Vec<Vec<i32>>) -> i32 {
-        if grid.is_empty() || grid[0].is_empty() { return -1; }
+        if grid.is_empty() || grid[0].is_empty() {
+            return -1;
+        }
         let mut fresh_cnt = 0usize;
         let mut rotten_oranges: VecDeque<(isize, isize)> = VecDeque::new();
         for r in 0..grid.len() {
@@ -267,7 +294,10 @@ impl Solution {
             for _ in 0..rotten_oranges.len() {
                 let (r, c) = rotten_oranges.pop_front().unwrap();
                 for (y, x) in vec![(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)] {
-                    let are_xy_valid = y >= 0 && y < grid.len() as isize && x >= 0 && x < grid[y as usize].len() as isize;
+                    let are_xy_valid = y >= 0
+                        && y < grid.len() as isize
+                        && x >= 0
+                        && x < grid[y as usize].len() as isize;
                     if are_xy_valid && grid[y as usize][x as usize] == 1 {
                         grid[y as usize][x as usize] = 2;
                         fresh_cnt -= 1;
@@ -275,10 +305,16 @@ impl Solution {
                     }
                 }
             }
-            if rotten_oranges.is_empty() { break; }
+            if rotten_oranges.is_empty() {
+                break;
+            }
             step += 1;
         }
-        if fresh_cnt == 0 { step } else { -1 }
+        if fresh_cnt == 0 {
+            step
+        } else {
+            -1
+        }
     }
 
     // 171. Excel Sheet Column Number
@@ -319,7 +355,9 @@ impl Solution {
 
     // 123. Best Time to Buy and Sell Stock III.
     // https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iii/
-    // DP solution with O(N) time and O(N) space.
+    // Iterative DP method.
+    // Time complexity: O(N).
+    // Space complexity: O(N).
     pub fn max_profit(prices: Vec<i32>) -> i32 {
         let l = prices.len();
         let mut left_min_price = prices[0];
@@ -328,30 +366,31 @@ impl Solution {
         // Pad the right DP array with an additional zero for convenience.
         let mut right_profits = vec![0; l + 1];
         for i in 1..l {
-            left_profits[i] = max(left_profits[i - 1], prices[i] - left_min_price);
-            left_min_price = min(left_min_price, prices[i]);
+            left_profits[i] = left_profits[i - 1].max(prices[i] - left_min_price);
+            left_min_price = left_min_price.min(prices[i]);
             let j = l - i - 1;
-            right_profits[j] = max(right_profits[j + 1], right_min_price - prices[j]);
-            right_min_price = min(right_min_price, prices[j]);
+            right_profits[j] = right_profits[j + 1].max(right_min_price - prices[j]);
+            right_min_price = right_min_price.min(prices[j]);
         }
         let mut max_profit = 0;
         for i in 0..l {
-            max_profit = max(max_profit, left_profits[i] + right_profits[i + 1]);
+            max_profit = max_profit.max(left_profits[i] + right_profits[i + 1]);
         }
         max_profit
     }
 
-    // Solution with O(N) time and O(1) space.
+    // Time complexity: O(N).
+    // Space complexity: O(1).
     pub fn max_profit_v2(prices: Vec<i32>) -> i32 {
         let mut t1_cost = i32::MAX;
         let mut t2_cost = i32::MAX;
         let mut t1_profit = 0;
         let mut t2_profit = 0;
         for i in 0..prices.len() {
-            t1_cost = min(t1_cost, prices[i]);
-            t1_profit = max(t1_profit, prices[i] - t1_cost);
-            t2_cost = min(t2_cost, prices[i] - t1_profit);
-            t2_profit = max(t2_profit, prices[i] - t2_cost);
+            t1_cost = t1_cost.min(prices[i]);
+            t1_profit = t1_profit.max(prices[i] - t1_cost);
+            t2_cost = t2_cost.min(prices[i] - t1_profit);
+            t2_profit = t2_profit.max(prices[i] - t2_cost);
         }
         t2_profit
     }
@@ -363,7 +402,9 @@ impl Solution {
         for (i, w) in s.split_ascii_whitespace().enumerate() {
             let mut word_chars: VecDeque<_> = w.chars().collect();
             match word_chars[0] {
-                'a' | 'e' | 'i' | 'o' | 'u' | 'A' | 'E' | 'I' | 'O' | 'U' => word_chars.extend(&['m', 'a']),
+                'a' | 'e' | 'i' | 'o' | 'u' | 'A' | 'E' | 'I' | 'O' | 'U' => {
+                    word_chars.extend(&['m', 'a'])
+                }
                 _ => {
                     let first = word_chars.pop_front().unwrap();
                     word_chars.extend(&[first, 'm', 'a'])
@@ -378,8 +419,12 @@ impl Solution {
     // 143. Reorder List.
     // https://leetcode.com/problems/reorder-list/
     pub fn reorder_list(head: &mut Option<Box<ListNode>>) {
-        if head.is_none() { return; }
-        if head.as_ref().unwrap().next.is_none() { return; }
+        if head.is_none() {
+            return;
+        }
+        if head.as_ref().unwrap().next.is_none() {
+            return;
+        }
 
         fn get_length(head: &Option<Box<ListNode>>) -> usize {
             let mut res = 0;
@@ -391,7 +436,10 @@ impl Solution {
             res
         }
 
-        fn split(mut head: Option<Box<ListNode>>, len: usize) -> (Option<Box<ListNode>>, Option<Box<ListNode>>) {
+        fn split(
+            mut head: Option<Box<ListNode>>,
+            len: usize,
+        ) -> (Option<Box<ListNode>>, Option<Box<ListNode>>) {
             let mut curr_node = &mut head;
             for _ in 0..len {
                 let curr_node_inner = curr_node.as_mut().unwrap();
@@ -416,7 +464,10 @@ impl Solution {
             prev_node.take()
         }
 
-        fn merge(head_1: Option<Box<ListNode>>, head_2: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
+        fn merge(
+            head_1: Option<Box<ListNode>>,
+            head_2: Option<Box<ListNode>>,
+        ) -> Option<Box<ListNode>> {
             let mut head_3: Box<ListNode> = Box::new(ListNode::new(0)); // Sentinel node.
             let mut prev_node: &mut Box<ListNode> = &mut head_3;
             let mut node_1 = head_1;
@@ -469,9 +520,17 @@ impl Solution {
     // 3) it stops rolling further if the stop point lays on a visited cell.
     pub fn has_path(mut maze: Vec<Vec<i32>>, start: Vec<i32>, destination: Vec<i32>) -> bool {
         #[derive(PartialEq, Eq, Clone, Debug)]
-        enum Direction { X, Y }
+        enum Direction {
+            X,
+            Y,
+        }
 
-        fn find_directions(maze: &Vec<Vec<i32>>, r: usize, c: usize, prev_direction: Option<Direction>) -> Vec<(Direction, i32)> {
+        fn find_directions(
+            maze: &Vec<Vec<i32>>,
+            r: usize,
+            c: usize,
+            prev_direction: Option<Direction>,
+        ) -> Vec<(Direction, i32)> {
             let mut res: Vec<(Direction, i32)> = Vec::with_capacity(4);
             if prev_direction.is_none() || *prev_direction.as_ref().unwrap() != Direction::Y {
                 if r > 0 && maze[r - 1][c] != 1 {
@@ -493,7 +552,12 @@ impl Solution {
             res
         }
 
-        fn roll_along_x(maze: &mut Vec<Vec<i32>>, r: usize, mut c: usize, step: i32) -> (usize, usize, i32) {
+        fn roll_along_x(
+            maze: &mut Vec<Vec<i32>>,
+            r: usize,
+            mut c: usize,
+            step: i32,
+        ) -> (usize, usize, i32) {
             let mut last_value;
             loop {
                 last_value = maze[r][c];
@@ -510,10 +574,15 @@ impl Solution {
             (r, c, last_value)
         }
 
-        fn roll_along_y(maze: &mut Vec<Vec<i32>>, mut r: usize, c: usize, step: i32) -> (usize, usize, i32) {
+        fn roll_along_y(
+            maze: &mut Vec<Vec<i32>>,
+            mut r: usize,
+            c: usize,
+            step: i32,
+        ) -> (usize, usize, i32) {
             let mut last_value;
             loop {
-                last_value= maze[r][c];
+                last_value = maze[r][c];
                 if maze[r][c] != 3 {
                     maze[r][c] = 2;
                 }
@@ -527,7 +596,14 @@ impl Solution {
             (r, c, last_value)
         }
 
-        fn solve(maze: &mut Vec<Vec<i32>>, r: usize, c: usize, dest_r: usize, dest_c: usize, prev_direction: Option<Direction>) -> bool {
+        fn solve(
+            maze: &mut Vec<Vec<i32>>,
+            r: usize,
+            c: usize,
+            dest_r: usize,
+            dest_c: usize,
+            prev_direction: Option<Direction>,
+        ) -> bool {
             let dirs = find_directions(&maze, r, c, prev_direction);
             for (dir, step) in dirs {
                 let (stop_r, stop_c, last_value) = match (&dir, step) {
@@ -535,22 +611,44 @@ impl Solution {
                     (Direction::Y, s) => roll_along_y(maze, r, c, s),
                 };
 
-                if stop_r == dest_r && stop_c == dest_c { return true; }
-                if last_value == 0 && solve(maze, stop_r, stop_c, dest_r, dest_c, Some(dir)) { return true; }
+                if stop_r == dest_r && stop_c == dest_c {
+                    return true;
+                }
+                if last_value == 0 && solve(maze, stop_r, stop_c, dest_r, dest_c, Some(dir)) {
+                    return true;
+                }
             }
             false
         }
 
-        solve(&mut maze, start[0] as usize, start[1] as usize, destination[0] as usize, destination[1] as usize, None)
+        solve(
+            &mut maze,
+            start[0] as usize,
+            start[1] as usize,
+            destination[0] as usize,
+            destination[1] as usize,
+            None,
+        )
     }
 
     // Simple dfs-solution.
     pub fn has_path_v2(mut maze: Vec<Vec<i32>>, start: Vec<i32>, destination: Vec<i32>) -> bool {
         let mut visited: Vec<Vec<bool>> = vec![vec![false; maze[0].len()]; maze.len()];
-        fn dfs(maze: &Vec<Vec<i32>>, start_r: usize, start_c: usize, dest_r: usize, dest_c: usize, visited: &mut Vec<Vec<bool>>) -> bool {
-            if visited[start_r][start_c] { return false; }
+        fn dfs(
+            maze: &Vec<Vec<i32>>,
+            start_r: usize,
+            start_c: usize,
+            dest_r: usize,
+            dest_c: usize,
+            visited: &mut Vec<Vec<bool>>,
+        ) -> bool {
+            if visited[start_r][start_c] {
+                return false;
+            }
 
-            if start_r == dest_r && start_c == dest_c { return true; }
+            if start_r == dest_r && start_c == dest_c {
+                return true;
+            }
             visited[start_r][start_c] = true;
 
             // Right.
@@ -558,47 +656,67 @@ impl Solution {
             while r < maze[start_r].len() as i32 && maze[start_r][r as usize] == 0 {
                 r += 1;
             }
-            if dfs(maze, start_r, (r - 1) as usize , dest_r, dest_c, visited) { return true; }
+            if dfs(maze, start_r, (r - 1) as usize, dest_r, dest_c, visited) {
+                return true;
+            }
 
             // Left.
             let mut l = start_c as i32 - 1;
             while l >= 0 && maze[start_r][l as usize] == 0 {
                 l -= 1;
             }
-            if dfs(maze, start_r, (l + 1) as usize , dest_r, dest_c, visited) { return true; }
+            if dfs(maze, start_r, (l + 1) as usize, dest_r, dest_c, visited) {
+                return true;
+            }
 
             // Up.
             let mut u = start_r as i32 - 1;
             while u >= 0 && maze[u as usize][start_c] == 0 {
                 u -= 1;
             }
-            if dfs(maze, (u + 1) as usize , start_c, dest_r, dest_c, visited) { return true; }
-
+            if dfs(maze, (u + 1) as usize, start_c, dest_r, dest_c, visited) {
+                return true;
+            }
 
             // Down.
             let mut d = start_r as i32 + 1;
             while d < maze.len() as i32 && maze[d as usize][start_c] == 0 {
                 d += 1;
             }
-            if dfs(maze, (d - 1) as usize, start_c, dest_r, dest_c, visited) { return true; }
+            if dfs(maze, (d - 1) as usize, start_c, dest_r, dest_c, visited) {
+                return true;
+            }
 
             false
         }
 
-        dfs(&mut maze, start[0] as usize, start[1] as usize, destination[0] as usize, destination[1] as usize, &mut visited)
+        dfs(
+            &mut maze,
+            start[0] as usize,
+            start[1] as usize,
+            destination[0] as usize,
+            destination[1] as usize,
+            &mut visited,
+        )
     }
 
     // 404. Sum of Left Leaves.
     // https://leetcode.com/problems/sum-of-left-leaves/
     // Recursive solution.
     pub fn sum_of_left_leaves(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
-        if root.is_none() { return 0; }
+        if root.is_none() {
+            return 0;
+        }
 
         fn dfs(node: &Option<Rc<RefCell<TreeNode>>>, is_left: bool) -> i32 {
             let node_inner = node.as_ref().unwrap();
             let node_borrowed = RefCell::borrow(&node_inner);
             if node_borrowed.left.is_none() && node_borrowed.right.is_none() {
-                if is_left { node_borrowed.val } else { 0 }
+                if is_left {
+                    node_borrowed.val
+                } else {
+                    0
+                }
             } else {
                 let mut sum = 0;
                 if node_borrowed.left.is_some() {
@@ -656,12 +774,12 @@ impl Solution {
     // 436. Find Right Interval.
     // https://leetcode.com/problems/find-right-interval/
     pub fn find_right_interval(intervals: Vec<Vec<i32>>) -> Vec<i32> {
-        if intervals.len() == 1 { return vec![-1]; }
+        if intervals.len() == 1 {
+            return vec![-1];
+        }
 
-        let mut indexed_intervals: Vec<(usize, Vec<i32>)> = intervals
-            .into_iter()
-            .enumerate()
-            .collect();
+        let mut indexed_intervals: Vec<(usize, Vec<i32>)> =
+            intervals.into_iter().enumerate().collect();
         indexed_intervals.sort_unstable_by_key(|x| x.1[0]);
 
         let mut res: Vec<i32> = vec![-1; indexed_intervals.len()];
@@ -680,7 +798,10 @@ impl Solution {
 
     // 450. Delete Node in a BST.
     // https://leetcode.com/problems/delete-node-in-a-bst/
-    pub fn delete_node(mut root: Option<Rc<RefCell<TreeNode>>>, val: i32) -> Option<Rc<RefCell<TreeNode>>> {
+    pub fn delete_node(
+        mut root: Option<Rc<RefCell<TreeNode>>>,
+        val: i32,
+    ) -> Option<Rc<RefCell<TreeNode>>> {
         fn find_min(node: &Option<Rc<RefCell<TreeNode>>>) -> i32 {
             let mut curr = node.as_ref().unwrap().clone();
             while curr.borrow().left.is_some() {
@@ -692,7 +813,9 @@ impl Solution {
         }
 
         fn remove(node: &mut Option<Rc<RefCell<TreeNode>>>, val: i32) {
-            if node.is_none() { return; }
+            if node.is_none() {
+                return;
+            }
 
             let node_val = node.as_ref().unwrap().borrow().val;
             match val.cmp(&node_val) {
@@ -713,9 +836,12 @@ impl Solution {
                     } else {
                         let successor_val = find_min(&node.as_ref().unwrap().borrow().right);
                         node.as_mut().unwrap().borrow_mut().val = successor_val;
-                        remove(&mut node.as_mut().unwrap().borrow_mut().right, successor_val);
+                        remove(
+                            &mut node.as_mut().unwrap().borrow_mut().right,
+                            successor_val,
+                        );
                     }
-                },
+                }
             }
         }
 

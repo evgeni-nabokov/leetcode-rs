@@ -1,19 +1,19 @@
-mod trie;
 mod list_node;
 mod stock_spanner;
+mod trie;
 
 #[cfg(test)]
 mod tests;
 
-use std::collections::{HashSet, HashMap};
+use std::cmp::Ordering;
 use std::collections::hash_map::Entry;
-use std::cmp::{max, min, Ordering};
+use std::collections::{HashMap, HashSet};
 
 use crate::common::tree_node::TreeNode;
 
 use list_node::ListNode;
-use std::rc::Rc;
 use std::cell::RefCell;
+use std::rc::Rc;
 
 pub struct Solution;
 
@@ -21,7 +21,9 @@ impl Solution {
     // 771. Jewels and Stones.
     // https://leetcode.com/problems/jewels-and-stones/
     pub fn num_jewels_in_stones(jewels: String, stones: String) -> i32 {
-        if jewels.is_empty() || stones.is_empty() { return 0; }
+        if jewels.is_empty() || stones.is_empty() {
+            return 0;
+        }
         let mut cnt = 0;
         let mut j_set: HashSet<char> = HashSet::with_capacity(jewels.len());
         for j in jewels.chars() {
@@ -38,7 +40,9 @@ impl Solution {
     // 383. Ransom Note.
     // https://leetcode.com/problems/ransom-note/
     pub fn can_construct(ransom_note: String, magazine: String) -> bool {
-        if ransom_note.len() > 0 && magazine.len() == 0 { return false; }
+        if ransom_note.len() > 0 && magazine.len() == 0 {
+            return false;
+        }
         let mut avail_chars = HashMap::<char, usize>::with_capacity(magazine.len());
         for c in magazine.chars() {
             *avail_chars.entry(c).or_insert(0) += 1;
@@ -58,7 +62,9 @@ impl Solution {
     }
 
     pub fn can_construct_v2(ransom_note: String, magazine: String) -> bool {
-        if ransom_note.len() > 0 && magazine.len() == 0 { return false; }
+        if ransom_note.len() > 0 && magazine.len() == 0 {
+            return false;
+        }
         let mut chars = vec![0; 26];
         for c in magazine.chars() {
             chars[c as usize - 97] += 1;
@@ -95,13 +101,15 @@ impl Solution {
     }
 
     pub fn bitwise_complement_v2(n: i32) -> i32 {
-        max((n as u32 + 1).next_power_of_two() as i32, 2) - n - 1
+        2.max((n as u32 + 1).next_power_of_two() as i32) - n - 1
     }
 
     // 387. First Unique Character in a String.
     // https://leetcode.com/problems/first-unique-character-in-a-string/
     pub fn first_uniq_char(s: String) -> i32 {
-        if s.is_empty() { return -1; }
+        if s.is_empty() {
+            return -1;
+        }
         let mut chars = vec![0; 26];
         for c in s.chars() {
             chars[c as usize - 97] += 1;
@@ -124,10 +132,10 @@ impl Solution {
             match counter_map.entry(n) {
                 Entry::Occupied(o) if *o.get() >= half_len => {
                     return n;
-                },
+                }
                 Entry::Occupied(mut o) => {
                     *o.get_mut() += 1;
-                },
+                }
                 Entry::Vacant(v) => {
                     v.insert(1);
                 }
@@ -145,20 +153,20 @@ impl Solution {
     // Divide and Conquer solution.
     pub fn majority_element_v3(nums: Vec<i32>) -> i32 {
         fn count(nums: &[i32], n: i32) -> i32 {
-            nums.iter().fold(0, |acc, x| acc + if *x == n { 1 } else { 0 })
+            nums.iter()
+                .fold(0, |acc, x| acc + if *x == n { 1 } else { 0 })
         }
 
         fn solve(nums: &[i32]) -> i32 {
             if nums.len() == 1 {
-                return nums[0]
+                return nums[0];
             }
 
             let mid = nums.len() / 2 + nums.len() % 2;
-            let left =  solve(&nums[..mid]);
-            let right =  solve(&nums[mid..]);
+            let left = solve(&nums[..mid]);
+            let right = solve(&nums[mid..]);
 
-            if left == right
-                || count(&nums[..mid], left) > count(&nums[mid..], right) {
+            if left == right || count(&nums[..mid], left) > count(&nums[mid..], right) {
                 left
             } else {
                 right
@@ -184,17 +192,32 @@ impl Solution {
     // 993. Cousins in Binary Tree.
     // https://leetcode.com/problems/cousins-in-binary-tree/
     pub fn is_cousins(root: Option<Rc<RefCell<TreeNode>>>, x: i32, y: i32) -> bool {
-        fn dfs(node: Option<Rc<RefCell<TreeNode>>>, val_to_find: i32, parent_val: i32, level: i32) -> (i32, i32) {
+        fn dfs(
+            node: Option<Rc<RefCell<TreeNode>>>,
+            val_to_find: i32,
+            parent_val: i32,
+            level: i32,
+        ) -> (i32, i32) {
             if let Some(some) = node {
                 let node_val = RefCell::borrow_mut(&some).val;
                 if node_val == val_to_find {
                     (parent_val, level)
                 } else {
-                    let left = dfs(RefCell::borrow_mut(&some).left.clone(), val_to_find, node_val, level + 1);
+                    let left = dfs(
+                        RefCell::borrow_mut(&some).left.clone(),
+                        val_to_find,
+                        node_val,
+                        level + 1,
+                    );
                     if left != (-1, -1) {
                         left
                     } else {
-                        let right = dfs(RefCell::borrow_mut(&some).right.clone(), val_to_find, node_val, level + 1);
+                        let right = dfs(
+                            RefCell::borrow_mut(&some).right.clone(),
+                            val_to_find,
+                            node_val,
+                            level + 1,
+                        );
                         if right != (-1, -1) {
                             right
                         } else {
@@ -217,7 +240,9 @@ impl Solution {
     // https://leetcode.com/problems/check-if-it-is-a-straight-line/
     pub fn check_straight_line(coordinates: Vec<Vec<i32>>) -> bool {
         // 1 or 2 points are always belong to the same line.
-        if coordinates.len() < 3 { return false; }
+        if coordinates.len() < 3 {
+            return false;
+        }
         // a * x + b * y + c = 0.
         // a = y1 - y2, b = x2 - x1, c = x1 * y2 - x2 * y1.
         let (x_1, y_1) = (coordinates[0][0], coordinates[0][1]);
@@ -253,7 +278,9 @@ impl Solution {
     }
 
     pub fn is_perfect_square_v2(num: i32) -> bool {
-        if num == 1 { return true; }
+        if num == 1 {
+            return true;
+        }
         let mut x_prev = 1f64;
         let mut x = (num / 2) as f64;
         while (x_prev - x).abs() >= 1.0 {
@@ -265,7 +292,7 @@ impl Solution {
         possible_roots.dedup();
         for r in possible_roots {
             if r * r == num {
-                return true
+                return true;
             }
         }
         false
@@ -340,11 +367,14 @@ impl Solution {
         let mut right = nums.len() - 1;
         while left < right {
             let mid = left + (right - left) / 2;
-            if mid == 0 ||
-                nums[mid] != nums[mid - 1] && nums[mid] != nums[mid + 1] {
+            if mid == 0 || nums[mid] != nums[mid - 1] && nums[mid] != nums[mid + 1] {
                 return nums[mid];
             }
-            let start = if nums[mid] == nums[mid + 1] { mid } else { mid - 1 };
+            let start = if nums[mid] == nums[mid + 1] {
+                mid
+            } else {
+                mid - 1
+            };
             if start % 2 == 0 {
                 left = mid + 1;
             } else {
@@ -357,7 +387,9 @@ impl Solution {
     // 402. Remove K Digits.
     // https://leetcode.com/problems/remove-k-digits/
     pub fn remove_k_digits(num: String, mut k: i32) -> String {
-        if num.len() == k as usize { return "0".to_string(); }
+        if num.len() == k as usize {
+            return "0".to_string();
+        }
         let mut res: Vec<char> = Vec::with_capacity(k as usize);
         let digits: Vec<char> = num.chars().collect();
         for d in digits {
@@ -376,44 +408,56 @@ impl Solution {
         while !res.is_empty() && res[0] == '0' {
             res.remove(0);
         }
-        if res.is_empty() { "0".to_string() } else { res.into_iter().collect() }
+        if res.is_empty() {
+            "0".to_string()
+        } else {
+            res.into_iter().collect()
+        }
     }
 
     // 918. Maximum Sum Circular Subarray.
     // https://leetcode.com/problems/maximum-sum-circular-subarray/
     pub fn max_subarray_sum_circular(nums: Vec<i32>) -> i32 {
-        if nums.len() == 1 { return nums[0]; }
+        if nums.len() == 1 {
+            return nums[0];
+        }
         let mut sum: i32 = nums[0];
         let mut sum_inv: i32 = -nums[0];
         let mut max_sum: i32 = sum;
         let mut max_sum_inv: i32 = sum_inv;
         let mut total_sum_inv = sum_inv;
         for n in nums.into_iter().skip(1) {
-            sum = max(n, sum + n);
-            sum_inv = max(-n, sum_inv - n);
-            max_sum = max(sum, max_sum);
-            max_sum_inv = max(sum_inv, max_sum_inv);
+            sum = n.max(sum + n);
+            sum_inv = (-n).max(sum_inv - n);
+            max_sum = max_sum.max(sum);
+            max_sum_inv = max_sum_inv.max(sum_inv);
             total_sum_inv -= n;
         }
         if max_sum < 0 {
             max_sum
         } else {
-            max(max_sum, max_sum_inv - total_sum_inv)
+            max_sum.max(max_sum_inv - total_sum_inv)
         }
     }
 
     // 328. Odd Even Linked List.
     // https://leetcode.com/problems/odd-even-linked-list/
     pub fn odd_even_list(head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
-        if head.is_none() { return None; }
-        let mut odd_head: Option<Box<ListNode>> = Some(Box::new(ListNode::new(head.as_ref().unwrap().val)));
+        if head.is_none() {
+            return None;
+        }
+        let mut odd_head: Option<Box<ListNode>> =
+            Some(Box::new(ListNode::new(head.as_ref().unwrap().val)));
         if head.as_ref().unwrap().next.is_none() {
             return odd_head;
         }
-        let mut even_head: Option<Box<ListNode>> = Some(Box::new(ListNode::new(head.as_ref().unwrap().next.as_ref().unwrap().val)));
+        let mut even_head: Option<Box<ListNode>> = Some(Box::new(ListNode::new(
+            head.as_ref().unwrap().next.as_ref().unwrap().val,
+        )));
         let mut curr_odd_node: &mut Option<Box<ListNode>> = &mut odd_head;
         let mut curr_even_node: &mut Option<Box<ListNode>> = &mut even_head;
-        let mut curr_node: &Option<Box<ListNode>> = &head.as_ref().unwrap().next.as_ref().unwrap().next;
+        let mut curr_node: &Option<Box<ListNode>> =
+            &head.as_ref().unwrap().next.as_ref().unwrap().next;
         let mut pos = 1;
         while curr_node.is_some() {
             let new_node = Some(Box::new(ListNode::new(curr_node.as_ref().unwrap().val)));
@@ -434,7 +478,9 @@ impl Solution {
     // 438. Find All Anagrams in a String.
     // https://leetcode.com/problems/find-all-anagrams-in-a-string/
     pub fn find_anagrams(s: String, p: String) -> Vec<i32> {
-        if s.len() < p.len() || s.is_empty() || p.is_empty() { return vec![]; }
+        if s.len() < p.len() || s.is_empty() || p.is_empty() {
+            return vec![];
+        }
         let mut res: Vec<i32> = Vec::new();
         let schars: Vec<char> = s.chars().collect();
         let mut pchars_counter = vec![0; 26];
@@ -459,7 +505,9 @@ impl Solution {
     }
 
     pub fn find_anagrams_v2(s: String, p: String) -> Vec<i32> {
-        if s.len() < p.len() || s.is_empty() || p.is_empty() { return vec![]; }
+        if s.len() < p.len() || s.is_empty() || p.is_empty() {
+            return vec![];
+        }
         const BASE: usize = 'a' as usize;
         let mut res: Vec<i32> = Vec::new();
         let schars: Vec<char> = s.chars().collect();
@@ -487,7 +535,9 @@ impl Solution {
     // 567. Permutation in String.
     // https://leetcode.com/problems/permutation-in-string/
     pub fn check_inclusion(s1: String, s2: String) -> bool {
-        if s2.len() < s1.len() || s1.is_empty() || s2.is_empty() { return false; }
+        if s2.len() < s1.len() || s1.is_empty() || s2.is_empty() {
+            return false;
+        }
         const BASE: usize = 'a' as usize;
         let s2_chars: Vec<char> = s2.chars().collect();
         let mut s1_counter = vec![0; 26];
@@ -527,14 +577,18 @@ impl Solution {
             if cnt == 0 {
                 return node.as_ref().unwrap().borrow().val;
             }
-            node = RefCell::borrow(node.clone().as_ref().unwrap()).right.clone()
+            node = RefCell::borrow(node.clone().as_ref().unwrap())
+                .right
+                .clone()
         }
     }
 
     // 1277. Count Square Submatrices with All Ones.
     // https://leetcode.com/problems/count-square-submatrices-with-all-ones/
     pub fn count_squares(matrix: Vec<Vec<i32>>) -> i32 {
-        if matrix.is_empty() { return 0; }
+        if matrix.is_empty() {
+            return 0;
+        }
         let n_rows = matrix.len();
         let n_cols = matrix[0].len();
         let mut cnt = 0;
@@ -543,7 +597,7 @@ impl Solution {
                 if matrix[r][c] == 1 {
                     cnt += 1;
                     // Check all submatrices growing from to the right-top.
-                    let max_size = min(n_rows - r, n_cols - c);
+                    let max_size = (n_rows - r).min(n_cols - c);
                     'outer: for s in 1..max_size {
                         for rr in r..r + s {
                             if matrix[rr][c + s] == 0 {
@@ -570,16 +624,67 @@ impl Solution {
     // https://leetcode.com/problems/sort-characters-by-frequency/
     pub fn frequency_sort(s: String) -> String {
         let mut cnt: Vec<(char, usize)> = vec![
-            ('A', 0), ('B', 0), ('C', 0), ('D', 0), ('E', 0), ('F', 0), ('G', 0), ('H', 0), ('I', 0),
-            ('J', 0), ('K', 0), ('L', 0), ('M', 0), ('N', 0), ('O', 0), ('P', 0), ('Q', 0), ('R', 0),
-            ('S', 0), ('T', 0), ('U', 0), ('V', 0), ('W', 0), ('X', 0), ('Y', 0), ('Z', 0),
-            ('a', 0), ('b', 0), ('c', 0), ('d', 0), ('e', 0), ('f', 0), ('g', 0), ('h', 0), ('i', 0),
-            ('j', 0), ('k', 0), ('l', 0), ('m', 0), ('n', 0), ('o', 0), ('p', 0), ('q', 0), ('r', 0),
-            ('s', 0), ('t', 0), ('u', 0), ('v', 0), ('w', 0), ('x', 0), ('y', 0), ('z', 0),
+            ('A', 0),
+            ('B', 0),
+            ('C', 0),
+            ('D', 0),
+            ('E', 0),
+            ('F', 0),
+            ('G', 0),
+            ('H', 0),
+            ('I', 0),
+            ('J', 0),
+            ('K', 0),
+            ('L', 0),
+            ('M', 0),
+            ('N', 0),
+            ('O', 0),
+            ('P', 0),
+            ('Q', 0),
+            ('R', 0),
+            ('S', 0),
+            ('T', 0),
+            ('U', 0),
+            ('V', 0),
+            ('W', 0),
+            ('X', 0),
+            ('Y', 0),
+            ('Z', 0),
+            ('a', 0),
+            ('b', 0),
+            ('c', 0),
+            ('d', 0),
+            ('e', 0),
+            ('f', 0),
+            ('g', 0),
+            ('h', 0),
+            ('i', 0),
+            ('j', 0),
+            ('k', 0),
+            ('l', 0),
+            ('m', 0),
+            ('n', 0),
+            ('o', 0),
+            ('p', 0),
+            ('q', 0),
+            ('r', 0),
+            ('s', 0),
+            ('t', 0),
+            ('u', 0),
+            ('v', 0),
+            ('w', 0),
+            ('x', 0),
+            ('y', 0),
+            ('z', 0),
         ];
         for c in s.chars() {
             let ascii_index = c as u8;
-            let i = ascii_index - if ascii_index < 'Z' as u8 { 'A' as u8 } else { 'a' as u8 - 26 };
+            let i = ascii_index
+                - if ascii_index < 'Z' as u8 {
+                    'A' as u8
+                } else {
+                    'a' as u8 - 26
+                };
             cnt[i as usize].1 += 1;
         }
         cnt.sort_unstable_by(|a, b| match b.1.cmp(&a.1) {
@@ -613,7 +718,9 @@ impl Solution {
     // 986. Interval List Intersections.
     // https://leetcode.com/problems/interval-list-intersections/
     pub fn interval_intersection(a: Vec<Vec<i32>>, b: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
-        if a.is_empty() || b.is_empty() { return vec![]; }
+        if a.is_empty() || b.is_empty() {
+            return vec![];
+        }
         let mut a_idx = 0;
         let mut b_idx = 0;
         let mut res: Vec<Vec<i32>> = Vec::new();
@@ -621,7 +728,7 @@ impl Solution {
             let a_int = a[a_idx].clone();
             let b_int = b[b_idx].clone();
             if a_int[1] >= b_int[0] && a_int[0] <= b_int[1] {
-                res.push(vec![max(a_int[0], b_int[0]), min(a_int[1], b_int[1])]);
+                res.push(vec![a_int[0].max(b_int[0]), a_int[1].min(b_int[1])]);
             }
             if a_int[1] > b_int[1] {
                 b_idx += 1;
@@ -635,14 +742,16 @@ impl Solution {
     // 1035. Uncrossed Lines.
     // https://leetcode.com/problems/uncrossed-lines/
     pub fn max_uncrossed_lines(a: Vec<i32>, b: Vec<i32>) -> i32 {
-        if a.is_empty() || b.is_empty() { return 0; }
+        if a.is_empty() || b.is_empty() {
+            return 0;
+        }
         let mut table: Vec<Vec<i32>> = vec![vec![0; b.len() + 1]; a.len() + 1];
         for row in 1..=a.len() {
             for col in 1..=b.len() {
                 if a[row - 1] == b[col - 1] {
                     table[row][col] = 1 + table[row - 1][col - 1];
                 } else {
-                    table[row][col] = max(table[row - 1][col], table[row][col - 1]);
+                    table[row][col] = table[row - 1][col].max(table[row][col - 1]);
                 }
             }
         }
@@ -652,7 +761,9 @@ impl Solution {
     // 886. Possible Bipartition.
     // https://leetcode.com/problems/possible-bipartition/
     pub fn possible_bipartition(n: i32, dislikes: Vec<Vec<i32>>) -> bool {
-        if n < 2 || dislikes.is_empty() { return true; }
+        if n < 2 || dislikes.is_empty() {
+            return true;
+        }
         // Building adjacency list of the given graph.
         let mut adj_list: Vec<Vec<usize>> = vec![vec![]; n as usize];
         for pair in dislikes {
@@ -676,7 +787,7 @@ impl Solution {
         }
         // Applying dfs for each uncolored vertex.
         for i in 0..n as usize {
-            if v[i] == 0 && !dfs(i, 1, &adj_list, &mut v){
+            if v[i] == 0 && !dfs(i, 1, &adj_list, &mut v) {
                 return false;
             }
         }
@@ -717,7 +828,9 @@ impl Solution {
     // 207. Course Schedule.
     // https://leetcode.com/problems/course-schedule/
     pub fn can_finish(n: i32, prerequisites: Vec<Vec<i32>>) -> bool {
-        if n < 2 || prerequisites.is_empty() { return true; }
+        if n < 2 || prerequisites.is_empty() {
+            return true;
+        }
         // Building adjacency list of the given graph.
         let mut adj_list: Vec<Vec<usize>> = vec![vec![]; n as usize];
         for pair in prerequisites {
@@ -729,8 +842,12 @@ impl Solution {
         let mut visited: Vec<i8> = vec![0; n as usize];
         // Using deep first search.
         fn dfs(i: usize, adj_list: &Vec<Vec<usize>>, visited: &mut Vec<i8>) -> bool {
-            if visited[i] == 1 { return false; }
-            if visited[i] == 2 { return true; }
+            if visited[i] == 1 {
+                return false;
+            }
+            if visited[i] == 2 {
+                return true;
+            }
             visited[i] = 1;
             for &k in &adj_list[i] {
                 if !dfs(k, adj_list, visited) {
@@ -742,7 +859,7 @@ impl Solution {
         }
 
         for i in 0..n as usize {
-            if visited[i] == 0 && !dfs(i, &adj_list, &mut visited){
+            if visited[i] == 0 && !dfs(i, &adj_list, &mut visited) {
                 return false;
             }
         }
@@ -752,13 +869,15 @@ impl Solution {
     // 973. K Closest Points to Origin.
     // https://leetcode.com/problems/k-closest-points-to-origin/
     pub fn k_closest(points: Vec<Vec<i32>>, k: i32) -> Vec<Vec<i32>> {
-        let mut d: Vec<(i32, usize)> = points.iter()
+        let mut d: Vec<(i32, usize)> = points
+            .iter()
             .enumerate()
             .map(|(i, p)| (p[0].pow(2) + p[1].pow(2), i))
             .collect();
         d.sort_unstable_by(|a, b| a.0.cmp(&b.0));
         d.iter()
-            .take(k as usize).map(|(_, i)| points[*i].clone())
+            .take(k as usize)
+            .map(|(_, i)| points[*i].clone())
             .collect()
     }
 
@@ -770,8 +889,12 @@ impl Solution {
     // 72. Edit Distance.
     // https://leetcode.com/problems/edit-distance/
     pub fn min_distance(word_1: String, word_2: String) -> i32 {
-        if word_1.is_empty() { return word_2.len() as i32; }
-        if word_2.is_empty() { return word_1.len() as i32; }
+        if word_1.is_empty() {
+            return word_2.len() as i32;
+        }
+        if word_2.is_empty() {
+            return word_1.len() as i32;
+        }
         let rows = word_1.len() + 1;
         let cols = word_2.len() + 1;
         let mut table: Vec<Vec<_>> = vec![vec![0usize; cols]; rows];
@@ -788,7 +911,7 @@ impl Solution {
                 if chars_1[r - 1] == chars_2[c - 1] {
                     table[r][c] = table[r - 1][c - 1];
                 } else {
-                    table[r][c] = 1 + min(table[r - 1][c], min(table[r - 1][c - 1], table[r][c - 1]));
+                    table[r][c] = 1 + table[r - 1][c].min(table[r - 1][c - 1].min(table[r][c - 1]));
                 }
             }
         }
@@ -816,7 +939,7 @@ impl Solution {
 
     // A stub for first_bad_version().
     #[allow(non_snake_case)]
-    fn isBadVersion(&self, _i : i32) -> bool {
+    fn isBadVersion(&self, _i: i32) -> bool {
         true
     }
 }

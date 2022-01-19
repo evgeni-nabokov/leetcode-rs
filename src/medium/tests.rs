@@ -3,6 +3,35 @@ use super::snapshot_array::SnapshotArray;
 use super::*;
 use crate::common::tree_node::BinaryTree;
 
+fn get_simplify_path_test_cases<'a>() -> Vec<(&'a str, &'a str)> {
+    vec![
+        ("/", "/"),
+        ("/home/", "/home"),
+        ("/../", "/"),
+        ("/home//foo/", "/home/foo"),
+    ]
+}
+
+#[test]
+fn simplify_path_test() {
+    for case in get_simplify_path_test_cases() {
+        assert_eq!(
+            Solution::simplify_path(case.0.to_string()),
+            case.1.to_string()
+        );
+    }
+}
+
+#[test]
+fn simplify_path_test_v2() {
+    for case in get_simplify_path_test_cases() {
+        assert_eq!(
+            Solution::simplify_path_v2(case.0.to_string()),
+            case.1.to_string()
+        );
+    }
+}
+
 #[test]
 fn h_index_test() {
     let test_cases = vec![

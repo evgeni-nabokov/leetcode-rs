@@ -70,6 +70,68 @@ impl Solution {
         l1
     }
 
+    // 71. Simplify Path.
+    // https://leetcode.com/problems/simplify-path/
+    // Time complexity: O(N).
+    // Space complexity: O(N).
+    pub fn simplify_path(path: String) -> String {
+        let mut res = Vec::with_capacity(path.len());
+        let mut segment = vec![];
+        for &b in path.as_bytes().into_iter().chain([b'/'].iter()) {
+            if segment.is_empty() {
+                segment.push(b);
+                continue;
+            }
+
+            if b == b'/' {
+                match segment.as_slice() {
+                    [b'/'] | [b'/', b'.'] => segment.clear(),
+                    [b'/', b'.', b'.'] => {
+                        while !res.is_empty() && res.pop().unwrap() != b'/' {}
+                        segment.clear();
+                    }
+                    _ => res.append(&mut segment),
+                }
+            }
+            segment.push(b);
+        }
+
+        if res.is_empty() {
+            res.push(b'/');
+        }
+
+        res.into_iter().map(|x| x as char).collect()
+    }
+
+    // Time complexity: O(N).
+    // Space complexity: O(N).
+    pub fn simplify_path_v2(path: String) -> String {
+        let mut res = Vec::new();
+
+        for segment in path.split('/') {
+            if segment.is_empty() || segment == "." {
+                continue;
+            }
+
+            if segment == ".." {
+                res.pop();
+                continue;
+            }
+
+            res.push(segment);
+        }
+
+        ['/' as char]
+            .into_iter()
+            .chain(res.join("/").chars())
+            .collect()
+
+        // Alternative concatenation.
+        // let mut path = String::from("/");
+        // path.extend(res.join("/").chars());
+        // path
+    }
+
     // 274. H-Index
     // https://leetcode.com/problems/h-index/
     // Time complexity: O(N * LogN).

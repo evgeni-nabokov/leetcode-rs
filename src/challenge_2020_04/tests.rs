@@ -469,22 +469,37 @@ fn min_path_sum_v2_test() {
     }
 }
 
+fn get_search_test_cases() -> Vec<(Vec<i32>, i32, i32)> {
+    vec![
+        (vec![], 1, -1),
+        (vec![1], 1, 0),
+        (vec![2], 1, -1),
+        (vec![1, 2], 1, 0),
+        (vec![1, 2], 2, 1),
+        (vec![1, 2], 3, -1),
+        (vec![2, 1], 1, 1),
+        (vec![2, 1], 2, 0),
+        (vec![2, 1], 3, -1),
+        (vec![1, 2, 3], 3, 2),
+        (vec![3, 1, 2], 3, 0),
+        (vec![4, 5, 6, 7, 0, 1, 2], 0, 4),
+        (vec![4, 5, 6, 7, 0, 1, 2], 3, -1),
+        (vec![4, 5, 6, 7, 8, 9, 10, 0, 1, 2], 10, 6),
+    ]
+}
+
 #[test]
 fn search_test() {
-    assert_eq!(Solution::search(vec![], 1), -1);
-    assert_eq!(Solution::search(vec![1], 1), 0);
-    assert_eq!(Solution::search(vec![2], 1), -1);
-    assert_eq!(Solution::search(vec![1, 2], 1), 0);
-    assert_eq!(Solution::search(vec![1, 2], 2), 1);
-    assert_eq!(Solution::search(vec![1, 2], 3), -1);
-    assert_eq!(Solution::search(vec![2, 1], 1), 1);
-    assert_eq!(Solution::search(vec![2, 1], 2), 0);
-    assert_eq!(Solution::search(vec![2, 1], 3), -1);
-    assert_eq!(Solution::search(vec![1, 2, 3], 3), 2);
-    assert_eq!(Solution::search(vec![3, 1, 2], 3), 0);
-    assert_eq!(Solution::search(vec![4, 5, 6, 7, 0, 1, 2], 0), 4);
-    assert_eq!(Solution::search(vec![4, 5, 6, 7, 0, 1, 2], 3), -1);
-    assert_eq!(Solution::search(vec![4, 5, 6, 7, 8, 9, 10, 0, 1, 2], 10), 6);
+    for case in get_search_test_cases() {
+        assert_eq!(Solution::search(case.0, case.1), case.2);
+    }
+}
+
+#[test]
+fn search_v2_test() {
+    for case in get_search_test_cases() {
+        assert_eq!(Solution::search_v2(case.0, case.1), case.2);
+    }
 }
 
 fn get_bst_from_preorder_test_cases() -> Vec<(Vec<i32>, Vec<Option<i32>>)> {

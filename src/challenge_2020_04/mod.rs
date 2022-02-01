@@ -6,6 +6,7 @@ mod min_stack;
 mod tests;
 
 use std::cell::{RefCell, RefMut};
+use std::cmp::Ordering;
 use std::collections::{BinaryHeap, HashMap, HashSet};
 use std::iter::Rev;
 use std::rc::Rc;
@@ -643,9 +644,73 @@ impl Solution {
 
     // 33. Search in Rotated Sorted Array.
     // https://leetcode.com/problems/search-in-rotated-sorted-array/
+    // Search smallest element first, then search target element.
     // Time complexity: O(LogN).
     // Space complexity: O(1).
     pub fn search(nums: Vec<i32>, target: i32) -> i32 {
+        if nums.is_empty() {
+            return -1;
+        }
+        if nums.len() == 1 {
+            return if nums[0] == target { 0 } else { -1 };
+        }
+
+        fn search_smallest(nums: &[i32]) -> usize {
+            let mut left = 0;
+            let mut right = nums.len() - 1;
+
+            if nums[left] < nums[right] {
+                return 0;
+            }
+
+            let mut mid = 0;
+            while left <= right {
+                mid = left + (right - left) / 2;
+                if nums[mid] > nums[mid + 1] {
+                    break;
+                } else {
+                    if nums[mid] < nums[left] {
+                        right = mid - 1;
+                    } else {
+                        left = mid + 1;
+                    }
+                }
+            }
+            mid + 1
+        }
+
+        let smallest = search_smallest(&nums) as i32;
+        let mut left: i32 = 0;
+        let mut right: i32 = nums.len() as i32 - 1;
+
+        if target == nums[smallest as usize] {
+            return smallest;
+        }
+
+        if smallest != 0 {
+            if target >= nums[0] {
+                right = smallest - 1;
+            } else {
+                left = smallest + 1
+            }
+        }
+
+        while left <= right {
+            let mid = left + (right - left) / 2;
+            match nums[mid as usize].cmp(&target) {
+                Ordering::Equal => return mid,
+                Ordering::Greater => right = mid - 1,
+                Ordering::Less => left = mid + 1,
+            }
+        }
+
+        -1
+    }
+
+    // Search target element right away.
+    // Time complexity: O(LogN).
+    // Space complexity: O(1).
+    pub fn search_v2(nums: Vec<i32>, target: i32) -> i32 {
         if nums.is_empty() {
             return -1;
         }

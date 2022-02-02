@@ -1,15 +1,11 @@
 use super::*;
-use crate::common::tree_node::BinaryTree;
-use crate::common::list_node::ListNode;
 use crate::common::linked_list::LinkedList;
+use crate::common::list_node::ListNode;
+use crate::common::tree_node::BinaryTree;
 
 #[test]
 fn arrange_coins_test() {
-    let test_cases = vec![
-        (5, 2),
-        (8, 3),
-        (2146467959, 65519)
-    ];
+    let test_cases = vec![(5, 2), (8, 3), (2146467959, 65519)];
     for case in test_cases {
         assert_eq!(Solution::arrange_coins(case.0), case.1);
     }
@@ -17,28 +13,21 @@ fn arrange_coins_test() {
 
 #[test]
 fn level_order_bottom_test() {
-    let test_cases = vec![
-        (
-            vec![Some(3), Some(9), Some(20), None, None, Some(15), Some(7)],
-            vec![
-                vec![15, 7],
-                vec![9, 20],
-                vec![3],
-            ]
-        )
-    ];
+    let test_cases = vec![(
+        vec![Some(3), Some(9), Some(20), None, None, Some(15), Some(7)],
+        vec![vec![15, 7], vec![9, 20], vec![3]],
+    )];
     for case in test_cases {
-        assert_eq!(Solution::level_order_bottom(TreeNode::from_level_order(&case.0)), case.1);
+        assert_eq!(
+            Solution::level_order_bottom(TreeNode::from_level_order(&case.0)),
+            case.1
+        );
     }
 }
 
 fn get_prison_after_n_days_test_cases() -> Vec<(Vec<i32>, i32, Vec<i32>)> {
     vec![
-        (
-            vec![],
-            7,
-            vec![],
-        ),
+        (vec![], 7, vec![]),
         (
             vec![0, 1, 0, 1, 1, 0, 0, 1],
             0,
@@ -57,17 +46,17 @@ fn get_prison_after_n_days_test_cases() -> Vec<(Vec<i32>, i32, Vec<i32>)> {
         (
             vec![0, 0, 1, 1, 1, 1, 0, 0],
             8,
-            vec![0,0,0,1,1,0,0,0]
+            vec![0, 0, 0, 1, 1, 0, 0, 0],
         ),
         (
             vec![1, 1, 0, 1, 1, 0, 1, 1],
             6,
-            vec![0, 0, 1, 0, 0, 1, 0, 0]
+            vec![0, 0, 1, 0, 0, 1, 0, 0],
         ),
         (
-            vec![1,0,0,1,0,0,0,1],
+            vec![1, 0, 0, 1, 0, 0, 0, 1],
             826,
-            vec![0,1,1,0,1,1,1,0]
+            vec![0, 1, 1, 0, 1, 1, 1, 0],
         ),
     ]
 }
@@ -107,9 +96,7 @@ fn nth_ugly_number_test() {
 
 #[test]
 fn hamming_distance_test() {
-    let test_cases = vec![
-        (1, 4, 2),
-    ];
+    let test_cases = vec![(1, 4, 2)];
     for case in test_cases {
         assert_eq!(Solution::hamming_distance(case.0, case.1), case.2);
     }
@@ -117,9 +104,7 @@ fn hamming_distance_test() {
 
 #[test]
 fn hamming_distance_v2_test() {
-    let test_cases = vec![
-        (1, 4, 2),
-    ];
+    let test_cases = vec![(1, 4, 2)];
     for case in test_cases {
         assert_eq!(Solution::hamming_distance_v2(case.0, case.1), case.2);
     }
@@ -127,9 +112,7 @@ fn hamming_distance_v2_test() {
 
 #[test]
 fn hamming_distance_v3_test() {
-    let test_cases = vec![
-        (1, 4, 2),
-    ];
+    let test_cases = vec![(1, 4, 2)];
     for case in test_cases {
         assert_eq!(Solution::hamming_distance_v3(case.0, case.1), case.2);
     }
@@ -138,22 +121,10 @@ fn hamming_distance_v3_test() {
 #[test]
 fn plus_one_test() {
     let test_cases = vec![
-        (
-            vec![0],
-            vec![1],
-        ),
-        (
-            vec![1, 2, 3],
-            vec![1, 2, 4],
-        ),
-        (
-            vec![4, 3, 2, 1],
-            vec![4, 3, 2, 2],
-        ),
-        (
-            vec![9],
-            vec![1, 0],
-        ),
+        (vec![0], vec![1]),
+        (vec![1, 2, 3], vec![1, 2, 4]),
+        (vec![4, 3, 2, 1], vec![4, 3, 2, 2]),
+        (vec![9], vec![1, 0]),
     ];
     for case in test_cases {
         assert_eq!(Solution::plus_one(case.0), case.1);
@@ -163,26 +134,17 @@ fn plus_one_test() {
 #[test]
 fn island_perimeter_test() {
     let test_cases = vec![
-        (
-            vec![],
-            0
-        ),
-        (
-            vec![vec![0]],
-            0
-        ),
-        (
-            vec![vec![1]],
-            4
-        ),
+        (vec![], 0),
+        (vec![vec![0]], 0),
+        (vec![vec![1]], 4),
         (
             vec![
-                vec![0,1,0,0],
-                vec![1,1,1,0],
-                vec![0,1,0,0],
-                vec![1,1,0,0],
+                vec![0, 1, 0, 0],
+                vec![1, 1, 1, 0],
+                vec![0, 1, 0, 0],
+                vec![1, 1, 0, 0],
             ],
-            16
+            16,
         ),
     ];
     for case in test_cases {
@@ -190,12 +152,15 @@ fn island_perimeter_test() {
     }
 }
 
-fn get_three_sum_test_cases() -> Vec<(Vec<i32>, Vec<Vec<i32>>)>{
+fn get_three_sum_test_cases() -> Vec<(Vec<i32>, Vec<Vec<i32>>)> {
     vec![
         (vec![], vec![]),
         (vec![0], vec![]),
         (vec![0, 0, 0], vec![vec![0, 0, 0]]),
-        (vec![-1, 0, 1, 2, -1, -4], vec![vec![-1, -1, 2], vec![-1, 0, 1]]),
+        (
+            vec![-1, 0, 1, 2, -1, -4],
+            vec![vec![-1, -1, 2], vec![-1, 0, 1]],
+        ),
     ]
 }
 
@@ -218,38 +183,39 @@ fn width_of_binary_tree_test() {
     let test_cases = vec![
         (
             vec![Some(1), Some(3), Some(2), Some(5), Some(3), None, Some(9)],
-            4
+            4,
         ),
+        (vec![Some(1), Some(3), None, Some(5), Some(3)], 2),
+        (vec![Some(1), Some(3), Some(2), Some(5)], 2),
         (
-            vec![Some(1), Some(3), None, Some(5), Some(3)],
-            2
+            vec![
+                Some(1),
+                Some(3),
+                Some(2),
+                Some(5),
+                None,
+                None,
+                Some(9),
+                Some(6),
+                None,
+                None,
+                Some(9),
+            ],
+            8,
         ),
-        (
-            vec![Some(1), Some(3), Some(2), Some(5)],
-            2
-        ),
-        (
-            vec![Some(1), Some(3), Some(2), Some(5), None, None, Some(9), Some(6), None, None, Some(9)],
-            8
-        )
     ];
     for case in test_cases {
-        assert_eq!(Solution::width_of_binary_tree(TreeNode::from_level_order(&case.0)), case.1);
+        assert_eq!(
+            Solution::width_of_binary_tree(TreeNode::from_level_order(&case.0)),
+            case.1
+        );
     }
 }
 
 #[test]
 fn subsets_test() {
     let test_cases = vec![
-        (
-            vec![1, 2],
-            vec![
-                vec![],
-                vec![1],
-                vec![2],
-                vec![1, 2],
-            ]
-        ),
+        (vec![1, 2], vec![vec![], vec![1], vec![2], vec![1, 2]]),
         (
             vec![1, 2, 3],
             vec![
@@ -261,11 +227,11 @@ fn subsets_test() {
                 vec![1, 3],
                 vec![2, 3],
                 vec![1, 2, 3],
-            ]
+            ],
         ),
         (
             //vec![3,2,4,1],
-            vec![1,2,3,4],
+            vec![1, 2, 3, 4],
             vec![
                 vec![],
                 vec![1],
@@ -283,35 +249,27 @@ fn subsets_test() {
                 vec![1, 3, 4],
                 vec![2, 3, 4],
                 vec![1, 2, 3, 4],
-            ]
-        )
+            ],
+        ),
     ];
     for case in test_cases {
         assert_eq!(Solution::subsets(case.0), case.1);
     }
 }
 
-fn get_is_same_tree_test_cases() -> Vec<(Vec<Option<i32>>, Vec<Option<i32>>, bool)>{
+fn get_is_same_tree_test_cases() -> Vec<(Vec<Option<i32>>, Vec<Option<i32>>, bool)> {
     vec![
-        (
-            vec![],
-            vec![Some(1)],
-            false
-        ),
+        (vec![], vec![Some(1)], false),
         (
             vec![Some(1), Some(2), Some(3)],
             vec![Some(1), Some(2), Some(3)],
-            true
+            true,
         ),
-        (
-            vec![Some(1), Some(2)],
-            vec![Some(1), None, Some(2)],
-            false
-        ),
+        (vec![Some(1), Some(2)], vec![Some(1), None, Some(2)], false),
         (
             vec![Some(1), Some(2), Some(1)],
             vec![Some(1), Some(1), Some(2)],
-            false
+            false,
         ),
     ]
 }
@@ -319,14 +277,26 @@ fn get_is_same_tree_test_cases() -> Vec<(Vec<Option<i32>>, Vec<Option<i32>>, boo
 #[test]
 fn is_same_tree_test() {
     for case in get_is_same_tree_test_cases() {
-        assert_eq!(Solution::is_same_tree(TreeNode::from_level_order(&case.0), TreeNode::from_level_order(&case.1)), case.2);
+        assert_eq!(
+            Solution::is_same_tree(
+                TreeNode::from_level_order(&case.0),
+                TreeNode::from_level_order(&case.1)
+            ),
+            case.2
+        );
     }
 }
 
 #[test]
 fn is_same_tree_v2_test() {
     for case in get_is_same_tree_test_cases() {
-        assert_eq!(Solution::is_same_tree_v2(TreeNode::from_level_order(&case.0), TreeNode::from_level_order(&case.1)), case.2);
+        assert_eq!(
+            Solution::is_same_tree_v2(
+                TreeNode::from_level_order(&case.0),
+                TreeNode::from_level_order(&case.1)
+            ),
+            case.2
+        );
     }
 }
 
@@ -366,7 +336,7 @@ fn my_pow_test() {
         (2.10000, 3, 9.26100),
         (2.00000, -2, 0.25000),
         (0.00001, 2147483647, 0f64),
-        (2.00000, -2147483648, 0f64)
+        (2.00000, -2147483648, 0f64),
     ];
 
     for case in test_cases {
@@ -389,9 +359,17 @@ fn top_k_frequent_test() {
 fn find_order_test() {
     let test_cases = vec![
         (2, vec![vec![1, 0]], vec![0, 1]),
-        (4, vec![vec![1, 0], vec![2, 0], vec![3, 1], vec![3, 2]], vec![0, 1, 2, 3]),
+        (
+            4,
+            vec![vec![1, 0], vec![2, 0], vec![3, 1], vec![3, 2]],
+            vec![0, 1, 2, 3],
+        ),
         (2, vec![vec![1, 0], vec![0, 1]], vec![]),
-        (4, vec![vec![1, 0], vec![2, 0], vec![3, 1], vec![3, 2], vec![0, 3]], vec![]),
+        (
+            4,
+            vec![vec![1, 0], vec![2, 0], vec![3, 1], vec![3, 2], vec![0, 3]],
+            vec![],
+        ),
     ];
 
     for case in test_cases {
@@ -407,7 +385,11 @@ fn add_binary_test() {
         ("1".to_string(), "1".to_string(), "10".to_string()),
         ("11".to_string(), "1".to_string(), "100".to_string()),
         ("1010".to_string(), "1011".to_string(), "10101".to_string()),
-        ("110010".to_string(), "10111".to_string(), "1001001".to_string()),
+        (
+            "110010".to_string(),
+            "10111".to_string(),
+            "1001001".to_string(),
+        ),
     ];
     for case in test_cases {
         assert_eq!(Solution::add_binary(case.0, case.1), case.2);
@@ -434,24 +416,15 @@ fn remove_elements_test() {
 #[test]
 fn exist_test() {
     let board = vec![
-        vec!['A','B','C','E'],
-        vec!['S','F','C','S'],
-        vec!['A','D','E','E']
+        vec!['A', 'B', 'C', 'E'],
+        vec!['S', 'F', 'C', 'S'],
+        vec!['A', 'D', 'E', 'E'],
     ];
 
     let test_cases = vec![
-        (
-            "ABCCED".to_string(),
-            true
-        ),
-        (
-            "SEE".to_string(),
-            true
-        ),
-        (
-            "ABCB".to_string(),
-            false
-        ),
+        ("ABCCED".to_string(), true),
+        ("SEE".to_string(), true),
+        ("ABCB".to_string(), false),
     ];
     for case in test_cases {
         assert_eq!(Solution::exist(board.clone(), case.0), case.1);
@@ -463,31 +436,24 @@ fn zigzag_level_order_test() {
     let test_cases = vec![
         (
             vec![Some(3), Some(9), Some(20), None, None, Some(15), Some(7)],
-            vec![
-                vec![3],
-                vec![20, 9],
-                vec![15, 7],
-            ]
+            vec![vec![3], vec![20, 9], vec![15, 7]],
         ),
         (
             vec![Some(1), Some(2), Some(3), Some(4), None, None, Some(5)],
-            vec![
-                vec![1],
-                vec![3, 2],
-                vec![4, 5],
-            ]
+            vec![vec![1], vec![3, 2], vec![4, 5]],
         ),
     ];
     for case in test_cases {
-        assert_eq!(Solution::zigzag_level_order(TreeNode::from_level_order(&case.0)), case.1);
+        assert_eq!(
+            Solution::zigzag_level_order(TreeNode::from_level_order(&case.0)),
+            case.1
+        );
     }
 }
 
 #[test]
 fn single_number_test() {
-    let test_cases = vec![
-        (vec![1, 2, 1, 3, 2, 5], vec![3, 5]),
-    ];
+    let test_cases = vec![(vec![1, 2, 1, 3, 2, 5], vec![3, 5])];
     for case in test_cases {
         let mut res = Solution::single_number_v2(case.0);
         res.sort_unstable();
@@ -497,9 +463,7 @@ fn single_number_test() {
 
 #[test]
 fn single_number_v2_test() {
-    let test_cases = vec![
-        (vec![1, 2, 1, 3, 2, 5], vec![3, 5]),
-    ];
+    let test_cases = vec![(vec![1, 2, 1, 3, 2, 5], vec![3, 5])];
     for case in test_cases {
         let mut res = Solution::single_number_v2(case.0);
         res.sort_unstable();
@@ -509,9 +473,10 @@ fn single_number_v2_test() {
 
 #[test]
 fn all_paths_source_target_test() {
-    let test_cases = vec![
-        (vec![vec![1, 2], vec![3], vec![3], vec![]] , vec![vec![0, 1, 3], vec![0, 2, 3]]),
-    ];
+    let test_cases = vec![(
+        vec![vec![1, 2], vec![3], vec![3], vec![]],
+        vec![vec![0, 1, 3], vec![0, 2, 3]],
+    )];
     for case in test_cases {
         assert_eq!(Solution::all_paths_source_target(case.0), case.1);
     }
@@ -519,13 +484,7 @@ fn all_paths_source_target_test() {
 
 #[test]
 fn add_digits_test() {
-    let test_cases = vec![
-        (0, 0),
-        (1, 1),
-        (11, 2),
-        (99, 9),
-        (38, 2),
-    ];
+    let test_cases = vec![(0, 0), (1, 1), (11, 2), (99, 9), (38, 2)];
     for case in test_cases {
         assert_eq!(Solution::add_digits(case.0), case.1);
     }
@@ -536,11 +495,22 @@ fn build_tree_test() {
     let test_cases = vec![
         (vec![], vec![], vec![]),
         (vec![2, 1], vec![2, 1], vec![Some(1), Some(2)]),
-        (vec![9, 3, 15, 20, 7], vec![9, 15, 7, 20, 3], vec![Some(3), Some(9), Some(20), None, None, Some(15), Some(7)]),
-        (vec![4, 2, 5, 1, 3], vec![4, 5, 2, 3, 1], vec![Some(1), Some(2), Some(3), Some(4), Some(5)]),
+        (
+            vec![9, 3, 15, 20, 7],
+            vec![9, 15, 7, 20, 3],
+            vec![Some(3), Some(9), Some(20), None, None, Some(15), Some(7)],
+        ),
+        (
+            vec![4, 2, 5, 1, 3],
+            vec![4, 5, 2, 3, 1],
+            vec![Some(1), Some(2), Some(3), Some(4), Some(5)],
+        ),
     ];
     for case in test_cases {
-        assert_eq!(Solution::build_tree(case.0, case.1).get_level_order_values(), case.2);
+        assert_eq!(
+            Solution::build_tree(case.0, case.1).get_level_order_values(),
+            case.2
+        );
     }
 }
 
@@ -549,7 +519,11 @@ fn least_interval_test() {
     let test_cases = vec![
         (vec!['A', 'A', 'A', 'B', 'B', 'B'], 2, 8),
         (vec!['A', 'A', 'A', 'B', 'B', 'B'], 0, 6),
-        (vec!['A', 'A', 'A', 'A', 'A', 'A', 'B', 'C', 'D', 'E', 'F', 'G'], 2, 16),
+        (
+            vec!['A', 'A', 'A', 'A', 'A', 'A', 'B', 'C', 'D', 'E', 'F', 'G'],
+            2,
+            16,
+        ),
     ];
     for case in test_cases {
         assert_eq!(Solution::least_interval(case.0, case.1), case.2);
@@ -609,22 +583,25 @@ fn word_break_test() {
         ),
     ];
     for case in test_cases {
-        assert_eq!(Solution::word_break(
-            case.0.to_string(),
-            case.1.into_iter().map(|x| x.to_string()).collect::<Vec<String>>()),
-             case.2.into_iter().map(|x| x.to_string()).collect::<Vec<String>>());
+        assert_eq!(
+            Solution::word_break(
+                case.0.to_string(),
+                case.1
+                    .into_iter()
+                    .map(|x| x.to_string())
+                    .collect::<Vec<String>>()
+            ),
+            case.2
+                .into_iter()
+                .map(|x| x.to_string())
+                .collect::<Vec<String>>()
+        );
     }
 }
 
-
 #[test]
 fn climb_stairs_test() {
-    let test_cases = vec![
-        (1, 1),
-        (2, 2),
-        (3, 3),
-        (4, 5),
-    ];
+    let test_cases = vec![(1, 1), (2, 2), (3, 3), (4, 5)];
     for case in test_cases {
         assert_eq!(Solution::climb_stairs(case.0), case.1);
     }

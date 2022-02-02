@@ -17,17 +17,38 @@ struct Solution;
 impl Solution {
     // 1. Two Sum.
     // https://leetcode.com/problems/two-sum/
+    // One-pass hash map method.
     // Time complexity: O(N).
     // Space complexity: O(N).
     pub fn two_sum(nums: Vec<i32>, target: i32) -> Vec<i32> {
-        let mut map: HashMap<i32, usize> = HashMap::new();
-        map.insert(nums[0], 0);
-        for i in 1..nums.len() {
-            let a = target - nums[i];
-            if let Some(b) = map.get(&a) {
-                return vec![*b as i32, i as i32];
+        let mut map = HashMap::new();
+        for i in 0..nums.len() {
+            let x = target - nums[i];
+            if let Some(j) = map.get(&x) {
+                return vec![i as i32, *j as i32];
             } else {
                 map.insert(nums[i], i);
+            }
+        }
+        vec![]
+    }
+
+    // Two-pass hash map method.
+    // Time complexity: O(N).
+    // Space complexity: O(N).
+    pub fn two_sum_v2(nums: Vec<i32>, target: i32) -> Vec<i32> {
+        let mut map = HashMap::new();
+        for i in 0..nums.len() {
+            map.insert(nums[i], i);
+        }
+
+        for i in 0..nums.len() {
+            let x = target - nums[i];
+            match map.get(&x) {
+                Some(j) if *j != i => {
+                    return vec![i as i32, *j as i32];
+                }
+                _ => (),
             }
         }
         vec![]

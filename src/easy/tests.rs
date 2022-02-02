@@ -1,10 +1,30 @@
 use super::*;
 use crate::common::linked_list::LinkedList;
 
+fn get_two_sum_test_cases() -> Vec<(Vec<i32>, i32, Vec<i32>)> {
+    vec![
+        (vec![2, 7, 11, 15], 9, vec![0, 1]),
+        (vec![3, 2, 4], 6, vec![1, 2]),
+        (vec![3, 3], 6, vec![0, 1]),
+    ]
+}
+
 #[test]
 fn two_sum_test() {
-    assert_eq!(Solution::two_sum(vec![2, 7, 11, 15], 9), vec![0, 1]);
-    assert_eq!(Solution::two_sum(vec![3, 2, 4], 6), vec![1, 2]);
+    for case in get_two_sum_test_cases() {
+        let mut actual = Solution::two_sum(case.0, case.1);
+        actual.sort_unstable();
+        assert_eq!(actual, case.2);
+    }
+}
+
+#[test]
+fn two_sum_v2_test() {
+    for case in get_two_sum_test_cases() {
+        let mut actual = Solution::two_sum_v2(case.0, case.1);
+        actual.sort_unstable();
+        assert_eq!(actual, case.2);
+    }
 }
 
 #[test]

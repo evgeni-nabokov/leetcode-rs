@@ -1287,6 +1287,7 @@ impl Solution {
 
     // 300. Longest Increasing Subsequence.
     // https://leetcode.com/problems/longest-increasing-subsequence/
+    // Patience sort and binary search method.
     // Time complexity: O(N * LogN).
     // Space complexity: O(N).
     pub fn length_of_lis(nums: Vec<i32>) -> i32 {
@@ -1306,6 +1307,24 @@ impl Solution {
         }
 
         sub.len() as _
+    }
+
+    // Iterative DP method.
+    // Time complexity: O(N^2).
+    // Space complexity: O(N).
+    pub fn length_of_lis_v2(nums: Vec<i32>) -> i32 {
+        let mut dp = vec![1; nums.len()];
+        let mut max_len = 1;
+        for i in 1..nums.len() {
+            for j in 0..i {
+                if nums[i] > nums[j] {
+                    dp[i] = dp[i].max(dp[j] + 1);
+                }
+            }
+            max_len = max_len.max(dp[i]);
+        }
+
+        max_len
     }
 
     // 199. Binary Tree Right Side View.

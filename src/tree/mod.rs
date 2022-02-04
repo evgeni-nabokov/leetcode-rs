@@ -14,22 +14,22 @@ impl Solution {
     // Recursive DFS method.
     // Time complexity: O(N).
     // Space complexity: O(N).
-    pub fn has_path_sum(root: Option<Rc<RefCell<TreeNode>>>, sum: i32) -> bool {
-        fn dfs(node: &Option<Rc<RefCell<TreeNode>>>, mut curr_sum: i32) -> bool {
+    pub fn has_path_sum(root: Option<Rc<RefCell<TreeNode>>>, target_sum: i32) -> bool {
+        fn dfs(node: &Option<Rc<RefCell<TreeNode>>>, mut sum: i32) -> bool {
             if let Some(inner_node) = node {
                 let borr_node = inner_node.borrow();
-                curr_sum -= borr_node.val;
+                sum -= borr_node.val;
                 if borr_node.left.is_none() && borr_node.right.is_none() {
-                    curr_sum == 0
+                    sum == 0
                 } else {
-                    dfs(&borr_node.left, curr_sum) || dfs(&borr_node.right, curr_sum)
+                    dfs(&borr_node.left, sum) || dfs(&borr_node.right, sum)
                 }
             } else {
                 false
             }
         }
 
-        dfs(&root, sum)
+        dfs(&root, target_sum)
     }
 
     // Iterative DFS method.
@@ -61,5 +61,33 @@ impl Solution {
         }
 
         false
+    }
+
+    // 113. Path Sum II.
+    // https://leetcode.com/problems/path-sum-ii/
+    pub fn path_sum(root: Option<Rc<RefCell<TreeNode>>>, target_sum: i32) -> Vec<Vec<i32>> {
+        fn dfs(
+            node: &Option<Rc<RefCell<TreeNode>>>,
+            mut sum: i32,
+            path: &mut Vec<i32>,
+            res: &mut Vec<Vec<i32>>,
+        ) {
+            if let Some(inner_node) = node {
+                let borr_node = inner_node.borrow();
+                path.push(borr_node.val);
+                sum -= borr_node.val;
+                if borr_node.left.is_none() && borr_node.right.is_none() && sum == 0 {
+                    res.push(path.clone());
+                } else {
+                    dfs(&borr_node.left, sum, path, res);
+                    dfs(&borr_node.right, sum, path, res);
+                }
+                path.pop();
+            }
+        }
+
+        let mut res = Vec::new();
+        dfs(&root, target_sum, &mut Vec::new(), &mut res);
+        res
     }
 }

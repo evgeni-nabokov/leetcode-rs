@@ -249,7 +249,7 @@ impl Solution {
     // https://leetcode.com/problems/3sum/
     // Two pointers method.
     // Time complexity: O(N^2).
-    // Space complexity: O(N).
+    // Space complexity: O(1).
     pub fn three_sum(mut nums: Vec<i32>) -> Vec<Vec<i32>> {
         let mut res = vec![];
 
@@ -291,7 +291,7 @@ impl Solution {
 
     // Binary search method.
     // Time complexity: O(N^2 * LogN).
-    // Space complexity: O(N).
+    // Space complexity: O(1).
     pub fn three_sum_v2(mut nums: Vec<i32>) -> Vec<Vec<i32>> {
         let mut res = vec![];
 
@@ -301,8 +301,11 @@ impl Solution {
 
         nums.sort_unstable();
 
-        for i in 0..nums.len() - 2 {
+        //for i in 0..nums.len() - 2 {
+        let mut i = 0;
+        while i < nums.len() - 2 && nums[i] <= 0 {
             if i > 0 && nums[i] == nums[i - 1] {
+                i += 1;
                 continue;
             }
 
@@ -311,11 +314,53 @@ impl Solution {
                     continue;
                 }
 
-                let target = 0 - nums[i] - nums[j];
-                if let Ok(k) = nums[j + 1..].binary_search(&target) {
+                let complement = -nums[i] - nums[j];
+                if let Ok(k) = nums[j + 1..].binary_search(&complement) {
                     res.push(vec![nums[i], nums[j], nums[j + 1 + k]]);
                 }
             }
+
+            i += 1;
+        }
+
+        res
+    }
+
+    // One-pass hash map method.
+    // Time complexity: O(N^2).
+    // Space complexity: O(N).
+    pub fn three_sum_v3(mut nums: Vec<i32>) -> Vec<Vec<i32>> {
+        let mut res = vec![];
+
+        if nums.len() < 3 {
+            return res;
+        }
+
+        nums.sort_unstable();
+
+        let mut i = 0;
+        while i < nums.len() - 2 && nums[i] <= 0 {
+            if i > 0 && nums[i] == nums[i - 1] || nums[i] > 0 {
+                i += 1;
+                continue;
+            }
+
+            let mut j = i + 1;
+            let mut set = HashSet::new();
+
+            while j < nums.len() {
+                let complement = -nums[i] - nums[j];
+                if set.contains(&complement) {
+                    res.push(vec![nums[i], nums[j], complement]);
+                    while j + 1 < nums.len() && nums[j] == nums[j + 1] {
+                        j += 1;
+                    }
+                }
+                set.insert(nums[j]);
+                j += 1;
+            }
+
+            i += 1;
         }
 
         res

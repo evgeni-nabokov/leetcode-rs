@@ -179,6 +179,19 @@ fn three_sum_v2_test() {
 }
 
 #[test]
+fn three_sum_v3_test() {
+    for case in get_three_sum_test_cases() {
+        let mut actual = Solution::three_sum_v3(case.0);
+        for v in &mut actual {
+            v.sort_unstable();
+        }
+        actual.sort_unstable();
+
+        assert_eq!(actual, case.1);
+    }
+}
+
+#[test]
 fn width_of_binary_tree_test() {
     let test_cases = vec![
         (

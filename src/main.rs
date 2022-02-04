@@ -20,5 +20,6 @@ mod medium;
 
 mod facebook;
 mod microsoft;
+mod tree;
 
 fn main() {}

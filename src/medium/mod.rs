@@ -1294,7 +1294,7 @@ impl Solution {
         let mut sub = vec![nums[0]];
 
         for i in 1..nums.len() {
-            match nums[i].cmp(&sub[sub.len() - 1]) {
+            match nums[i].cmp(sub.last().unwrap()) {
                 Ordering::Greater => sub.push(nums[i]),
                 Ordering::Less => {
                     match sub.binary_search(&nums[i]) {

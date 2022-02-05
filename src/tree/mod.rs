@@ -48,16 +48,14 @@ impl Solution {
             if node.borrow().left.is_none() && node.borrow().right.is_none() && sum == 0 {
                 return true;
             }
-            if node.borrow().left.is_some() {
-                let left = node.borrow_mut().left.take().unwrap();
-                let val = left.borrow().val;
-                stack.push((left, sum - val));
+            if let Some(inner_left) = node.borrow().left.clone() {
+                let val = inner_left.borrow().val;
+                stack.push((inner_left, sum - val));
             }
-            if node.borrow().right.is_some() {
-                let right = node.borrow_mut().right.take().unwrap();
-                let val = right.borrow().val;
-                stack.push((right, sum - val));
-            }
+            if let Some(inner_right) = node.borrow().right.clone() {
+                let val = inner_right.borrow().val;
+                stack.push((inner_right, sum - val));
+            };
         }
 
         false
@@ -65,6 +63,7 @@ impl Solution {
 
     // 113. Path Sum II.
     // https://leetcode.com/problems/path-sum-ii/
+    // Recursive DFS method.
     pub fn path_sum(root: Option<Rc<RefCell<TreeNode>>>, target_sum: i32) -> Vec<Vec<i32>> {
         fn dfs(
             node: &Option<Rc<RefCell<TreeNode>>>,

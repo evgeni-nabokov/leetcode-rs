@@ -1379,6 +1379,47 @@ impl Solution {
         res
     }
 
+    // 739. Daily Temperatures.
+    // https://leetcode.com/problems/daily-temperatures/
+    // Monotonic stack method.
+    // Time complexity: O(N).
+    // Space complexity: O(N).
+    pub fn daily_temperatures(temps: Vec<i32>) -> Vec<i32> {
+        let mut res = vec![0; temps.len()];
+        let mut stack = Vec::with_capacity(temps.len());
+
+        for i in 0..temps.len() {
+            while !stack.is_empty() && temps[*stack.last().unwrap()] < temps[i] {
+                let j = stack.pop().unwrap();
+                res[j] = (i - j) as i32;
+            }
+            stack.push(i);
+        }
+
+        res
+    }
+
+    // Backward traversal method.
+    // Time complexity: O(N).
+    // Space complexity: O(1).
+    pub fn daily_temperatures_v2(temps: Vec<i32>) -> Vec<i32> {
+        let mut res = vec![0; temps.len()];
+        let mut hottest_temp = 0;
+        for i in (0..temps.len()).rev() {
+            if temps[i] >= hottest_temp {
+                hottest_temp = temps[i];
+            } else {
+                let mut day = i + 1;
+                while temps[i] >= temps[day] {
+                    day = day + res[day] as usize;
+                }
+                res[i] = (day - i) as i32;
+            }
+        }
+
+        res
+    }
+
     // 1091. Shortest Path in Binary Matrix.
     // https://leetcode.com/problems/shortest-path-in-binary-matrix/
     // BFS method, input rewriting.

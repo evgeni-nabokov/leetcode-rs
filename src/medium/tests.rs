@@ -3,6 +3,17 @@ use super::snapshot_array::SnapshotArray;
 use super::*;
 use crate::common::tree_node::BinaryTree;
 
+#[test]
+fn unique_paths_with_obstacles_test() {
+    let test_cases = vec![
+        (vec![vec![0, 0, 0], vec![0, 1, 0], vec![0, 0, 0]], 2),
+        (vec![vec![0, 1], vec![0, 0]], 1),
+    ];
+    for case in test_cases {
+        assert_eq!(Solution::unique_paths_with_obstacles(case.0), case.1);
+    }
+}
+
 fn get_simplify_path_test_cases<'a>() -> Vec<(&'a str, &'a str)> {
     vec![
         ("/", "/"),

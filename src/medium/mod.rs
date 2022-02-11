@@ -70,6 +70,27 @@ impl Solution {
         l1
     }
 
+    // 63. Unique Paths II.
+    // https://leetcode.com/problems/unique-paths-ii/
+    // Bottom-up DP iterative method.
+    // Time complexity: O(MxN).
+    // Space complexity: O(MxN).
+    pub fn unique_paths_with_obstacles(obstacle_grid: Vec<Vec<i32>>) -> i32 {
+        let mut dp = vec![vec![0; obstacle_grid[0].len() + 1]; obstacle_grid.len() + 1];
+
+        dp[0][1] = 1;
+
+        for r in 1..dp.len() {
+            for c in 1..dp[0].len() {
+                if obstacle_grid[r - 1][c - 1] == 0 {
+                    dp[r][c] = dp[r - 1][c] + dp[r][c - 1];
+                }
+            }
+        }
+
+        dp[obstacle_grid.len()][obstacle_grid[0].len()]
+    }
+
     // 71. Simplify Path.
     // https://leetcode.com/problems/simplify-path/
     // Time complexity: O(N).

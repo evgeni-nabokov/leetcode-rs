@@ -940,7 +940,7 @@ fn max_ancestor_diff_test() {
 }
 
 #[test]
-fn minimum_operations() {
+fn minimum_operations_test() {
     let test_cases = vec![
         (vec![1, 2], 0),
         (vec![1, 1], 1),

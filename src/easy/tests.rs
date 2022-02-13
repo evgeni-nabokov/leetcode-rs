@@ -484,3 +484,12 @@ fn binary_tree_paths_test() {
         );
     }
 }
+
+#[test]
+fn count_operations_test() {
+    let test_cases = vec![(2, 3, 3), (10, 10, 1)];
+
+    for case in test_cases {
+        assert_eq!(Solution::count_operations(case.0, case.1), case.2);
+    }
+}

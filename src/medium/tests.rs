@@ -938,3 +938,17 @@ fn max_ancestor_diff_test() {
         );
     }
 }
+
+#[test]
+fn minimum_operations() {
+    let test_cases = vec![
+        (vec![1, 2], 0),
+        (vec![1, 1], 1),
+        (vec![3, 1, 3, 2, 4, 3], 3),
+        (vec![1, 2, 2, 2, 2], 2),
+    ];
+
+    for case in test_cases {
+        assert_eq!(Solution::minimum_operations(case.0), case.1);
+    }
+}

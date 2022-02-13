@@ -1534,4 +1534,55 @@ impl Solution {
         let val = root.as_ref().unwrap().borrow().val;
         dfs(&root, val, val)
     }
+
+    // 2170. Minimum Operations to Make the Array Alternating
+    // https://leetcode.com/problems/minimum-operations-to-make-the-array-alternating/
+    // Time complexity: O(N).
+    // Space complexity: O(Domain(N)).
+    pub fn minimum_operations(nums: Vec<i32>) -> i32 {
+        let mut odd_count = vec![0; 100001];
+        let mut even_count = vec![0; 100001];
+        for i in 0..nums.len() {
+            if i % 2 == 0 {
+                even_count[nums[i] as usize] += 1;
+            } else {
+                odd_count[nums[i] as usize] += 1;
+            }
+        }
+
+        let mut odd_most_freq = 0;
+        let mut even_most_freq = 0;
+        for i in 1..100001 {
+            if odd_count[i] > odd_count[odd_most_freq] {
+                odd_most_freq = i;
+            }
+            if even_count[i] > even_count[even_most_freq] {
+                even_most_freq = i;
+            }
+        }
+
+        nums.len() as i32
+            - if odd_most_freq != even_most_freq {
+                odd_count[odd_most_freq] + even_count[even_most_freq]
+            } else {
+                let mut odd_2nd_most_freq = 0;
+                let mut even_2nd_most_freq = 0;
+                for i in 1..100001 {
+                    if i != odd_most_freq && odd_count[i] > odd_count[odd_2nd_most_freq] {
+                        odd_2nd_most_freq = i;
+                    }
+                    if i != even_most_freq && even_count[i] > even_count[even_2nd_most_freq] {
+                        even_2nd_most_freq = i;
+                    }
+                }
+
+                if odd_count[odd_most_freq] + even_count[even_2nd_most_freq]
+                    > odd_count[odd_2nd_most_freq] + even_count[even_most_freq]
+                {
+                    odd_count[odd_most_freq] + even_count[even_2nd_most_freq]
+                } else {
+                    odd_count[odd_2nd_most_freq] + even_count[even_most_freq]
+                }
+            }
+    }
 }

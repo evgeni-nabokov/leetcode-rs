@@ -952,3 +952,23 @@ fn minimum_operations_test() {
         assert_eq!(Solution::minimum_operations(case.0), case.1);
     }
 }
+
+#[test]
+fn find_min_difference_test() {
+    let test_cases = vec![
+        (vec!["23:59", "00:00"], 1),
+        (vec!["00:00", "23:59", "00:00"], 0),
+    ];
+
+    for case in test_cases {
+        assert_eq!(
+            Solution::find_min_difference(
+                case.0
+                    .into_iter()
+                    .map(|x| x.to_string())
+                    .collect::<Vec<_>>()
+            ),
+            case.1
+        );
+    }
+}

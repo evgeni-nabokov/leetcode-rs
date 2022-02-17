@@ -1585,4 +1585,42 @@ impl Solution {
                 }
             }
     }
+
+    // 539. Minimum Time Difference.
+    // https://leetcode.com/problems/minimum-time-difference/
+    // Time complexity: O(N).
+    // Space complexity: O(1).
+    pub fn find_min_difference(time_points: Vec<String>) -> i32 {
+        let mut minutes = vec![false; 24 * 60];
+        let mut min = 24 * 60;
+        let mut max = 0;
+        for i in 0..time_points.len() {
+            let bytes = time_points[i].as_bytes();
+            let hh = &bytes[0..2];
+            let mm = &bytes[3..5];
+            let m = ((hh[0] - b'0') * 10 + hh[1] - b'0') as usize * 60
+                + (mm[0] - b'0') as usize * 10
+                + (mm[1] - b'0') as usize;
+            if minutes[m] {
+                return 0;
+            }
+            min = min.min(m);
+            max = max.max(m);
+            minutes[m] = true;
+        }
+
+        let mut min_diff = min + 24 * 60 - max;
+        let mut prev = min;
+        for curr in (min + 1)..=max {
+            if minutes[curr] {
+                min_diff = min_diff.min(curr - prev);
+                if min_diff == 1 {
+                    break;
+                }
+                prev = curr;
+            }
+        }
+
+        min_diff as _
+    }
 }

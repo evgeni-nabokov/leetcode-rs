@@ -1623,4 +1623,48 @@ impl Solution {
 
         min_diff as _
     }
+
+    // 2182. Construct String With Repeat Limit.
+    // https://leetcode.com/problems/construct-string-with-repeat-limit/
+    // Time complexity: O(N).
+    // Space complexity: O(1).
+    pub fn repeat_limited_string(s: String, repeat_limit: i32) -> String {
+        let limit = repeat_limit as usize;
+        let mut count = vec![0; 26];
+        let bytes = s.as_bytes();
+        for i in 0..bytes.len() {
+            count[(bytes[i] - b'a') as usize] += 1;
+        }
+
+        let mut curr: i32 = 25;
+        let mut next = curr - 1;
+        let mut res = Vec::with_capacity(bytes.len());
+        while curr >= 0 {
+            let repeat = limit.min(count[curr as usize]);
+            count[curr as usize] -= repeat;
+            for _ in 0..repeat {
+                res.push((curr as u8 + b'a') as char);
+            }
+
+            if count[curr as usize] > 0 {
+                if curr <= next {
+                    next = curr - 1;
+                }
+                while next >= 0 && count[next as usize] == 0 {
+                    next -= 1;
+                }
+                if next >= 0 {
+                    count[next as usize] -= 1;
+                    res.push((next as u8 + b'a') as char);
+                    continue;
+                } else {
+                    break;
+                }
+            };
+
+            curr -= 1;
+        }
+
+        res.into_iter().collect()
+    }
 }

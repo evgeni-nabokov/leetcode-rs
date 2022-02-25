@@ -972,3 +972,14 @@ fn find_min_difference_test() {
         );
     }
 }
+
+#[test]
+fn repeat_limited_string_test() {
+    let test_cases = vec![("cczazcc", 3, "zzcccac"), ("aababab", 2, "bbabaa")];
+    for case in test_cases {
+        assert_eq!(
+            Solution::repeat_limited_string(case.0.to_string(), case.1),
+            case.2.to_string()
+        );
+    }
+}

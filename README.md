@@ -1,4 +1,4 @@
-### List of solved problems (298)
+### List of solved problems (299)
 1. **1** Two Sum https://leetcode.com/problems/two-sum/ *Easy*
 2. **2** Add Two Numbers // https://leetcode.com/problems/add-two-numbers/ *Medium* 
 3. **5** Longest Palindromic Substring https://leetcode.com/problems/longest-palindromic-substring/ *Medium*
@@ -297,3 +297,4 @@
 296. **2121** Intervals Between Identical Elements https://leetcode.com/problems/intervals-between-identical-elements/ *Medium*
 297. **2169** Count Operations to Obtain Zero https://leetcode.com/problems/count-operations-to-obtain-zero/ *Easy*
 298. **2170** Minimum Operations to Make the Array Alternating https://leetcode.com/problems/minimum-operations-to-make-the-array-alternating/ *Medium*
+299. **2182** Construct String With Repeat Limit https://leetcode.com/problems/construct-string-with-repeat-limit/ *Medium*
